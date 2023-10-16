@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 
-const index = () => {
+const index =async () => {
   return (
     <section id="category">
     <div className="pb-10">

@@ -1,11 +1,10 @@
-import { Button } from "@/components/ui/button";
-import { ChevronRight, Facebook, SendHorizontal } from 'lucide-react';
+import { getMenu } from "lib/shopify";
+import { AiFillInstagram, AiFillTwitterCircle } from 'react-icons/ai';
 import { BsFacebook } from 'react-icons/bs';
-import { AiFillTwitterCircle } from 'react-icons/ai';
-import { AiFillInstagram } from 'react-icons/ai';
-import Image from "next/image";
 
-export default function Foter() {
+export default async function Foter() {
+  const menu = await getMenu('footer');
+
   return (
     <main className='bg-black  pt-5 mt-5 '>
 

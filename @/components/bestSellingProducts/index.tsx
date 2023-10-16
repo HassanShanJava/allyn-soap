@@ -24,7 +24,8 @@ function generateStarRatingArray(rating: number) {
   return ratings;
 }
 
-const BestSellingProducts = () => {
+const BestSellingProducts =  (props:any) => {
+  console.log({props})
   return (
     <section id="best-sellers" className="bg-subsec px-3 py-20 md:px-12">
       <div className="text-center">
