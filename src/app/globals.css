@@ -95,3 +95,7 @@ html{
 .captialize-first::first-letter{
   text-transform: uppercase;
 }
+
+.link-hover{
+  text-shadow: 0 0.015em var(--primary),0 -0.015em var(--primary),0.01em 0 var(--primary),-0.01em 0 var(--primary);
+}

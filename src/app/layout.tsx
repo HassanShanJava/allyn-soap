@@ -1,6 +1,6 @@
 
 import { ensureStartsWith } from 'lib/utils';
-import { Poppins} from 'next/font/google';
+import { Poppins } from 'next/font/google';
 import { ReactNode, Suspense } from 'react';
 import './globals.css';
 import Navbar from '@/components/layout/navbar';
@@ -44,12 +44,25 @@ const poppins = Poppins({
 });
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
-  
+
   const menu = await getMenu('main-menu');
-  console.log({menu},"menu2")
+  console.log({ menu }, "menu2")
   return (
     <html lang="en" className={poppins.className}>
       <head>
+      <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link
+          rel="apple-touch-icon"
+          href="/apple-icon?<generated>"
+          type="image/<generated>"
+          sizes="<generated>"
+        />
+        <link
+          rel="icon"
+          href="/icon?<generated>"
+          type="image/<generated>"
+          sizes="<generated>"
+        />
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
@@ -57,10 +70,12 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           crossOrigin="anonymous"
           referrerPolicy="no-referrer"
         />
+        
+
       </head>
       <body>
-          <Navbar menu={menu}/>
-          <main>{children}</main>
+        <Navbar menu={menu} />
+        <main>{children}</main>
       </body>
     </html>
   );
