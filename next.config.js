@@ -14,8 +14,14 @@ module.exports = {
         protocol: 'https',
         hostname: 'cdn.shopify.com',
         pathname: '/s/files/**'
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        pathname: '/s/files/**'
       }
-    ]
+    ],
+    domains: ['images.unsplash.com', 'media.winnar.com','cdn.shopify.com'],
   },
   async redirects() {
     return [
