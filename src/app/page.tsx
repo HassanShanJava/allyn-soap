@@ -5,8 +5,9 @@ export default async function HomePage() {
 console.log({products})
   // if (!products?.length) return null;
   return (
-    <div>
+    <div className="h-screen">
       {/* <p className="text-7xl font-black">Sup!</p> */}
+      <p>Sup</p>
     </div>
   );
 }

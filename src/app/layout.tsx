@@ -3,6 +3,9 @@ import { ensureStartsWith } from 'lib/utils';
 import { Poppins} from 'next/font/google';
 import { ReactNode, Suspense } from 'react';
 import './globals.css';
+import Navbar from '@/components/layout/navbar';
+import Head from 'next/head';
+import { getMenu } from 'lib/shopify';
 
 
 const { TWITTER_CREATOR, TWITTER_SITE, SITE_NAME } = process.env;
@@ -41,9 +44,22 @@ const poppins = Poppins({
 });
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
+  
+  const menu = await getMenu('main-menu');
+  console.log({menu},"menu2")
   return (
     <html lang="en" className={poppins.className}>
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+          integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+          crossOrigin="anonymous"
+          referrerPolicy="no-referrer"
+        />
+      </head>
       <body>
+          <Navbar menu={menu}/>
           <main>{children}</main>
       </body>
     </html>
