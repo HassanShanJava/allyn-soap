@@ -1,11 +1,7 @@
-import Cart from '@/components/cart';
-import OpenCart from '@/components/cart/open-cart';
 
 import { getMenu } from 'lib/shopify';
 import { Menu } from 'lib/shopify/types';
 import Link from 'next/link';
-import { Suspense } from 'react';
-import MobileMenu from './mobile-menu';
 const { SITE_NAME } = process.env;
 
 export default async function Navbar() {
@@ -14,7 +10,7 @@ console.log({menu})
   return (
     <nav className="sticky top-0 flex items-center justify-between p-4 lg:px-6 bg-[#ffffff] z-50 ">
       <div className="block flex-none md:hidden">
-        <MobileMenu menu={menu} />
+        {/* <MobileMenu menu={menu} /> */}
 
       </div>
       <div className="flex w-full items-center mx-auto max-w-[1600px]">
@@ -42,11 +38,11 @@ console.log({menu})
         {/* <div className="hidden justify-center md:flex md:w-1/3">
           <Search />
         </div> */}
-        <div className="flex justify-end md:w-1/3">
+        {/* <div className="flex justify-end md:w-1/3">
           <Suspense fallback={<OpenCart />}>
             <Cart />
           </Suspense>
-        </div>
+        </div> */}
       </div>
     </nav>
   );

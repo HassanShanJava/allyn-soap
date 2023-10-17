@@ -1,3 +1,4 @@
+import { getCollectionProducts } from "lib/shopify";
 
 export default async function HomePage() {
    const products = await getCollectionProducts({ collection: 'dryer-balls-and-spray' });
