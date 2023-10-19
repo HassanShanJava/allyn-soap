@@ -98,6 +98,7 @@ export async function shopifyFetch<T>({
       body
     };
   } catch (e) {
+    console.log(e.message,"e.message")
     if (isShopifyError(e)) {
       throw {
         cause: e.cause?.toString() || 'unknown',
@@ -313,6 +314,7 @@ export async function getCollections(): Promise<Collection[]> {
     query: getCollectionsQuery,
     tags: [TAGS.collections]
   });
+  console.log(res.body?.data,"res.body?.data22")
   const shopifyCollections = removeEdgesAndNodes(res.body?.data?.collections);
   const collections = [
     {
@@ -322,7 +324,7 @@ export async function getCollections(): Promise<Collection[]> {
       seo: {
         title: 'All',
         description: 'All products'
-      },
+      },productsCount:0,
       path: '/search',
       updatedAt: new Date().toISOString()
     },

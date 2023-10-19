@@ -1,9 +1,10 @@
-import React from 'react'
-import Outline from "public/outline.png"
-import Demo from "public/demo.png"
 import Image from 'next/image'
+import Demo from "public/demo.png"
+import Outline from "public/outline.png"
+import CategorySection from '../categorySection'
 const Home = () => {
     return (
+        <>
         <div className='relative '>
             {/* for bg color */}
             <div className='absolute bg-secondary min-w-[300px] w-full  max-w-[80%] h-48 rounded-br-[100px] '></div>
@@ -23,9 +24,13 @@ const Home = () => {
                 </div>
             </div>
 
-            <div className="h-screen">sup</div>
-
+            <div className="h-screen">
+           <CategorySection />
         </div>
+        </div>
+        
+        
+        </>
 
     )
 }

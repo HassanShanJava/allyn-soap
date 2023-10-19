@@ -12,6 +12,7 @@ export default async function Home() {
     <div>
       <Suspense >
         <HomePage />
+        
       </Suspense>
     </div>
   );

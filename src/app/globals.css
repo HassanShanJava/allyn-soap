@@ -73,8 +73,10 @@ html {
     --input: 240 5.9% 90%;
     --ring: 142.1 76.2% 36.3%;
     --radius: 0.5rem;
-    --text-dark: 231, 33%, 23%, 1;
-    --text-light: 0, 0%, 37%, 1
+    --text-dark:231, 33%, 23%, 1;
+    --text-light:0, 0%, 37%, 1;
+    --text-white:0, 0%, 100%, 1;
+    --text-light-secondary:0, 0%, 97%, 1;
   }
 
   .dark {
@@ -84,8 +86,8 @@ html {
     --card-foreground: 0 0% 95%;
     --popover: 0 0% 9%;
     --popover-foreground: 0 0% 95%;
-    --primary: 142.1 70.6% 45.3%;
-    --primary-foreground: 144.9 80.4% 10%;
+    --primary: 163, 66%, 53%, 1;
+    --primary-foreground: 0, 0%, 98%, 1;
     --secondary: 240 3.7% 15.9%;
     --secondary-foreground: 0 0% 98%;
     --muted: 0 0% 15%;

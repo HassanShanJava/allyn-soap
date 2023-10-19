@@ -45,6 +45,13 @@ module.exports = {
           DEFAULT: "hsl(var(--destructive) / <alpha-value>)",
           foreground: "hsl(var(--destructive-foreground) / <alpha-value>)",
         },
+        text:{
+           DEFAULT: "hsl(var(--text-dark))",
+           light: "hsl(var(--text-light))",
+           white: "hsl(var(--text-white))",
+           'light-secondary':"hsl(var(--text-light-secondary))",
+        }
+        ,
         muted: {
           DEFAULT: "hsl(var(--muted))",
           foreground: "hsl(var(--muted-foreground))",
