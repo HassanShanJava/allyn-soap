@@ -2,11 +2,11 @@
 
 import Image from 'next/image';
 
-const CategoryCard = (props: { item: object, index: number }) => {
+const CategoryCard = (props: { item: any, index: number }) => {
     console.log({ props })
     return (
         <>
-            <div className='group relative bg-primary-foreground hover:bg-primary w-48 h-48 rounded-xl  transition ease-in delay-150 cursor-pointer'>
+            <div className='group relative bg-primary-foreground hover:bg-primary w-48 h-48 rounded-xl  transition ease-in  cursor-pointer'>
                 <div className='relative h-4/6 w-full p-4'>
                     {props?.item?.image ? <>
                         <Image
