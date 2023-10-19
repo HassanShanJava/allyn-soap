@@ -1,11 +1,10 @@
 
+import Navbar from '@/components/layout/navbar';
+import { getMenu } from 'lib/shopify';
 import { ensureStartsWith } from 'lib/utils';
 import { Poppins } from 'next/font/google';
-import { ReactNode, Suspense } from 'react';
+import { ReactNode } from 'react';
 import './globals.css';
-import Navbar from '@/components/layout/navbar';
-import Head from 'next/head';
-import { getMenu } from 'lib/shopify';
 
 
 const { TWITTER_CREATOR, TWITTER_SITE, SITE_NAME } = process.env;
@@ -46,7 +45,9 @@ const poppins = Poppins({
 export default async function RootLayout({ children }: { children: ReactNode }) {
 
   const menu = await getMenu('main-menu');
-  console.log({ menu }, "menu2")
+
+  // console.log({ menu }, "menu2")
+ 
   return (
     <html lang="en" className={poppins.className}>
       <head>
@@ -75,8 +76,10 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
       </head>
       
       <body className='w-full max-w-[1600px] mx-auto'>
+
         <Navbar menu={menu} />
         <main>{children}</main>
+
       </body>
     </html>
   );

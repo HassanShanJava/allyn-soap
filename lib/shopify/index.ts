@@ -98,7 +98,6 @@ export async function shopifyFetch<T>({
       body
     };
   } catch (e) {
-    console.log(e.message,"e.message")
     if (isShopifyError(e)) {
       throw {
         cause: e.cause?.toString() || 'unknown',
@@ -115,7 +114,7 @@ export async function shopifyFetch<T>({
   }
 }
 
-const removeEdgesAndNodes = (array: Connection<any>) => {
+export const removeEdgesAndNodes = (array: Connection<any>) => {
   return array.edges.map((edge) => edge?.node);
 };
 

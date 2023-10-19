@@ -16,7 +16,7 @@ const CategoryCard = (props: { item: object, index: number }) => {
                             src={props?.item?.image?.src}
                             alt="girl-image"
                         />
-                    </> : <div className=' h-full w-full flex items-center justify-center border border-text-light rounded-xl'>
+                    </> : <div className=' h-full w-full flex items-center justify-center bg-white border border-text-light rounded-xl'>
                     <i className="fa-solid fa-image text-2xl text-text-light text-center"></i></div>}
 
 
