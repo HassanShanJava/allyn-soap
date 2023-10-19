@@ -29,7 +29,13 @@ export type CartItem = {
   };
 };
 
-export type Collection = ShopifyCollection & {
+export type Collection = {
+   handle: string;
+  title: string;
+  description: string;
+  seo: SEO;
+  productsCount?:any;
+  updatedAt: string;
   path: string;
 };
 
@@ -105,6 +111,7 @@ export type ShopifyCollection = {
   title: string;
   description: string;
   seo: SEO;
+  productsCount?:any;
   updatedAt: string;
 };
 

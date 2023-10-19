@@ -44,6 +44,7 @@
     "react-slick": "^0.29.0",
     "react-social-icons": "^6.4.0",
     "select": "^1.1.2",
+    "server-only": "^0.0.1",
     "slick-carousel": "^1.8.1",
     "swiper": "^10.3.0",
     "tailwind-merge": "^1.14.0",

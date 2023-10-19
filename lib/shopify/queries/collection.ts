@@ -25,15 +25,24 @@ export const getCollectionQuery = /* GraphQL */ `
 
 export const getCollectionsQuery = /* GraphQL */ `
   query getCollections {
-    collections(first: 100, sortKey: TITLE) {
-      edges {
-        node {
-          ...collection
-        }
+  collections(first: 199, query: "productsCount:>=1") {
+    edges {
+      node {
+        handle
+        description
+        title
+      products(first: 10) {
+          filters {
+            values {
+              count
+              id
+              input
+            }
+          }}
       }
     }
   }
-  ${collectionFragment}
+  }
 `;
 
 export const getCollectionProductsQuery = /* GraphQL */ `
