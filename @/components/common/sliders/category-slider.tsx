@@ -29,7 +29,7 @@ customPaging: function(i:number) {
     speed: 500,
     slidesToShow:
       4,
-    slidesToScroll: 1,
+    slidesToScroll: 4,
     arrows: false,
     centerMode: false,
     mobileFirst: true,
