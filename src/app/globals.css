@@ -73,6 +73,7 @@ html {
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
     --ring: 142.1 76.2% 36.3%;
+    --dot-color:0, 0%, 71%, 1;
     --radius: 0.5rem;
     --text-dark: 231, 33%, 23%, 1;
     --text-light: 0, 0%, 37%, 1;

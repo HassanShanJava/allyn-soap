@@ -14,18 +14,26 @@ const CategorySlider = (props:any) => {
   const previous = () => {
     slider?.current?.slickPrev();
   };
+  console.log(slider?.current,'slider?.current')
   const settings = {
     className: 'center slider variable-width flex gap-3 ',
-
-    dots: false,
+customPaging: function(i:number) {
+        return (
+          <a className='hidden lg:block'>
+            <div className={`mt-4 h-2 w-2 rounded-full   active:bg-primary ${i === slider?.current ?'bg-primary':'bg-primary-muted'} `}></div>
+          </a>
+        );
+      },
+    dots: true,
     infinite: false,
     speed: 500,
     slidesToShow:
       4,
-    slidesToScroll: 1,
+    slidesToScroll: 4,
     arrows: false,
     centerMode: false,
     mobileFirst: true,
+    
     responsive: [
       {
         breakpoint:
