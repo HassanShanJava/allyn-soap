@@ -48,6 +48,7 @@ module.exports = {
            DEFAULT: "hsl(var(--text-dark))",
            light: "hsl(var(--text-light))",
            white: "hsl(var(--text-white))",
+           'light-secondary':"hsl(var(--text-light-secondary))",
         }
         ,
         muted: {

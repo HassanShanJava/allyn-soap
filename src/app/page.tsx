@@ -4,8 +4,9 @@ export default async function HomePage() {
 
   // if (!products?.length) return null;
   return (
-    <div>
+ 
       
+    <div className="h-screen">
       <CategorySection />
       {/* <p className="text-7xl font-black">Sup!</p> */}
     </div>

@@ -1,48 +1,48 @@
-
-import { getMenu } from 'lib/shopify';
+"use client"
 import { Menu } from 'lib/shopify/types';
+import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 const { SITE_NAME } = process.env;
 
-export default async function Navbar() {
-  const menu = await getMenu('main-menu');
-console.log({menu})
-  return (
-    <nav className="sticky top-0 flex items-center justify-between p-4 lg:px-6 bg-[#ffffff] z-50 ">
-      <div className="block flex-none md:hidden">
-        {/* <MobileMenu menu={menu} /> */}
+export default async function Navbar({ menu }: any) {
+  const [color, setColor] = useState(false);
 
+  useEffect(() => {
+    const changeColor = () =>
+      window.scrollY >= 80 ? setColor(true) : setColor(false);
+
+    window.addEventListener('scroll', changeColor);
+
+    return () => {
+      console.log(color)
+      window.removeEventListener('scroll', changeColor);
+    };
+  }, []);
+  
+
+  return (
+    <nav className={`sticky top-0 bg-white  flex items-center justify-between  max-w-[1600px] mx-auto`}>
+      <div className={`flex justify-between gap-6 w-full items-center   transform ease-in-out   ${color?"bg-white duration-300":"bg-secondary duration-300"} p-6 lg:px-12`}>
+        <Link href="/" className="mr-2 flex w-full items-center justify-center md:w-auto lg:mr-6">
+          <Image src='/logo.png' alt='/' priority={true} width={100} height={100} />
+        </Link>
+
+        {menu.length ? (
+          <ul className="hidden sm:flex gap-4 text-sm  text-text-dark  md:flex-row  md:items-center ">
+            {menu.map((item: Menu) => (
+              <li key={item.title} className=' captialize-first  lowercase hover:font-semibold hover:text-primary  hover:cursor-pointer '>
+                 {item.title}
+              </li>
+            ))}
+          </ul>
+        ) : ""}
       </div>
-      <div className="flex w-full items-center mx-auto max-w-[1600px]">
-        <div className="flex w-full md:w-1/3">
-          <Link href="/" className="mr-2 flex w-full items-center justify-center md:w-auto lg:mr-6">
-            <div className="ml-2 flex-none text-sm font-medium uppercase md:hidden lg:block">
-              {SITE_NAME}
-            </div>
-          </Link>
-          {menu.length ? (
-            <ul className="hidden gap-6 text-sm md:flex md:items-center">
-              {menu.map((item: Menu) => (
-                <li key={item.title}>
-                  <Link
-                    href={item.path}
-                    className="text-neutral-500 underline-offset-4 hover:text-black hover:underline dark:text-neutral-400 dark:hover:text-neutral-300"
-                  >
-                    {item.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          ) : null}
-        </div>
-        {/* <div className="hidden justify-center md:flex md:w-1/3">
-          <Search />
-        </div> */}
-        {/* <div className="flex justify-end md:w-1/3">
-          <Suspense fallback={<OpenCart />}>
-            <Cart />
-          </Suspense>
-        </div> */}
+
+      <div className='w-[15%] p-4 lg:px-6 flex text-text-dark  gap-3 justify-center text-lg items-center'>
+        <i className='fas fa-magnifying-glass  text-center text-xl'></i>
+        <i className='fas fa-shopping-cart  text-center text-xl'></i>
+        <i className='fas fa-user  text-center text-xl'></i>
       </div>
     </nav>
   );
