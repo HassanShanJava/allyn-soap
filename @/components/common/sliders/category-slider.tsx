@@ -10,6 +10,7 @@ const CategorySlider = (props:any) => {
         const next = () => {
     slider?.current?.slickNext();
   };
+
   const previous = () => {
     slider?.current?.slickPrev();
   };
