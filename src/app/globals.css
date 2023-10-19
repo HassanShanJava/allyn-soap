@@ -5,7 +5,7 @@
 @import 'slick-carousel/slick/slick.css';
 @import 'slick-carousel/slick/slick-theme.css';
 
-html{
+html {
   font-family: var(--font-poppins), sans-serif;
 
 }
@@ -22,26 +22,34 @@ html{
   width: 300px;
   height: 300px;
 }
+
 .swiper-pagination {
   margin-top: 10px;
 }
+
 /* 
 .home-banner {
   background-image: url('/public/home-banner.jpg');
 } */
 
-@layer components{
-  .team-card{
-    
-      @apply w-[250px] h-auto md:w-[200px]  lg:w-[300px];
-      @apply  hover:bg-slate-100 hover:shadow-lg hover:scale-105;
-      @apply  flex flex-col justify-center items-center;
+@layer components {
+  .team-card {
+
+    @apply w-[250px] h-auto md:w-[200px] lg:w-[300px];
+    @apply hover:bg-slate-100 hover:shadow-lg hover:scale-105;
+    @apply flex flex-col justify-center items-center;
   }
-  .team-card-img{
+
+  .team-card-img {
     @apply block mx-auto sm:mx-0 sm:shrink-0 object-cover rounded-full h-[100px] w-[100px];
   }
 }
 
+@layer utilities {
+  .clip-img {
+    clip-path: url(#svgPath);
+  }
+}
 
 @layer base {
   :root {
@@ -51,7 +59,7 @@ html{
     --card-foreground: 240 10% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
-    --primary: 163, 66%, 53%, 1;
+    --primary: 163, 66%, 53%, 1; /*#38d6a9*/
     --primary-foreground: 0, 0%, 98%, 1;
     --secondary: 163, 66%, 53%, 0.08;
     --secondary-foreground: 240 5.9% 10%;
@@ -65,10 +73,10 @@ html{
     --input: 240 5.9% 90%;
     --ring: 142.1 76.2% 36.3%;
     --radius: 0.5rem;
-    --text-dark:231, 33%, 23%, 1;
-    --text-light:0, 0%, 37%, 1
+    --text-dark: 231, 33%, 23%, 1;
+    --text-light: 0, 0%, 37%, 1
   }
- 
+
   .dark {
     --background: 20 14.3% 4.1%;
     --foreground: 0 0% 95%;
@@ -92,12 +100,12 @@ html{
   }
 }
 
-.captialize-first::first-letter{
+.captialize-first::first-letter {
   text-transform: uppercase;
 }
 
-.link-hover{
-  text-shadow: 0 0.015em var(--primary),0 -0.015em var(--primary),0.01em 0 var(--primary),-0.01em 0 var(--primary);
+.link-hover {
+  text-shadow: 0 0.015em var(--primary), 0 -0.015em var(--primary), 0.01em 0 var(--primary), -0.01em 0 var(--primary);
 }
 
 
@@ -110,6 +118,22 @@ html{
   padding: 20px;
 }
 
-.background-image{
+.background-image {
   background-image: url('/public/outline.png');
+}
+
+.border {
+  /* border-image: url('/public/outline.png');
+  border-image-slice: 161 158 151 148;
+  border-image-width: 20px 20px 20px 20px;
+  border-image-outset: 0px 0px 0px 0px;
+  border-image-repeat: stretch stretch; */
+
+ 
+  --mask: 
+    radial-gradient(#000 0 0) 50%/calc(100% - 35.50px) calc(100% - 35.50px) no-repeat,
+    radial-gradient(farthest-side,#38d6a9 98, #0000) 0 0/60px 60px round;
+  -webkit-mask: var(--mask);
+          mask: var(--mask);
+  
 }

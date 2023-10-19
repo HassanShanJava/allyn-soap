@@ -21,6 +21,7 @@ export const metadata = {
     default: SITE_NAME!,
     template: `%s | ${SITE_NAME}`
   },
+  description: "Allyn's Soap Co. is dedicated to producing quality handmade soaps and lotions and other bath products with ingredients you can pronounce and understand",
   robots: {
     follow: true,
     index: true
@@ -73,7 +74,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
 
 
       </head>
-      
+
       <body className='w-full max-w-[1600px] mx-auto'>
         <Navbar menu={menu} />
         <main>{children}</main>
