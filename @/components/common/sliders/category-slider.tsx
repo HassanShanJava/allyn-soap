@@ -77,11 +77,11 @@ const CategorySlider = (props:any) => {
   };
 //   const collection = await getCollections()
     return (
-        <div className='w-full md:w-3/5  mx-auto flex items-center justify-center gao-2 md:gap-4'>
+        <div className='w-full md:w-4/6  mx-auto flex items-center justify-center gao-2 md:gap-4'>
           <div onClick={() => previous()} className='group hidden sm:flex bg-text-light-secondary hover:bg-primary  h-10 w-10 text-center justify-center items-center rounded-full cursor-pointer  transition ease-in delay-150'>
             <i className="fa-solid fa-chevron-left text-base text-text-light group-hover:text-text-white"></i>
           </div>
-          <div className='w-3/5  mx-auto flex-1'>
+          <div className='w-4/5  mx-auto flex-1'>
 
           <Slider ref={slider} {...settings}>
          

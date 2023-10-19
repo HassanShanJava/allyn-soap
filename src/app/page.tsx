@@ -1,14 +1,18 @@
-import CategorySection from "@/components/categorySection";
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
+const HomePage = dynamic(() => import('@/components/homepage'), {
+  loading: () => <p>Loading... Homepage</p>,
+})
 
-export default async function HomePage() {
+export default async function Home() {
 
-  // if (!products?.length) return null;
+
   return (
- 
-      
-    <div className="h-screen">
-      <CategorySection />
-      {/* <p className="text-7xl font-black">Sup!</p> */}
+    <div>
+      <Suspense >
+        <HomePage />
+        
+      </Suspense>
     </div>
   );
 }
