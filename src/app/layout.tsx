@@ -50,7 +50,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   return (
     <html lang="en" className={poppins.className}>
       <head>
-      <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
         <link
           rel="apple-touch-icon"
           href="/apple-icon?<generated>"
@@ -70,10 +70,11 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           crossOrigin="anonymous"
           referrerPolicy="no-referrer"
         />
-        
+
 
       </head>
-      <body>
+      
+      <body className='w-full max-w-[1600px] mx-auto'>
         <Navbar menu={menu} />
         <main>{children}</main>
       </body>

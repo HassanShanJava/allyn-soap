@@ -1,13 +1,17 @@
-import { getCollectionProducts } from "lib/shopify";
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
+const HomePage = dynamic(() => import('@/components/homepage'), {
+  loading: () => <p>Loading... Homepage</p>,
+})
 
-export default async function HomePage() {
-   const products = await getCollectionProducts({ collection: 'dryer-balls-and-spray' });
-console.log({products})
-  // if (!products?.length) return null;
+export default async function Home() {
+
+
   return (
-    <div className="h-screen">
-      {/* <p className="text-7xl font-black">Sup!</p> */}
-      <p>Sup</p>
+    <div>
+      <Suspense >
+        <HomePage />
+      </Suspense>
     </div>
   );
 }
