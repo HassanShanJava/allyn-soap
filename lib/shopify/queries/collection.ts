@@ -28,6 +28,7 @@ export const getCollectionsQuery = /* GraphQL */ `
   collections(first: 199) {
     edges {
       node {
+        id
         handle
         description
         title

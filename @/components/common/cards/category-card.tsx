@@ -3,9 +3,14 @@
 import Image from 'next/image';
 
 const CategoryCard = (props: { item: any, index: number }) => {
+    console.log(props?.item,'props?.item')
+//      const { category} = useSelector(
+//     (state: RootState) => state.category,
+//   );
+//   console.log({category})
     return (
         <>
-            <div className='group relative bg-primary-foreground hover:bg-primary w-48 h-48 rounded-xl  transition ease-in  cursor-pointer'>
+            <div className={`group relative  hover:bg-primary ${"gid://shopify/Collection/178979176587" == props?.item?.id ?'bg-primary':'bg-primary-foreground'} w-48 h-48 rounded-xl  transition ease-in  cursor-pointer`}>
                 <div className='relative h-4/6 w-full p-4'>
                     {props?.item?.image ? <>
                         <Image
