@@ -1,26 +1,34 @@
 'use client';
 // import { getCollections } from 'lib/shopify';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import Slider from 'react-slick';
 import CategoryCard from '../cards/category-card';
 
 const CategorySlider = (props:any) => {
       const slider = useRef<any>(null);
-
-        const next = () => {
+      const [active,setActive] = useState(0)
+console.log({active})
+  const next = () => {
     slider?.current?.slickNext();
+    
+console.log(props?.collection?.length,Math.floor((props?.collection?.length / slider?.current?.props?.slidesToShow )-2),active,'active')
+    setActive((prev)=>(( Math.floor(((props?.collection?.length / slider?.current?.props?.slidesToShow )-2)) >prev) ? prev+1:prev));
   };
 
   const previous = () => {
     slider?.current?.slickPrev();
+    setActive((prev)=>prev === 0 ? 0: prev - 1);
+
   };
-  console.log(slider?.current,'slider?.current')
   const settings = {
     className: 'center slider variable-width flex gap-3 ',
 customPaging: function(i:number) {
         return (
-          <a className='hidden lg:block'>
-            <div className={`mt-4 h-2 w-2 rounded-full   active:bg-primary ${i === slider?.current ?'bg-primary':'bg-primary-muted'} `}></div>
+          <a className={` hidden lg:block    `}>
+            <div onClick={()=>setActive(i)} className={`mt-4 flex items-center justify-center relative rounded-full h-4 w-4   ${i === active ?' border border-primary p-1 ':' p-1'}`}>
+
+            <div className={`h-full w-full  rounded-full    ${i === active ?'bg-primary  ':'bg-primary-muted '} `}></div>
+            </div>
           </a>
         );
       },
@@ -41,7 +49,7 @@ customPaging: function(i:number) {
         settings: {
           slidesToShow:
              3,
-          slidesToScroll: 1,
+          slidesToScroll: 3,
           centerMode: false,
         },
       },
@@ -51,7 +59,7 @@ customPaging: function(i:number) {
         settings: {
           slidesToShow:
              2,
-          slidesToScroll: 1,
+          slidesToScroll: 3,
           centerMode: false,
         },
       },
@@ -61,7 +69,7 @@ customPaging: function(i:number) {
         settings: {
           slidesToShow:
           2,
-          slidesToScroll: 1,
+          slidesToScroll: 3,
           centerMode: false,
         },
       },
@@ -72,13 +80,13 @@ customPaging: function(i:number) {
         settings: {
           slidesToShow:
              2,
-          slidesToScroll: 1,
+          slidesToScroll: 2,
         },
       },
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 1.05,
+          slidesToShow: 1.5,
           slidesToScroll: 1,
         },
       },

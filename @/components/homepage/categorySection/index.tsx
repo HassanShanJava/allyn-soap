@@ -1,10 +1,10 @@
 
 
-import apolloClient from '../../../apollo-client';
+import apolloClient from '../../../../apollo-client';
 
 import { gql } from '@apollo/client';
 import { removeEdgesAndNodes } from 'lib/shopify';
-import CategorySlider from '../common/sliders/category-slider';
+import CategorySlider from '../../common/sliders/category-slider';
 
 export const GET_PRODUCTS = gql`
     query getCollections {
