@@ -3,7 +3,6 @@
 import Image from 'next/image';
 
 const CategoryCard = (props: { item: any, index: number }) => {
-    console.log({ props })
     return (
         <>
             <div className='group relative bg-primary-foreground hover:bg-primary w-48 h-48 rounded-xl  transition ease-in  cursor-pointer'>
