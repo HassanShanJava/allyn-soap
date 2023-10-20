@@ -1,35 +1,41 @@
-/** @type {import('next').NextConfig} */
-module.exports = {
-  eslint: {
-    // Disabling on production builds because we're running checks on PRs via GitHub Actions.
-    ignoreDuringBuilds: true
+// @ts-check
+/* eslint-disable @typescript-eslint/no-var-requires */
+const { env } = require('./src/server/env');
+
+/**
+ * Don't be scared of the generics here.
+ * All they do is to give us autocompletion when using this.
+ *
+ * @template {import('next').NextConfig} T
+ * @param {T} config - A generic parameter that flows through to the return type
+ * @constraint {{import('next').NextConfig}}
+ */
+function getConfig(config) {
+  return config;
+}
+
+/**
+ * @link https://nextjs.org/docs/api-reference/next.config.js/introduction
+ */
+module.exports = getConfig({
+  /**
+   * Dynamic configuration available for the browser and server.
+   * Note: requires `ssr: true` or a `getInitialProps` in `_app.tsx`
+   * @link https://nextjs.org/docs/api-reference/next.config.js/runtime-configuration
+   */
+  publicRuntimeConfig: {
+    NODE_ENV: env.NODE_ENV,
   },
-  experimental: {
-    serverActions: true
-  },
+
   images: {
-    formats: ['image/avif', 'image/webp'],
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'cdn.shopify.com',
-        pathname: '/s/files/**'
-      },
-      {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
-        pathname: '/s/files/**'
-      }
-    ],
-    domains: ['images.unsplash.com', 'media.winnar.com','cdn.shopify.com'],
+    // disableStaticImages: true,
+    unoptimized: true,
+    dangerouslyAllowSVG: true,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+
+    domains: ['images.unsplash.com', 'media.winnar.com'],
+
   },
-  async redirects() {
-    return [
-      {
-        source: '/password',
-        destination: '/',
-        permanent: true
-      }
-    ];
-  }
-};
+  /** We run eslint as a separate task in CI */
+  eslint: { ignoreDuringBuilds: !!process.env.CI },
+});
