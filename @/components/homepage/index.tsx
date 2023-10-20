@@ -16,7 +16,7 @@ const Home = () => {
                     </div>
 
                     <div className=' '>
-                        <div className='  border-4 border-primary   '>
+                        <div className='  border-waves   '>
                             <Image src={Demo.src} className='overflow-clip' alt='/' width={650} height={550} />
                         </div>
                     </div>
