@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Demo from "public/demo.png"
 import Outline from "public/outline.png"
-import CategorySection from '../categorySection'
+import CategorySection from './categorySection'
 const Home = () => {
   return (
     <div className='relative '>
