@@ -7,7 +7,6 @@
 
 html {
   font-family: var(--font-poppins), sans-serif;
-
 }
 
 .swiper {
@@ -34,7 +33,6 @@ html {
 
 @layer components {
   .team-card {
-
     @apply w-[250px] h-auto md:w-[200px] lg:w-[300px];
     @apply hover:bg-slate-100 hover:shadow-lg hover:scale-105;
     @apply flex flex-col justify-center items-center;
@@ -73,7 +71,7 @@ html {
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
     --ring: 142.1 76.2% 36.3%;
-    --dot-color:0, 0%, 71%, 1;
+    --dot-color: 0, 0%, 71%, 1;
     --radius: 0.5rem;
     --text-dark: 231, 33%, 23%, 1;
     --text-light: 0, 0%, 37%, 1;
@@ -98,7 +96,7 @@ html {
     --accent-foreground: 0 0% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 85.7% 97.3%;
-    --border: 240 3.7% 15.9%;
+    --border: 0 0 94% 1;
     --input: 240 3.7% 15.9%;
     --ring: 142.4 71.8% 29.2%;
   }
@@ -109,9 +107,9 @@ html {
 }
 
 .link-hover {
-  text-shadow: 0 0.015em var(--primary), 0 -0.015em var(--primary), 0.01em 0 var(--primary), -0.01em 0 var(--primary);
+  text-shadow: 0 0.015em var(--primary), 0 -0.015em var(--primary),
+    0.01em 0 var(--primary), -0.01em 0 var(--primary);
 }
-
 
 .border-waves {
   position: relative;
@@ -119,5 +117,4 @@ html {
   background-repeat: no-repeat no-repeat;
   background-position: center center;
   background-size: cover;
-  
 }

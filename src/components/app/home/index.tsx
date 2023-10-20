@@ -1,8 +1,8 @@
-
 import langContent from '~/locales';
 import { RootState } from '~/store/store';
 import { useSelector } from 'react-redux';
 import CategorySection from './category_section';
+import RelatedProducts from './related_product';
 
 export default function Home() {
   return (
@@ -11,14 +11,12 @@ export default function Home() {
 
       {/* product section 1 */}
       <div className="relative flex flex-col gap-4 md:gap-14  md:px-10  py-6 md:py-12  ">
-       <CategorySection />
-       
+        <CategorySection />
+        <RelatedProducts />
       </div>
 
       {/* Video section */}
-      <div className="relative bg-background-footer px-4 flex flex-col gap-4 md:gap-14  md:px-14  py-6 md:py-12">
-        
-      </div>
+      <div className="relative bg-background-footer px-4 flex flex-col gap-4 md:gap-14  md:px-14  py-6 md:py-12"></div>
     </div>
   );
 }
