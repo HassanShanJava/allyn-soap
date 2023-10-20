@@ -5,7 +5,7 @@ import { RootState } from '../store';
 export interface Category {
   title: string;
   index: number;
-  handle:string;
+  handle: string;
   category_id: string;
 }
 // Define a type for the slice state
@@ -15,7 +15,12 @@ interface CategoryState {
 
 // Define the initial state using that type
 const initialState: CategoryState = {
-  category: { title: "Bar Soap",handle:"soap", index: 0, category_id: 'gid://shopify/Collection/178979176587' },
+  category: {
+    title: 'Bar Soap',
+    handle: 'soap',
+    index: 0,
+    category_id: 'gid://shopify/Collection/178979176587',
+  },
 };
 
 export const categorySlice = createSlice({
@@ -23,7 +28,6 @@ export const categorySlice = createSlice({
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
-   
     toggleCategory: (state, action: PayloadAction<Category>) => {
       console.log('action.payload', action.payload);
       state.category = action.payload;
@@ -31,7 +35,7 @@ export const categorySlice = createSlice({
   },
 });
 
-export const {  toggleCategory } = categorySlice.actions;
+export const { toggleCategory } = categorySlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectCount = (state: RootState) => state.layout;
