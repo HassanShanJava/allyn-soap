@@ -125,17 +125,19 @@ html {
 .container{
   width: fit-content;
   padding: 0;
+  max-width: 515px;
 }
 
 
 div.borderStyle {
   display:block;
-  width:500px;
-  height: 450px;
+  width:600px;
+  height: 351px;
 }
 
-svg mask{
-  border: 4px #39D7A9 solid;
+.frame-border {
+  stroke: #39D7A9;
+  stroke-width: 6;
 }
 
 svg image {width:100%; height:100%;mask:url(#top);}
