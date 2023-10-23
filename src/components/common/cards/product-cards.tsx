@@ -52,10 +52,10 @@ const ProductCard = (props: { item: any; index: number }) => {
             {/* {`(${props?.item?.products?.filters[0]?.values[0]?.count} ${props?.item?.title})`}{' '} */}
           </p>
           <p
-            className={`w-full text-3xl font-semibold  group-hover:text-text-white line-clamp-1  overflow-hidden text-ellipsis    `}
+            className={`w-full text-3xl font-bold  group-hover:text-text-white line-clamp-1  overflow-hidden text-ellipsis    `}
           >
-            <span className=" text-xl text-red-500">$</span>
-            24.00
+            <span className=" text-xl font-semibold text-red-500">$</span>
+            {props?.item?.priceRange?.maxVariantPrice?.amount}
           </p>
         </div>
       </div>
