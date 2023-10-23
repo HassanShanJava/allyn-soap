@@ -23,6 +23,7 @@ export default function Header() {
   const { error, data } = useQuery(getMenuQuery, {
     variables: { handle: 'main-menu' },
   });
+  console.log({ data }, 'menuData');
 
   useEffect(() => {
     const changeColor = () =>
@@ -59,12 +60,20 @@ export default function Header() {
         {data?.menu?.items.length ? (
           <ul className="hidden xl:flex gap-4 text-sm  text-text-dark  xl:flex-row  xl:items-center ">
             {data?.menu?.items?.map((item: Menu) => (
-              <li
+              <Link
                 key={item.title}
-                className=" captialize-first  lowercase font-semibold hover:text-primary  hover:cursor-pointer "
+                href={
+                  item?.type === 'COLLECTION' || item?.title !== 'Home'
+                    ? `/products/${item.title
+                        ?.toLowerCase()
+                        ?.replace(' ', '-')}`
+                    : `/`
+                }
               >
-                {item.title}
-              </li>
+                <li className=" captialize-first  lowercase font-semibold hover:text-primary  hover:cursor-pointer ">
+                  {item.title}
+                </li>
+              </Link>
             ))}
           </ul>
         ) : (

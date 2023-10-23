@@ -30,11 +30,11 @@ export type CartItem = {
 };
 
 export type Collection = {
-   handle: string;
+  handle: string;
   title: string;
   description: string;
   seo: SEO;
-  productsCount?:any;
+  productsCount?: any;
   updatedAt: string;
   path: string;
 };
@@ -49,6 +49,7 @@ export type Image = {
 export type Menu = {
   title: string;
   path: string;
+  type: string;
 };
 
 export type Money = {
@@ -111,7 +112,7 @@ export type ShopifyCollection = {
   title: string;
   description: string;
   seo: SEO;
-  productsCount?:any;
+  productsCount?: any;
   updatedAt: string;
 };
 

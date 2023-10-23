@@ -12,7 +12,7 @@ const ProductCard = (props: { item: any; index: number }) => {
   return (
     <>
       <div
-        className={`group relative  hover:bg-primary hover:border-none py-6  w-full h-72 rounded-3xl shadow-md  transition ease-in  cursor-pointer border border-border`}
+        className={`group relative  hover:bg-primary hover:border-none py-6 mx-auto w-full h-72 rounded-3xl shadow-md  transition ease-in  cursor-pointer border border-border`}
       >
         <div className="relative h-3/5 w-full  px-4">
           {/* <Image

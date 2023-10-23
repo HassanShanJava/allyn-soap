@@ -23,7 +23,7 @@ const ArrivalCard = (props: { item: any; index: number }) => {
       <div
         className={`group relative   ${
           category?.category_id == props?.item?.id ? '' : 'bg-card'
-        } w-60 h-60 rounded-xl  transition ease-in  cursor-pointer shadow-md  `}
+        } w-60 h-60 rounded-xl  transition ease-in  cursor-pointer shadow-md mx-auto  `}
         onClick={() => onDataSubmit(props?.item)}
       >
         <div className="w-full h-full absolute overflow-hidden">

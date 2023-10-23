@@ -1,9 +1,13 @@
+import ListingSection from './listing';
+
 const Listing = () => {
   return (
     <>
       <div className="relative mt-32 font-poppins">
         {/* for bg color */}
-        <div className="absolute bg-secondary min-w-[200px] w-full  max-w-[60%] md:max-w-[80%] h-48 rounded-br-[100px] "></div>
+        <div className="w-full px-4 py-12 2xl:container sm:px-6 xl:px-20 2xl:mx-auto 2xl:px-0 ">
+          <ListingSection />
+        </div>
       </div>
     </>
   );

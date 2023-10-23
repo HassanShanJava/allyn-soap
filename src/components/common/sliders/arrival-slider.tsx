@@ -4,9 +4,9 @@ import { useRef, useState } from 'react';
 import Slider from 'react-slick';
 import CategoryCard from '../cards/category-cards';
 import { useQuery } from '@apollo/client';
-import { getCollectionsQuery } from '~/server/lib/shopify/query/collection';
 import { removeEdgesAndNodes } from '~/utils/helper';
 import ArrivalCard from '../cards/arrival-cards';
+import { getCollectionsQuery } from '~/server/lib/shopify/query/collection';
 
 const ArrivalSlider = () => {
   const slider = useRef<any>(null);
@@ -98,7 +98,6 @@ const ArrivalSlider = () => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          centerMode: true,
         },
       },
     ],
@@ -108,7 +107,7 @@ const ArrivalSlider = () => {
     <div className="w-full md:w-4/6  mx-auto flex items-center justify-center gao-2 md:gap-4 ">
       <div
         onClick={() => previous()}
-        className="group hidden sm:flex bg-text-light-secondary hover:bg-primary  h-10 w-10 text-center justify-center items-center rounded-full cursor-pointer  transition ease-in delay-150"
+        className="group flex bg-text-light-secondary hover:bg-primary  h-10 w-10 text-center justify-center items-center rounded-full cursor-pointer  transition ease-in delay-150"
       >
         <i className="fa-solid fa-chevron-left text-base text-text-light group-hover:text-text-white"></i>
       </div>
@@ -136,7 +135,7 @@ const ArrivalSlider = () => {
 
       <div
         onClick={() => next()}
-        className="group hidden sm:flex bg-text-light-secondary hover:bg-primary  h-10 w-10 text-center justify-center items-center rounded-full cursor-pointer  transition ease-in delay-150"
+        className="group flex bg-text-light-secondary hover:bg-primary  h-10 w-10 text-center justify-center items-center rounded-full cursor-pointer  transition ease-in delay-150"
       >
         <i className="fa-solid fa-chevron-right text-base text-text-light group-hover:text-text-white"></i>
       </div>

@@ -4,8 +4,8 @@ import { useRef, useState } from 'react';
 import Slider from 'react-slick';
 import CategoryCard from '../cards/category-cards';
 import { useQuery } from '@apollo/client';
-import { getCollectionsQuery } from '~/server/lib/shopify/query/collection';
 import { removeEdgesAndNodes } from '~/utils/helper';
+import { getCollectionsQuery } from '~/server/lib/shopify/query/collection';
 
 const CategorySlider = () => {
   const slider = useRef<any>(null);
@@ -31,7 +31,7 @@ const CategorySlider = () => {
     setActive((prev) => (prev === 0 ? 0 : prev - 1));
   };
   const settings = {
-    className: 'center slider variable-width flex gap-3 ',
+    className: 'center slider variable-width flex gap-3  mx-auto',
     customPaging: function (i: number) {
       return (
         <a className={` hidden lg:block    `}>
@@ -95,7 +95,7 @@ const CategorySlider = () => {
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 1.2,
+          slidesToShow: 1,
           slidesToScroll: 1,
         },
       },
@@ -106,7 +106,7 @@ const CategorySlider = () => {
     <div className="w-full md:w-4/6  mx-auto flex items-center justify-center gao-2 md:gap-4">
       <div
         onClick={() => previous()}
-        className="group hidden sm:flex bg-text-light-secondary hover:bg-primary  h-10 w-10 text-center justify-center items-center rounded-full cursor-pointer  transition ease-in delay-150"
+        className="group flex  bg-text-light-secondary hover:bg-primary  h-10 w-10 text-center justify-center items-center rounded-full cursor-pointer  transition ease-in delay-150"
       >
         <i className="fa-solid fa-chevron-left text-base text-text-light group-hover:text-text-white"></i>
       </div>
@@ -116,7 +116,7 @@ const CategorySlider = () => {
             collectionData?.map((item: any, index: number) => {
               if (item?.products?.filters[0]?.values[0]?.count >= 1) {
                 return (
-                  <div key={index} className={` w-full sm:mr-4`}>
+                  <div key={index} className={` w-full sm:mr-4 mx-auto`}>
                     <CategoryCard item={item} index={active} />
                   </div>
                 );
@@ -134,7 +134,7 @@ const CategorySlider = () => {
 
       <div
         onClick={() => next()}
-        className="group hidden sm:flex bg-text-light-secondary hover:bg-primary  h-10 w-10 text-center justify-center items-center rounded-full cursor-pointer  transition ease-in delay-150"
+        className="group flex bg-text-light-secondary hover:bg-primary  h-10 w-10 text-center justify-center items-center rounded-full cursor-pointer  transition ease-in delay-150"
       >
         <i className="fa-solid fa-chevron-right text-base text-text-light group-hover:text-text-white"></i>
       </div>
