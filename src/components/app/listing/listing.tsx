@@ -9,11 +9,11 @@ const ListingSection = () => {
 
   return (
     <section id="Home-Page">
-      <div className="grid grid-cols-12  text-black px-20">
-        <div className=" col-span-3 hidden md:block ">
+      <div className="relative grid grid-cols-12  text-black px-20 gap-4">
+        <div className="h-full  bg-yellow-500 sticky top-52  col-span-3 hidden md:block ">
           <FilterSection />
         </div>
-        <div className=" col-span-12 md:col-span-9 text-black flex flex-col gap-4">
+        <div className=" relative col-span-12 md:col-span-9 text-black flex flex-col gap-4">
           <div className=" flex  justify-between">
             <p className=" text-text text-4xl capitalize font-semibold">{id}</p>
             <p>Casual</p>

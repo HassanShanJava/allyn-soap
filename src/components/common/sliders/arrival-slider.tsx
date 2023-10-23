@@ -7,20 +7,30 @@ import { useQuery } from '@apollo/client';
 import { removeEdgesAndNodes } from '~/utils/helper';
 import ArrivalCard from '../cards/arrival-cards';
 import { getCollectionsQuery } from '~/server/lib/shopify/query/collection';
+import { getProductsQuery } from '~/server/lib/shopify/query/product';
 
 const ArrivalSlider = () => {
   const slider = useRef<any>(null);
   const [active, setActive] = useState(0);
-
-  const { error, data } = useQuery(getCollectionsQuery);
-  const collectionData = data ? removeEdgesAndNodes(data?.collections) : [];
-  console.log({ collectionData });
+  const { error, data, loading } = useQuery(getProductsQuery, {
+    variables: {
+      query: 'totalInventory:>=1',
+      reverse: true,
+      sortKey: 'CREATED_AT',
+      first: 8,
+    },
+  });
+  // const { error, data } = useQuery(getCollectionsQuery);
+  const newArrivalData = data?.products
+    ? removeEdgesAndNodes(data?.products)
+    : [];
+  console.log({ newArrivalData });
   const next = () => {
     slider?.current?.slickNext();
 
     setActive((prev) =>
       Math.floor(
-        collectionData?.length / slider?.current?.props?.slidesToShow - 2,
+        newArrivalData?.length / slider?.current?.props?.slidesToShow - 2,
       ) > prev
         ? prev + 1
         : prev,
@@ -54,8 +64,8 @@ const ArrivalSlider = () => {
     dots: false,
     infinite: false,
     speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 3,
+    slidesToShow: 4,
+    slidesToScroll: 4,
     arrows: false,
     centerMode: false,
     mobileFirst: true,
@@ -64,16 +74,16 @@ const ArrivalSlider = () => {
       {
         breakpoint: 1536,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToShow: 2.9,
+          slidesToScroll: 2.9,
           centerMode: false,
         },
       },
       {
         breakpoint: 1280,
         settings: {
-          slidesToShow: 1.5,
-          slidesToScroll: 1.5,
+          slidesToShow: 2.4,
+          slidesToScroll: 2.4,
           centerMode: false,
         },
       },
@@ -104,7 +114,7 @@ const ArrivalSlider = () => {
   };
   //   const collection = await getCollections()
   return (
-    <div className="w-full md:w-4/6  mx-auto flex items-center justify-center gao-2 md:gap-4 ">
+    <div className="w-full md:w-5/6  mx-auto flex items-center justify-center gao-2 md:gap-4 ">
       <div
         onClick={() => previous()}
         className="group flex bg-text-light-secondary hover:bg-primary  h-10 w-10 text-center justify-center items-center rounded-full cursor-pointer  transition ease-in delay-150"
@@ -113,17 +123,15 @@ const ArrivalSlider = () => {
       </div>
       <div className="w-4/5  mx-auto flex-1">
         <Slider ref={slider} {...settings}>
-          {collectionData.length > 0 &&
-            collectionData?.map((item: any, index: number) => {
-              if (item?.products?.filters[0]?.values[0]?.count >= 1) {
-                return (
-                  <div key={index} className={` w-full sm:mr-4  `}>
-                    <ArrivalCard item={item} index={active} />
-                  </div>
-                );
-              }
+          {newArrivalData.length > 0 &&
+            newArrivalData?.map((item: any, index: number) => {
+              return (
+                <div key={index} className={` w-full sm:mr-4  `}>
+                  <ArrivalCard item={item} index={active} />
+                </div>
+              );
             })}
-          {collectionData?.length === 0 ? (
+          {newArrivalData?.length === 0 ? (
             <div className="text-center w-full py-10 text-lg">
               Coming Soon...
             </div>
