@@ -60,7 +60,8 @@ html {
     --primary: 163, 66%, 53%, 1;
     /*#39D7A9 */
     --primary-foreground: 0, 0%, 98%, 1;
-    --secondary: 163, 66%, 53%, 0.08;
+    --secondary: 162,	73.91%,	95.49%, 1;
+    /* #ebfcf7 */
     --secondary-foreground: 240 5.9% 10%;
     --muted: 240 4.8% 95.9%;
     --muted-foreground: 240 3.8% 46.1%;
@@ -157,13 +158,15 @@ html {
 .container {
   width: fit-content;
   padding: 0;
-  max-width: 515px;
+  max-width: 705px;
 }
 
 div.borderStyle {
   display: block;
-  width: 600px;
-  height: 351px;
+  /* width: 600px;
+  height: 351px; */
+  width: 900px;
+  /* height: 840px; */
 }
 
 .frame-border {

@@ -46,7 +46,7 @@ export default function Header() {
         className={`flex  justify-start xl:justify-between lg:gap-4 xl:gap-6 min-w-[200px] w-full max-w-[60%]  md:max-w-[80%] items-center  ${
           color
             ? '!bg-white transform ease-in-out duration-500 '
-            : 'bg-[#ebfcf7] transform ease-in-out duration-500'
+            : 'bg-secondary transform ease-in-out duration-500'
         }   transform ease-in-out    p-6 lg:px-12 lg:py-6 `}
       >
         <Link
