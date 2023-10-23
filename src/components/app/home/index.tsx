@@ -15,10 +15,8 @@ const Home = () => {
 
         <BannerSection />
 
-        <div className="h-screen">
-          <CategorySection />
-          <RelatedProducts />
-        </div>
+        <CategorySection />
+        <RelatedProducts />
       </div>
     </>
   );
