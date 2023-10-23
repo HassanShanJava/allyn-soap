@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 
 // import Icon from '~/public/assets/favicon.png';
 import { Toaster } from 'react-hot-toast';
+import SeoHead from '../common/seo-head';
 type DefaultLayoutProps = { children: ReactNode };
 
 export default function DefaultLayout({ children }: DefaultLayoutProps) {
@@ -19,11 +20,8 @@ export default function DefaultLayout({ children }: DefaultLayoutProps) {
     <Provider store={store}>
       <Toaster position="top-right" reverseOrder={false} />
       <ThemeProvider attribute="class" >
-        <Head>
-          <title>allynssoapco</title>
-          {/* <link rel="icon" href={Icon.src} /> */}
-        </Head>
-                  <AppLayout>{children}</AppLayout>
+        <SeoHead/>
+        <AppLayout>{children}</AppLayout>
 
       </ThemeProvider>
     </Provider>

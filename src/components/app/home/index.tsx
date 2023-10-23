@@ -1,22 +1,27 @@
-import langContent from '~/locales';
-import { RootState } from '~/store/store';
-import { useSelector } from 'react-redux';
+import Image from 'next/image';
+
 import CategorySection from './category_section';
+import Demo from '~/public/assets/demo.png';
+import Outline from '~/public/assets/outline.png';
+import BannerSection from './banner_section';
 import RelatedProducts from './related_product';
 
-export default function Home() {
+const Home = () => {
   return (
-    <div className=" flex flex-col w-full ">
-      {/* // <div className=""> */}
+    <>
+      <div className="relative mt-32 font-poppins">
+        {/* for bg color */}
+        <div className="absolute bg-secondary min-w-[200px] w-full  max-w-[60%] md:max-w-[80%] h-48 rounded-br-[100px] "></div>
 
-      {/* product section 1 */}
-      <div className="relative flex flex-col gap-4 md:gap-14  md:px-10  py-6 md:py-12  ">
-        <CategorySection />
-        <RelatedProducts />
+        <BannerSection />
+
+        <div className="h-screen">
+          <CategorySection />
+          <RelatedProducts />
+        </div>
       </div>
-
-      {/* Video section */}
-      <div className="relative bg-background-footer px-4 flex flex-col gap-4 md:gap-14  md:px-14  py-6 md:py-12"></div>
-    </div>
+    </>
   );
-}
+};
+
+export default Home;
