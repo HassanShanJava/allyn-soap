@@ -4,13 +4,23 @@ import { Button } from '~/components/ui/button';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { useQuery } from '@apollo/client';
+import { getProductsQuery } from '~/server/lib/shopify/query/product';
 
 const BannerSection = ({ list }: any) => {
   console.log({ list });
   const router = useRouter();
   const slider = useRef<any>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
-
+  const { error, data, loading } = useQuery(getProductsQuery, {
+    variables: {
+      query: 'totalInventory:>=1',
+      reverse: false,
+      sortKey: 'BEST_SELLING',
+      first: 4,
+    },
+  });
+  console.log({ data }, 'bannerDaata');
   const settings = {
     // customPaging: function (i: number) {
     //   return (
