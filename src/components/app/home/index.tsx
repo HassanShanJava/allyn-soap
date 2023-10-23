@@ -5,6 +5,7 @@ import Demo from '~/public/assets/demo.png';
 import Outline from '~/public/assets/outline.png';
 import BannerSection from './banner_section';
 import RelatedProducts from './related_product';
+import ArrivalSection from './arrival_section';
 
 const Home = () => {
   return (
@@ -17,6 +18,7 @@ const Home = () => {
 
         <CategorySection />
         <RelatedProducts />
+        <ArrivalSection />
       </div>
     </>
   );

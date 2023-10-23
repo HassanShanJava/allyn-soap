@@ -18,8 +18,8 @@ const RelatedProducts = () => {
   console.log(productData, 'product Data');
 
   return (
-    <section id="category">
-      <div className="   mx-auto  grid grid-cols-1 xsm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 w-full md:w-4/6 gap-4  ">
+    <section id="category ">
+      <div className="   mx-auto  grid grid-cols-1 xsm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 w-full md:w-4/6 gap-4 mb-4 ">
         {!loading ? (
           <>
             {productData?.length > 0 ? (

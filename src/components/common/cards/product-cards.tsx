@@ -27,8 +27,11 @@ const ProductCard = (props: { item: any; index: number }) => {
               <Image
                 height={1000}
                 width={1000}
-                className=" h-full w-full object-cover object-center rounded-3xl"
                 src={props?.item?.featuredImage?.url}
+                className=" h-full w-full object-cover object-center rounded-3xl bg-text-light-secondary  transition-all duration-[2s] animate-pulse"
+                onLoadingComplete={(imgae) =>
+                  imgae?.classList?.remove('animate-pulse')
+                }
                 alt="girl-image"
                 priority
               />

@@ -72,7 +72,7 @@ const CategorySlider = () => {
         breakpoint: 1280,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 3,
+          slidesToScroll: 2,
           centerMode: false,
         },
       },
@@ -80,7 +80,7 @@ const CategorySlider = () => {
         breakpoint: 800,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 3,
+          slidesToScroll: 2,
           centerMode: false,
         },
       },
@@ -116,7 +116,7 @@ const CategorySlider = () => {
             collectionData?.map((item: any, index: number) => {
               if (item?.products?.filters[0]?.values[0]?.count >= 1) {
                 return (
-                  <div key={index} className={` w-full sm:ml-2`}>
+                  <div key={index} className={` w-full sm:mr-4`}>
                     <CategoryCard item={item} index={active} />
                   </div>
                 );
