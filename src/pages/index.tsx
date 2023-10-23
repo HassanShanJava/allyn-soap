@@ -4,7 +4,7 @@ import { Suspense } from 'react';
 
 const IndexPage: NextPageWithLayout = () => {
     return (
-        <Suspense>
+        <Suspense fallback={<p>Loading home</p>}>
             <Home />
         </Suspense>
     )
