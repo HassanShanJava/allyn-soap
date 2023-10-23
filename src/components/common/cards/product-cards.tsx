@@ -12,9 +12,9 @@ const ProductCard = (props: { item: any; index: number }) => {
   return (
     <>
       <div
-        className={`group relative  hover:bg-primary hover:border-none  w-full h-72 rounded-xl shadow-md  transition ease-in  cursor-pointer border border-border`}
+        className={`group relative  hover:bg-primary hover:border-none py-6  w-full h-72 rounded-3xl shadow-md  transition ease-in  cursor-pointer border border-border`}
       >
-        <div className="relative h-3/5 w-full pt-8 px-8">
+        <div className="relative h-3/5 w-full  px-4">
           {/* <Image
             height={1000}
             width={1000}
@@ -27,7 +27,7 @@ const ProductCard = (props: { item: any; index: number }) => {
               <Image
                 height={1000}
                 width={1000}
-                className=" h-full w-full object-cover object-center rounded-xl "
+                className=" h-full w-full object-cover object-center rounded-3xl"
                 src={props?.item?.featuredImage?.url}
                 alt="girl-image"
                 priority
@@ -39,7 +39,7 @@ const ProductCard = (props: { item: any; index: number }) => {
             </div>
           )}
         </div>
-        <div className=" px-8 flex flex-col gap-1 mt-2">
+        <div className=" px-4 flex flex-col gap-1 mt-2">
           <p
             className={`w-full text-2xl font-semibold  group-hover:text-text-white line-clamp-1  overflow-hidden text-ellipsis    `}
           >

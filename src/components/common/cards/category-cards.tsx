@@ -25,7 +25,7 @@ const CategoryCard = (props: { item: any; index: number }) => {
           category?.category_id == props?.item?.id
             ? 'bg-primary'
             : 'bg-primary-foreground'
-        } w-48 h-48 rounded-xl  transition ease-in  cursor-pointer`}
+        } w-48 h-48 rounded-2xl  transition ease-in  cursor-pointer`}
         onClick={() => onDataSubmit(props?.item)}
       >
         <div className="relative h-4/6 w-full p-4">
@@ -34,13 +34,13 @@ const CategoryCard = (props: { item: any; index: number }) => {
               <Image
                 height={1000}
                 width={1000}
-                className=" h-full w-full object-cover object-center rounded-xl "
+                className=" h-full w-full object-cover object-center rounded-2xl "
                 src={props?.item?.image?.src}
                 alt="girl-image"
               />
             </>
           ) : (
-            <div className=" h-full w-full flex items-center justify-center bg-white border border-text-light rounded-xl">
+            <div className=" h-full w-full flex items-center justify-center bg-white border border-text-light rounded-2xl">
               <i className="fa-solid fa-image text-2xl text-text-light text-center"></i>
             </div>
           )}
