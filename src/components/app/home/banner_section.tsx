@@ -20,7 +20,6 @@ const BannerSection = ({ list }: any) => {
       first: 4,
     },
   });
-  console.log({ data }, 'bannerDaata');
   const settings = {
     // customPaging: function (i: number) {
     //   return (
