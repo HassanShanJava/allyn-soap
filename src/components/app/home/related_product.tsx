@@ -15,7 +15,6 @@ const RelatedProducts = () => {
   const productData = data
     ? removeEdgesAndNodes(data?.collection?.products)
     : [];
-  console.log(productData, 'product Data');
 
   return (
     <section id="category ">

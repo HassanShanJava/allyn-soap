@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
 import FilterSection from './filter';
-import { useQuery } from '@apollo/client';
-import { removeEdgesAndNodes } from '~/utils/helper';
+
 import ProductListing from './product_listing';
 
 const ListingSection = () => {

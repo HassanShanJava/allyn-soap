@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import ProductCard from '~/components/common/cards/product-cards';
 import { LoadingContent } from '~/components/common/loading/loadingContent';
 import { getCollectionProductsQuery } from '~/server/lib/shopify/query/collection';
-import { getProductsQuery } from '~/server/lib/shopify/query/product';
 import { defaultSort } from '~/utils/constant';
 import { removeEdgesAndNodes } from '~/utils/helper';
 
@@ -18,7 +17,6 @@ const ProductListing = () => {
   const productData = data?.collection?.products
     ? removeEdgesAndNodes(data?.collection?.products)
     : [];
-  console.log({ productData }, 'product Dynamic Data');
   return (
     <>
       {!loading ? (

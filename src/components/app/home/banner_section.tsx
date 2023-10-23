@@ -36,65 +36,61 @@ const BannerSection = ({ list }: any) => {
     slidesToScroll: 1,
     arrows: false,
     centerMode: false,
-    autoPlay:true
-
-
+    autoPlay: true,
   };
 
   const next = () => {
     // slider?.current?.slickNext();
     slider.current.slickNext();
-    
   };
 
   const previous = () => {
-      slider.current.slickPrev();
-    
+    slider.current.slickPrev();
   };
   return (
     <section id="banner">
-        <>
-
+      <>
         <Slider ref={slider} {...settings}>
-          {list.map((item, i) => (
-            <div className="!flex flex-col md:!flex-row   justify-between items-center  ">
+          {list.map((item, i: number) => (
+            <div
+              key={i}
+              className="!flex flex-col md:!flex-row   justify-between items-center  "
+            >
               <div className="p-6 md:px-12 my-auto ">
                 <p className="text-text-dark text-[3.5rem] font-black">
                   {item.heading}
                 </p>
                 <p className="text-text-light py-4">{item.desc}</p>
-                <div className='flex justify-between flex-row md:flex-col  items-center md:items-start  w-full md:w-fit'>
-
-                <Button
-                  className="text-center w-40 h-12  mt-4 shadow-xl"
-                  onClick={() => router.push(item.link)}
-                >
-                  Shop Now
-                </Button>
-
-                <div className="mt-4 flex justify-between w-fit gap-3 ">
-                  <button
-                    className="hover:cursor-pointer hover:opacity-80 font-thin w-12 h-12 bg-gray-400  text-text rounded-full flex items-center justify-center"
-                    onClick={previous}
-                    // disabled={currentSlide === 0 ? true : false}
+                <div className="flex justify-between flex-row md:flex-col  items-center md:items-start  w-full md:w-fit">
+                  <Button
+                    className="text-center w-40 h-12  mt-4 shadow-xl"
+                    onClick={() => router.push(item.link)}
                   >
-                    <i className="text-xl fas fa-angle-left  "></i>
-                  </button>
-                  <button
-                    className="hover:cursor-pointer hover:opacity-80 font-thin w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center"
-                    onClick={next}
-                    // disabled={currentSlide < list.length - 1 ? true : false}
-                  >
-                    <i className=" text-xl fas fa-angle-right "></i>
-                  </button>
-                </div>
+                    Shop Now
+                  </Button>
+
+                  <div className="mt-4 flex justify-between w-fit gap-3 ">
+                    <button
+                      className="hover:cursor-pointer hover:opacity-80 font-thin w-12 h-12 bg-gray-400  text-text rounded-full flex items-center justify-center"
+                      onClick={previous}
+                      // disabled={currentSlide === 0 ? true : false}
+                    >
+                      <i className="text-xl fas fa-angle-left  "></i>
+                    </button>
+                    <button
+                      className="hover:cursor-pointer hover:opacity-80 font-thin w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center"
+                      onClick={next}
+                      // disabled={currentSlide < list.length - 1 ? true : false}
+                    >
+                      <i className=" text-xl fas fa-angle-right "></i>
+                    </button>
+                  </div>
                 </div>
               </div>
 
               <div className="container w-[300px] md:w-[500px]  lg:w-[900px] ">
                 <div className="borderStyle   ">
                   <svg
-                    
                     xmlns="http://www.w3.org/2000/svg"
                     //   viewBox="0 0 1000 640"
                     viewBox="0 0 900 600"
@@ -129,8 +125,7 @@ const BannerSection = ({ list }: any) => {
             </div>
           ))}
         </Slider>
-        </>
-      
+      </>
     </section>
   );
 };
