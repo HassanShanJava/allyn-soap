@@ -64,8 +64,8 @@ const ArrivalSlider = () => {
     dots: false,
     infinite: false,
     speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 3,
+    slidesToShow: 4,
+    slidesToScroll: 4,
     arrows: false,
     centerMode: false,
     mobileFirst: true,
@@ -74,16 +74,16 @@ const ArrivalSlider = () => {
       {
         breakpoint: 1536,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToShow: 2.9,
+          slidesToScroll: 2.9,
           centerMode: false,
         },
       },
       {
         breakpoint: 1280,
         settings: {
-          slidesToShow: 1.5,
-          slidesToScroll: 1.5,
+          slidesToShow: 2.4,
+          slidesToScroll: 2.4,
           centerMode: false,
         },
       },
@@ -114,7 +114,7 @@ const ArrivalSlider = () => {
   };
   //   const collection = await getCollections()
   return (
-    <div className="w-full md:w-4/6  mx-auto flex items-center justify-center gao-2 md:gap-4 ">
+    <div className="w-full md:w-5/6  mx-auto flex items-center justify-center gao-2 md:gap-4 ">
       <div
         onClick={() => previous()}
         className="group flex bg-text-light-secondary hover:bg-primary  h-10 w-10 text-center justify-center items-center rounded-full cursor-pointer  transition ease-in delay-150"

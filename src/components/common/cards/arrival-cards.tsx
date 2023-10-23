@@ -1,30 +1,18 @@
 import Image from 'next/image';
-import { useDispatch, useSelector } from 'react-redux';
-import { toggleCategory } from '~/store/reducers/category';
+import { useSelector } from 'react-redux';
 import { RootState } from '~/store/store';
 
 const ArrivalCard = (props: { item: any; index: number }) => {
   console.log(props?.item, 'props?.item');
-  const dispatch = useDispatch();
   const { category } = useSelector((state: RootState) => state.category);
   //   console.log({category})
-  const onDataSubmit = (data: any) => {
-    dispatch(
-      toggleCategory({
-        handle: data?.handle,
-        title: data?.title,
-        category_id: data?.id,
-        index: props?.index,
-      }),
-    );
-  };
+
   return (
     <>
       <div
         className={`group relative   ${
           category?.category_id == props?.item?.id ? '' : 'bg-card'
         } w-60 h-60 rounded-xl  transition ease-in  cursor-pointer shadow-md mx-auto  `}
-        onClick={() => onDataSubmit(props?.item)}
       >
         <div className="w-full h-full absolute overflow-hidden">
           <div
