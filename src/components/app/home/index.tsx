@@ -49,7 +49,7 @@ const demoList = [
 const Home = () => {
   return (
     <>
-      <div className="relative mt-32 font-poppins">
+      <div className="relative  font-poppins">
         {/* for bg color */}
         <div className="absolute -z-10 bg-secondary min-w-[200px] w-full  max-w-[60%] md:max-w-[80%] h-48 rounded-br-[100px] "></div>
 
