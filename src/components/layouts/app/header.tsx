@@ -4,15 +4,11 @@ import LogoImage from '~/public/assets/logo.png';
 import Image from 'next/image';
 
 import { useRouter } from 'next/router';
-import { toggleLang } from '~/store/reducers/layout';
-import { RootState } from '~/store/store';
 import Link from 'next/link';
-import langContent from '~/locales';
-import { useToast } from '~/components/ui/use-toast';
 import { getMenuQuery } from '~/server/lib/shopify/query/menu';
 
 import { useQuery } from '@apollo/client';
-import { getRoutData, removeEdgesAndNodes } from '~/utils/helper';
+
 import { Menu } from '~/server/lib/shopify/type';
 
 export default function Header() {
@@ -20,7 +16,7 @@ export default function Header() {
 
   const [color, setColor] = useState(false);
   const [nav, setNav] = useState<boolean>(false);
-  const { error, data } = useQuery(getMenuQuery, {
+  const { error, data,loading } = useQuery(getMenuQuery, {
     variables: { handle: 'main-menu' },
   });
   console.log({ data }, 'menuData');
@@ -57,7 +53,7 @@ export default function Header() {
           <Image src={LogoImage} alt="/" width={80} height={80} />
         </Link>
 
-        {data?.menu?.items.length ? (
+        {data?.menu?.items ? (
           <ul className="hidden xl:flex gap-4 text-sm  text-text-dark  xl:flex-row  xl:items-center ">
             {data?.menu?.items?.map((item: Menu) => (
               <Link
