@@ -80,14 +80,14 @@ const BannerSection = ({ list }: any) => {
 
                       <div className="flex justify-between w-fit gap-3 md:mt-4">
                         <Button
-                          className={` hover:cursor-pointer disabled:cursor-not-allowed hover:opacity-80 font-thin w-10 h-10 md:w-12 md:h-12 shadow-lg bg-text-light-secondary  text-text rounded-full flex items-center justify-center `}
+                          className={` cursor-pointer disabled:cursor-not-allowed hover:opacity-80 font-thin w-10 h-10 md:w-12 md:h-12 shadow-lg bg-text-light-secondary  text-text rounded-full flex items-center justify-center `}
                           onClick={previous}
                           disabled={i === 0 ? true : false}
                         >
                           <i className="text-md md:text-xl fas fa-angle-left  "></i>
                         </Button>
                         <Button
-                          className={`hover:cursor-pointer disabled:cursor-not-allowed hover:opacity-80 font-thin w-10 h-10 md:w-12 md:h-12 shadow-lg bg-primary text-white rounded-full flex items-center justify-center `}
+                          className={`cursor-pointer disabled:cursor-not-allowed hover:opacity-80 font-thin w-10 h-10 md:w-12 md:h-12 shadow-lg bg-primary text-white rounded-full flex items-center justify-center `}
                           onClick={next}
                           disabled={i == sliderData.length - 1 ? true : false}
                         >
