@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/client';
+import Link from 'next/link';
 import { LoadingContent } from '~/components/common/loading/loadingContent';
 import {
   Accordion,
@@ -7,6 +8,7 @@ import {
   AccordionTrigger,
 } from '~/components/ui/accordion';
 import { getFilterQuery } from '~/server/lib/shopify/query/menu';
+import { getRoutData } from '~/utils/helper';
 
 const FilterSection = () => {
   const {
@@ -34,12 +36,29 @@ const FilterSection = () => {
                     <AccordionItem value={`item-${index}`} key={index}>
                       <AccordionTrigger>{item?.title}</AccordionTrigger>
                       <AccordionContent>
-                        Yes. It adheres to the WAI-ARIA design pattern.
+                        {item?.items &&
+                          item.items.map((subItem: any, index: number) => {
+                            return (
+                              <Link
+                                href={`/products/${getRoutData(subItem?.url)}`}
+                                key={index}
+                              >
+                                <p>{subItem?.title}</p>
+                              </Link>
+                            );
+                          })}
                       </AccordionContent>
                     </AccordionItem>
                   );
                 } else {
-                  return <p key={index}>{item?.title}</p>;
+                  return (
+                    <Link
+                      href={`/products/${getRoutData(item?.url)}`}
+                      key={index}
+                    >
+                      {item?.title}
+                    </Link>
+                  );
                 }
               })}
             </>
