@@ -39,7 +39,7 @@ border-solid border-tranparent border-l-card-foreground overflow-hidden   "
         </div>
         <div className="relative px-4">
           <p
-            className={`w-full text-lg font-semibold text-center line-clamp-1  overflow-hidden text-ellipsis    ${
+            className={`w-full text-lg font-semibold text-left line-clamp-1  overflow-hidden text-ellipsis    ${
               category?.category_id == props?.item?.id
                 ? ' text-text-white '
                 : ' text-text '
@@ -48,7 +48,7 @@ border-solid border-tranparent border-l-card-foreground overflow-hidden   "
             {props?.item?.title}
           </p>
           <p
-            className={`text-sm  font-medium line-clamp-1  overflow-hidden text-ellipsis  text-center ${
+            className={`text-sm  font-medium line-clamp-1  overflow-hidden text-ellipsis   ${
               category?.category_id == props?.item?.id
                 ? ' text-text-light '
                 : ' text-text-light '
