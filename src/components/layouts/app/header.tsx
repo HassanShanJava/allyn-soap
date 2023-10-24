@@ -63,10 +63,9 @@ export default function Header() {
               <Link
                 key={item.title}
                 href={
-                  // item?.type === 'COLLECTION' || item?.title !== 'Home'
-                  //   ? `/products/${getRoutData(item?.url)}`
-                  //   : `/`
-                  "/"
+                  item?.type === 'COLLECTION' || item?.title !== 'Home'
+                    ? `/products/${getRoutData(item?.url)}`
+                    : `/`
                 }
               >
                 <li className=" captialize-first  lowercase font-semibold hover:text-primary  hover:cursor-pointer ">

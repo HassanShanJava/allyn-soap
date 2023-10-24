@@ -27,7 +27,7 @@ const ListingSection = () => {
   }
   return (
     <section id="Home-Page">
-      <div className="relative grid grid-cols-12  text-black px-20 gap-4">
+      <div className="relative grid grid-cols-12  text-black px-4 md:px-20 gap-4">
         <div className=" h-max sticky top-36  shadow-md border border-text-light-secondary  col-span-3 hidden md:block p-2 rounded-2xl">
           <FilterSection />
         </div>

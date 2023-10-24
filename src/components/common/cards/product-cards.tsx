@@ -2,7 +2,8 @@ import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleCategory } from '~/store/reducers/category';
 import { RootState } from '~/store/store';
-import LogoImage from '~/public/assets/logo.png';
+import NextImage from '../custom_image';
+import Link from 'next/link';
 
 const ProductCard = (props: { item: any; index: number }) => {
   const dispatch = useDispatch();
@@ -10,7 +11,7 @@ const ProductCard = (props: { item: any; index: number }) => {
   //   console.log({category})
 
   return (
-    <>
+    <Link href={`/product-detail/${props?.item?.handle}`}>
       <div
         className={`group relative  hover:bg-primary hover:border-none py-6 mx-auto w-full h-72 rounded-3xl shadow-md  transition ease-in  cursor-pointer border border-border`}
       >
@@ -23,19 +24,13 @@ const ProductCard = (props: { item: any; index: number }) => {
             alt="girl-image"
           /> */}
           {props?.item?.featuredImage ? (
-            <>
-              <Image
-                height={1000}
-                width={1000}
-                src={props?.item?.featuredImage?.url}
-                className=" h-full w-full object-cover object-center rounded-3xl bg-text-light-secondary  transition-all duration-[2s] animate-pulse"
-                onLoadingComplete={(imgae) =>
-                  imgae?.classList?.remove('animate-pulse')
-                }
-                alt="girl-image"
-                priority
-              />
-            </>
+            <NextImage
+              height={1000}
+              width={1000}
+              src={props?.item?.featuredImage?.url}
+              alt=""
+              className=" h-full w-full object-cover object-center rounded-3xl"
+            />
           ) : (
             <div className=" h-full w-full flex items-center justify-center bg-white border border-text-light rounded-xl">
               <i className="fa-solid fa-image text-2xl text-text-light text-center"></i>
@@ -58,11 +53,11 @@ const ProductCard = (props: { item: any; index: number }) => {
             className={`w-full text-3xl font-semibold  group-hover:text-text-white line-clamp-1  overflow-hidden text-ellipsis    `}
           >
             <span className=" text-xl font-semibold text-red-500">$</span>
-            {props?.item?.priceRange?.maxVariantPrice?.amount}
+            {(+props?.item?.priceRange?.maxVariantPrice?.amount)?.toFixed(2)}
           </p>
         </div>
       </div>
-    </>
+    </Link>
   );
 };
 
