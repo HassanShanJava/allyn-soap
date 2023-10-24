@@ -20,19 +20,19 @@ const Socials = [
     name: 'facebook',
     icon: 'fa-brands fa-facebook-f',
     link: 'https://www.facebook.com/AllynsSoapCo/',
-    lucide:<Facebook/>
+    lucide: <Facebook />,
   },
   {
     name: 'instrgram',
     icon: 'fa-brands fa-instagram',
     link: 'https://www.instagram.com/allynssoapco/',
-    lucide:<Instagram/>
+    lucide: <Instagram />,
   },
   {
     name: 'twitter',
     icon: 'fa-brands fa-twitter',
     link: 'https://twitter.com/AllynsSoapCo',
-    lucide:<Twitter/>
+    lucide: <Twitter />,
   },
 ];
 
@@ -46,7 +46,7 @@ function Footer() {
     <section id="footer">
       {/* relative bottom-0 */}
       <footer className=" p-6 lg:px-12  lg:pb-16 flex flex-col md:flex-row bg-secondary  justify-between item-start gap-4">
-        <div className="w-1/2 lg:w-2/6">
+        <div className="md:w-1/2 lg:w-2/6">
           <div>
             <Link
               href="/"
@@ -55,19 +55,20 @@ function Footer() {
               <Image src={LogoImage} alt="/" width={80} height={80} />
             </Link>
 
-            <p className="py-7 font-[400] w-full max-w-[280px] text-base text-text-dark">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            <p className="py-7 font-[300] w-full md:max-w-[280px] text-base text-text-dark">
+              At Allyn's Soap Co., we create skincare with a personal touch.
+              Handcrafting in small batches with pure ingredients and an
+              eco-friendly ethos, we deliver quality with a natural twist.
             </p>
           </div>
         </div>
 
-        <div className="w-1/2 lg:w-4/6 grid grid-col-1 sm:grid-col-2 gap-y-6 gap-x-2 lg:gap-6 lg:grid-cols-3 justify-between text-text-dark ">
+        <div className="w-1/2 lg:w-4/6  grid grid-col-1  sm:grid-col-2 gap-y-6 gap-x-2 lg:gap-6 lg:grid-cols-3 justify-between text-text-dark ">
           <div className="space-y-6 ">
-            <p className="font-bold text-lg">Useful Links</p>
+            <p className="font-[600] text-lg">Useful links</p>
             <ul className="space-y-6">
               {footerData &&
-                footerData.map((item:any, i:number) => (
+                footerData.map((item: any, i: number) => (
                   <li key={i} className="">
                     <Link href={item.url}>{item.title}</Link>
                   </li>
@@ -75,7 +76,7 @@ function Footer() {
             </ul>
           </div>
           <div className="space-y-6">
-            <p className="font-bold text-lg">Company</p>
+            <p className="font-[600] text-lg">Company</p>
             <ul className="space-y-6">
               <li className="">
                 <Link href={'/'}>Faqs</Link>
@@ -92,13 +93,15 @@ function Footer() {
             </ul>
           </div>
           <div className="space-y-6">
-            <p className="font-bold text-lg">Contact Us</p>
+            <p className="font-[600] text-lg">Contact Us</p>
             <ul className="space-y-6">
               <li className="">
                 <Link href={'/'}>info@AllynsSoapCo.com</Link>
               </li>
               <li className="">
-                <Link href={'https://www.facebook.com/AllynsSoapCo/'}>www.facebook.com/AllynsSoapCo/</Link>
+                <Link href={'https://www.facebook.com/AllynsSoapCo/'}>
+                  www.facebook.com/AllynsSoapCo/
+                </Link>
               </li>
               <li className="">
                 <Link href={'/'}>@AllynsSoapCo</Link>
@@ -143,5 +146,3 @@ function Footer() {
 }
 
 export default Footer;
-
-

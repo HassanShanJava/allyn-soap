@@ -59,14 +59,14 @@ const BannerSection = ({ list }: any) => {
             ? sliderData.map((item:any, i: number) => (
                 <div
                   key={i}
-                  className="!flex flex-col md:!flex-row w-full  gap-10 justify-between items-center  "
+                  className="!flex flex-col md:!flex-row w-full  gap-5 md:gap-10 justify-between items-center  "
                 >
                   <div className="p-6 md:px-12 my-auto w-full md:max-w-[50%]">
                     <p className="text-text-dark uppercase leading-none text-3xl  lg:text-[3.5rem] font-black">
                       {item?.title}
                     </p>
                     <div className="text-text-light py-5 w-full leading-none text-sm md:text-base md:max-w-[400px]">
-                      <p className=" line-clamp-3 ">{item?.description}</p>
+                      <p className=" line-clamp-2 md:line-clamp-3 ">{item?.description}</p>
                     </div>
                     <div className="mt-4 flex justify-between flex-row md:flex-col  items-center md:items-start  w-full md:w-fit">
                       <Button

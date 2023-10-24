@@ -174,12 +174,40 @@ div.borderStyle {
 }
 
 svg image {
-
   mask: url(#top);
   object-fit: cover;
   width: 125%;
   max-width: max-content;
+}
 
+@media screen and (max-width:480px) {
+  .container {
+    height: 240px;
+    max-width: 400px;
+    overflow: hidden;
+  }
+  
+  div.borderStyle {
+    display: block;
+    /* width: 100%; */
+    width: 400px;
+  }
+  
+  
+}
 
-
+@media screen and (max-width:640px) {
+  .container {
+    height: 360px;
+    max-width: 480px;
+    overflow: hidden;
+  }
+  
+  div.borderStyle {
+    display: block;
+    /* width: 100%; */
+    width: 480px;
+  }
+  
+  
 }

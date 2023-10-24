@@ -51,7 +51,7 @@ const Home = () => {
     <>
       <div className="relative  font-poppins">
         {/* for bg color */}
-        <div className="absolute -z-10 bg-secondary min-w-[200px] w-full  max-w-[60%] md:max-w-[80%] h-48 rounded-br-[100px] "></div>
+        <div className="absolute -z-10 bg-secondary min-w-[200px] w-full  max-w-[60%] md:max-w-[80%] h-20 md:h-48 rounded-br-[100px] "></div>
 
         <BannerSection list={demoList} />
 
