@@ -74,7 +74,7 @@ const BannerSection = ({ list }: any) => {
                 className="!flex flex-col md:!flex-row   justify-between items-center  "
               >
                 <div className="p-6 md:px-12 my-auto ">
-                  <p className="text-text-dark text-[3.5rem] font-black">
+                  <p className="text-text-dark uppercase text-[3.5rem] font-black">
                     {item.title}
                   </p>
                   <p className="text-text-light py-4 line-clamp-2 max-w-[400px]">
@@ -90,14 +90,14 @@ const BannerSection = ({ list }: any) => {
 
                     <div className="mt-4 flex justify-between w-fit gap-3 ">
                       <Button
-                        className={` hover:cursor-pointer hover:opacity-80 font-thin w-12 h-12 bg-gray-400  text-text rounded-full flex items-center justify-center `}
+                        className={` hover:cursor-pointer hover:opacity-80 font-thin w-12 h-12 shadow-lg bg-text-light-secondary  text-text rounded-full flex items-center justify-center `}
                         onClick={previous}
                         disabled={i === 0 ? true : false}
                       >
                         <i className="text-xl fas fa-angle-left  "></i>
                       </Button>
                       <Button
-                        className={`hover:cursor-pointer hover:opacity-80 font-thin w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center `}
+                        className={`hover:cursor-pointer hover:opacity-80 font-thin w-12 h-12 shadow-lg bg-primary text-white rounded-full flex items-center justify-center `}
                         onClick={next}
                         disabled={i == productData.length - 1 ? true : false}
                       >
@@ -107,8 +107,8 @@ const BannerSection = ({ list }: any) => {
                   </div>
                 </div>
 
-                <div className="container w-[300px] md:w-[500px]  lg:w-[900px] ">
-                  <div className="borderStyle   ">
+                <div className="lg:!container w-[300px] sm:w-[600px] md:w-[750px]   ">
+                  <div className=" lg:!borderStyle   ">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       //   viewBox="0 0 1000 640"
@@ -124,8 +124,10 @@ const BannerSection = ({ list }: any) => {
                       </mask>
                       <image
                         xlinkHref={`${item?.featuredImage.url}`}
-                        fill="white"
+                        className='!w-[100%] !h-full object-cover'
                       />
+                      
+                      
                       <polyline
                         id="test"
                         fill="none"

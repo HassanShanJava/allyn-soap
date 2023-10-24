@@ -39,7 +39,7 @@ function Index({ children }: DefaultLayoutProps) {
 
   return (
     <div
-      className={` relative ${poppins.variable} ${poppins.className} max-w-[1600px] w-full overflow-x-hidden `}
+      className={` relative ${poppins.variable} ${poppins.className} max-w-[1600px] mx-auto w-full overflow-x-hidden `}
     >
       <ApolloProvider client={apolloClient}>
         <Header />
