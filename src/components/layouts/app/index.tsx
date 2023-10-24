@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect } from 'react';
+import React, { ReactNode, Suspense, useEffect } from 'react';
 import Header from './header';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '~/store/store';
@@ -31,7 +31,7 @@ function Index({ children }: DefaultLayoutProps) {
     link: new HttpLink({
       uri: `https://allyns-soap-co.myshopify.com/api/2023-01/graphql.json`, // Replace with your Shopify store URL
       headers: {
-        'X-Shopify-Storefront-Access-Token': '3c0035a4645c7f0fbc72f8b77cbac2dc', // Replace with your Shopify access token
+        'X-Shopify-Storefront-Access-Token': process.env.NEXT_PUBLIC_SHOPIFY_HEADER as string, // Replace with your Shopify access token
       },
     }),
     cache: new InMemoryCache(),
@@ -44,7 +44,8 @@ function Index({ children }: DefaultLayoutProps) {
       <ApolloProvider client={apolloClient}>
         <Header />
         <Toaster />
-        <>{children}</>
+        <Suspense fallback={<p>Loading layout</p>}>{children}</Suspense>
+        <Footer />
       </ApolloProvider>
     </div>
   );

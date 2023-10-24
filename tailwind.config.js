@@ -16,7 +16,6 @@ module.exports = {
         sm: '639px',
         md: '769px',
         lg: '1025px',
-        'nav-list': '1150px',
         'xl-lg': '1100px',
         xl: '1350px',
         '2xl': '1535px',
@@ -84,6 +83,8 @@ module.exports = {
         smm: '400px',
         xsm: '480px',
         sm: '640px',
+
+
         // => @media (min-width: 640px) { ... }
 
         md: '768px',
@@ -97,6 +98,9 @@ module.exports = {
         xl: '1280px',
         // => @media (min-width: 1280px) { ... }
 
+        'xl-lg': '1100px',
+        'nav-list': '1150px',
+        
         '2xl': '1536px',
         // => @media (min-width: 1536px) { ... }
       },

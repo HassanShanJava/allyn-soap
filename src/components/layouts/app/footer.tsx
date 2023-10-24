@@ -1,15 +1,4 @@
 import React, { useState } from 'react';
-import { Button } from '@/ui/button';
-import Image from 'next/image';
-import Lines from '~/public/assets/icons/Lines_Big.png';
-import Group16 from '~/public/assets/icons/Group16.svg';
-import Group17 from '~/public/assets/icons/Group17.png';
-import Glow from '~/components/common/glow';
-import Link from 'next/link';
-import langContent from '~/locales';
-import { useSelector } from 'react-redux';
-import { RootState } from '~/store/store';
-import { useRouter } from 'next/router';
 
 interface LinkItemProps {
   name: string;
@@ -18,12 +7,12 @@ interface LinkItemProps {
   disable?: boolean;
 }
 function Footer() {
-
-
   return (
-    <footer className="h-full  bg-background-footer !z-50">
-      
-    </footer>
+    <section id="footer">
+      <footer className="">
+        
+      </footer>
+    </section>
   );
 }
 

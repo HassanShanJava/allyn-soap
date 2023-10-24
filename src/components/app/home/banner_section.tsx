@@ -71,15 +71,15 @@ const BannerSection = ({ list }: any) => {
             productData?.map((item, i: number) => (
               <div
                 key={i}
-                className="!flex flex-col md:!flex-row   justify-between items-center  "
+                className="!flex flex-col md:!flex-row w-full  gap-10 justify-between items-center  "
               >
-                <div className="p-6 md:px-12 my-auto w-full">
-                  <p className="text-text-dark uppercase leading-none text-3xl md:text-[3.5rem] font-black">
+                <div className="p-6 md:px-12 my-auto w-full md:max-w-[50%]">
+                  <p className="text-text-dark uppercase leading-none text-3xl  lg:text-[3.5rem] font-black">
                     {item.title}
                   </p>
-                  <p className="text-text-light py-5 w-full  line-clamp-3  leading-none text-sm md:text-base md:max-w-[400px] ">
-                    {item.description}
-                  </p>
+                  <div className="text-text-light py-5 w-full leading-none text-sm md:text-base md:max-w-[400px]">
+                    <p className=" line-clamp-3 ">{item.description}</p>
+                  </div>
                   <div className="mt-4 flex justify-between flex-row md:flex-col  items-center md:items-start  w-full md:w-fit">
                     <Button
                       className="text-center w-32 h-10 md:w-40 md:h-12   shadow-xl"
@@ -107,12 +107,13 @@ const BannerSection = ({ list }: any) => {
                   </div>
                 </div>
 
-                <div className="w-[300px] xs:w-[360px] sm:w-[600px] md:w-[750px] lg:container overflow-hidden   ">
-                  <div className="w-[300px] xs:w-[360px] sm:w-[600px]  lg:borderStyle   ">
+                <div className="w-full max-w-[300px] xs:max-w-[360px] sm:max-w-[600px] md:max-w-[750px] lg:max-w-[800px] overflow-hidden   ">
+                  <div className="w-full max-w-[300px] xs:max-w-[360px] xsm:max-w-[500px] sm:max-w-[600px]  lg:max-w-[800px]   ">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       //   viewBox="0 0 1000 640"
                       viewBox="0 0 900 600"
+                      className="relative"
                       fill="none"
                     >
                       <mask id="top" fill="red">
@@ -124,9 +125,9 @@ const BannerSection = ({ list }: any) => {
                       </mask>
                       <image
                         xlinkHref={`${item?.featuredImage.url}`}
+                        className="!object-fill "
                       />
-                      
-                      
+
                       <polyline
                         id="test"
                         fill="none"
