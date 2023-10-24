@@ -63,7 +63,7 @@ function Footer() {
             <p className="font-bold text-lg">Useful Links</p>
             <ul className="space-y-6">
               {footerData &&
-                footerData.map((item, i) => (
+                footerData.map((item:any, i:number) => (
                   <li key={i} className="">
                     <Link href={item.url}>{item.title}</Link>
                   </li>

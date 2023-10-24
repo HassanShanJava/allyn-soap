@@ -21,7 +21,7 @@ const FilterSection = () => {
       </div>
       <div>
         <Accordion type="single" collapsible className="w-full">
-          {FilterData?.menu?.items?.map((item: any, index) => {
+          {FilterData?.menu?.items?.map((item: any, index:number) => {
             if (item?.items?.length > 0) {
               return (
                 <AccordionItem value="item-1" key={index}>
