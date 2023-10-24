@@ -12,7 +12,9 @@ const CategorySlider = () => {
   const [active, setActive] = useState(0);
 
   const { error, data } = useQuery(getCollectionsQuery);
-  const collectionData = data ? removeEdgesAndNodes(data?.collections) : [];
+  const collectionData = data?.collections
+    ? removeEdgesAndNodes(data?.collections)
+    : [];
   console.log({ collectionData });
   const next = () => {
     slider?.current?.slickNext();
@@ -110,7 +112,7 @@ const CategorySlider = () => {
       >
         <i className="fa-solid fa-chevron-left text-base text-text-light group-hover:text-text-white"></i>
       </div>
-      
+
       <div className="w-4/5  mx-auto flex-1">
         <Slider ref={slider} {...settings}>
           {collectionData.length > 0 &&

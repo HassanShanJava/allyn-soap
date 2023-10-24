@@ -1,6 +1,6 @@
 import ListingSection from './listing';
 
-const Listing = () => {
+const ListingPage = () => {
   return (
     <>
       <div className="relative mt-32 font-poppins">
@@ -13,4 +13,4 @@ const Listing = () => {
   );
 };
 
-export default Listing;
+export default ListingPage;

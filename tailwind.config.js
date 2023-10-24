@@ -28,7 +28,10 @@ module.exports = {
         poppins: ['var(--font-poppins)'],
       },
       colors: {
-        border: 'hsl(var(--border))',
+        border: {
+          DEFAULT: 'hsl(var(--border))',
+          light: 'hsl(var(--border-light))',
+        },
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
         background: 'hsl(var(--background))',
@@ -55,6 +58,7 @@ module.exports = {
           light: 'hsl(var(--text-light))',
           white: 'hsl(var(--text-white))',
           'light-secondary': 'hsl(var(--text-light-secondary))',
+          'light-gray': 'hsl(var(--text-light-gray))',
         },
         muted: {
           DEFAULT: 'hsl(var(--muted))',

@@ -60,7 +60,7 @@ html {
     --primary: 163, 66%, 53%, 1;
     /*#39D7A9 */
     --primary-foreground: 0, 0%, 98%, 1;
-    --secondary: 162,	73.91%,	95.49%, 1;
+    --secondary: 162, 73.91%, 95.49%, 1;
     /* #ebfcf7 */
     --secondary-foreground: 240 5.9% 10%;
     --muted: 240 4.8% 95.9%;
@@ -70,6 +70,7 @@ html {
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
     --border: 240 5.9% 90%;
+    --border-light: 0, 0%, 0%, 0.1;
     --input: 240 5.9% 90%;
     --ring: 142.1 76.2% 36.3%;
     --dot-color: 0, 0%, 71%, 1;
@@ -78,6 +79,7 @@ html {
     --text-light: 0, 0%, 37%, 1;
     --text-white: 0, 0%, 100%, 1;
     --text-light-secondary: 0, 0%, 97%, 1;
+    --text-light-gray: 0, 0%, 37%, 0.69;
   }
 
   .dark {
@@ -186,12 +188,11 @@ svg image {
     padding: 0;
     max-width: 405px;
   }
-  
+
   div.borderStyle {
     display: block;
     /* width: 100%; */
     width: 500px;
     /* height: 840px; */
   }
-  
 }
