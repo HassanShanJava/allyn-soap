@@ -1,12 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import categoryReducer from './reducers/category';
+import filtersReducer from './reducers/filters';
 import layoutReducer from './reducers/layout';
 
 const store = configureStore({
   reducer: {
     layout: layoutReducer,
     category: categoryReducer,
+    filters: filtersReducer,
   },
   middleware: (getDefaultMiddleware: any) =>
     getDefaultMiddleware({ serializableCheck: false }),

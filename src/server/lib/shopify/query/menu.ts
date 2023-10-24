@@ -11,3 +11,21 @@ export const getMenuQuery = gql`
     }
   }
 `;
+export const getFilterQuery = gql`
+  query getMenu($handle: String!) {
+    menu(handle: $handle) {
+      items {
+        type
+        title
+        url
+        items {
+          id
+          tags
+          title
+          type
+          url
+        }
+      }
+    }
+  }
+`;

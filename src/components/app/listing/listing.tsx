@@ -10,14 +10,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from '~/components/ui/select';
+import { useDispatch } from 'react-redux';
+import { toggleFilters } from '~/store/reducers/filters';
 
 const ListingSection = () => {
   const router = useRouter();
   const id = router?.query?.id ?? '';
-  function toggleLanguageHandler(lang: 'en' | 'ar') {
-    const dir: 'ltr' | 'rtl' = lang === 'ar' ? 'rtl' : 'ltr';
-    const lang_id: 1 | 2 = lang === 'en' ? 1 : 2;
-    const language = { lang, dir, lang_id };
+  const dispatch = useDispatch();
+  function toggleLanguageHandler(text: string) {
+    dispatch(
+      toggleFilters({
+        sortKey: text,
+      }),
+    );
   }
   return (
     <section id="Home-Page">
@@ -34,15 +39,14 @@ const ListingSection = () => {
               <p>Sort by:</p>
               <Select onValueChange={toggleLanguageHandler}>
                 <SelectTrigger className=" flex font-bold justify-between h-8 w-36 text-text rounded-none border-none line-clamp-1 text-center shadow-none   ">
-                  <SelectValue placeholder="Best Selling" />
+                  <SelectValue placeholder="Relevance" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
+                    <SelectItem value="RELEVANCE">Relevance</SelectItem>
+                    <SelectItem value="TITLE">Title</SelectItem>
                     <SelectItem value="BEST_SELLING">Best Selling</SelectItem>
-                    <SelectItem value="TRENDING">Trending</SelectItem>
-                    <SelectItem value="LATEST_ARRIVALS">
-                      Latest arrivals
-                    </SelectItem>
+                    <SelectItem value="CREATED">New Arival</SelectItem>
                   </SelectGroup>
                 </SelectContent>
               </Select>

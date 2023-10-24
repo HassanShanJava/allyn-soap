@@ -48,7 +48,7 @@ export type Image = {
 
 export type Menu = {
   title: string;
-  path: string;
+  url: string;
   type: string;
 };
 

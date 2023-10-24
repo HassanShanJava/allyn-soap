@@ -1,8 +1,10 @@
 import { useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
 import ProductCard from '~/components/common/cards/product-cards';
 import { LoadingContent } from '~/components/common/loading/loadingContent';
 import { getCollectionProductsQuery } from '~/server/lib/shopify/query/collection';
+import { RootState } from '~/store/store';
 import { defaultSort } from '~/utils/constant';
 import { removeEdgesAndNodes } from '~/utils/helper';
 
@@ -10,9 +12,10 @@ const ProductListing = () => {
   const router = useRouter();
   const id = router?.query?.id ?? '';
   const { sortKey, reverse } = defaultSort;
-
+  const { filters } = useSelector((state: RootState) => state.filters);
+  console.log({ filters }, 'filters toggle');
   const { error, data, loading } = useQuery(getCollectionProductsQuery, {
-    variables: { handle: id, reverse, sortKey, first: 12 },
+    variables: { handle: id, reverse, ...filters, first: 12 },
   });
   const productData = data?.collection?.products
     ? removeEdgesAndNodes(data?.collection?.products)

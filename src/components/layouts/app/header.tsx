@@ -12,7 +12,7 @@ import { useToast } from '~/components/ui/use-toast';
 import { getMenuQuery } from '~/server/lib/shopify/query/menu';
 
 import { useQuery } from '@apollo/client';
-import { removeEdgesAndNodes } from '~/utils/helper';
+import { getRoutData, removeEdgesAndNodes } from '~/utils/helper';
 import { Menu } from '~/server/lib/shopify/type';
 
 export default function Header() {
@@ -64,9 +64,7 @@ export default function Header() {
                 key={item.title}
                 href={
                   item?.type === 'COLLECTION' || item?.title !== 'Home'
-                    ? `/products/${item.title
-                        ?.toLowerCase()
-                        ?.replace(' ', '-')}`
+                    ? `/products/${getRoutData(item?.url)}`
                     : `/`
                 }
               >
