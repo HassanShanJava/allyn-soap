@@ -38,7 +38,7 @@ export default function Header() {
 
   return (
     <nav
-      className={`fixed  w-full top-0 bg-white z-40 flex items-center justify-between   max-w-[1600px] mx-auto ${
+      className={`sticky  w-full top-0 bg-white z-40 flex items-center justify-between   max-w-[1600px] mx-auto ${
         color ? 'shadow-xl' : ''
       }`}
     >

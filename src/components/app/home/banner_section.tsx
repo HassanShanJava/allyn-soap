@@ -73,42 +73,42 @@ const BannerSection = ({ list }: any) => {
                 key={i}
                 className="!flex flex-col md:!flex-row   justify-between items-center  "
               >
-                <div className="p-6 md:px-12 my-auto ">
-                  <p className="text-text-dark uppercase text-[3.5rem] font-black">
+                <div className="p-6 md:px-12 my-auto w-full">
+                  <p className="text-text-dark uppercase leading-none text-3xl md:text-[3.5rem] font-black">
                     {item.title}
                   </p>
-                  <p className="text-text-light py-4 line-clamp-2 max-w-[400px]">
+                  <p className="text-text-light py-5 w-full  line-clamp-3  leading-none text-sm md:text-base md:max-w-[400px] ">
                     {item.description}
                   </p>
-                  <div className="flex justify-between flex-row md:flex-col  items-center md:items-start  w-full md:w-fit">
+                  <div className="mt-4 flex justify-between flex-row md:flex-col  items-center md:items-start  w-full md:w-fit">
                     <Button
-                      className="text-center w-40 h-12  mt-4 shadow-xl"
+                      className="text-center w-32 h-10 md:w-40 md:h-12   shadow-xl"
                       // onClick={() => router.push(item.link)}
                     >
                       Shop Now
                     </Button>
 
-                    <div className="mt-4 flex justify-between w-fit gap-3 ">
+                    <div className="flex justify-between w-fit gap-3 md:mt-4">
                       <Button
-                        className={` hover:cursor-pointer hover:opacity-80 font-thin w-12 h-12 shadow-lg bg-text-light-secondary  text-text rounded-full flex items-center justify-center `}
+                        className={` hover:cursor-pointer disabled:cursor-not-allowed hover:opacity-80 font-thin w-10 h-10 md:w-12 md:h-12 shadow-lg bg-text-light-secondary  text-text rounded-full flex items-center justify-center `}
                         onClick={previous}
                         disabled={i === 0 ? true : false}
                       >
-                        <i className="text-xl fas fa-angle-left  "></i>
+                        <i className="text-md md:text-xl fas fa-angle-left  "></i>
                       </Button>
                       <Button
-                        className={`hover:cursor-pointer hover:opacity-80 font-thin w-12 h-12 shadow-lg bg-primary text-white rounded-full flex items-center justify-center `}
+                        className={`hover:cursor-pointer disabled:cursor-not-allowed hover:opacity-80 font-thin w-10 h-10 md:w-12 md:h-12 shadow-lg bg-primary text-white rounded-full flex items-center justify-center `}
                         onClick={next}
                         disabled={i == productData.length - 1 ? true : false}
                       >
-                        <i className=" text-xl fas fa-angle-right "></i>
+                        <i className=" text-md md:text-xl fas fa-angle-right "></i>
                       </Button>
                     </div>
                   </div>
                 </div>
 
-                <div className="lg:!container w-[300px] sm:w-[600px] md:w-[750px]   ">
-                  <div className=" lg:!borderStyle   ">
+                <div className="w-[300px] xs:w-[360px] sm:w-[600px] md:w-[750px] lg:container overflow-hidden   ">
+                  <div className="w-[300px] xs:w-[360px] sm:w-[600px]  lg:borderStyle   ">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       //   viewBox="0 0 1000 640"
@@ -124,7 +124,6 @@ const BannerSection = ({ list }: any) => {
                       </mask>
                       <image
                         xlinkHref={`${item?.featuredImage.url}`}
-                        className='!w-[100%] !h-full object-cover'
                       />
                       
                       
