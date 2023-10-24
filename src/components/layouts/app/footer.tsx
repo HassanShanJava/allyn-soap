@@ -6,6 +6,7 @@ import { useQuery } from '@apollo/client';
 import { getRoutData, removeEdgesAndNodes } from '~/utils/helper';
 import LogoImage from '~/public/assets/logo.png';
 import Image from 'next/image';
+import { Facebook, Instagram, Twitter } from 'lucide-react';
 
 interface LinkItemProps {
   name: string;
@@ -19,16 +20,19 @@ const Socials = [
     name: 'facebook',
     icon: 'fa-brands fa-facebook-f',
     link: 'https://www.facebook.com/AllynsSoapCo/',
+    lucide:<Facebook/>
   },
   {
     name: 'instrgram',
     icon: 'fa-brands fa-instagram',
     link: 'https://www.instagram.com/allynssoapco/',
+    lucide:<Instagram/>
   },
   {
     name: 'twitter',
     icon: 'fa-brands fa-twitter',
     link: 'https://twitter.com/AllynsSoapCo',
+    lucide:<Twitter/>
   },
 ];
 
@@ -107,9 +111,10 @@ function Footer() {
             <Link
               href={social.link}
               key={i}
-              className="rounded-full font-[500] text-text-dark hover:text-primary text-sm w-8 h-8 flex justify-center items-center bg-primary hover:bg-white"
+              className="rounded-full font-[500] text-text-dark hover:text-primary text-sm w-9 h-9 flex justify-center items-center bg-primary hover:bg-white"
             >
-              <i className={`${social.icon}`}></i>
+              {/* <i className={`${social.icon}`}></i> */}
+              {social.lucide}
             </Link>
           ))}
         </div>
@@ -122,7 +127,8 @@ function Footer() {
               key={i}
               className="rounded-full text-text-dark hover:text-primary text-lg w-10 h-10 flex justify-center items-center bg-white"
             >
-              <i className={`${social.icon}`}></i>
+              {/* <i className={`${social.icon}`}></i> */}
+              {social.lucide}
             </Link>
           ))}
         </div>
