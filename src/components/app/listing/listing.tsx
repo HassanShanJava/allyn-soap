@@ -21,13 +21,14 @@ const ListingSection = () => {
     dispatch(
       toggleFilters({
         sortKey: text,
+        reverse: text === 'CREATED' ? true : false,
       }),
     );
   }
   return (
     <section id="Home-Page">
       <div className="relative grid grid-cols-12  text-black px-20 gap-4">
-        <div className="h-1/2 sticky top-36  shadow-md border border-text-light-secondary  col-span-3 hidden md:block p-2 rounded-2xl">
+        <div className=" h-max sticky top-36  shadow-md border border-text-light-secondary  col-span-3 hidden md:block p-2 rounded-2xl">
           <FilterSection />
         </div>
         <div className=" relative col-span-12 md:col-span-9 text-black flex flex-col gap-4">

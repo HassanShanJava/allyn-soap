@@ -42,6 +42,12 @@ export const getCollectionProductsQuery = gql`
             ...product
           }
         }
+        pageInfo {
+          endCursor
+          hasNextPage
+          hasPreviousPage
+          startCursor
+        }
       }
     }
   }
