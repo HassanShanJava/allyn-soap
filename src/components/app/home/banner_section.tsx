@@ -9,7 +9,6 @@ import { getProductsQuery } from '~/server/lib/shopify/query/product';
 import { removeEdgesAndNodes } from '~/utils/helper';
 
 const BannerSection = ({ list }: any) => {
-  console.log({ list });
   const router = useRouter();
   const slider = useRef<any>(null);
   const [sliderData, setSliderData] = useState([]);
@@ -21,7 +20,6 @@ const BannerSection = ({ list }: any) => {
       first: 5,
     },
   });
-  console.log({ data });
   // let productData;
   // if (!loading) {
     // productData = removeEdgesAndNodes(data?.products);
@@ -97,8 +95,8 @@ const BannerSection = ({ list }: any) => {
                     </div>
                   </div>
 
-                  <div className="w-full max-w-[300px] xs:max-w-[360px] sm:max-w-[600px] md:max-w-[750px] lg:max-w-[800px] overflow-hidden   ">
-                    <div className="w-full max-w-[300px] xs:max-w-[360px] xsm:max-w-[500px] sm:max-w-[600px]  lg:max-w-[800px]   ">
+                  <div className="container    ">
+                    <div className="borderStyle   ">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         //   viewBox="0 0 1000 640"
@@ -115,7 +113,7 @@ const BannerSection = ({ list }: any) => {
                         </mask>
                         <image
                           xlinkHref={`${item?.featuredImage.url}`}
-                          className="!object-fill "
+                          className="object-cover "
                         />
 
                         <polyline
