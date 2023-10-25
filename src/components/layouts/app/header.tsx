@@ -11,6 +11,7 @@ import { useQuery } from '@apollo/client';
 
 import { Menu } from '~/server/lib/shopify/type';
 import { getRoutData } from '~/utils/helper';
+import { Search, ShoppingCart, User } from 'lucide-react';
 
 export default function Header() {
   const router = useRouter();
@@ -77,9 +78,12 @@ export default function Header() {
       </div>
 
       <div className=" w-[40%] md:w-[20%]  p-6 lg:px-12 flex text-text-dark  gap-4 justify-center text-lg items-center">
-        <i className="fas fa-magnifying-glass  text-center text-xl"></i>
+        {/* <i className="fas fa-magnifying-glass  text-center text-xl"></i>
         <i className="fas fa-shopping-cart  text-center text-xl"></i>
-        <i className="fas fa-user  text-center text-xl"></i>
+        <i className="fas fa-user  text-center text-xl"></i> */}
+        <Search />
+        <ShoppingCart />
+        <User />
       </div>
     </nav>
   );

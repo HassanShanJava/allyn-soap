@@ -38,27 +38,31 @@ const ListingSection = () => {
             <p className="w-full text-text text-4xl capitalize font-semibold">
               {id}
             </p>
-            <div className=" flex flex-col xsm:flex-row items-start  xsm:items-center xsm:justify-between gap-1  xsm:gap-4">
-              <p className="w-full text-text font-bold flex text-xl items-center gap-2 lg:hidden">
+            <div className="w-full flex flex-row  items-center xsm:justify-between gap-2 xsm:gap-4">
+              <p className="w-full text-text font-bold flex text-base xsm:text-xl items-center gap-2 lg:hidden">
                 <i className="fa-solid fa-sliders  rotate-90 text-text-light-gray"></i>
                 Filters
               </p>
 
-              <div className="w-full  flex items-center gap-2 justify-start xsm:justify-end text-base">
-                <p className="w-16 text-right">Sort by:</p>
-                <Select onValueChange={toggleLanguageHandler}>
-                  <SelectTrigger className=" flex font-bold justify-between h-8 w-36 text-text rounded-none border-none line-clamp-1 text-center shadow-none   ">
-                    <SelectValue placeholder="Relevance" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectItem value="RELEVANCE">Relevance</SelectItem>
-                      <SelectItem value="TITLE">Title</SelectItem>
-                      <SelectItem value="BEST_SELLING">Best Selling</SelectItem>
-                      <SelectItem value="CREATED">New Arival</SelectItem>
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
+              <div className="w-full    flex items-center gap-1 xsm:gap-2  justify-start xsm:justify-end text-sm xsm:text-base">
+                <div className=" text-right w-max ">Sort by:</div>
+                <div>
+                  <Select onValueChange={toggleLanguageHandler}>
+                    <SelectTrigger className=" flex font-bold justify-between h-8 gap-1 w-full xsm:w-36  text-text rounded-none border-none line-clamp-1 text-center shadow-none   ">
+                      <SelectValue placeholder="Relevance" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        <SelectItem value="RELEVANCE">Relevance</SelectItem>
+                        <SelectItem value="TITLE">Title</SelectItem>
+                        <SelectItem value="BEST_SELLING">
+                          Best Selling
+                        </SelectItem>
+                        <SelectItem value="CREATED">New Arival</SelectItem>
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                </div>
               </div>
             </div>
           </div>
