@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/client';
 
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ProductCard from '~/components/common/cards/product-cards';
 import { LoadingContent } from '~/components/common/loading/loadingContent';
@@ -10,68 +10,60 @@ import { Button } from '~/components/ui/button';
 import { getCollectionProductsQuery } from '~/server/lib/shopify/query/collection';
 import { toggleFilters } from '~/store/reducers/filters';
 import { RootState } from '~/store/store';
-import { defaultSort } from '~/utils/constant';
 import { removeEdgesAndNodes } from '~/utils/helper';
 
 const ProductListing = () => {
   const router = useRouter();
   const id = router?.query?.id ?? '';
-  const { sortKey, reverse } = defaultSort;
-  const [after, setAfter] = useState(null);
-  const [before, setBefore] = useState(null);
-  const [pagination, setPagination] = useState<any>({
-    first: 12,
-    last: null,
-  });
+
   const dispatch = useDispatch();
 
   const { filters } = useSelector((state: RootState) => state.filters);
   console.log({ filters }, 'filters toggle');
   const { error, data, loading } = useQuery(getCollectionProductsQuery, {
-    variables: { handle: id, ...filters, after, before },
+    variables: { handle: id, ...filters },
   });
   useEffect(() => {
-    setAfter(null);
-    setBefore(null);
     dispatch(
       toggleFilters({
         ...filters,
         first: 12,
         last: null,
+        after: null,
+        before: null,
       }),
     );
   }, [router?.query?.id]);
   const productData = data?.collection?.products
     ? removeEdgesAndNodes(data?.collection?.products)
     : [];
-  console.log(before, 'PRODUCT DATA FILTERS');
   const handleNextPage = () => {
     if (data?.collection?.products?.pageInfo?.hasNextPage) {
-      setAfter(data?.collection?.products?.pageInfo?.endCursor);
-      setPagination((prev: any) => ({ ...prev, first: 12, last: null }));
       dispatch(
         toggleFilters({
           ...filters,
           first: 12,
           last: null,
+
+          after: data?.collection?.products?.pageInfo?.endCursor,
+          before: null,
         }),
       );
-      setBefore(null);
     }
   };
 
   const handlePrevPage = () => {
     if (data?.collection?.products?.pageInfo?.hasPreviousPage) {
-      setBefore(data?.collection?.products?.pageInfo?.startCursor);
-      setPagination((prev: any) => ({ ...prev, first: null, last: 12 }));
       dispatch(
         toggleFilters({
           ...filters,
           first: null,
           last: 12,
+
+          after: null,
+          before: data?.collection?.products?.pageInfo?.startCursor,
         }),
       );
-      setAfter(null);
     }
   };
   return (

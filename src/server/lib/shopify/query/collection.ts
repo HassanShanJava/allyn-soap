@@ -37,6 +37,7 @@ export const getCollectionProductsQuery = gql`
     $last: Int
     $after: String
     $before: String
+    $price: PriceRangeFilter
   ) {
     collection(handle: $handle) {
       products(
@@ -46,6 +47,7 @@ export const getCollectionProductsQuery = gql`
         last: $last
         after: $after
         before: $before
+        filters: { price: $price }
       ) {
         edges {
           cursor

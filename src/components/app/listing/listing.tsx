@@ -24,6 +24,9 @@ const ListingSection = () => {
         reverse: text === 'CREATED' ? true : false,
         first: 12,
         last: null,
+        after: null,
+        before: null,
+        price: null,
       }),
     );
   }
@@ -36,7 +39,7 @@ const ListingSection = () => {
         <div className="relative flex flex-col gap-4">
           <div className=" flex  lg:flex-row justify-start   lg:justify-between flex-col-reverse">
             <p className="w-full text-text text-4xl capitalize font-semibold">
-              {id}
+              {id?.toString()?.replaceAll('-', ' ')}
             </p>
             <div className="w-full flex flex-row  items-center xsm:justify-between gap-2 xsm:gap-4">
               <p className="w-full text-text font-bold flex text-base xsm:text-xl items-center gap-2 lg:hidden">

@@ -3,11 +3,18 @@ import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 import { defaultSort } from '~/utils/constant';
 
+type priceType = {
+  min: number;
+  max: number;
+};
 export interface Filters {
   sortKey: string;
   reverse: boolean;
   first: number | null;
   last: number | null;
+  after: string | null;
+  before: string | null;
+  price: priceType | null;
 }
 // Define a type for the slice state
 interface FiltersState {
@@ -21,6 +28,9 @@ const initialState: FiltersState = {
     reverse: defaultSort?.reverse,
     first: 12,
     last: null,
+    after: null,
+    before: null,
+    price: null,
   },
 };
 
