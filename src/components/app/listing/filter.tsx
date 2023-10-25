@@ -56,7 +56,7 @@ const FilterSection = () => {
                       href={`/products/${getRoutData(item?.url)}`}
                       key={index}
                     >
-                      {item?.title}
+                      <p>{item?.title}</p>
                     </Link>
                   );
                 }

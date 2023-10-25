@@ -22,41 +22,50 @@ const ListingSection = () => {
       toggleFilters({
         sortKey: text,
         reverse: text === 'CREATED' ? true : false,
+        first: 12,
+        last: null,
       }),
     );
   }
   return (
-    <section id="Home-Page">
-      <div className="relative grid grid-cols-12  text-black px-4 md:px-20 gap-4">
-        <div className=" h-max sticky top-36  shadow-md border border-text-light-secondary  col-span-3 hidden md:block p-2 rounded-2xl">
-          <FilterSection />
-        </div>
-        <div className=" relative col-span-12 md:col-span-9 text-black flex flex-col gap-4">
-          <div className=" flex  justify-between">
+    <div className="relative grid grid-cols-12  text-black px-4 py-4 lg:px-20 gap-4">
+      <div className=" h-max sticky top-36  shadow-md border border-text-light-secondary  col-span-3 hidden lg:block p-2 rounded-2xl">
+        <FilterSection />
+      </div>
+      <div className=" relative w-full col-span-12 lg:col-span-9 text-black  ">
+        <div className="relative flex flex-col gap-4">
+          <div className=" flex  lg:flex-row justify-start   lg:justify-between flex-col-reverse">
             <p className="w-full text-text text-4xl capitalize font-semibold">
               {id}
             </p>
-            <div className="w-full  flex items-center gap-2 justify-end text-base">
-              <p>Sort by:</p>
-              <Select onValueChange={toggleLanguageHandler}>
-                <SelectTrigger className=" flex font-bold justify-between h-8 w-36 text-text rounded-none border-none line-clamp-1 text-center shadow-none   ">
-                  <SelectValue placeholder="Relevance" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectItem value="RELEVANCE">Relevance</SelectItem>
-                    <SelectItem value="TITLE">Title</SelectItem>
-                    <SelectItem value="BEST_SELLING">Best Selling</SelectItem>
-                    <SelectItem value="CREATED">New Arival</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
+            <div className=" flex flex-col xsm:flex-row items-start  xsm:items-center xsm:justify-between gap-1  xsm:gap-4">
+              <p className="w-full text-text font-bold flex text-xl items-center gap-2 lg:hidden">
+                <i className="fa-solid fa-sliders  rotate-90 text-text-light-gray"></i>
+                Filters
+              </p>
+
+              <div className="w-full  flex items-center gap-2 justify-start xsm:justify-end text-base">
+                <p className="w-16 text-right">Sort by:</p>
+                <Select onValueChange={toggleLanguageHandler}>
+                  <SelectTrigger className=" flex font-bold justify-between h-8 w-36 text-text rounded-none border-none line-clamp-1 text-center shadow-none   ">
+                    <SelectValue placeholder="Relevance" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="RELEVANCE">Relevance</SelectItem>
+                      <SelectItem value="TITLE">Title</SelectItem>
+                      <SelectItem value="BEST_SELLING">Best Selling</SelectItem>
+                      <SelectItem value="CREATED">New Arival</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
           </div>
           <ProductListing />
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

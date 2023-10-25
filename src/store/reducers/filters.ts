@@ -6,6 +6,8 @@ import { defaultSort } from '~/utils/constant';
 export interface Filters {
   sortKey: string;
   reverse: boolean;
+  first: number | null;
+  last: number | null;
 }
 // Define a type for the slice state
 interface FiltersState {
@@ -17,6 +19,8 @@ const initialState: FiltersState = {
   filters: {
     sortKey: defaultSort?.sortKey,
     reverse: defaultSort?.reverse,
+    first: 12,
+    last: null,
   },
 };
 
