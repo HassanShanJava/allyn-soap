@@ -102,6 +102,9 @@ html {
     --border: 0 0 94% 1;
     --input: 240 3.7% 15.9%;
     --ring: 142.4 71.8% 29.2%;
+    --imageBackground: 0, 0%, 85%, 1;
+    --name: 231, 33%, 23%, 1;
+    --seperator: 0, 0%, 28%, 1;
   }
 }
 
@@ -180,9 +183,6 @@ svg image {
   max-width: max-content;
 }
 
-/* MULTI RANGE START  */
-
-/* MULTI RANGE END */
 @media screen and (max-width: 480px) {
   .container {
     height: 240px;
@@ -209,4 +209,16 @@ svg image {
     /* width: 100%; */
     width: 480px;
   }
+}
+
+/* customer testimonial */
+.slide {
+  transform: scale(0.2);
+  transition: transform 300ms;
+  opacity: 0.5;
+}
+
+.activeSlide {
+  transform: scale(1.1);
+  opacity: 1;
 }

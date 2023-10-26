@@ -22,9 +22,9 @@ const BannerSection = ({ list }: any) => {
   });
   // let productData;
   // if (!loading) {
-    // productData = removeEdgesAndNodes(data?.products);
+  // productData = removeEdgesAndNodes(data?.products);
 
-    // console.log({ productData });
+  // console.log({ productData });
   // }
   useEffect(() => {
     if (data) {
@@ -32,6 +32,7 @@ const BannerSection = ({ list }: any) => {
       setSliderData(sliderdata);
     }
   }, [loading, data]);
+  
   const settings = {
     dots: false,
     infinite: false,
@@ -40,7 +41,6 @@ const BannerSection = ({ list }: any) => {
     slidesToScroll: 1,
     arrows: false,
     centerMode: false,
-    autoPlay: true,
   };
 
   const next = () => {
@@ -56,7 +56,7 @@ const BannerSection = ({ list }: any) => {
       <>
         <Slider ref={slider} {...settings}>
           {sliderData
-            ? sliderData.map((item:any, i: number) => (
+            ? sliderData.map((item: any, i: number) => (
                 <div
                   key={i}
                   className="!flex flex-col md:!flex-row w-full  gap-5 md:gap-10 justify-between items-center  "
@@ -66,7 +66,9 @@ const BannerSection = ({ list }: any) => {
                       {item?.title}
                     </p>
                     <div className="text-text-light py-5 w-full leading-none text-sm md:text-base md:max-w-[400px]">
-                      <p className=" line-clamp-2 md:line-clamp-3 ">{item?.description}</p>
+                      <p className=" line-clamp-2 md:line-clamp-3 ">
+                        {item?.description}
+                      </p>
                     </div>
                     <div className="mt-4 flex justify-between flex-row md:flex-col  items-center md:items-start  w-full md:w-fit">
                       <Button
@@ -78,14 +80,14 @@ const BannerSection = ({ list }: any) => {
 
                       <div className="flex justify-between w-fit gap-3 md:mt-4">
                         <Button
-                          className={` cursor-pointer disabled:cursor-not-allowed hover:opacity-80 font-thin w-10 h-10 md:w-12 md:h-12 shadow-lg bg-text-light-secondary  text-text rounded-full flex items-center justify-center `}
+                          className={` cursor-pointer disabled:cursor-not-allowed hover:bg-primary hover:text-white font-thin w-10 h-10 md:w-12 md:h-12 shadow-lg bg-text-light-secondary  text-text rounded-full flex items-center justify-center `}
                           onClick={previous}
                           disabled={i === 0 ? true : false}
                         >
                           <i className="text-md md:text-xl fas fa-angle-left  "></i>
                         </Button>
                         <Button
-                          className={`cursor-pointer disabled:cursor-not-allowed hover:opacity-80 font-thin w-10 h-10 md:w-12 md:h-12 shadow-lg bg-primary text-white rounded-full flex items-center justify-center `}
+                          className={`cursor-pointer disabled:cursor-not-allowed hover:opacity-80 font-thin w-10 h-10 md:w-12 md:h-12 shadow-lg bg-text-light-secondary hover:bg-primary hover:text-white  text-text rounded-full flex items-center justify-center `}
                           onClick={next}
                           disabled={i == sliderData.length - 1 ? true : false}
                         >
