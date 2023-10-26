@@ -53,7 +53,7 @@ const ProductCard = (props: { item: any; index: number }) => {
             className={`w-full text-3xl font-semibold  group-hover:text-text-white line-clamp-1  overflow-hidden text-ellipsis    `}
           >
             <span className=" text-xl font-semibold text-red-500">$</span>
-            {(+props?.item?.priceRange?.maxVariantPrice?.amount)?.toFixed(2)}
+            {(+props?.item?.priceRange?.minVariantPrice?.amount)?.toFixed(2)}
           </p>
         </div>
       </div>
