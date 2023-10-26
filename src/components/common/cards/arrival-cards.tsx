@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { useSelector } from 'react-redux';
 import { RootState } from '~/store/store';
+import NextImage from '../custom_image';
 
 const ArrivalCard = (props: { item: any; index: number }) => {
   console.log(props?.item, 'props?.item');
@@ -23,15 +24,13 @@ border-solid border-tranparent border-l-card-foreground overflow-hidden   "
         </div>
         <div className="relative h-4/5 w-full p-4 py-6">
           {props?.item?.featuredImage ? (
-            <>
-              <Image
-                height={1000}
-                width={1000}
-                className=" h-full w-full object-cover object-center rounded-2xl "
-                src={props?.item?.featuredImage?.url}
-                alt="girl-image"
-              />
-            </>
+            <NextImage
+              height={1000}
+              width={1000}
+              src={props?.item?.featuredImage?.url}
+              alt=""
+              className=" h-full w-full object-cover object-center rounded-2xl "
+            />
           ) : (
             <div className=" h-full w-full flex items-center justify-center bg-white border border-text-light rounded-2xl">
               <i className="fa-solid fa-image text-2xl text-text-light text-center"></i>
@@ -40,7 +39,7 @@ border-solid border-tranparent border-l-card-foreground overflow-hidden   "
         </div>
         <div className="relative px-4">
           <p
-            className={`w-full text-lg font-semibold text-center line-clamp-1  overflow-hidden text-ellipsis    ${
+            className={`w-full text-lg font-semibold text-left line-clamp-1  overflow-hidden text-ellipsis    ${
               category?.category_id == props?.item?.id
                 ? ' text-text-white '
                 : ' text-text '
@@ -49,7 +48,7 @@ border-solid border-tranparent border-l-card-foreground overflow-hidden   "
             {props?.item?.title}
           </p>
           <p
-            className={`text-sm  font-medium line-clamp-1  overflow-hidden text-ellipsis  text-center ${
+            className={`text-sm  font-medium line-clamp-1  overflow-hidden text-ellipsis   ${
               category?.category_id == props?.item?.id
                 ? ' text-text-light '
                 : ' text-text-light '

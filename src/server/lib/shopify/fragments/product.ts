@@ -10,6 +10,7 @@ const productFragment = gql`
     title
     description
     descriptionHtml
+    onlineStoreUrl
     options {
       id
       name

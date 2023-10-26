@@ -6,8 +6,10 @@ export default function Document() {
   return (
     <Html>
       <Head>
-
-        
+        <script
+          src="https://cdn-widgetsrepository.yotpo.com/v1/loader/5m8xhAHtJf2ak4R6ihcYA08d9QdD7NNTDkVromWz"
+          async
+        ></script>
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
@@ -15,8 +17,6 @@ export default function Document() {
           crossOrigin="anonymous"
           referrerPolicy="no-referrer"
         />
-
-        
       </Head>
       <body>
         <Main />

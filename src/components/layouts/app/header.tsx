@@ -10,7 +10,8 @@ import { getMenuQuery } from '~/server/lib/shopify/query/menu';
 import { useQuery } from '@apollo/client';
 
 import { Menu } from '~/server/lib/shopify/type';
-import { Search, ShoppingCart, User} from 'lucide-react';
+import { getRoutData } from '~/utils/helper';
+import { Search, ShoppingCart, User } from 'lucide-react';
 
 export default function Header() {
   const router = useRouter();
@@ -60,10 +61,9 @@ export default function Header() {
               <Link
                 key={item.title}
                 href={
-                  // item?.type === 'COLLECTION' || item?.title !== 'Home'
-                  //   ? `/products/${getRoutData(item?.url)}`
-                  //   : `/`
-                  '/'
+                  item?.type === 'COLLECTION' || item?.title !== 'Home'
+                    ? `/products/${getRoutData(item?.url)}`
+                    : `/`
                 }
               >
                 <li className=" captialize-first  lowercase font-semibold hover:text-primary  hover:cursor-pointer ">
@@ -83,7 +83,7 @@ export default function Header() {
         <i className="fas fa-user  text-center text-xl"></i> */}
         <Search />
         <ShoppingCart />
-        <User/>
+        <User />
       </div>
     </nav>
   );

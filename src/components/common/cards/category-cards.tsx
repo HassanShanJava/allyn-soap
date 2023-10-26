@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleCategory } from '~/store/reducers/category';
 import { RootState } from '~/store/store';
+import NextImage from '../custom_image';
 
 const CategoryCard = (props: { item: any; index: number }) => {
   console.log(props?.item, 'props?.item');
@@ -30,15 +31,13 @@ const CategoryCard = (props: { item: any; index: number }) => {
       >
         <div className="relative h-4/6 w-full p-4">
           {props?.item?.image ? (
-            <>
-              <Image
-                height={1000}
-                width={1000}
-                className=" h-full w-full object-cover object-center rounded-2xl "
-                src={props?.item?.image?.src}
-                alt="girl-image"
-              />
-            </>
+            <NextImage
+              height={1000}
+              width={1000}
+              src={props?.item?.image?.src}
+              alt=""
+              className=" h-full w-full object-cover object-center rounded-2xl "
+            />
           ) : (
             <div className=" h-full w-full flex items-center justify-center bg-white border border-text-light rounded-2xl">
               <i className="fa-solid fa-image text-2xl text-text-light text-center"></i>

@@ -33,14 +33,33 @@ export const getCollectionProductsQuery = gql`
     $handle: String!
     $sortKey: ProductCollectionSortKeys
     $reverse: Boolean
-    $first: Int!
+    $first: Int
+    $last: Int
+    $after: String
+    $before: String
+    $price: PriceRangeFilter
   ) {
     collection(handle: $handle) {
-      products(sortKey: $sortKey, reverse: $reverse, first: $first) {
+      products(
+        sortKey: $sortKey
+        reverse: $reverse
+        first: $first
+        last: $last
+        after: $after
+        before: $before
+        filters: { price: $price }
+      ) {
         edges {
+          cursor
           node {
             ...product
           }
+        }
+        pageInfo {
+          endCursor
+          hasNextPage
+          hasPreviousPage
+          startCursor
         }
       }
     }
