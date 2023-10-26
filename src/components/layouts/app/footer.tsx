@@ -56,9 +56,9 @@ function Footer() {
             </Link>
 
             <p className="py-7 font-[300] w-full md:max-w-[280px] text-base text-text-dark">
-              At Allyn's Soap Co., we create skincare with a personal touch.
+              {`At Allyn's Soap Co., we create skincare with a personal touch.
               Handcrafting in small batches with pure ingredients and an
-              eco-friendly ethos, we deliver quality with a natural twist.
+              eco-friendly ethos, we deliver quality with a natural twist.`}
             </p>
           </div>
         </div>
@@ -137,7 +137,7 @@ function Footer() {
         </div>
         <div className="w-full text-white">
           <p className="w-full text-xs md:text-base text-center">
-            Copyright © 2023, Allyn's Soap Co. Powered by Shopify
+            {` Copyright © 2023, Allyn's Soap Co. Powered by Shopify`}
           </p>
         </div>
       </div>

@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router';
-import FilterSection from './filter';
 
 import ProductListing from './product_listing';
 import {
@@ -12,11 +11,14 @@ import {
 } from '~/components/ui/select';
 import { useDispatch } from 'react-redux';
 import { toggleFilters } from '~/store/reducers/filters';
+import { FilterSection, FilterSheet } from './filter';
+import { useState } from 'react';
 
 const ListingSection = () => {
   const router = useRouter();
   const id = router?.query?.id ?? '';
   const dispatch = useDispatch();
+  const [modal, setModal] = useState(false);
   function toggleLanguageHandler(text: string) {
     dispatch(
       toggleFilters({
@@ -32,7 +34,7 @@ const ListingSection = () => {
   }
   return (
     <div className="relative grid grid-cols-12  text-black px-4 py-4 lg:px-20 gap-4">
-      <div className=" h-max sticky top-36  shadow-md border border-text-light-secondary  col-span-3 hidden lg:block p-2 rounded-2xl">
+      <div className=" h-max sticky top-36  shadow-md border border-text-light-secondary  col-span-3 hidden lg:block  rounded-2xl">
         <FilterSection />
       </div>
       <div className=" relative w-full col-span-12 lg:col-span-9 text-black  ">
@@ -42,7 +44,10 @@ const ListingSection = () => {
               {id?.toString()?.replaceAll('-', ' ')}
             </p>
             <div className="w-full flex flex-row  items-center xsm:justify-between gap-2 xsm:gap-4">
-              <p className="w-full text-text font-bold flex text-base xsm:text-xl items-center gap-2 lg:hidden">
+              <p
+                onClick={() => setModal(!modal)}
+                className="w-full cursor-pointer text-text font-bold flex text-base xsm:text-xl items-center gap-2 lg:hidden"
+              >
                 <i className="fa-solid fa-sliders  rotate-90 text-text-light-gray"></i>
                 Filters
               </p>
@@ -72,6 +77,7 @@ const ListingSection = () => {
           <ProductListing />
         </div>
       </div>
+      <FilterSheet modal={modal} setModal={setModal} />
     </div>
   );
 };

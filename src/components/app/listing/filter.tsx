@@ -1,5 +1,4 @@
 import { useQuery } from '@apollo/client';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,12 +10,47 @@ import {
 } from '~/components/ui/accordion';
 import { Button } from '~/components/ui/button';
 import { Slider } from '~/components/ui/input-slider';
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '~/components/ui/sheet';
 import { getFilterQuery } from '~/server/lib/shopify/query/menu';
 import { toggleFilters } from '~/store/reducers/filters';
 import { RootState } from '~/store/store';
 import { getRoutData } from '~/utils/helper';
 
-const FilterSection = () => {
+export function FilterSection() {
+  return (
+    <div className="  px-2 text-text">
+      <FilterContent isSheet={false} />
+    </div>
+  );
+}
+
+type FilterSheetType = {
+  modal: boolean;
+  setModal: (e: boolean) => void;
+};
+export function FilterSheet(props: FilterSheetType) {
+  return (
+    <Sheet open={props?.modal} onOpenChange={(e) => props.setModal(e)}>
+      <SheetContent className="font-poppins">
+        <SheetHeader>
+          {/* <SheetTitle>Are you sure absolutely sure?</SheetTitle> */}
+        </SheetHeader>
+        <SheetDescription className="h-screen overflow-y-scroll px-2 font-poppins">
+          <FilterContent isSheet={true} />
+        </SheetDescription>
+      </SheetContent>
+    </Sheet>
+  );
+}
+
+export function FilterContent(props: { isSheet: boolean }) {
   const {
     error,
     loading,
@@ -28,7 +62,7 @@ const FilterSection = () => {
   const router = useRouter();
   const { filters } = useSelector((state: RootState) => state.filters);
 
-  const [range, setRange] = useState([5, 500]);
+  const [range, setRange] = useState([5, 300]);
   const [category, setCategory] = useState<any>(null);
   const [activeIndex, seActiveIndex] = useState<any>(null);
   console.log({ range, category });
@@ -56,12 +90,20 @@ const FilterSection = () => {
     );
   };
   return (
-    <div className="  p-4 text-text">
-      <div className="flex items-center justify-between text-dark border-b border-border-light py-4 ">
-        <div className=" font-bold text-xl">Filters</div>
-        <div>
-          <i className="fa-solid fa-sliders text-xl rotate-90 text-text-light-gray"></i>
+    <div className="  p-4 text-text font-poppins">
+      <div className="flex items-center justify-between text-dark border-b border-border-light pb-4 ">
+        <div
+          className={` font-bold font-poppins ${
+            props?.isSheet ? 'text-2xl' : 'text-xl'
+          } `}
+        >
+          Filters
         </div>
+        {!props?.isSheet && (
+          <div>
+            <i className="fa-solid fa-sliders text-xl rotate-90 text-text-light-gray"></i>
+          </div>
+        )}
       </div>
       <div className="h-full">
         <Accordion type="single" collapsible className="w-full">
@@ -71,7 +113,9 @@ const FilterSection = () => {
                 if (item?.items?.length > 0) {
                   return (
                     <AccordionItem value={`item-${index}`} key={index}>
-                      <AccordionTrigger>{item?.title}</AccordionTrigger>
+                      <AccordionTrigger className="indent-1 font-poppins">
+                        {item?.title}
+                      </AccordionTrigger>
                       <AccordionContent>
                         {item?.items &&
                           item.items.map((subItem: any, i: number) => {
@@ -107,6 +151,11 @@ const FilterSection = () => {
                           index,
                         );
                       }}
+                      className={`${
+                        category === '/products/' + getRoutData(item?.url)
+                          ? ' font-bold bg-text-light-secondary '
+                          : ' '
+                      } cursor-pointer py-1 indent-1 hover:bg-text-light-secondary mt-1 rounded-md`}
                       key={index}
                     >
                       {item?.title}
@@ -133,7 +182,7 @@ const FilterSection = () => {
                   defaultValue={range}
                   value={range}
                   min={1}
-                  max={500}
+                  max={300}
                   className={'w-full mt-6'}
                   onValueChange={(e: any) => {
                     setRange(e);
@@ -157,6 +206,6 @@ const FilterSection = () => {
       </div>
     </div>
   );
-};
+}
 
-export default FilterSection;
+// export default FilterSection;

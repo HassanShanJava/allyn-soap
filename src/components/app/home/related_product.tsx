@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/client';
 import { useSelector } from 'react-redux';
 import ProductCard from '~/components/common/cards/product-cards';
+import ProductSkeleton from '~/components/common/skeleton/product-skeleton';
 import { LoadingContent } from '~/components/common/loading/loadingContent';
 import { getCollectionProductsQuery } from '~/server/lib/shopify/query/collection';
 import { RootState } from '~/store/store';
@@ -34,9 +35,15 @@ const RelatedProducts = () => {
             )}
           </>
         ) : (
-          <div className=" col-span-4">
-            <LoadingContent text={'Loading...'} />
-          </div>
+          <>
+            {Array.from(Array(8).keys()).map((item, index) => {
+              return (
+                <div key={index}>
+                  <ProductSkeleton />
+                </div>
+              );
+            })}
+          </>
         )}
       </div>
     </section>

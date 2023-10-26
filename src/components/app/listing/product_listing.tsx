@@ -5,8 +5,10 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ProductCard from '~/components/common/cards/product-cards';
+import ProductSkeleton from '~/components/common/skeleton/product-skeleton';
 import { LoadingContent } from '~/components/common/loading/loadingContent';
 import { Button } from '~/components/ui/button';
+import { Skeleton } from '~/components/ui/skeleton';
 import { getCollectionProductsQuery } from '~/server/lib/shopify/query/collection';
 import { toggleFilters } from '~/store/reducers/filters';
 import { RootState } from '~/store/store';
@@ -83,8 +85,18 @@ const ProductListing = () => {
           )}
         </div>
       ) : (
-        <div className=" ">
-          <LoadingContent text={'Loading...'} />
+        <div className=" grid grid-cols-1  sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4   gap-4">
+          {Array.from(
+            Array(filters.first ? filters.first : filters.last).keys(),
+          ).map((item, index) => {
+            return (
+              <div key={index}>
+                <ProductSkeleton />
+              </div>
+            );
+          })}
+
+          {/* <LoadingContent text={'Loading...'} /> */}
         </div>
       )}
       {(data?.collection?.products?.pageInfo?.hasPreviousPage ||
