@@ -49,11 +49,11 @@ const RelatedProducts = () => {
         )}
       </div>
       <div className="w-full mx-auto  text-center mt-14">
-        <Link href={`/products/${category?.handle}`}>
+        {/* <Link href={`/products/${category?.handle}`}> */}
           <Button className=" rounded-lg" size={'lg'}>
             View More
           </Button>
-        </Link>
+        {/* </Link> */}
       </div>
     </section>
   );
