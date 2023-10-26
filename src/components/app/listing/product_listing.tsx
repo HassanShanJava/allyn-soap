@@ -53,6 +53,7 @@ const ProductListing = () => {
           before: null,
         }),
       );
+      if (window) window?.scrollTo(0, 0);
     }
   };
 
@@ -68,6 +69,7 @@ const ProductListing = () => {
           before: data?.collection?.products?.pageInfo?.startCursor,
         }),
       );
+      if (window) window?.scrollTo(0, 0);
     }
   };
   return (

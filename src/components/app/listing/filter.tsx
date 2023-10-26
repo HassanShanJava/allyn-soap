@@ -106,7 +106,7 @@ export function FilterContent(props: { isSheet: boolean }) {
       }),
     );
   };
-  const ClearFilter = () => {
+  const clearFilter = () => {
     seActiveIndex(null);
     setCategory(null);
     setRange([5, 200]);
@@ -253,7 +253,7 @@ export function FilterContent(props: { isSheet: boolean }) {
           <Button
             className="w-full rounded-md"
             onClick={() => {
-              applyFilter();
+              clearFilter();
             }}
             variant={'outline'}
           >
