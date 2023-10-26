@@ -147,3 +147,5 @@ const BannerSection = ({ list }: any) => {
 };
 
 export default BannerSection;
+
+
