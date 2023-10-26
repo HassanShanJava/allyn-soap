@@ -6,6 +6,8 @@ import { LoadingContent } from '~/components/common/loading/loadingContent';
 import { getCollectionProductsQuery } from '~/server/lib/shopify/query/collection';
 import { RootState } from '~/store/store';
 import { removeEdgesAndNodes } from '~/utils/helper';
+import { Button } from '~/components/ui/button';
+import Link from 'next/link';
 
 const RelatedProducts = () => {
   const { category } = useSelector((state: RootState) => state.category);
@@ -45,6 +47,13 @@ const RelatedProducts = () => {
             })}
           </>
         )}
+      </div>
+      <div className="w-full mx-auto  text-center mt-14">
+        <Link href={`/products/${category?.handle}`}>
+          <Button className=" rounded-lg" size={'lg'}>
+            View More
+          </Button>
+        </Link>
       </div>
     </section>
   );

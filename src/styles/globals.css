@@ -6,7 +6,7 @@
 @import 'slick-carousel/slick/slick-theme.css';
 
 html {
-  font-family: var(--font-poppins), sans-serif;
+  font-family: var(--font-poppins), sans-serif !important;
 }
 
 .swiper {
