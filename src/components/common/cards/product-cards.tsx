@@ -13,9 +13,15 @@ const ProductCard = (props: { item: any; index: number }) => {
   return (
     <Link href={`/product-detail/${props?.item?.handle}`}>
       <div
-        className={`group relative  hover:bg-primary hover:border-none py-6 mx-auto w-full h-72 rounded-3xl shadow-md  transition ease-in  cursor-pointer border border-border`}
+        className={`group relative   hover:bg-primary hover:border-none py-6 mx-auto w-full h-72 rounded-3xl shadow-md  transition ease-in  cursor-pointer border border-border`}
       >
-        <div className="relative h-3/5 w-full  px-4">
+        {/* {(props?.item?.totalInventory === 0 ||
+          !props?.item?.availableForSale) && (
+          <div className=" absolute top-0 right-0 px-2   bg-primary text-white text-sm ">
+            Sold Out
+          </div>
+        )} */}
+        <div className="relative h-3/5 w-full  px-4 ">
           {/* <Image
             height={1000}
             width={1000}
@@ -23,6 +29,7 @@ const ProductCard = (props: { item: any; index: number }) => {
             src={LogoImage.src}
             alt="girl-image"
           /> */}
+
           {props?.item?.featuredImage ? (
             <NextImage
               height={1000}
@@ -54,6 +61,13 @@ const ProductCard = (props: { item: any; index: number }) => {
           >
             <span className=" text-xl font-semibold text-red-500">$</span>
             {(+props?.item?.priceRange?.minVariantPrice?.amount)?.toFixed(2)}
+            {/* {(props?.item?.totalInventory === 0 ||
+              !props?.item?.availableForSale) && (
+              <span className="w-full text-sm font-semibold text-red-500 mr-auto">
+                {' '}
+                Sold Out
+              </span>
+            )} */}
           </p>
         </div>
       </div>

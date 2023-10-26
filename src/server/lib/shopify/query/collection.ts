@@ -53,6 +53,7 @@ export const getCollectionProductsQuery = gql`
           cursor
           node {
             ...product
+            totalInventory
           }
         }
         pageInfo {

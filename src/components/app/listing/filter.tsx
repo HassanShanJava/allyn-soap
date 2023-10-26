@@ -79,7 +79,7 @@ export function FilterContent(props: { isSheet: boolean }) {
   const router = useRouter();
   const { filters } = useSelector((state: RootState) => state.filters);
 
-  const [range, setRange] = useState([5, 300]);
+  const [range, setRange] = useState([5, 200]);
   const [category, setCategory] = useState<any>(null);
   const [activeIndex, seActiveIndex] = useState<any>(null);
   console.log({ range, category });
@@ -88,7 +88,6 @@ export function FilterContent(props: { isSheet: boolean }) {
     seActiveIndex(index);
   };
   const applyFilter = () => {
-    console.log(' applying filter');
     const price = {
       min: range[0] ?? 0,
       max: range[1] ?? 0,
@@ -103,6 +102,21 @@ export function FilterContent(props: { isSheet: boolean }) {
         after: null,
         before: null,
         price: price,
+      }),
+    );
+  };
+  const ClearFilter = () => {
+    seActiveIndex(null);
+    setCategory(null);
+    setRange([5, 200]);
+    dispatch(
+      toggleFilters({
+        ...filters,
+        first: 12,
+        last: null,
+        after: null,
+        before: null,
+        price: null,
       }),
     );
   };
@@ -213,7 +227,7 @@ export function FilterContent(props: { isSheet: boolean }) {
                   defaultValue={range}
                   value={range}
                   min={1}
-                  max={300}
+                  max={200}
                   className={'w-full mt-6'}
                   onValueChange={(e: any) => {
                     setRange(e);
@@ -224,7 +238,7 @@ export function FilterContent(props: { isSheet: boolean }) {
           </AccordionItem>
         </Accordion>
 
-        <div className="w-full max-w-lg mx-auto">
+        <div className="w-full max-w-lg mx-auto space-y-2">
           <Button
             className="w-full rounded-md"
             onClick={() => {
@@ -232,6 +246,15 @@ export function FilterContent(props: { isSheet: boolean }) {
             }}
           >
             Apply Filter
+          </Button>
+          <Button
+            className="w-full rounded-md"
+            onClick={() => {
+              applyFilter();
+            }}
+            variant={'outline'}
+          >
+            Clear Filter
           </Button>
         </div>
       </div>

@@ -21,10 +21,11 @@ const ProductListing = () => {
   const dispatch = useDispatch();
 
   const { filters } = useSelector((state: RootState) => state.filters);
-  console.log({ filters }, 'filters toggle');
   const { error, data, loading } = useQuery(getCollectionProductsQuery, {
     variables: { handle: id, ...filters },
   });
+  console.log({ data }, 'filters toggle');
+
   useEffect(() => {
     dispatch(
       toggleFilters({
@@ -33,6 +34,7 @@ const ProductListing = () => {
         last: null,
         after: null,
         before: null,
+        price: null,
       }),
     );
   }, [router?.query?.id]);

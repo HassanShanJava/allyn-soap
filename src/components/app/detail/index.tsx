@@ -22,9 +22,13 @@ const DetailPage = () => {
       <div className="relative  font-poppins">
         {/* for bg color */}
         <div className="w-full px-4 py-12 2xl:container sm:px-6 xl:px-20 2xl:mx-auto 2xl:px-0 ">
-          <div className="grid grid-cols-2">
-            <Slider data={productData?.product} />
-            <Detail data={productData?.product} />
+          <div className="grid grid-cols-12 gap-2">
+            <div className=" col-span-6">
+              <Slider data={productData?.product} />
+            </div>
+            <div className=" col-span-6">
+              <Detail data={productData?.product} />
+            </div>
           </div>
           <ReveiewContent data={productData?.product} />
         </div>
