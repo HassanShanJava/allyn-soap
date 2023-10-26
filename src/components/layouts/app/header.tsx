@@ -46,7 +46,7 @@ export default function Header() {
           color
             ? '!bg-white transform ease-in-out duration-500 '
             : 'bg-secondary transform ease-in-out duration-500'
-        }   transform ease-in-out    p-6 lg:px-12 lg:py-6 `}
+        }   transform ease-in-out    xs:p-6 lg:px-12 lg:py-6 `}
       >
         <Link
           href="/"

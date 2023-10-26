@@ -66,7 +66,7 @@ function Footer() {
         <div className="w-1/2 lg:w-4/6  grid grid-col-1  sm:grid-col-2 gap-y-6 gap-x-2 lg:gap-6 lg:grid-cols-3 justify-between text-text-dark ">
           <div className="space-y-6 ">
             <p className="font-[600] text-lg">Useful links</p>
-            <ul className="space-y-6">
+            <ul className="space-y-6 text-sm sm:text-base">
               {footerData &&
                 footerData.map((item: any, i: number) => (
                   <li key={i} className="">
@@ -77,7 +77,7 @@ function Footer() {
           </div>
           <div className="space-y-6">
             <p className="font-[600] text-lg">Company</p>
-            <ul className="space-y-6">
+            <ul className="space-y-6 text-sm sm:text-base">
               <li className="">
                 <Link href={'/'}>Faqs</Link>
               </li>
@@ -92,9 +92,9 @@ function Footer() {
               </li>
             </ul>
           </div>
-          <div className="space-y-6">
+          <div className="space-y-6 ">
             <p className="font-[600] text-lg">Contact Us</p>
-            <ul className="space-y-6">
+            <ul className="space-y-6 text-sm sm:text-base">
               <li className="">
                 <Link href={'/'}>info@AllynsSoapCo.com</Link>
               </li>
