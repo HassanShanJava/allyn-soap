@@ -128,7 +128,7 @@ export const SideBarMenu: React.FC<SideBarMenuProps> = ({
         <div className="absolute flex w-full justify-between items-center p-4 xsm:px-6 py-6 xsm:py-5 md:py-4 z-50 bg-secondary ">
           <div className='w-[80%]'>
 
-          <Link href="/" className="w-full items-center  ">
+          <Link href="/" className="w-full items-center  " onClick={() => closeFn(false)}>
             <Image src={LogoImage} alt="/" width={80} height={80} />
           </Link>
           </div>
