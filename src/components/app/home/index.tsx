@@ -6,6 +6,7 @@ import Outline from '~/public/assets/outline.png';
 import BannerSection from './banner_section';
 import RelatedProducts from './related_product';
 import ArrivalSection from './arrival_section';
+import CustomerTestimonials from '~/components/common/customer-testimonials';
 
 const list = {
   heading: 'PLANT BASED & HANDMADE DAILY',
@@ -58,6 +59,7 @@ const Home = () => {
         <CategorySection />
         <RelatedProducts />
         <ArrivalSection />
+        <CustomerTestimonials />
       </div>
     </>
   );

@@ -102,6 +102,9 @@ html {
     --border: 0 0 94% 1;
     --input: 240 3.7% 15.9%;
     --ring: 142.4 71.8% 29.2%;
+    --imageBackground: 0, 0%, 85%, 1;
+    --name: 231, 33%, 23%, 1;
+    --seperator: 0, 0%, 28%, 1;
   }
 }
 
@@ -180,34 +183,42 @@ svg image {
   max-width: max-content;
 }
 
-@media screen and (max-width:480px) {
+@media screen and (max-width: 480px) {
   .container {
     height: 240px;
     max-width: 400px;
     overflow: hidden;
   }
-  
+
   div.borderStyle {
     display: block;
     /* width: 100%; */
     width: 400px;
   }
-  
-  
 }
 
-@media screen and (max-width:640px) {
+@media screen and (max-width: 640px) {
   .container {
     height: 360px;
     max-width: 480px;
     overflow: hidden;
   }
-  
+
   div.borderStyle {
     display: block;
     /* width: 100%; */
     width: 480px;
   }
-  
-  
+}
+
+/* customer testimonial */
+.slide {
+  transform: scale(0.2);
+  transition: transform 300ms;
+  opacity: 0.5;
+}
+
+.activeSlide {
+  transform: scale(1.1);
+  opacity: 1;
 }

@@ -35,6 +35,9 @@ module.exports = {
         ring: 'hsl(var(--ring))',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
+        imageBackground: 'hsl(var(--imageBackground))',
+        name: 'hsl(var(--name))',
+        seperator: 'hsl(var(--seperator))',
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',
@@ -84,7 +87,6 @@ module.exports = {
         xsm: '480px',
         sm: '640px',
 
-
         // => @media (min-width: 640px) { ... }
 
         md: '768px',
@@ -100,7 +102,7 @@ module.exports = {
 
         'xl-lg': '1100px',
         'nav-list': '1150px',
-        
+
         '2xl': '1536px',
         // => @media (min-width: 1536px) { ... }
       },
