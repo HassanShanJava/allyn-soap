@@ -101,36 +101,41 @@ const ProductListing = () => {
       )}
       {(data?.collection?.products?.pageInfo?.hasPreviousPage ||
         data?.collection?.products?.pageInfo?.hasNextPage) && (
-        <div className="  flex items-center justify-between xsm:justify-end gap-2 mb-2">
-          <div className=" flex gap-4 items-center ">
-            <Button
-              variant="outline"
-              className="h-9 flex  gap-2  w-max p-2 text-base rounded-lg"
-              onClick={() => handlePrevPage()}
-              disabled={
-                data?.collection?.products?.pageInfo?.hasPreviousPage
-                  ? false
-                  : true
-              }
-            >
-              <ArrowLeft className="h-4 w-4" />
-              <span className=" ">Previous</span>
-            </Button>
+        <>
+          <hr className="mt-4" />
+          <div className="  flex items-center justify-between xsm:justify-center gap-2 xsm:gap-8 mb-2">
+            <div className=" flex gap-4 items-center ">
+              <Button
+                variant="outline"
+                className="h-9 flex  gap-2  w-max p-2 text-base rounded-lg"
+                onClick={() => handlePrevPage()}
+                disabled={
+                  data?.collection?.products?.pageInfo?.hasPreviousPage
+                    ? false
+                    : true
+                }
+              >
+                <ArrowLeft className="h-4 w-4" />
+                <span className=" ">Previous</span>
+              </Button>
+            </div>
+            <div className=" flex gap-4 items-center ">
+              <Button
+                variant="outline"
+                className="h-9 flex  gap-2 w-max p-2 text-base rounded-lg"
+                onClick={() => handleNextPage()}
+                disabled={
+                  data?.collection?.products?.pageInfo?.hasNextPage
+                    ? false
+                    : true
+                }
+              >
+                <span className=" ">Next</span>
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+            </div>
           </div>
-          <div className=" flex gap-4 items-center ">
-            <Button
-              variant="outline"
-              className="h-9 flex  gap-2 w-max p-2 text-base rounded-lg"
-              onClick={() => handleNextPage()}
-              disabled={
-                data?.collection?.products?.pageInfo?.hasNextPage ? false : true
-              }
-            >
-              <span className=" ">Next</span>
-              <ArrowRight className="h-4 w-4" />
-            </Button>
-          </div>
-        </div>
+        </>
       )}
     </div>
   );
