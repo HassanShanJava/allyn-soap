@@ -54,7 +54,6 @@ const CustomerTestimonials = () => {
   const customerSlider = useRef<any>(null);
   const [index, setIndex] = useState(0);
   const settings = {
-    
     dots: false,
     // fade:true,
     // cssEase:"linear",
@@ -65,7 +64,7 @@ const CustomerTestimonials = () => {
     swipe: false,
     arrows: false,
     centerMode: true,
-    mobileFirst:true,
+    mobileFirst: true,
     beforeChange: (current: number, next: number) => setIndex(next),
     responsive: [
       {
@@ -144,9 +143,9 @@ const ReviewCard: React.FC<ReviewCard> = (customer: ReviewCard) => {
       } flex justify-between items-start bg-white  shadow-lg  p-5 sm:p-7 md:p-10 rounded-xl gap-4 lg:gap-20`}
     >
       <div className="relative w-fit h-fit">
-        <div className="relative bg-[#D9D9D9] w-20 sm:w-44 h-20 sm:h-44 top-3 -left-3 "></div>
+        <div className="relative bg-[#D9D9D9] w-16 xs:w-20 sm:w-44 h-16 xs:h-20 sm:h-44 top-1 xs:top-2 sm:top-3 -left-1 xs:-left-2 sm:-left-3 "></div>
         <Image
-          className="relative object-cover w-20 sm:w-44 h-20 sm:h-44 top-0 right-0"
+          className="relative object-cover w-16 xs:w-20  sm:w-44 h-16 xs:h-20 sm:h-44 top-0 right-0"
           fill
           quality={100}
           src={customer.image}
@@ -154,7 +153,7 @@ const ReviewCard: React.FC<ReviewCard> = (customer: ReviewCard) => {
         />
       </div>
 
-      <div className="w-full text-xs sm:text-sm md:text-base text-[#5E5E5E] h-20 sm:h-44">
+      <div className="w-full text-xs sm:text-sm md:text-base text-[#5E5E5E] h-16 xs:h-20 sm:h-44">
         <p>{`"${customer.review}"`}</p>
 
         <div className="my-2 md:my-4">

@@ -32,7 +32,7 @@ const BannerSection = ({ list }: any) => {
       setSliderData(sliderdata);
     }
   }, [loading, data]);
-  
+
   const settings = {
     dots: false,
     infinite: false,
@@ -41,7 +41,7 @@ const BannerSection = ({ list }: any) => {
     slidesToScroll: 1,
     arrows: false,
     centerMode: false,
-    
+    swipe: false,
   };
 
   const next = () => {
@@ -81,7 +81,7 @@ const BannerSection = ({ list }: any) => {
 
                       <div className="flex justify-between w-fit gap-3 md:mt-4">
                         <Button
-                          className={` cursor-pointer disabled:cursor-not-allowed hover:bg-primary hover:text-white font-thin w-10 h-10 md:w-12 md:h-12 shadow-lg bg-text-light-secondary  text-text rounded-full flex items-center justify-center `}
+                          className={` cursor-pointer disabled:!cursor-not-allowed hover:bg-primary hover:text-white font-thin w-10 h-10 md:w-12 md:h-12 shadow-lg bg-text-light-secondary  text-text rounded-full flex items-center justify-center `}
                           onClick={previous}
                           disabled={i === 0 ? true : false}
                         >
