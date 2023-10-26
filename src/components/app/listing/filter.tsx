@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import FilterSkeleton from '~/components/common/skeleton/filters-skeleton';
 import {
   Accordion,
   AccordionContent,
@@ -165,8 +166,14 @@ export function FilterContent(props: { isSheet: boolean }) {
               })}
             </>
           ) : (
-            <div className=" w-full h-full flex justify-center items-center">
-              {/* <LoadingContent text={'Loading...'} /> */}
+            <div className=" w-full h-full flex flex-col justify-center items-center">
+              {Array.from(Array(8)).map((item, index) => {
+                return (
+                  <div className=" w-full " key={index}>
+                    <FilterSkeleton />
+                  </div>
+                );
+              })}
             </div>
           )}
         </Accordion>
