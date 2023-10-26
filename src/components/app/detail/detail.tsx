@@ -18,7 +18,12 @@ const Detail = (props: any) => {
     <div className="  p-4">
       <div>{props?.data?.title}</div>
       <div>${variant?.price?.amount}</div>
-      <div className=" ">{props?.data?.description}</div>
+      <div
+        className=" "
+        dangerouslySetInnerHTML={{ __html: props?.data?.descriptionHtml }}
+      >
+        {/* {props?.data?.description} */}
+      </div>
       <div>Only {variant?.quantityAvailable} item(s) left in stock!</div>
       Quantity
       <div className="flex  items-center gap-2">
@@ -41,7 +46,11 @@ const RenderButton = (props: { forSale: boolean; quantity: number }) => {
     <>
       {!props.forSale || props?.quantity <= 0 ? (
         <>
-          <Button className="w-full cursor-not-allowed" disabled={true}>
+          <Button
+            className="w-full cursor-not-allowed"
+            variant={'outline'}
+            disabled={true}
+          >
             Sold Out
           </Button>
         </>

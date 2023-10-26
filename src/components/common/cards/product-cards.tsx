@@ -4,7 +4,7 @@ import { toggleCategory } from '~/store/reducers/category';
 import { RootState } from '~/store/store';
 import NextImage from '../custom_image';
 import Link from 'next/link';
-
+import SoldOut from '../../../public/assets/soldout.svg';
 const ProductCard = (props: { item: any; index: number }) => {
   const dispatch = useDispatch();
   const { category } = useSelector((state: RootState) => state.category);
@@ -13,14 +13,20 @@ const ProductCard = (props: { item: any; index: number }) => {
   return (
     <Link href={`/product-detail/${props?.item?.handle}`}>
       <div
-        className={`group relative   hover:bg-primary hover:border-none py-6 mx-auto w-full h-72 rounded-3xl shadow-md  transition ease-in  cursor-pointer border border-border`}
+        className={`group relative   hover:bg-primary hover:border-none py-8 mx-auto w-full h-72 rounded-3xl shadow-md  transition ease-in  cursor-pointer border border-border`}
       >
-        {/* {(props?.item?.totalInventory === 0 ||
+        {(props?.item?.totalInventory === 0 ||
           !props?.item?.availableForSale) && (
-          <div className=" absolute top-0 right-0 px-2   bg-primary text-white text-sm ">
-            Sold Out
+          <div className=" absolute top-1  -right-[22px] px-2    text-white text-sm ">
+            <Image
+              height={1000}
+              width={1000}
+              src={SoldOut}
+              alt=""
+              className=" h-8 w-full object-cover object-center rounded-3xl"
+            />
           </div>
-        )} */}
+        )}
         <div className="relative h-3/5 w-full  px-4 ">
           {/* <Image
             height={1000}

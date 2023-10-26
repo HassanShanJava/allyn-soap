@@ -38,7 +38,7 @@ const ListingSection = () => {
         <FilterSection />
       </div>
       <div className=" relative w-full col-span-12 lg:col-span-9 text-black  ">
-        <div className="relative flex flex-col gap-4">
+        <div className="relative flex flex-col gap-8">
           <div className=" flex  lg:flex-row justify-start   lg:justify-between flex-col-reverse">
             <p className="w-full text-text text-4xl capitalize font-semibold">
               {id?.toString()?.replaceAll('-', ' ')}

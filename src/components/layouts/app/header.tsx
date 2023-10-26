@@ -7,21 +7,30 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { getMenuQuery } from '~/server/lib/shopify/query/menu';
 
-import { useQuery } from '@apollo/client';
+import { useLazyQuery, useMutation, useQuery } from '@apollo/client';
 
 import { Menu } from '~/server/lib/shopify/type';
 import { getRoutData } from '~/utils/helper';
 import { Search, ShoppingCart, User } from 'lucide-react';
+import { getCartQuery } from '~/server/lib/shopify/query/cart';
+import { RootState } from '~/store/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleCart } from '~/store/reducers/cart';
 
 export default function Header() {
   const router = useRouter();
 
   const [color, setColor] = useState(false);
   const [nav, setNav] = useState<boolean>(false);
+  const { cart } = useSelector((state: RootState) => state.cart);
+  const dispatch = useDispatch();
+
   const { error, data, loading } = useQuery(getMenuQuery, {
     variables: { handle: 'main-menu' },
   });
-  console.log({ data }, 'menuData');
+
+  const [getCart, { data: cartData, loading: cartLoading, error: cartError }] =
+    useLazyQuery(getCartQuery);
 
   useEffect(() => {
     const changeColor = () =>
@@ -33,7 +42,22 @@ export default function Header() {
       window.removeEventListener('scroll', changeColor);
     };
   }, []);
+  useEffect(() => {
+    (async () => {
+      const cartID = localStorage.getItem('cartID');
+      // await addTodo({ variables: { cartId: cartID } });
 
+      if (cartID) {
+        dispatch(
+          toggleCart({
+            cart_id: cartID,
+          }),
+        );
+        await getCart({ variables: { cartId: cartID } });
+      }
+    })();
+  }, []);
+  console.log({ cartData });
   return (
     <nav
       className={`sticky  w-full top-0 bg-white z-40 flex items-center justify-between   max-w-[1600px] mx-auto ${

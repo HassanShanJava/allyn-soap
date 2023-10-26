@@ -30,7 +30,9 @@ const DetailPage = () => {
               <Detail data={productData?.product} />
             </div>
           </div>
-          <ReveiewContent data={productData?.product} />
+          {productData?.product && (
+            <ReveiewContent data={productData?.product} />
+          )}
         </div>
       </div>
       {/* <LoadingDialog open={loading} text="Loading..." /> */}
