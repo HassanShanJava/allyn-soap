@@ -48,14 +48,13 @@ const testimonials = [
     name: 'Jesse G.',
     title: 'merchant',
   },
- 
 ];
 
 const CustomerTestimonials = () => {
   const customerSlider = useRef<any>(null);
   const [index, setIndex] = useState(0);
   const settings = {
-    className: 'w-full ',
+    
     dots: false,
     // fade:true,
     // cssEase:"linear",
@@ -63,10 +62,19 @@ const CustomerTestimonials = () => {
     speed: 700,
     slidesToShow: 1,
     slidesToScroll: 1,
-    swipe:false,
+    swipe: false,
     arrows: false,
     centerMode: true,
+    mobileFirst:true,
     beforeChange: (current: number, next: number) => setIndex(next),
+    responsive: [
+      {
+        breakpoint: 480,
+        settings: {
+          swipe: true,
+        },
+      },
+    ],
   };
 
   const next = () => {
@@ -96,7 +104,7 @@ const CustomerTestimonials = () => {
                 <div
                   className={`relative ${
                     i == index ? ' z-10 ' : ' -z-10 opacity-30'
-                  } transform ease-in-out w-full max-w-6xl mx-auto flex justify-center items-center h-64  sm:h-80   `}
+                  } transition-all ease-in-out duration-300 w-full max-w-6xl mx-auto flex justify-center items-center h-64  sm:h-80   `}
                 >
                   <ReviewCard {...payload} />
                 </div>
@@ -132,13 +140,13 @@ const ReviewCard: React.FC<ReviewCard> = (customer: ReviewCard) => {
       className={`  ${
         customer.active
           ? 'absolute h-48 w-[120%] xsm:w-full !max-w-4xl sm:h-72 z-20'
-          : 'absolute w-[120%] h-40 sm:h-60 '
+          : 'absolute w-[120%] invisible xsm:visible  h-40 sm:h-60 '
       } flex justify-between items-start bg-white  shadow-lg  p-5 sm:p-7 md:p-10 rounded-xl gap-4 lg:gap-20`}
     >
       <div className="relative w-fit h-fit">
-        <div className="relative bg-[#D9D9D9] w-28 sm:w-44 h-28 sm:h-44 top-3 -left-3 "></div>
+        <div className="relative bg-[#D9D9D9] w-20 sm:w-44 h-20 sm:h-44 top-3 -left-3 "></div>
         <Image
-          className="relative object-cover w-28 sm:w-44 h-28 sm:h-44 top-0 right-0"
+          className="relative object-cover w-20 sm:w-44 h-20 sm:h-44 top-0 right-0"
           fill
           quality={100}
           src={customer.image}
@@ -146,7 +154,7 @@ const ReviewCard: React.FC<ReviewCard> = (customer: ReviewCard) => {
         />
       </div>
 
-      <div className="w-full text-xs sm:text-sm md:text-base text-[#5E5E5E] h-28 sm:h-44">
+      <div className="w-full text-xs sm:text-sm md:text-base text-[#5E5E5E] h-20 sm:h-44">
         <p>{`"${customer.review}"`}</p>
 
         <div className="my-2 md:my-4">

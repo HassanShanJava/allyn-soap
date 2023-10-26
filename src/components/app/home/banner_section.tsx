@@ -41,6 +41,7 @@ const BannerSection = ({ list }: any) => {
     slidesToScroll: 1,
     arrows: false,
     centerMode: false,
+    
   };
 
   const next = () => {

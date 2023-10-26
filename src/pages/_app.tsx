@@ -22,14 +22,14 @@ const MyApp = (({ Component, pageProps }: AppPropsWithLayout) => {
   const getLayout =
     Component.getLayout ??
     ((page) => (
-      <main className={'font-sans'}>
+      <main className={'font-poppins'}>
         <Layout>{page}</Layout>
       </main>
     ));
 
 
   return getLayout(
-    <main className={'font-sans'}>
+    <main className={'font-poppins'}>
 
       <Component {...pageProps} />
     </main>,
