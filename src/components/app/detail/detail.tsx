@@ -15,9 +15,18 @@ const Detail = (props: any) => {
   }, [props?.data?.variants]);
   console.log(props?.data, 'props?.data');
   return (
-    <div className="  p-4">
-      <div>{props?.data?.title}</div>
-      <div>${variant?.price?.amount}</div>
+    <div className="  p-4 flex flex-col gap-4">
+      <div className=" text-4xl font-semibold">{props?.data?.title}</div>
+      <div className="flex items-center">
+        <div className=" text-xl font-semibold">
+          ${(+variant?.price?.amount ?? 0)?.toFixed(2)}
+        </div>
+        {variant?.compareAtPrice && (
+          <div className=" text-base font-semibold text-text-light-secondary">
+            ${(+variant?.compareAtPrice?.amount ?? 0)?.toFixed(2)}
+          </div>
+        )}
+      </div>
       <div
         className=" "
         dangerouslySetInnerHTML={{ __html: props?.data?.descriptionHtml }}

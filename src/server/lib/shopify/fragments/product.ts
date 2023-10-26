@@ -41,6 +41,10 @@ const productFragment = gql`
             amount
             currencyCode
           }
+          compareAtPrice {
+            amount
+            currencyCode
+          }
         }
       }
     }

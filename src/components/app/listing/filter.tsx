@@ -23,6 +23,7 @@ import {
 import { getFilterQuery } from '~/server/lib/shopify/query/menu';
 import { toggleFilters } from '~/store/reducers/filters';
 import { RootState } from '~/store/store';
+import { defaultSort } from '~/utils/constant';
 import { getRoutData } from '~/utils/helper';
 
 export function FilterSection() {
@@ -112,6 +113,8 @@ export function FilterContent(props: { isSheet: boolean }) {
     dispatch(
       toggleFilters({
         ...filters,
+        sortKey: defaultSort.sortKey,
+
         first: 12,
         last: null,
         after: null,

@@ -21,7 +21,7 @@ const RelatedProducts = () => {
 
   return (
     <section id="category ">
-      <div className=" px-4   sm:mx-auto  grid grid-cols-1 xsm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 w-full md:w-4/6 gap-4 mb-4   ">
+      <div className=" px-4   sm:mx-auto  grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 w-full md:w-4/6 gap-4 mb-4   ">
         {!loading ? (
           <>
             {productData?.length > 0 ? (
