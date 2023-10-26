@@ -11,6 +11,7 @@ import {
 } from '~/components/ui/accordion';
 import { Button } from '~/components/ui/button';
 import { Slider } from '~/components/ui/input-slider';
+import { ScrollArea, ScrollBar } from '~/components/ui/scroll-area';
 import {
   Sheet,
   SheetContent,
@@ -39,12 +40,27 @@ type FilterSheetType = {
 export function FilterSheet(props: FilterSheetType) {
   return (
     <Sheet open={props?.modal} onOpenChange={(e) => props.setModal(e)}>
-      <SheetContent className="font-poppins">
+      <SheetContent className="font-poppins w-full ">
         <SheetHeader>
-          {/* <SheetTitle>Are you sure absolutely sure?</SheetTitle> */}
+          {/* <div className="flex items-center justify-between text-dark border-b border-border-light pb-4 ">
+            <div
+              className={` font-bold font-poppins text-2xl`}
+            >
+              Filters
+            </div>
+            
+              <div>
+                <i className="fa-solid fa-sliders text-xl rotate-90 text-text-light-gray"></i>
+              </div>
+          
+          </div> */}
         </SheetHeader>
-        <SheetDescription className="h-screen overflow-y-scroll px-2 font-poppins">
-          <FilterContent isSheet={true} />
+        <SheetDescription className="mt-4">
+          <ScrollArea className="h-screen  pb-8  font-poppins">
+            <ScrollBar orientation="vertical" />
+
+            <FilterContent isSheet={true} />
+          </ScrollArea>
         </SheetDescription>
       </SheetContent>
     </Sheet>
