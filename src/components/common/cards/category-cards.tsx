@@ -39,14 +39,14 @@ const CategoryCard = (props: { item: any; index: number }) => {
               className=" h-full w-full object-cover object-center rounded-2xl "
             />
           ) : (
-            <div className=" h-full w-full flex items-center justify-center bg-white border border-text-light rounded-2xl">
-              <i className="fa-solid fa-image text-2xl text-text-light text-center"></i>
+            <div className=" h-full w-full flex items-center  justify-center bg-white border border-text-light rounded-2xl">
+              <i className="fa-solid fa-image text-5xl  text-text-light-gray text-center"></i>
             </div>
           )}
         </div>
         <div className=" px-4">
           <p
-            className={`w-full text-lg font-semibold text-center group-hover:text-text-white line-clamp-1  overflow-hidden text-ellipsis    ${
+            className={`w-full text-lg font-semibold text-center group-hover:text-text-white line-clamp-1      ${
               category?.category_id == props?.item?.id
                 ? ' text-text-white '
                 : ' text-text '
@@ -55,7 +55,7 @@ const CategoryCard = (props: { item: any; index: number }) => {
             {props?.item?.title}
           </p>
           <p
-            className={`text-sm  font-medium group-hover:text-text-white line-clamp-1  overflow-hidden text-ellipsis  text-center ${
+            className={`text-sm  font-medium group-hover:text-text-white line-clamp-1    text-center ${
               category?.category_id == props?.item?.id
                 ? ' text-text-white '
                 : ' text-text-light '

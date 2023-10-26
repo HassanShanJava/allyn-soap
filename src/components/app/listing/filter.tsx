@@ -123,13 +123,21 @@ export function FilterContent(props: { isSheet: boolean }) {
         )}
       </div>
       <div className="h-full">
-        <Accordion type="single" collapsible className="w-full">
+        <Accordion
+          type="single"
+          collapsible
+          className={`w-full ${loading ? '' : ' '}`}
+        >
           {!loading ? (
             <>
               {FilterData?.menu?.items?.map((item: any, index: number) => {
                 if (item?.items?.length > 0) {
                   return (
-                    <AccordionItem value={`item-${index}`} key={index}>
+                    <AccordionItem
+                      className="  "
+                      value={`item-${index}`}
+                      key={index}
+                    >
                       <AccordionTrigger className="indent-1 font-poppins">
                         {item?.title}
                       </AccordionTrigger>
