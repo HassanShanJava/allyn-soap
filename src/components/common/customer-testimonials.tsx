@@ -58,7 +58,7 @@ const CustomerTestimonials = () => {
     // fade:true,
     // cssEase:"linear",
     infinite: true,
-    speed: 700,
+    speed: 1000,
     slidesToShow: 1,
     slidesToScroll: 1,
     swipe: false,
@@ -101,6 +101,7 @@ const CustomerTestimonials = () => {
             return (
               <>
                 <div
+                  key={i}
                   className={`relative ${
                     i == index ? ' z-10 ' : ' -z-10 opacity-30'
                   } transition-all ease-in-out duration-300 w-full max-w-6xl mx-auto flex justify-center items-center h-64  sm:h-80   `}

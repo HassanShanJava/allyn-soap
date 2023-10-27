@@ -17,6 +17,12 @@ import { RootState } from '~/store/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleCart } from '~/store/reducers/cart';
 
+interface SideBarMenuProps {
+  nav: boolean;
+  closeFn: React.Dispatch<React.SetStateAction<boolean>>;
+  list?: any;
+}
+
 export default function Header() {
   const router = useRouter();
 
@@ -69,15 +75,15 @@ export default function Header() {
     >
       {/* for bg color */}
       <div
-        className={`flex  justify-start xl:justify-between lg:gap-4 xl:gap-6 min-w-[200px] w-full max-w-[60%]  md:max-w-[80%] items-center  ${
+        className={`flex  justify-start xl:justify-between lg:gap-4 xl:gap-6 min-w-[200px] w-full max-w-[70%]  md:max-w-[80%] items-center  ${
           color
-            ? '!bg-white transform ease-in-out duration-500 '
-            : 'bg-secondary transform ease-in-out duration-500'
-        }   transform ease-in-out    xs:p-6 lg:px-12 lg:py-6 `}
+            ? '!bg-white transform ease-in-out duration-300 '
+            : 'bg-secondary transform ease-in-out duration-300'
+        }   transform-all ease-in-out   p-4 xs:p-6 lg:px-12 lg:py-6 `}
       >
         <Link
           href="/"
-          className="mr-2 flex w-full items-center  md:w-auto lg:mr-6"
+          className="mr-2 flex w-full items-center  md:w-auto lg:mr-6 "
         >
           <Image src={LogoImage} alt="/" width={80} height={80} />
         </Link>
@@ -88,9 +94,10 @@ export default function Header() {
               <Link
                 key={item.title}
                 href={
-                  item?.type === 'COLLECTION' || item?.title !== 'Home'
-                    ? `/products/${getRoutData(item?.url)}`
-                    : `/`
+                  // item?.type === 'COLLECTION' || item?.title !== 'Home'
+                  //   ? `/products/${getRoutData(item?.url)}`
+                  //   : `/`
+                  `/`
                 }
               >
                 <li className=" captialize-first  lowercase font-semibold hover:text-primary  hover:cursor-pointer ">
@@ -104,14 +111,92 @@ export default function Header() {
         )}
       </div>
 
-      <div className=" w-[40%] md:w-[20%]  p-6 lg:px-12 flex text-text-dark  gap-4 justify-center text-lg items-center">
+      <div className=" hidden md:w-[20%]  p-6 lg:px-12 xl:flex text-text-dark  gap-4 justify-center text-lg items-center">
         {/* <i className="fas fa-magnifying-glass  text-center text-xl"></i>
         <i className="fas fa-shopping-cart  text-center text-xl"></i>
         <i className="fas fa-user  text-center text-xl"></i> */}
-        <Search />
-        <ShoppingCart />
-        <User />
+        <Search className="text-lg" />
+        <ShoppingCart className="text-lg" />
+        <User className="text-lg" />
       </div>
+      <div className="flex justify-center items-center gap-4 py-6 xsm:p-6  xl:hidden w-[30%] md:w-[20%]">
+        <ShoppingCart className="text-lg" />
+        <i
+          className={` fas fa-bars-staggered text-2xl hover:cursor-pointer `}
+          onClick={() => setNav(!nav)}
+        ></i>
+      </div>
+
+      <SideBarMenu nav={nav} closeFn={setNav} list={data?.menu?.items} />
     </nav>
   );
 }
+
+export const SideBarMenu: React.FC<SideBarMenuProps> = ({
+  nav,
+  closeFn,
+  list,
+}) => {
+  const [hide, setHide] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    window.addEventListener('resize', () => closeFn(false));
+    return () => {
+      window.removeEventListener('resize', () => closeFn(false));
+    };
+  }, []);
+
+  // const menuList = list ? [...list]:[];
+
+  return (
+    <>
+      {nav && (
+        <div className="absolute flex w-full justify-between items-center p-4 xsm:px-6 py-6 xsm:py-5 md:py-4 z-50 bg-secondary ">
+          <div className='w-[80%]'>
+
+          <Link href="/" className="w-full items-center  " onClick={() => closeFn(false)}>
+            <Image src={LogoImage} alt="/" width={80} height={80} />
+          </Link>
+          </div>
+
+          <i
+            onClick={() => closeFn(false)}
+            className="fas fa-xmark text-3xl w-[20%] text-center hover:cursor-pointer  "
+          ></i>
+        </div>
+      )}
+      <ul
+        className={`z-10 pb-4 block font-poppins  transition-all ease-linear xl:hidden  overflow-y-scroll scroll-hide ${
+          nav
+            ? 'absolute top-0 left-0 duration-100 w-full h-screen bg-secondary flex flex-col justify-start items-center pt-32'
+            : 'absolute top-32 left-[-100%] hidden duration-100'
+        }`}
+      >
+        {list &&
+          list.map((item: any, i: number) => {
+            return (
+              <Link
+                href={
+                  // item?.type === 'COLLECTION' || item?.title !== 'Home'
+                  //   ? `/products/${getRoutData(item?.url)}`
+                  //   : `/`
+                  '/'
+                }
+                key={i}
+                className={`group py-3 text-lg w-full text-center ${
+                  list.length - 1 === i ? 'border-y-[1px]' : 'border-t-[1px]'
+                }
+             border-gray-700 hover:bg-primary hover:text-primary-foreground hover:border-transparent transition-colors duration-300 ease-in-out cursor-pointer`}
+                onClick={() => {
+                  closeFn(false);
+                }}
+              >
+                {item.title}
+              </Link>
+            );
+          })}
+      </ul>
+    </>
+  );
+};
