@@ -69,7 +69,7 @@ const ListingSection = () => {
                 <i className="fa-solid fa-sliders  rotate-90 text-text-light-gray"></i>
                 Filters
               </p>
-              <div className="flex flex-col xsm:flex-row justify-start xsm:justify-end w-full items-center">
+              <div className="flex flex-col xsm:flex-row gap-2 justify-start xsm:justify-end w-full items-center">
                 {(filters.last ||
                   filters.before ||
                   filters.sortKey !== defaultSort.sortKey ||
@@ -86,7 +86,7 @@ const ListingSection = () => {
                     </div>
                   </>
                 )}
-                <div className="w-full    flex items-center gap-1 xsm:gap-2  justify-start xsm:justify-end text-sm xsm:text-base">
+                <div className="   w-max   flex items-center gap-1 xsm:gap-2  justify-start xsm:justify-end text-sm xsm:text-base">
                   <div className=" text-right w-max ">Sort by:</div>
                   <div>
                     <Select
