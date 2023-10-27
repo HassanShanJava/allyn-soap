@@ -27,7 +27,7 @@ const DetailPage = () => {
               <Slider data={productData?.product} />
             </div>
             <div className=" col-span-6">
-              <Detail data={productData?.product} />
+              {true ? <>Detail</> : <Detail data={productData?.product} />}
             </div>
           </div>
 
