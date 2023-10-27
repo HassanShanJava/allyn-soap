@@ -12,6 +12,8 @@ import {
 
 const Detail = (props: any) => {
   const [variant, setVariant] = useState<any>(null);
+  const [cartItem, setCartItem] = useState<any>(null);
+  const [cartView, setCartView] = useState<boolean>(false);
   const [range, setRange] = useState<number>(1);
   const { cart } = useSelector((state: RootState) => state.cart);
   const [cartCreate] = useMutation(createCartMutation);
@@ -20,9 +22,13 @@ const Detail = (props: any) => {
     const variants = props?.data?.variants?.edges
       ? removeEdgesAndNodes(props?.data?.variants)
       : [];
+    const lines = cart?.cart?.lines?.edges
+      ? removeEdgesAndNodes(cart?.cart?.lines)
+      : [];
+
+    setCartItem(lines);
     setVariant(variants[0]);
   }, [props?.data?.variants]);
-  console.log(cart, 'cart?.cart_id');
   const addtoCart = async () => {
     try {
       if (!cart?.cart_id) {
@@ -34,23 +40,28 @@ const Detail = (props: any) => {
             'cartID',
             data?.data?.cartCreate?.cart?.id?.toString(),
           );
-          // const addtoCart = await cartAdd({ variables: { type: input.value } });
+          await cartAdd({
+            variables: {
+              cartId: data?.data?.cartCreate?.cart?.id?.toString(),
+              lines: [{ merchandiseId: variant?.id, quantity: range }],
+            },
+          });
+          setCartView(true);
         }
       } else {
-        console.log(cart?.cart_id, 'update to cart');
-
-        const addtoCart = await cartAdd({
+        await cartAdd({
           variables: {
             cartId: cart?.cart_id,
             lines: [{ merchandiseId: variant?.id, quantity: range }],
           },
         });
-
-        console.log(addtoCart, 'update to cart');
+        setCartView(true);
       }
-    } catch (e) {}
+    } catch (e: any) {
+      console.log('error :::', e?.message);
+    }
   };
-  console.log(variant, 'props?.data');
+  console.log({ cart }, 'setCartItem');
   return (
     <div className="  p-4 flex flex-col gap-4">
       <div className=" text-4xl font-semibold">{props?.data?.title}</div>
@@ -82,6 +93,7 @@ const Detail = (props: any) => {
         <RenderButton
           forSale={variant?.availableForSale}
           quantity={variant?.quantityAvailable}
+          cartView={cartView}
           addtoCart={addtoCart}
         />
       </div>
@@ -90,29 +102,36 @@ const Detail = (props: any) => {
 };
 const RenderButton = (props: {
   forSale: boolean;
+  cartView: boolean;
   quantity: number;
   addtoCart: () => void;
 }) => {
-  return (
-    <>
-      {!props.forSale || props?.quantity <= 0 ? (
-        <>
-          <Button
-            className="w-full cursor-not-allowed"
-            variant={'outline'}
-            disabled={true}
-          >
-            Sold Out
-          </Button>
-        </>
-      ) : (
-        <>
-          <Button className="w-full" onClick={() => props?.addtoCart()}>
-            Add to Cart
-          </Button>
-        </>
-      )}
-    </>
-  );
+  if (!props.forSale || props?.quantity <= 0) {
+    return (
+      <Button
+        className="w-full cursor-not-allowed"
+        variant={'outline'}
+        disabled={true}
+      >
+        Sold Out
+      </Button>
+    );
+  } else if (props?.cartView) {
+    return (
+      <Button
+        className="w-full cursor-not-allowed"
+        variant={'outline'}
+        disabled={true}
+      >
+        View Cart
+      </Button>
+    );
+  } else {
+    return (
+      <Button className="w-full" onClick={() => props?.addtoCart()}>
+        Add to Cart
+      </Button>
+    );
+  }
 };
 export default Detail;

@@ -15,7 +15,7 @@ import { Search, ShoppingCart, User } from 'lucide-react';
 import { getCartQuery } from '~/server/lib/shopify/query/cart';
 import { RootState } from '~/store/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleCart } from '~/store/reducers/cart';
+import { toggleCart, toggleCartModal } from '~/store/reducers/cart';
 
 interface SideBarMenuProps {
   nav: boolean;
@@ -115,11 +115,40 @@ export default function Header() {
         <i className="fas fa-shopping-cart  text-center text-xl"></i>
         <i className="fas fa-user  text-center text-xl"></i> */}
         <Search className="text-lg" />
-        <ShoppingCart className="text-lg" />
+        <div
+          className="relative cursor-pointer"
+          onClick={() => {
+            dispatch(toggleCartModal());
+          }}
+        >
+          {cart?.cart && cart?.cart?.totalQuantity && (
+            <div className=" absolute -top-6 -right-2 p-1">
+              {cart?.cart?.totalQuantity > 99
+                ? '99+'
+                : cart?.cart?.totalQuantity}
+            </div>
+          )}
+
+          <ShoppingCart className="text-lg" />
+        </div>
         <User className="text-lg" />
       </div>
       <div className="flex justify-center items-center gap-4 py-6 xsm:p-6  xl:hidden w-[30%] md:w-[20%]">
-        <ShoppingCart className="text-lg" />
+        <div
+          className="relative cursor-pointer"
+          onClick={() => {
+            dispatch(toggleCartModal());
+          }}
+        >
+          {cart?.cart && cart?.cart?.totalQuantity && (
+            <div className=" absolute -top-5 -right-2 p-1">
+              {cart?.cart?.totalQuantity > 99
+                ? '99+'
+                : cart?.cart?.totalQuantity}
+            </div>
+          )}
+          <ShoppingCart className="text-lg" />
+        </div>
         <i
           className={` fas fa-bars-staggered text-2xl hover:cursor-pointer `}
           onClick={() => setNav(!nav)}

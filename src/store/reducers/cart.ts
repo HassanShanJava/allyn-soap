@@ -9,6 +9,7 @@ export interface Cart {
 // Define a type for the slice state
 interface CategoryState {
   cart: Cart;
+  isCartOpen: boolean;
 }
 
 // Define the initial state using that type
@@ -17,6 +18,7 @@ const initialState: CategoryState = {
     cart_id: null,
     cart: null,
   },
+  isCartOpen: false,
 };
 
 export const cartSlice = createSlice({
@@ -28,10 +30,13 @@ export const cartSlice = createSlice({
       console.log('action.payload', action.payload);
       state.cart = action.payload;
     },
+    toggleCartModal: (state) => {
+      state.isCartOpen = !state.isCartOpen;
+    },
   },
 });
 
-export const { toggleCart } = cartSlice.actions;
+export const { toggleCart, toggleCartModal } = cartSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectCount = (state: RootState) => state.layout;
