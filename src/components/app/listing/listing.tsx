@@ -73,7 +73,8 @@ const ListingSection = () => {
                 {(filters.last ||
                   filters.before ||
                   filters.sortKey !== defaultSort.sortKey ||
-                  filters.price) && (
+                  filters.price ||
+                  filters.after) && (
                   <>
                     <div
                       onClick={() => {
