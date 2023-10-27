@@ -94,10 +94,9 @@ export default function Header() {
               <Link
                 key={item.title}
                 href={
-                  // item?.type === 'COLLECTION' || item?.title !== 'Home'
-                  //   ? `/products/${getRoutData(item?.url)}`
-                  //   : `/`
-                  `/`
+                  item?.type === 'COLLECTION' || item?.title !== 'Home'
+                    ? `/products/${getRoutData(item?.url)}`
+                    : `/`
                 }
               >
                 <li className=" captialize-first  lowercase font-semibold hover:text-primary  hover:cursor-pointer ">
@@ -153,11 +152,14 @@ export const SideBarMenu: React.FC<SideBarMenuProps> = ({
     <>
       {nav && (
         <div className="absolute flex w-full justify-between items-center p-4 xsm:px-6 py-6 xsm:py-5 md:py-4 z-50 bg-secondary ">
-          <div className='w-[80%]'>
-
-          <Link href="/" className="w-full items-center  " onClick={() => closeFn(false)}>
-            <Image src={LogoImage} alt="/" width={80} height={80} />
-          </Link>
+          <div className="w-[80%]">
+            <Link
+              href="/"
+              className="w-full items-center  "
+              onClick={() => closeFn(false)}
+            >
+              <Image src={LogoImage} alt="/" width={80} height={80} />
+            </Link>
           </div>
 
           <i
@@ -178,10 +180,9 @@ export const SideBarMenu: React.FC<SideBarMenuProps> = ({
             return (
               <Link
                 href={
-                  // item?.type === 'COLLECTION' || item?.title !== 'Home'
-                  //   ? `/products/${getRoutData(item?.url)}`
-                  //   : `/`
-                  '/'
+                  item?.type === 'COLLECTION' || item?.title !== 'Home'
+                    ? `/products/${getRoutData(item?.url)}`
+                    : `/`
                 }
                 key={i}
                 className={`group py-3 text-lg w-full text-center ${
