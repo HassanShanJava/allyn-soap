@@ -28,7 +28,7 @@ export default function CartSheet() {
   const lines = cart?.cart?.lines?.edges
     ? removeEdgesAndNodes(cart?.cart?.lines)
     : [];
-  console.log({ lines });
+  console.log({ cart }, 'cart Drawer data');
   return (
     <Sheet open={isCartOpen} onOpenChange={(e) => dispatch(toggleCartModal())}>
       <SheetContent className="font-poppins w-full p-2 md:min-w-[420px] ">
@@ -38,7 +38,7 @@ export default function CartSheet() {
           </div>
         </SheetHeader>
         <SheetDescription className="mt-4 h-screen p-0">
-          <ScrollArea className="h-1/2  pb-8 pt-8 px-2 font-poppins w-full relative">
+          <ScrollArea className="min-h-3/5  pb-8 pt-8 px-2 font-poppins w-full relative">
             <ScrollBar orientation="vertical" />
             <CartProduct products={lines} cart_id={cart?.cart_id} />
             {/* <FilterContent isSheet={true} /> */}
@@ -63,7 +63,6 @@ const CartProduct = (props: any) => {
   const dispatch = useDispatch();
 
   const deleteItem = async (item: any) => {
-    console.log({ item }, 'delete item');
     const cartDeleteData = await cartDelete({
       variables: { cartId: props?.cart_id, lineIds: [item?.id] },
     });
@@ -99,10 +98,11 @@ const CartProduct = (props: any) => {
             const variants = item?.merchandise?.product?.variants
               ? removeEdgesAndNodes(item?.merchandise?.product?.variants)
               : [];
+            console.log({ item, variants }, 'item, variants');
             return (
               <div className="" key={index}>
                 <div
-                  className={`group relative  flex  gap-2   mx-auto w-full h-full    transition ease-in   `}
+                  className={`group relative  flex  gap-2   mx-auto w-full h-24    transition ease-in   `}
                 >
                   <div className=" relative w-[30%] h-26      ">
                     {item?.merchandise?.product?.featuredImage ? (
@@ -141,12 +141,18 @@ const CartProduct = (props: any) => {
                     <p
                       className={`w-full text-base font-normal   line-clamp-1  overflow-hidden text-ellipsis    `}
                     >
-                      ${+variants[0].price?.amount * +item?.quantity}
+                      $
+                      {item?.discountAllocations[0]?.discountedAmount
+                        ? +variants[0].price?.amount * +item?.quantity -
+                          +item?.discountAllocations[0]?.discountedAmount
+                            ?.amount
+                        : +variants[0].price?.amount * +item?.quantity}
                     </p>
                     <CartCounter
                       min={1}
                       qty={item?.quantity}
                       max={variants[0]?.quantityAvailable}
+                      getCart={getCart}
                     />
                     {/* <p
                   className={`text-sm  font-normal  line-clamp-1  overflow-hidden text-ellipsis `}

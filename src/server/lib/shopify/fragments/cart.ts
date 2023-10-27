@@ -24,6 +24,28 @@ const cartFragment = gql`
         node {
           id
           quantity
+          discountAllocations {
+            discountedAmount {
+              amount
+              currencyCode
+            }
+            ... on CartCodeDiscountAllocation {
+              __typename
+              code
+              discountedAmount {
+                amount
+                currencyCode
+              }
+            }
+            ... on CartCustomDiscountAllocation {
+              __typename
+              discountedAmount {
+                amount
+                currencyCode
+              }
+              title
+            }
+          }
           cost {
             totalAmount {
               amount

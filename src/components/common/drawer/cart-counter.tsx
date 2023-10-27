@@ -1,19 +1,34 @@
+import { useMutation } from '@apollo/client';
 import { useState } from 'react';
+import { editCartItemsMutation } from '~/server/lib/shopify/query/cart';
 
 type CounterType = {
   qty: number;
   min: number;
   max: number;
+  getCart: (data: any) => unknown;
 };
 
 const CartCounter = (props: CounterType) => {
   const [range, setRange] = useState(props?.qty);
+
+  const [
+    cartUpdate,
+    {
+      data: cartUpdateData,
+      loading: cartUpdateLoading,
+      error: cartUpdateError,
+    },
+  ] = useMutation(editCartItemsMutation);
   const UpdateCounter = (type: string) => {
-    if (props?.max > 0) {
-      if (type == 'addition' && range !== props?.max) {
-        setRange(range + 1);
-      } else if (type == 'substraction' && range !== props?.min) {
-        setRange(range - 1);
+    if (!cartUpdateLoading) {
+      if (props?.max > 0) {
+        let cartUpdate: any;
+        if (type == 'addition' && range !== props?.max) {
+          setRange(range + 1);
+        } else if (type == 'substraction' && range !== props?.min) {
+          setRange(range - 1);
+        }
       }
     }
   };
