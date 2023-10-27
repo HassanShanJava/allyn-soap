@@ -122,7 +122,7 @@ export default function Header() {
           }}
         >
           {cart?.cart && cart?.cart?.totalQuantity && (
-            <div className=" absolute -top-6 -right-2 p-1">
+            <div className=" absolute text-sm -top-4 -right-2 p-1">
               {cart?.cart?.totalQuantity > 99
                 ? '99+'
                 : cart?.cart?.totalQuantity}
@@ -141,7 +141,7 @@ export default function Header() {
           }}
         >
           {cart?.cart && cart?.cart?.totalQuantity && (
-            <div className=" absolute -top-5 -right-2 p-1">
+            <div className=" absolute text-sm -top-4 -right-2 p-1">
               {cart?.cart?.totalQuantity > 99
                 ? '99+'
                 : cart?.cart?.totalQuantity}
