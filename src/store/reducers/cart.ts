@@ -4,6 +4,7 @@ import { RootState } from '../store';
 
 export interface Cart {
   cart_id: string | null;
+  cart: any | null;
 }
 // Define a type for the slice state
 interface CategoryState {
@@ -14,6 +15,7 @@ interface CategoryState {
 const initialState: CategoryState = {
   cart: {
     cart_id: null,
+    cart: null,
   },
 };
 

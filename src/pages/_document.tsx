@@ -17,6 +17,13 @@ export default function Document() {
           crossOrigin="anonymous"
           referrerPolicy="no-referrer"
         />
+        <Script
+          src="https://cdn-widgetsrepository.yotpo.com/v1/loader/5m8xhAHtJf2ak4R6ihcYA08d9QdD7NNTDkVromWz"
+          async
+          onReady={() => {
+            console.log('Script has loaded');
+          }}
+        ></Script>
       </Head>
       <body>
         <Main />

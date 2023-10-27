@@ -2,18 +2,55 @@ import { useEffect, useState } from 'react';
 import { removeEdgesAndNodes } from '~/utils/helper';
 import Counter from './counter';
 import { Button } from '~/components/ui/button';
+import { useSelector } from 'react-redux';
+import { RootState } from '~/store/store';
+import { useMutation } from '@apollo/client';
+import {
+  addToCartMutation,
+  createCartMutation,
+} from '~/server/lib/shopify/query/cart';
 
 const Detail = (props: any) => {
   const [variant, setVariant] = useState<any>(null);
-  const [range, setRange] = useState<any>(1);
-
+  const [range, setRange] = useState<number>(1);
+  const { cart } = useSelector((state: RootState) => state.cart);
+  const [cartCreate] = useMutation(createCartMutation);
+  const [cartAdd] = useMutation(addToCartMutation);
   useEffect(() => {
     const variants = props?.data?.variants?.edges
       ? removeEdgesAndNodes(props?.data?.variants)
       : [];
     setVariant(variants[0]);
   }, [props?.data?.variants]);
-  console.log(props?.data, 'props?.data');
+  console.log(cart, 'cart?.cart_id');
+  const addtoCart = async () => {
+    try {
+      if (!cart?.cart_id) {
+        console.log('add to cart');
+        const data: any = await cartCreate();
+        console.log(data, 'add to Cart');
+        if (data?.data?.cartCreate?.cart) {
+          localStorage.setItem(
+            'cartID',
+            data?.data?.cartCreate?.cart?.id?.toString(),
+          );
+          // const addtoCart = await cartAdd({ variables: { type: input.value } });
+        }
+      } else {
+        console.log(cart?.cart_id, 'update to cart');
+
+        const addtoCart = await cartAdd({
+          variables: {
+            cartId: cart?.cart_id,
+            lines: [{ merchandiseId: variant?.id, quantity: range }],
+          },
+        });
+
+        console.log(addtoCart, 'update to cart');
+      }
+    } catch (e) {}
+  };
+  console.log(variant, 'props?.data');
   return (
     <div className="  p-4 flex flex-col gap-4">
       <div className=" text-4xl font-semibold">{props?.data?.title}</div>
@@ -45,12 +82,17 @@ const Detail = (props: any) => {
         <RenderButton
           forSale={variant?.availableForSale}
           quantity={variant?.quantityAvailable}
+          addtoCart={addtoCart}
         />
       </div>
     </div>
   );
 };
-const RenderButton = (props: { forSale: boolean; quantity: number }) => {
+const RenderButton = (props: {
+  forSale: boolean;
+  quantity: number;
+  addtoCart: () => void;
+}) => {
   return (
     <>
       {!props.forSale || props?.quantity <= 0 ? (
@@ -65,7 +107,9 @@ const RenderButton = (props: { forSale: boolean; quantity: number }) => {
         </>
       ) : (
         <>
-          <Button className="w-full">Add to Cart</Button>
+          <Button className="w-full" onClick={() => props?.addtoCart()}>
+            Add to Cart
+          </Button>
         </>
       )}
     </>

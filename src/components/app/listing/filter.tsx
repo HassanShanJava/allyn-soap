@@ -250,15 +250,15 @@ export function FilterContent(props: { isSheet: boolean }) {
           >
             Apply Filter
           </Button>
-          <Button
-            className="w-full rounded-md"
-            onClick={() => {
-              clearFilter();
-            }}
-            variant={'outline'}
-          >
-            Clear Filter
-          </Button>
+          {/* <Button
+          className="w-full rounded-md"
+          onClick={() => {
+            clearFilter();
+          }}
+          variant={'outline'}
+        >
+          Clear Filter
+        </Button> */}
         </div>
       </div>
     </div>

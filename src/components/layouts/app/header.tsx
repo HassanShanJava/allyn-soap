@@ -45,15 +45,18 @@ export default function Header() {
   useEffect(() => {
     (async () => {
       const cartID = localStorage.getItem('cartID');
-      // await addTodo({ variables: { cartId: cartID } });
-
       if (cartID) {
-        dispatch(
-          toggleCart({
-            cart_id: cartID,
-          }),
-        );
-        await getCart({ variables: { cartId: cartID } });
+        const cartData = await getCart({ variables: { cartId: cartID } });
+        console.log(cartData?.data, 'Cart DATA FOR REDUx');
+        if (cartData?.data?.cart) {
+          dispatch(
+            toggleCart({
+              cart_id: cartID,
+              cart: { ...cartData?.data?.cart },
+            }),
+          );
+        }
+        // await getCart({ variables: { cartId: cartID } });
       }
     })();
   }, []);
