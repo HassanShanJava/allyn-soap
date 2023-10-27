@@ -90,7 +90,7 @@ const ListingSection = () => {
                   <div className=" text-right w-max ">Sort by:</div>
                   <div>
                     <Select
-                      // onValueChange={toggleLanguageHandler}
+                      onValueChange={toggleLanguageHandler}
                       defaultValue={filters.sortKey}
                       value={filters.sortKey}
                     >
