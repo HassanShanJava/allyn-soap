@@ -2,13 +2,15 @@ import { useEffect, useState } from 'react';
 import { removeEdgesAndNodes } from '~/utils/helper';
 import Counter from './counter';
 import { Button } from '~/components/ui/button';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '~/store/store';
-import { useMutation } from '@apollo/client';
+import { useLazyQuery, useMutation } from '@apollo/client';
 import {
   addToCartMutation,
   createCartMutation,
+  getCartQuery,
 } from '~/server/lib/shopify/query/cart';
+import { toggleCart, toggleCartModal } from '~/store/reducers/cart';
 
 const Detail = (props: any) => {
   const [variant, setVariant] = useState<any>(null);
@@ -16,8 +18,12 @@ const Detail = (props: any) => {
   const [cartView, setCartView] = useState<boolean>(false);
   const [range, setRange] = useState<number>(1);
   const { cart } = useSelector((state: RootState) => state.cart);
+  const dispatch = useDispatch();
+
   const [cartCreate] = useMutation(createCartMutation);
   const [cartAdd] = useMutation(addToCartMutation);
+  const [getCart, { data: cartData, loading: cartLoading, error: cartError }] =
+    useLazyQuery(getCartQuery);
   useEffect(() => {
     const variants = props?.data?.variants?.edges
       ? removeEdgesAndNodes(props?.data?.variants)
@@ -31,6 +37,7 @@ const Detail = (props: any) => {
   }, [props?.data?.variants]);
   const addtoCart = async () => {
     try {
+      let cartAddData: any;
       if (!cart?.cart_id) {
         console.log('add to cart');
         const data: any = await cartCreate();
@@ -40,21 +47,47 @@ const Detail = (props: any) => {
             'cartID',
             data?.data?.cartCreate?.cart?.id?.toString(),
           );
-          await cartAdd({
+          cartAddData = await cartAdd({
             variables: {
               cartId: data?.data?.cartCreate?.cart?.id?.toString(),
               lines: [{ merchandiseId: variant?.id, quantity: range }],
             },
           });
+          if (cartAddData?.data) {
+            const cartData = await getCart({
+              variables: {
+                cartId: data?.data?.cartCreate?.cart?.id?.toString(),
+              },
+            });
+            if (cartData)
+              dispatch(
+                toggleCart({
+                  cart_id: data?.data?.cartCreate?.cart?.id?.toString(),
+                  cart: { ...cartData?.data?.cart },
+                }),
+              );
+          }
           setCartView(true);
         }
       } else {
-        await cartAdd({
+        cartAddData = await cartAdd({
           variables: {
             cartId: cart?.cart_id,
             lines: [{ merchandiseId: variant?.id, quantity: range }],
           },
         });
+        if (cartAddData?.data) {
+          const cartData = await getCart({
+            variables: { cartId: cart?.cart_id },
+          });
+          if (cartData?.data)
+            dispatch(
+              toggleCart({
+                cart_id: cart?.cart_id,
+                cart: { ...cartData?.data?.cart },
+              }),
+            );
+        }
         setCartView(true);
       }
     } catch (e: any) {
@@ -106,6 +139,8 @@ const RenderButton = (props: {
   quantity: number;
   addtoCart: () => void;
 }) => {
+  const dispatch = useDispatch();
+
   if (!props.forSale || props?.quantity <= 0) {
     return (
       <Button
@@ -119,9 +154,12 @@ const RenderButton = (props: {
   } else if (props?.cartView) {
     return (
       <Button
-        className="w-full cursor-not-allowed"
+        className="w-full "
         variant={'outline'}
-        disabled={true}
+        // disabled={true}
+        onClick={() => {
+          dispatch(toggleCartModal());
+        }}
       >
         View Cart
       </Button>
