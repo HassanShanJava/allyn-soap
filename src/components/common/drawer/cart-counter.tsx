@@ -1,35 +1,65 @@
 import { useMutation } from '@apollo/client';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { editCartItemsMutation } from '~/server/lib/shopify/query/cart';
+import { toggleCart } from '~/store/reducers/cart';
 
 type CounterType = {
   qty: number;
   min: number;
   max: number;
+  id: string;
+  cart_id: string;
+  cartUpdateLoading: boolean;
   getCart: (data: any) => unknown;
+  cartUpdate: (data: any) => unknown;
 };
 
 const CartCounter = (props: CounterType) => {
   const [range, setRange] = useState(props?.qty);
+  const dispatch = useDispatch();
 
-  const [
-    cartUpdate,
-    {
-      data: cartUpdateData,
-      loading: cartUpdateLoading,
-      error: cartUpdateError,
-    },
-  ] = useMutation(editCartItemsMutation);
-  const UpdateCounter = (type: string) => {
-    if (!cartUpdateLoading) {
-      if (props?.max > 0) {
-        let cartUpdate: any;
-        if (type == 'addition' && range !== props?.max) {
-          setRange(range + 1);
-        } else if (type == 'substraction' && range !== props?.min) {
-          setRange(range - 1);
+  const UpdateCounter = async (type: string) => {
+    try {
+      if (!props?.cartUpdateLoading) {
+        if (props?.max > 0) {
+          let cartUpdate: any;
+          if (type == 'addition' && range !== props?.max) {
+            cartUpdate = await props?.cartUpdate({
+              variables: {
+                cartId: props?.cart_id,
+                lines: [{ id: props?.id, quantity: range + 1 }],
+              },
+            });
+            setRange(range + 1);
+          } else if (type == 'substraction' && range !== props?.min) {
+            cartUpdate = await props?.cartUpdate({
+              variables: {
+                cartId: props?.cart_id,
+                lines: [{ id: props?.id, quantity: range - 1 }],
+              },
+            });
+            setRange(range - 1);
+          }
+          if (cartUpdate?.data) {
+            const cartData: any = await props?.getCart({
+              variables: { cartId: props?.cart_id },
+            });
+            if (cartData) {
+              console.log({ cartData });
+
+              dispatch(
+                toggleCart({
+                  cart_id: props?.cart_id,
+                  cart: { ...cartData?.data?.cart },
+                }),
+              );
+            }
+          }
         }
       }
+    } catch (e) {
+      console.log(e);
     }
   };
   return (

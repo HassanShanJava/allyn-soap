@@ -13,6 +13,7 @@ import NextImage from '../custom_image';
 import CartCounter from './cart-counter';
 import { useLazyQuery, useMutation } from '@apollo/client';
 import {
+  editCartItemsMutation,
   getCartQuery,
   removeFromCartMutation,
 } from '~/server/lib/shopify/query/cart';
@@ -58,6 +59,15 @@ const CartProduct = (props: any) => {
       error: cartDeleteError,
     },
   ] = useMutation(removeFromCartMutation);
+
+  const [
+    cartUpdate,
+    {
+      data: cartUpdateData,
+      loading: cartUpdateLoading,
+      error: cartUpdateError,
+    },
+  ] = useMutation(editCartItemsMutation);
   const [getCart, { data: cartData, loading: cartLoading, error: cartError }] =
     useLazyQuery(getCartQuery);
   const dispatch = useDispatch();
@@ -82,7 +92,7 @@ const CartProduct = (props: any) => {
   };
   return (
     <div className="flex flex-col gap-4">
-      {cartDeleteLoading || cartLoading ? (
+      {cartDeleteLoading || cartLoading  ? (
         <>
           {Array.from(Array(8).keys()).map((item, index) => {
             return (
@@ -152,6 +162,10 @@ const CartProduct = (props: any) => {
                       min={1}
                       qty={item?.quantity}
                       max={variants[0]?.quantityAvailable}
+                      cartUpdate={cartUpdate}
+                      id={item?.id}
+                      cart_id={props?.cart_id}
+                      cartUpdateLoading={cartUpdateLoading}
                       getCart={getCart}
                     />
                     {/* <p

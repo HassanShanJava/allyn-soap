@@ -121,7 +121,7 @@ export default function Header() {
             dispatch(toggleCartModal());
           }}
         >
-          {cart?.cart && cart?.cart?.totalQuantity && (
+          {cart?.cart && cart?.cart?.totalQuantity > 0 && (
             <div className=" absolute text-sm -top-4 -right-2 p-1">
               {cart?.cart?.totalQuantity > 99
                 ? '99+'
@@ -140,7 +140,7 @@ export default function Header() {
             dispatch(toggleCartModal());
           }}
         >
-          {cart?.cart && cart?.cart?.totalQuantity && (
+          {cart?.cart && cart?.cart?.totalQuantity > 0 && (
             <div className=" absolute text-sm -top-4 -right-2 p-1">
               {cart?.cart?.totalQuantity > 99
                 ? '99+'
