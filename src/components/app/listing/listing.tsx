@@ -26,13 +26,14 @@ const ListingSection = () => {
   function toggleLanguageHandler(text: string) {
     dispatch(
       toggleFilters({
+        ...filters,
+
         sortKey: text,
         reverse: text === 'CREATED' ? true : false,
         first: 12,
         last: null,
         after: null,
         before: null,
-        price: null,
       }),
     );
   }
@@ -41,7 +42,7 @@ const ListingSection = () => {
       toggleFilters({
         ...filters,
         sortKey: defaultSort.sortKey,
-
+        reverse: false,
         first: 12,
         last: null,
         after: null,
