@@ -34,7 +34,6 @@ const ProductListing = () => {
         last: null,
         after: null,
         before: null,
-        price: null,
       }),
     );
   }, [router?.query?.id]);

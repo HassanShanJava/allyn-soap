@@ -26,13 +26,14 @@ const ListingSection = () => {
   function toggleLanguageHandler(text: string) {
     dispatch(
       toggleFilters({
+        ...filters,
+
         sortKey: text,
         reverse: text === 'CREATED' ? true : false,
         first: 12,
         last: null,
         after: null,
         before: null,
-        price: null,
       }),
     );
   }
@@ -41,7 +42,7 @@ const ListingSection = () => {
       toggleFilters({
         ...filters,
         sortKey: defaultSort.sortKey,
-
+        reverse: false,
         first: 12,
         last: null,
         after: null,
@@ -53,7 +54,7 @@ const ListingSection = () => {
   return (
     <div className="relative grid grid-cols-12  text-black px-4 py-4 lg:px-20 gap-4">
       <div className=" h-max sticky top-36  shadow-md border border-text-light-secondary  col-span-3 hidden lg:block  rounded-2xl">
-        {/* <FilterSection /> */}
+        <FilterSection />
       </div>
       <div className=" relative w-full col-span-12 lg:col-span-9 text-black  ">
         <div className="relative flex flex-col gap-8">
@@ -63,7 +64,7 @@ const ListingSection = () => {
             </p>
             <div className="w-full flex flex-row  items-center xsm:justify-between gap-2 xsm:gap-4">
               <p
-                // onClick={() => setModal(!modal)}
+                onClick={() => setModal(!modal)}
                 className="w-full cursor-pointer text-text font-bold flex text-base xsm:text-xl items-center gap-2 lg:hidden"
               >
                 <i className="fa-solid fa-sliders  rotate-90 text-text-light-gray"></i>
