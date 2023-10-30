@@ -1,19 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from '../ui/button';
 import Demo from '~/public/assets/demo.png';
 import { useRouter } from 'next/router';
+import { getBestCollectionProductsQuery } from '~/server/lib/shopify/query/collection';
+import { useQuery } from '@apollo/client';
+import { removeEdgesAndNodes } from '~/utils/helper';
 
 // will work on this component for other pages
 const BannerCard = ({ banner, key, type }: any) => {
   const router = useRouter();
+  const [collectionBanner, setCollectionBannner] = useState<any>(null);
   const { id } = router.query;
+  const { error, data, loading } = useQuery(getBestCollectionProductsQuery, {
+    variables: { handle: id },
+  });
+  useEffect(()=>{
+    if(data){
+      const payload=removeEdgesAndNodes(data?.collectionByHandle?.products)
+      setCollectionBannner(payload[0])
+    }
+  },[data])
+
+
   return (
     <>
       <div className="relative  bottom-6 md:-bottom-6 ">
         {id && (
           <p className="absolute p-6 md:px-12">
             {`Home > `}
-            <span className="capitalize">
+            <span className="capitalize font-[#272D4E]">
               {(id as string).split('-').join(' ')}
             </span>
           </p>
@@ -25,13 +40,11 @@ const BannerCard = ({ banner, key, type }: any) => {
       >
         <div className="p-6 md:px-12 my-auto w-full md:max-w-[50%]">
           <p className="text-text-dark uppercase leading-none text-3xl  lg:text-[3.5rem] font-black">
-            {banner?.title ?? `PLANT BASED & HANDMADE DAILY`}
+            {collectionBanner?.title}
           </p>
           <div className="text-text-light py-5 w-full leading-none text-sm md:text-base md:max-w-[400px]">
             <p className=" line-clamp-2 md:line-clamp-3 ">
-              {banner?.description ??
-                `Small Batch Bars of Soap. Made with the freshest ingredients for a rich and soft lather that will leave your skin feeling silky smooth!!`}
-            </p>
+              {collectionBanner?.description}</p>
           </div>
         </div>
 
@@ -52,7 +65,7 @@ const BannerCard = ({ banner, key, type }: any) => {
                 ></path>
               </mask>
               <image
-                xlinkHref={`${banner?.featuredImage.url ?? Demo.src}`}
+                xlinkHref={`${collectionBanner?.featuredImage?.url}`}
                 className="object-cover "
               />
 

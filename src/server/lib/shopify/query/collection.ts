@@ -67,3 +67,22 @@ export const getCollectionProductsQuery = gql`
   }
   ${productFragment}
 `;
+
+// query for priduct listing banner according to collection handle
+export const getBestCollectionProductsQuery = gql`
+  query getCollectionProducts(
+    $handle: String!) {
+    collectionByHandle(handle: $handle) {
+    id
+      products(sortKey: BEST_SELLING, first: 1) {
+        edges {
+          node {
+            ...product
+          }
+        }
+      }
+    }
+  }
+  ${productFragment}
+
+`;
