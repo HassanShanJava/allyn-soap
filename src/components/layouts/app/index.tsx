@@ -10,9 +10,11 @@ import {
   ApolloProvider,
   HttpLink,
   InMemoryCache,
+  useQuery,
 } from '@apollo/client';
 import { makeApolloClient } from '~/utils/apolloClient';
 import { Poppins } from 'next/font/google';
+import { getMenuQuery } from '~/server/lib/shopify/query/menu';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -31,18 +33,21 @@ function Index({ children }: DefaultLayoutProps) {
     link: new HttpLink({
       uri: `https://allyns-soap-co.myshopify.com/api/2023-01/graphql.json`, // Replace with your Shopify store URL
       headers: {
-        'X-Shopify-Storefront-Access-Token': process.env.NEXT_PUBLIC_SHOPIFY_HEADER as string, // Replace with your Shopify access token
+        'X-Shopify-Storefront-Access-Token': process.env
+          .NEXT_PUBLIC_SHOPIFY_HEADER as string, // Replace with your Shopify access token
       },
     }),
     cache: new InMemoryCache(),
   });
+
+  
 
   return (
     <div
       className={` relative ${poppins.variable} ${poppins.className} max-w-[1600px] mx-auto w-full `}
     >
       <ApolloProvider client={apolloClient}>
-        <Header />
+        <Header  />
         <Toaster />
         <Suspense fallback={<p>Loading layout</p>}>{children}</Suspense>
         <Footer />

@@ -28,12 +28,9 @@ export default function Header() {
 
   const [color, setColor] = useState(false);
   const [nav, setNav] = useState<boolean>(false);
+  const [navList, setNavList] = useState([]);
   const { cart } = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
-
-  const { error, data, loading } = useQuery(getMenuQuery, {
-    variables: { handle: 'main-menu' },
-  });
 
   const [getCart, { data: cartData, loading: cartLoading, error: cartError }] =
     useLazyQuery(getCartQuery);
@@ -66,6 +63,14 @@ export default function Header() {
       }
     })();
   }, []);
+
+  const { error, data, loading } = useQuery(getMenuQuery, {
+    variables: { handle: 'main-menu' },
+  });
+  useEffect(() => {
+    if (data) setNavList(data?.menu.items);
+  }, [data]);
+
   console.log({ cartData });
   return (
     <nav
@@ -88,9 +93,9 @@ export default function Header() {
           <Image src={LogoImage} alt="/" width={80} height={80} />
         </Link>
 
-        {data?.menu?.items ? (
+        {navList ? (
           <ul className="hidden xl:flex gap-4 text-sm  text-text-dark  xl:flex-row  xl:items-center ">
-            {data?.menu?.items?.map((item: Menu) => (
+            {navList.map((item: Menu) => (
               <Link
                 key={item.title}
                 href={
@@ -126,7 +131,7 @@ export default function Header() {
         ></i>
       </div>
 
-      <SideBarMenu nav={nav} closeFn={setNav} list={data?.menu?.items} />
+      <SideBarMenu nav={nav} closeFn={setNav} list={navList} />
     </nav>
   );
 }
