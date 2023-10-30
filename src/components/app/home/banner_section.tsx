@@ -60,7 +60,7 @@ const BannerSection = ({ list }: any) => {
             ? sliderData.map((item: any, i: number) => (
                 <div
                   key={i}
-                  className="!flex flex-col md:!flex-row w-full  gap-5 md:gap-10 justify-between items-center  "
+                  className="!flex flex-col md:!flex-row w-full  gap-5 md:gap-10 justify-between items-start  "
                 >
                   <div className="p-6 md:px-12 my-auto w-full md:max-w-[50%]">
                     <p className="text-text-dark uppercase leading-none text-3xl  lg:text-[3.5rem] font-black">

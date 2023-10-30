@@ -10,10 +10,12 @@ import {
   ApolloProvider,
   HttpLink,
   InMemoryCache,
+  useQuery,
 } from '@apollo/client';
 import { makeApolloClient } from '~/utils/apolloClient';
 import { Poppins } from 'next/font/google';
 import CartSheet from '~/components/common/drawer/cart-drawer';
+import { getMenuQuery } from '~/server/lib/shopify/query/menu';
 
 const poppins = Poppins({
   subsets: ['latin'],
