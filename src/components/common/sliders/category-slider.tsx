@@ -6,12 +6,13 @@ import CategoryCard from '../cards/category-cards';
 import { useQuery } from '@apollo/client';
 import { removeEdgesAndNodes } from '~/utils/helper';
 import { getCollectionsQuery } from '~/server/lib/shopify/query/collection';
+import CategorySkeleton from '../skeleton/category-skeleton';
 
 const CategorySlider = () => {
   const slider = useRef<any>(null);
   const [active, setActive] = useState(0);
 
-  const { error, data } = useQuery(getCollectionsQuery);
+  const { error, data, loading } = useQuery(getCollectionsQuery);
   const collectionData = data?.collections
     ? removeEdgesAndNodes(data?.collections)
     : [];
@@ -124,6 +125,14 @@ const CategorySlider = () => {
                   </div>
                 );
               }
+            })}
+          {loading &&
+            Array.from(Array(8).keys()).map((item, index) => {
+              return (
+                <div key={index}>
+                  <CategorySkeleton />
+                </div>
+              );
             })}
           {collectionData?.length === 0 ? (
             <div className="text-center w-full py-10 text-lg">

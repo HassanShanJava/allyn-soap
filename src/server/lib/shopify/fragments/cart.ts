@@ -19,6 +19,12 @@ const cartFragment = gql`
         currencyCode
       }
     }
+    discountAllocations {
+      discountedAmount {
+        amount
+        currencyCode
+      }
+    }
     lines(first: 100) {
       edges {
         node {

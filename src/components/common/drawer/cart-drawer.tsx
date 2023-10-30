@@ -18,6 +18,7 @@ import {
   removeFromCartMutation,
 } from '~/server/lib/shopify/query/cart';
 import CartSkeleton from '../skeleton/cart-skeleton';
+import { Button } from '~/components/ui/button';
 
 type FilterSheetType = {
   modal: boolean;
@@ -29,7 +30,7 @@ export default function CartSheet() {
   const lines = cart?.cart?.lines?.edges
     ? removeEdgesAndNodes(cart?.cart?.lines)
     : [];
-  console.log({ cart }, 'cart Drawer data');
+  console.log({ cart, lines }, 'cart Drawer data');
   return (
     <Sheet open={isCartOpen} onOpenChange={(e) => dispatch(toggleCartModal())}>
       <SheetContent className="font-poppins w-full p-2 md:min-w-[420px] ">
@@ -37,14 +38,67 @@ export default function CartSheet() {
           <div className=" text-text font-bold !font-poppins text-3xl">
             Shopping Cart
           </div>
+          {cart?.cart?.cost?.totalAmount?.amount > 100 ? (
+            'Free Shipping'
+          ) : (
+            <div className=" text-text-light-gray capitalize text-xl">
+              Buy{' '}
+              <span className=" text-text  font-bold ">
+                ${100 - cart?.cart?.cost?.totalAmount?.amount}
+              </span>{' '}
+              More and get{' '}
+              <span className=" text-text  font-bold ">free shipping</span>
+            </div>
+          )}
         </SheetHeader>
-        <SheetDescription className="mt-4 h-screen p-0">
-          <ScrollArea className="min-h-3/5  pb-8 pt-8 px-2 font-poppins w-full relative">
+        <SheetDescription className="mt-4 h-screen   p-0">
+          <ScrollArea className="h-3/5  pb-8 pt-8 px-2 font-poppins w-full relative">
             <ScrollBar orientation="vertical" />
             <CartProduct products={lines} cart_id={cart?.cart_id} />
             {/* <FilterContent isSheet={true} /> */}
           </ScrollArea>
-          Description
+          <hr className="mb-4" />
+          <div className="flex flex-col gap-4 ">
+            <div>Coupon Code apply</div>
+            <div className=" flex flex-col gap-2">
+              {cart?.cart?.cost?.totalAmount?.amount <
+                cart?.cart?.cost?.subtotalAmount?.amount && (
+                <div className=" flex justify-between items-center">
+                  <div>{'Discount (-20%)'}</div>
+                  <div>
+                    -$
+                    {(
+                      cart?.cart?.cost?.subtotalAmount?.amount -
+                      cart?.cart?.cost?.totalAmount?.amount
+                    )
+                      .toFixed(2)
+                      .toString()}
+                  </div>
+                </div>
+              )}
+
+              <div className=" flex justify-between items-center">
+                <div>{'Delivery Fee'}</div>
+                <div>
+                  {cart?.cart?.cost?.totalAmount?.amount > 100
+                    ? 'Free'
+                    : '$8.00'}{' '}
+                </div>
+              </div>
+              <hr className="mt-4" />
+
+              <div className=" flex justify-between items-center">
+                <div>{'Subtotal'}</div>
+                <div>
+                  $
+                  {cart?.cart?.cost?.totalAmount?.amount < 100
+                    ? (+cart?.cart?.cost?.totalAmount?.amount + 8).toFixed(2)
+                    : cart?.cart?.cost?.totalAmount?.amount}
+                </div>
+              </div>
+            </div>
+          </div>
+          <Button className="w-full mt-8">Checkout</Button>
         </SheetDescription>
       </SheetContent>
     </Sheet>
@@ -92,7 +146,7 @@ const CartProduct = (props: any) => {
   };
   return (
     <div className="flex flex-col gap-4">
-      {cartDeleteLoading || cartLoading  ? (
+      {cartDeleteLoading || cartLoading ? (
         <>
           {Array.from(Array(8).keys()).map((item, index) => {
             return (
@@ -149,14 +203,21 @@ const CartProduct = (props: any) => {
                       </div>
                     </div>
                     <p
-                      className={`w-full text-base font-normal   line-clamp-1  overflow-hidden text-ellipsis    `}
+                      className={`w-full text-base font-normal flex gap-2 items-center       `}
                     >
                       $
-                      {item?.discountAllocations[0]?.discountedAmount
-                        ? +variants[0].price?.amount * +item?.quantity -
-                          +item?.discountAllocations[0]?.discountedAmount
-                            ?.amount
-                        : +variants[0].price?.amount * +item?.quantity}
+                      {item?.discountAllocations[0]?.discountedAmount ? (
+                        <>
+                          {+variants[0].price?.amount * +item?.quantity -
+                            +item?.discountAllocations[0]?.discountedAmount
+                              ?.amount}
+                          <span className=" text-sm text-red-500 line-through">
+                            ${+variants[0].price?.amount * +item?.quantity}
+                          </span>
+                        </>
+                      ) : (
+                        +variants[0].price?.amount * +item?.quantity
+                      )}
                     </p>
                     <CartCounter
                       min={1}

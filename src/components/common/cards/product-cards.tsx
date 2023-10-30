@@ -11,7 +11,7 @@ const ProductCard = (props: { item: any; index: number }) => {
   //   console.log({category})
 
   return (
-    <Link href={`/product-detail/${props?.item?.handle}`}>
+    <a href={`/product-detail/${props?.item?.handle}`}>
       <div
         className={`group relative   hover:bg-primary hover:border-none py-8 mx-auto w-full h-72 rounded-3xl shadow-md  transition ease-in  cursor-pointer border border-border`}
       >
@@ -77,7 +77,7 @@ const ProductCard = (props: { item: any; index: number }) => {
           </p>
         </div>
       </div>
-    </Link>
+    </a>
   );
 };
 

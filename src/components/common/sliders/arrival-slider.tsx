@@ -8,6 +8,7 @@ import { removeEdgesAndNodes } from '~/utils/helper';
 import ArrivalCard from '../cards/arrival-cards';
 import { getCollectionsQuery } from '~/server/lib/shopify/query/collection';
 import { getProductsQuery } from '~/server/lib/shopify/query/product';
+import ArrivalSkeleton from '../skeleton/arrival-skeleton';
 
 const ArrivalSlider = () => {
   const slider = useRef<any>(null);
@@ -128,6 +129,14 @@ const ArrivalSlider = () => {
               return (
                 <div key={index} className={` w-full sm:mr-4  `}>
                   <ArrivalCard item={item} index={active} />
+                </div>
+              );
+            })}
+          {loading &&
+            Array.from(Array(8).keys()).map((item, index) => {
+              return (
+                <div key={index}>
+                  <ArrivalSkeleton />
                 </div>
               );
             })}
