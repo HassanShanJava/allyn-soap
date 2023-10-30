@@ -31,7 +31,7 @@ const DetailSlider = (props: any) => {
             width={1000}
             height={1000}
             loading="lazy"
-            className="h-16 w-20  object-cover  object-center border border-border p-2 rounded-sm   duration-700 ease-in-out"
+            className="h-16 w-20  object-cover  object-center  rounded-sm   duration-700 ease-in-out"
           />
           {/* <img src={`${baseUrl}/abstract0${i + 1}.jpg`} /> */}
         </a>
@@ -54,13 +54,13 @@ const DetailSlider = (props: any) => {
     arrows: false,
   };
   return (
-    <div className="relative p-6 border border-border rounded-md mx-auto w-full lg:w-5/6 ">
+    <div className="relative   rounded-md mx-auto w-full lg:w-[34rem] h-full ">
       <Slider {...settings}>
         {imagesData &&
           imagesData?.length &&
           imagesData?.map((item: any, index: number) => {
             return (
-              <div className="h-[18rem] lg:h-[24rem] relative" key={index}>
+              <div className={`h-[18rem] md:h-[34rem]  relative`} key={index}>
                 <NextImage
                   alt="feature"
                   src={item?.url}

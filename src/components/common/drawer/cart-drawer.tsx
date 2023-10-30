@@ -19,6 +19,7 @@ import {
 } from '~/server/lib/shopify/query/cart';
 import CartSkeleton from '../skeleton/cart-skeleton';
 import { Button } from '~/components/ui/button';
+import Link from 'next/link';
 
 type FilterSheetType = {
   modal: boolean;
@@ -98,7 +99,20 @@ export default function CartSheet() {
               </div>
             </div>
           </div>
-          <Button className="w-full mt-8">Checkout</Button>
+          <div className="flex gap-2 items-center justify-between mt-8">
+            <Button
+              onClick={() => {
+                dispatch(toggleCartModal());
+              }}
+              className="w-full border-primary text-primary "
+              variant={'outline'}
+            >
+              Continue Shopping
+            </Button>
+            <Link className="w-full " href={cart?.cart?.checkoutUrl}>
+              <Button className="w-full  ">Checkout</Button>
+            </Link>
+          </div>
         </SheetDescription>
       </SheetContent>
     </Sheet>
