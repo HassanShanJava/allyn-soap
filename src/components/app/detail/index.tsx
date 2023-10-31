@@ -93,14 +93,14 @@ const DetailPage = () => {
           <div className="relative w-full px-4 py-12 2xl:container sm:px-6 xl:px-20 ">
             <div className="relative grid grid-cols-12 gap-2">
               <div className="col-span-12 md:col-span-6 relative  md:sticky md:top-36   ">
-                {false ? (
+                {true ? (
                   <>Slider</>
                 ) : (
                   <DetailSlider data={productData?.product} />
                 )}
               </div>
               <div className="col-span-12 md:col-span-6">
-                {false ? <>Detail</> : <Detail data={productData?.product} />}
+                {true ? <>Detail</> : <Detail data={productData?.product} />}
               </div>
             </div>
             {productData?.product && !loading && !error && (
@@ -138,9 +138,7 @@ const ReveiewContent = (props: any) => {
           props?.data?.id?.split('/')[props?.data?.id?.split('/').length - 1]
         }`}
         data-yotpo-name={`${props?.data?.title} | escape`}
-        data-yotpo-url={`${
-          process.env.NEXT_PUBLIC_BASE_URL
-        }/product-detail/${'boll-weevil-soap'}}`}
+        data-yotpo-url={`${process.env.NEXT_PUBLIC_BASE_URL}/product-detail/${props?.data?.handle}}`}
         data-yotpo-image-url={`${props?.data?.featuredImage?.url} | product_img_url: "large" |replace: '?', '%3F' | replace: '&','%26'`}
         data-yotpo-description={`${props?.data?.description} | escape`}
       ></div>
