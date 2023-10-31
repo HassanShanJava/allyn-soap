@@ -5,7 +5,6 @@
 @import 'slick-carousel/slick/slick.css';
 @import 'slick-carousel/slick/slick-theme.css';
 
-
 html {
   font-family: var(--font-poppins), sans-serif;
   margin: 0;
@@ -90,6 +89,7 @@ body {
     --text-light-secondary: 0, 0%, 97%, 1;
     --text-light-gray: 0, 0%, 37%, 0.69;
     --text-light-blue: 202, 100%, 52%, 1;
+    --text-light-yellow: 43, 100%, 60%, 1;
   }
 
   .dark {
@@ -239,4 +239,35 @@ svg image {
 .activeSlide {
   transform: scale(1.1);
   opacity: 1;
+}
+
+/* star review */
+.starRatingWrap {
+  display: inline-block;
+  touch-action: none;
+}
+
+.empty-icons {
+  display: flex !important;
+}
+.simpleStarRating {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  touch-action: none;
+}
+
+.fillIcons {
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.emptyIcons {
+  display: inline-block;
 }
