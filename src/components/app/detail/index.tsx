@@ -20,20 +20,27 @@ const DetailPage = () => {
   console.log({ productData });
   return (
     <>
+      {/* <Script
+        src="https://cdn-widgetsrepository.yotpo.com/v1/loader/5m8xhAHtJf2ak4R6ihcYA08d9QdD7NNTDkVromWz"
+        async
+        onReady={() => {
+          console.log('Script has loaded');
+        }}
+      ></Script> */}
       <div className="relative  font-poppins">
         {/* for bg color */}
         {!loading ? (
           <div className="relative w-full px-4 py-12 2xl:container sm:px-6 xl:px-20 ">
             <div className="relative grid grid-cols-12 gap-2">
               <div className="col-span-12 md:col-span-6 relative  md:sticky md:top-36   ">
-                {true ? (
+                {false ? (
                   <>Slider</>
                 ) : (
                   <DetailSlider data={productData?.product} />
                 )}
               </div>
               <div className="col-span-12 md:col-span-6">
-                {true ? <>Detail</> : <Detail data={productData?.product} />}
+                {false ? <>Detail</> : <Detail data={productData?.product} />}
               </div>
             </div>
             {productData?.product && (
@@ -58,7 +65,7 @@ const ReveiewContent = (props: any) => {
           console.log('Script has loaded');
         }}
       ></Script>
-      {/* <div
+      <div
         className="yotpo-widget-instance"
         data-yotpo-instance-id="522581"
         data-yotpo-product-id={`${props?.data?.id}`}
@@ -66,15 +73,6 @@ const ReveiewContent = (props: any) => {
         data-yotpo-url={`http://localhost:3000/product-detail/boll-weevil-soap`}
         data-yotpo-image-url={`${props?.data?.featuredImage?.url} | product_img_url: "large" |replace: '?', '%3F' | replace: '&','%26'`}
         data-yotpo-description={`${props?.data?.description} | escape`}
-      ></div> */}
-      <div
-        className="yotpo-widget-instance"
-        data-yotpo-instance-id="522581"
-        data-yotpo-product-id={`${props?.data?.id}`}
-        data-yotpo-name={`${props?.data?.title} | escape`}
-        data-yotpo-url="{{ http://localhost:3000/ }}{{ product-detail/boll-weevil-soap }}"
-        data-yotpo-image-url={`{{ ${props?.data?.featuredImage}  | product_img_url: "large" |replace: '?', '%3F' | replace: '&','%26'}} `}
-        data-yotpo-description={`{{${props?.data?.description} | escape}}`}
       ></div>
     </>
   );
