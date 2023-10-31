@@ -59,7 +59,6 @@ export function FilterSheet(props: FilterSheetType) {
         <SheetDescription className="mt-4 !font-poppins">
           <ScrollArea className="h-screen  pb-8  ">
             <ScrollBar orientation="vertical" />
-
             <FilterContent isSheet={true} />
           </ScrollArea>
         </SheetDescription>

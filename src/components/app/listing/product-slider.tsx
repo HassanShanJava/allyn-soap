@@ -116,12 +116,12 @@ const ProductSlider = () => {
           </div>
         </div>
 
-        <div className="sm:max-w-[50%] md:max-w-[55%]  w-full px-6 sm:px-0">
+        <div className="sm:max-w-[50%] w-full px-6 sm:px-0">
           <Slider ref={productSlider} {...settings}>
             {productData.map((item, i) => (
               <div
                 key={i}
-                className=" flex justify-between items-center  px-1 sm:px-0   "
+                className=" flex justify-between items-center  px-1    "
               >
                 <div className="realtive rounded-md bg-white p-6 w-fit   mx-auto md:m-0 ">
                   <div className=" p-auto  my-auto  ">
