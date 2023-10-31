@@ -36,7 +36,7 @@ const DetailPage = () => {
                 {true ? <>Detail</> : <Detail data={productData?.product} />}
               </div>
             </div>
-            {!error && productData?.product && (
+            {productData?.product && (
               <ReveiewContent data={productData?.product} />
             )}
           </div>
