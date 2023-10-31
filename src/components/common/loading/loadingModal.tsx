@@ -2,10 +2,14 @@ import { AlertDialog, AlertDialogContent } from '@/ui/alert-dialog';
 
 interface LoadingDialogInterface {
   open: boolean;
+  setOpen: Function;
   text?: string;
 }
 
 export function LoadingDialog(props: LoadingDialogInterface) {
+  setTimeout(() => {
+    props.setOpen(false);
+  }, 5000);
   return (
     <AlertDialog open={props.open}>
       <AlertDialogContent>

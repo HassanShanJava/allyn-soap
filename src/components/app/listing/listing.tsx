@@ -52,7 +52,7 @@ const ListingSection = () => {
     );
   };
   return (
-    <div className="relative grid grid-cols-12  text-black px-4 py-4 lg:px-20 gap-4">
+    <div className="relative grid grid-cols-12  text-black px-4 py-4 sm:p-6 lg:px-12 gap-4">
       <div className=" h-max sticky top-36  shadow-md border border-text-light-secondary  col-span-3 hidden lg:block  rounded-2xl">
         <FilterSection />
       </div>
@@ -81,7 +81,7 @@ const ListingSection = () => {
                       onClick={() => {
                         clearFilter();
                       }}
-                      className="w-full flex text-xl underline text-text-blue justify-start bg-red-600s xsm:justify-end"
+                      className="w-full cursor-pointer flex text-xl underline text-text-blue justify-start bg-red-600s xsm:justify-end"
                     >
                       Clear Filter
                     </div>
