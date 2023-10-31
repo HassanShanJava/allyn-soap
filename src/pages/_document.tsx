@@ -18,11 +18,8 @@ export default function Document() {
           referrerPolicy="no-referrer"
         />
         <Script
-          src="https://cdn-widgetsrepository.yotpo.com/v1/loader/5m8xhAHtJf2ak4R6ihcYA08d9QdD7NNTDkVromWz"
+          src={`https://cdn-widgetsrepository.yotpo.com/v1/loader/${process.env.NEXT_PUBLIC_SHOPIFY_REVIEW}`}
           async
-          onReady={() => {
-            console.log('Script has loaded');
-          }}
         ></Script>
       </Head>
       <body>
