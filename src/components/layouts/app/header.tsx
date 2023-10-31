@@ -222,7 +222,7 @@ export const SideBarMenu: React.FC<SideBarMenuProps> = ({
                 className={`group py-3 text-lg w-full text-center ${
                   list.length - 1 === i ? 'border-y-[1px]' : 'border-t-[1px]'
                 }
-             border-gray-700 hover:bg-primary hover:text-primary-foreground hover:border-transparent transition-colors duration-300 ease-in-out cursor-pointer`}
+             border-gray-200 hover:bg-primary hover:text-primary-foreground hover:border-transparent transition-colors duration-300 ease-in-out cursor-pointer`}
                 onClick={() => {
                   closeFn(false);
                 }}
