@@ -36,8 +36,9 @@ const DetailPage = () => {
                 {true ? <>Detail</> : <Detail data={productData?.product} />}
               </div>
             </div>
-
-            <ReveiewContent data={productData?.product} />
+            {!error && productData?.product && (
+              <ReveiewContent data={productData?.product} />
+            )}
           </div>
         ) : (
           <DescriptionSkeleton />
@@ -57,14 +58,23 @@ const ReveiewContent = (props: any) => {
           console.log('Script has loaded');
         }}
       ></Script>
+      {/* <div
+        className="yotpo-widget-instance"
+        data-yotpo-instance-id="522581"
+        data-yotpo-product-id={`${props?.data?.id}`}
+        data-yotpo-name={`${props?.data?.title} | escape`}
+        data-yotpo-url={`http://localhost:3000/product-detail/boll-weevil-soap`}
+        data-yotpo-image-url={`${props?.data?.featuredImage?.url} | product_img_url: "large" |replace: '?', '%3F' | replace: '&','%26'`}
+        data-yotpo-description={`${props?.data?.description} | escape`}
+      ></div> */}
       <div
         className="yotpo-widget-instance"
         data-yotpo-instance-id="522581"
-        data-yotpo-product-id={`{{${props?.data?.id}}}`}
-        data-yotpo-name={`{{ ${props?.data?.title} | escape }}`}
-        data-yotpo-url={`{{ https://allyns-soap-co.myshopify.com }}{{ ${props?.data?.onlineStoreUrl} }}`}
-        data-yotpo-image-url={`"{{ ${props?.data?.featuredImage?.url} | product_img_url: "large" |replace: '?', '%3F' | replace: '&','%26'}}"`}
-        data-yotpo-description={`{{ ${props?.data?.description} | escape }}`}
+        data-yotpo-product-id={`${props?.data?.id}`}
+        data-yotpo-name={`${props?.data?.title} | escape`}
+        data-yotpo-url="{{ http://localhost:3000/ }}{{ product-detail/boll-weevil-soap }}"
+        data-yotpo-image-url={`{{ ${props?.data?.featuredImage}  | product_img_url: "large" |replace: '?', '%3F' | replace: '&','%26'}} `}
+        data-yotpo-description={`{{${props?.data?.description} | escape}}`}
       ></div>
     </>
   );
