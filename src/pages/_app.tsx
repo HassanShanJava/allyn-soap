@@ -1,11 +1,16 @@
-import { ApolloProvider, ApolloClient, useQuery, HttpLink, InMemoryCache } from '@apollo/client';
+import {
+  ApolloProvider,
+  ApolloClient,
+  useQuery,
+  HttpLink,
+  InMemoryCache,
+} from '@apollo/client';
 import type { NextPage } from 'next';
 import type { AppType, AppProps } from 'next/app';
 import { useState, type ReactElement, type ReactNode, useEffect } from 'react';
 import Layout from '~/components/layouts';
 import '~/styles/globals.css';
-import  { makeApolloClient } from '~/utils/apolloClient';
-
+import { makeApolloClient } from '~/utils/apolloClient';
 
 export type NextPageWithLayout<
   TProps = Record<string, unknown>,
@@ -27,12 +32,10 @@ const MyApp = (({ Component, pageProps }: AppPropsWithLayout) => {
       </main>
     ));
 
-
   return getLayout(
     <main className={'font-poppins'}>
-
       <Component {...pageProps} />
-    </main>,
+    </main>
   );
 }) as AppType;
 

@@ -98,8 +98,8 @@ const ListingSection = () => {
                       <SelectTrigger className=" flex font-bold justify-between h-8 gap-1 w-full xsm:w-36  text-text rounded-none border-none line-clamp-1 text-center shadow-none   ">
                         <SelectValue placeholder="Relevance" />
                       </SelectTrigger>
-                      <SelectContent>
-                        <SelectGroup>
+                      <SelectContent >
+                        <SelectGroup className='font-poppins'>
                           <SelectItem value="RELEVANCE">Relevance</SelectItem>
                           <SelectItem value="TITLE">Title</SelectItem>
                           <SelectItem value="BEST_SELLING">

@@ -41,7 +41,7 @@ type FilterSheetType = {
 export function FilterSheet(props: FilterSheetType) {
   return (
     <Sheet open={props?.modal} onOpenChange={(e) => props.setModal(e)}>
-      <SheetContent className="font-poppins w-full ">
+      <SheetContent className=" w-full ">
         <SheetHeader>
           {/* <div className="flex items-center justify-between text-dark border-b border-border-light pb-4 ">
             <div
@@ -56,8 +56,8 @@ export function FilterSheet(props: FilterSheetType) {
           
           </div> */}
         </SheetHeader>
-        <SheetDescription className="mt-4">
-          <ScrollArea className="h-screen  pb-8  font-poppins">
+        <SheetDescription className="mt-4 !font-poppins">
+          <ScrollArea className="h-screen  pb-8  ">
             <ScrollBar orientation="vertical" />
 
             <FilterContent isSheet={true} />

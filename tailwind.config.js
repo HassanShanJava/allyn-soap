@@ -1,11 +1,11 @@
 /** @type {import('tailwindcss').Config} */
+
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 module.exports = {
   darkMode: ['class'],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './@/components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
+    './src/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     container: {
@@ -24,7 +24,7 @@ module.exports = {
 
     extend: {
       fontFamily: {
-        poppins: ['var(--font-poppins)'],
+        sans: ['"Poppins"', ...defaultTheme.fontFamily.sans],
       },
       colors: {
         border: {
