@@ -23,10 +23,14 @@ const DetailPage = () => {
       <div className="relative  font-poppins">
         {/* for bg color */}
         {!loading ? (
-          <div className="relative w-full px-4 py-12 2xl:container sm:px-6 xl:px-20 2xl:mx-auto 2xl:px-0 ">
+          <div className="relative w-full px-4 py-12 2xl:container sm:px-6 xl:px-20 ">
             <div className="relative grid grid-cols-12 gap-2">
-              <div className="col-span-12 md:col-span-6 lg:p-4  sticky top-0 ">
-                <DetailSlider data={productData?.product} />
+              <div className="col-span-12 md:col-span-6 relative  md:sticky md:top-36   ">
+                {false ? (
+                  <>Slider</>
+                ) : (
+                  <DetailSlider data={productData?.product} />
+                )}
               </div>
               <div className="col-span-12 md:col-span-6">
                 {false ? <>Detail</> : <Detail data={productData?.product} />}
