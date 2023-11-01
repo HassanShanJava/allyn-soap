@@ -21,12 +21,12 @@ const Slider = React.forwardRef<
       <SliderPrimitive.Range className="absolute h-full bg-primary" />
     </SliderPrimitive.Track>
 
-    <SliderPrimitive.Thumb className="relative mx-auto block h-5 w-5 rounded-full border-2 border-primary bg-primary ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
+    <SliderPrimitive.Thumb className="relative cursor-pointer mx-auto block h-5 w-5 rounded-full border-2 border-primary bg-primary ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
       <div className=" absolute top-4">
         ${props?.value?.length ? props?.value[0] : 0}
       </div>
     </SliderPrimitive.Thumb>
-    <SliderPrimitive.Thumb className="relative mx-auto block h-5 w-5 rounded-full border-2 border-primary bg-primary ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
+    <SliderPrimitive.Thumb className="relative cursor-pointer mx-auto block h-5 w-5 rounded-full border-2 border-primary bg-primary ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
       <div className=" absolute top-4 right-1">
         ${props?.value?.length ? props?.value[1] : 0}
       </div>

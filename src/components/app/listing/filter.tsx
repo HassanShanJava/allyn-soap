@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import FilterSkeleton from '~/components/common/skeleton/filters-skeleton';
 import {
@@ -78,6 +78,11 @@ export function FilterContent(props: { isSheet: boolean }) {
   const [category, setCategory] = useState<any>(null);
   const [activeIndex, seActiveIndex] = useState<any>(null);
   console.log({ range, category });
+  useEffect(() => {
+    if (!filters?.price) {
+      setRange([5, 200]);
+    }
+  }, [filters?.price]);
   const handleCategory = (text: string, index: number) => {
     setCategory(text);
     seActiveIndex(index);
