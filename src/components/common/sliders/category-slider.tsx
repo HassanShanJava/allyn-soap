@@ -117,15 +117,17 @@ const CategorySlider = () => {
       <div className="w-4/5  mx-auto flex-1">
         <Slider ref={slider} {...settings}>
           {collectionData.length > 0 &&
-            collectionData?.map((item: any, index: number) => {
-              if (item?.products?.filters[0]?.values[0]?.count >= 1) {
-                return (
-                  <div key={index} className={` w-full sm:mr-4 mx-auto`}>
-                    <CategoryCard item={item} index={active} />
-                  </div>
-                );
-              }
-            })}
+            collectionData
+              ?.filter((item) => item.image !== null)
+              .map((item: any, index: number) => {
+                if (item?.products?.filters[0]?.values[0]?.count >= 1) {
+                  return (
+                    <div key={index} className={` w-full sm:mr-4 mx-auto`}>
+                      <CategoryCard item={item} index={active} />
+                    </div>
+                  );
+                }
+              })}
           {loading &&
             Array.from(Array(8).keys()).map((item, index) => {
               return (

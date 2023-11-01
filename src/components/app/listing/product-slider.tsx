@@ -134,7 +134,7 @@ const ProductSlider = () => {
 
                   <div className="m-auto h-fit   py-2">
                     <p className="font-[600] text-[#272D4E] py-1 text-xs">
-                      {`${'0' + (i + 1)} -- ${item.name} `}
+                      {`${'0' + (i + 1)} `}&#8213;{' ' + item.name}
                     </p>
                     <p className="font-[600] text-[#272D4E] text-xl">{`${item.price}`}</p>
                   </div>
