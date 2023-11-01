@@ -24,11 +24,20 @@ const DetailPage = () => {
     variables: { handle: id },
   });
   useEffect(() => {
-    // productData?.product?.id?.split('/')[
-    //   productData?.product?.id?.split('/').length - 1
-    // ]
     if (!loading && !error) {
-      const url = `https://api-cdn.yotpo.com/v1/widget/${process.env.NEXT_PUBLIC_SHOPIFY_REVIEW}/products/4727631511691/reviews.json`;
+      console.log(
+        productData?.product?.id?.split('/')[
+          productData?.product?.id?.split('/').length - 1
+        ],
+        'product ID',
+      );
+      const url = `https://api-cdn.yotpo.com/v1/widget/${
+        process.env.NEXT_PUBLIC_SHOPIFY_REVIEW
+      }/products/${
+        productData?.product?.id?.split('/')[
+          productData?.product?.id?.split('/').length - 1
+        ]
+      }/reviews.json`;
       const options = {
         method: 'GET',
         headers: {
@@ -52,14 +61,14 @@ const DetailPage = () => {
           <div className="relative w-full px-4 py-12 2xl:container sm:px-6  ">
             <div className="relative grid grid-cols-12 gap-2">
               <div className="col-span-12 md:col-span-6 relative     ">
-                {true ? (
+                {false ? (
                   <>Slider</>
                 ) : (
                   <DetailSlider data={productData?.product} />
                 )}
               </div>
               <div className="col-span-12 md:col-span-6">
-                {true ? (
+                {false ? (
                   <>Detail</>
                 ) : (
                   <Detail data={productData?.product} reviews={reviews} />
@@ -177,11 +186,11 @@ const ReveiewContent = (props: any) => {
             Write a Review
           </Button>
         </div>
-        {props?.reviews && (
+        {props?.reviews?.response?.reviews?.length > 0 && (
           <>
             <div className="w-full">
               <Slider ref={reviewSlider} {...settings}>
-                {props?.reviews?.response?.reviews &&
+                {props?.reviews?.response?.reviews?.length &&
                   props?.reviews?.response?.reviews?.map(
                     (item: any, index: number) => {
                       console.log({ item }, 'review item');
