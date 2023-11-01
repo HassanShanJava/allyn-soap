@@ -184,7 +184,7 @@ const Detail = (props: any) => {
                 // defaultValue={filters.sortKey}
                 // value={filters.sortKey}
                 >
-                  <SelectTrigger className=" flex font-bold justify-between h-10 gap-1 w-full xsm:w-36  text-text rounded-md border line-clamp-1 text-center shadow-none   ">
+                  <SelectTrigger className=" flex font-bold justify-between h-10 gap-1 w-full xsm:w-32  text-text rounded-md border line-clamp-1 text-center shadow-none   ">
                     <SelectValue placeholder="Relevance" />
                   </SelectTrigger>
                   <SelectContent>
