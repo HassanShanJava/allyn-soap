@@ -26,21 +26,17 @@ import ReactStars from 'react-stars';
 interface reviewDialogInterface {
   isModal: boolean;
   title: string;
-  setIsModal: any;
+  setIsModal: (e: boolean) => void;
+  data: any;
   type: string;
 }
 export const addCustomerAddress = z.object({
-  id: z.number().optional(),
   review_score: z.number(),
   email: z.string().email().trim(),
 
   review_title: z.string().trim(),
+  display_name: z.string().trim(),
   review_content: z.string().trim(),
-  phone_code: z.string().trim(),
-  postal_code: z.number({
-    required_error: 'Please enter your postal code',
-    invalid_type_error: 'Please enter your postal code',
-  }),
 });
 export function ReviewDialog(props: reviewDialogInterface) {
   const { toast } = useToast();
@@ -75,19 +71,53 @@ export function ReviewDialog(props: reviewDialogInterface) {
   console.log({ rating });
   async function onSubmit(values: z.infer<typeof addCustomerAddress>) {
     try {
-      const payload = { ...values };
+      setLoading(true);
 
-      toast({
-        variant: 'success',
-        title: `Address  Add successfully!`,
-      });
-      //  props?.refetch();
-      //  props?.openChangeHandler();
+      const Addoptions = {
+        method: 'POST',
+        headers: {
+          accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          appkey: `${process.env.NEXT_PUBLIC_SHOPIFY_REVIEW}`,
+          domain: `${process.env.NEXT_PUBLIC_BASE_URL}`,
+          sku: `${
+            props?.data?.id?.split('/')[props?.data?.id?.split('/').length - 1]
+          }`,
+          product_title: `${props?.data?.title}`,
+          product_description: `${props?.data?.title}`,
+          product_url: `${
+            process.env.NEXT_PUBLIC_BASE_URL
+          }product-detail/${'boll-weevil-soap'}}`,
+          ...values,
+          product_image_url: 'http://www.shop.com/phone.jpg',
+
+          is_incentivized: true,
+
+          time_stamp: '1415107190',
+        }),
+      };
+
+      fetch('https://api.yotpo.com/reviews/dynamic_create', Addoptions)
+        .then((response) => response.json())
+        .then((response) => console.log(response))
+        .catch((err) => console.error(err));
+
+      setTimeout(() => {
+        toast({
+          variant: 'success',
+          title: `Review  Added successfully!`,
+        });
+        setLoading(false);
+        props.setIsModal(!props?.isModal);
+      }, 2000);
     } catch (error: any) {
-      //  props?.openChangeHandler();
+      setLoading(false);
+      props.setIsModal(false);
       toast({
         variant: 'destructive',
-        title: error?.message ?? 'Something went wrong!',
+        title: error.message,
       });
     }
   }
@@ -131,7 +161,27 @@ export function ReviewDialog(props: reviewDialogInterface) {
                         {...form.register('review_score')}
                       /> */}
                     </div>
-
+                    <FormField
+                      control={form.control}
+                      name="display_name"
+                      render={() => (
+                        <FormItem className=" w-full ">
+                          <FormLabel className="text-sm text-cardGray ">
+                            Name <sup className="text-red-500">*</sup>
+                          </FormLabel>
+                          <FormControl>
+                            <Input
+                              type="text"
+                              placeholder="Enter Name"
+                              {...form.register('display_name')}
+                            />
+                          </FormControl>
+                          <div className="relative pb-3 ">
+                            <FormMessage />
+                          </div>
+                        </FormItem>
+                      )}
+                    />
                     <FormField
                       control={form.control}
                       name="email"
@@ -147,7 +197,7 @@ export function ReviewDialog(props: reviewDialogInterface) {
                               {...form.register('email')}
                             />
                           </FormControl>
-                          <div className="relative pb-4 ">
+                          <div className="relative pb-3 ">
                             <FormMessage />
                           </div>
                         </FormItem>
@@ -169,7 +219,7 @@ export function ReviewDialog(props: reviewDialogInterface) {
                               {...field}
                             />
                           </FormControl>
-                          <div className="relative pb-2">
+                          <div className="relative pb-3">
                             <FormMessage />
                           </div>
                         </FormItem>
@@ -190,7 +240,7 @@ export function ReviewDialog(props: reviewDialogInterface) {
                               {...field}
                             />
                           </FormControl>
-                          <div className="relative pb-2">
+                          <div className="relative pb-3">
                             <FormMessage />
                           </div>
                         </FormItem>
@@ -201,23 +251,20 @@ export function ReviewDialog(props: reviewDialogInterface) {
                       <Button
                         variant="secondary"
                         type="button"
-                        // disabled={
-                        //   addAddress.isLoading || updateAddress.isLoading
-                        // }
-
+                        disabled={loading}
                         onClick={() => {
                           props.setIsModal(!props?.isModal);
                         }}
                       >
                         Cancel
                       </Button>
-                      <Button
-                        type="submit"
-                        // disabled={
-                        //   addAddress.isLoading || updateAddress.isLoading
-                        // }
-                      >
-                        Add
+                      <Button type="submit" disabled={loading}>
+                        {loading ? (
+                          <i className="fa-solid fa-spinner fa-spin"></i>
+                        ) : (
+                          'Add'
+                        )}
+
                         {/* {props?.id ? 'Update' : 'Add'} */}
                       </Button>
                     </div>

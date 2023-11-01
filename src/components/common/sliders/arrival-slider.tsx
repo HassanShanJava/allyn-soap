@@ -127,7 +127,7 @@ const ArrivalSlider = () => {
           {newArrivalData.length > 0 &&
             newArrivalData?.map((item: any, index: number) => {
               return (
-                <div key={index} className={` w-full sm:mr-4  `}>
+                <div key={index} className={`w-full sm:mr-4`}>
                   <ArrivalCard item={item} index={active} />
                 </div>
               );
@@ -135,7 +135,7 @@ const ArrivalSlider = () => {
           {loading &&
             Array.from(Array(8).keys()).map((item, index) => {
               return (
-                <div key={index}>
+                <div key={index} className={`w-full sm:mr-4`}>
                   <ArrivalSkeleton />
                 </div>
               );
