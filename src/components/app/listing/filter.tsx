@@ -83,9 +83,15 @@ export function FilterContent(props: { isSheet: boolean }) {
       setRange([5, 200]);
     }
   }, [filters?.price]);
+
   const handleCategory = (text: string, index: number) => {
-    setCategory(text);
-    seActiveIndex(index);
+    if (text === category) {
+      setCategory(null);
+      seActiveIndex(null);
+    } else {
+      setCategory(text);
+      seActiveIndex(index);
+    }
   };
   const applyFilter = () => {
     let price = null;
@@ -137,11 +143,7 @@ export function FilterContent(props: { isSheet: boolean }) {
               {FilterData?.menu?.items?.map((item: any, index: number) => {
                 if (item?.items?.length > 0) {
                   return (
-                    <AccordionItem
-                      className="  "
-                      value={`item-${index}`}
-                      key={index}
-                    >
+                    <AccordionItem value={`item-${index}`} key={index}>
                       <AccordionTrigger className="indent-1 font-poppins">
                         {item?.title}
                       </AccordionTrigger>
@@ -183,8 +185,8 @@ export function FilterContent(props: { isSheet: boolean }) {
                       className={`${
                         category === '/products/' + getRoutData(item?.url)
                           ? ' font-bold bg-text-light-secondary  '
-                          : ' '
-                      } cursor-pointer py-1 indent-1 hover:bg-text-light-secondary mt-1 rounded-md captialize-first  lowercase font-sans font-semibold text-sm`}
+                          : ' font-semibold '
+                      } cursor-pointer py-2 indent-1 hover:bg-text-light-secondary mt-1 rounded-md captialize-first  lowercase font-sans text-sm`}
                       key={index}
                     >
                       {item?.title}

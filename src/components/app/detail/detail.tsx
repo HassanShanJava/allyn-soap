@@ -208,10 +208,9 @@ const RenderButton = (props: {
       <Button
         className="w-full "
         variant={'outline'}
-        // disabled={true}
-        // onClick={() => {
-        //   dispatch(toggleCartModal());
-        // }}
+        onClick={() => {
+          dispatch(toggleCartModal());
+        }}
       >
         View Cart
       </Button>

@@ -125,6 +125,7 @@ export function ReviewDialog(props: reviewDialogInterface) {
                         className="h-14"
                         count={5}
                         size={36}
+                        half={false}
                         color2={'#ffd700'}
                         value={rating}
                         onChange={ratingChanged}
