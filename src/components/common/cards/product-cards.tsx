@@ -60,20 +60,12 @@ const ProductCard = (props: { item: any; index: number }) => {
             className={`text-sm  font-normal group-hover:text-text-white line-clamp-1  overflow-hidden text-ellipsis `}
           >
             {props?.item?.description}
-            {/* {`(${props?.item?.products?.filters[0]?.values[0]?.count} ${props?.item?.title})`}{' '} */}
           </p>
           <p
-            className={`w-full text-3xl font-semibold  group-hover:text-text-white line-clamp-1  overflow-hidden text-ellipsis    `}
+            className={`w-full text-2xl font-semibold  group-hover:text-text-white line-clamp-1  overflow-hidden text-ellipsis    `}
           >
             <span className=" text-xl font-semibold text-red-500">$</span>
             {(+props?.item?.priceRange?.minVariantPrice?.amount)?.toFixed(2)}
-            {/* {(props?.item?.totalInventory === 0 ||
-              !props?.item?.availableForSale) && (
-              <span className="w-full text-sm font-semibold text-red-500 mr-auto">
-                {' '}
-                Sold Out
-              </span>
-            )} */}
           </p>
         </div>
       </div>

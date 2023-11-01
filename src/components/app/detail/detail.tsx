@@ -12,9 +12,18 @@ import {
 } from '~/server/lib/shopify/query/cart';
 import { toggleCart, toggleCartModal } from '~/store/reducers/cart';
 import { Progress } from '~/components/ui/progress';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '~/components/ui/select';
 
 const Detail = (props: any) => {
   const [variant, setVariant] = useState<any>(null);
+  const [variants, setVariants] = useState<any>(null);
   const [cartItem, setCartItem] = useState<any>(null);
   const [cartView, setCartView] = useState<boolean>(false);
   const [range, setRange] = useState<number>(1);
@@ -33,6 +42,7 @@ const Detail = (props: any) => {
       : [];
 
     setCartItem(lines);
+    setVariants(variants);
     setVariant(variants[0]);
   }, [props?.data?.variants]);
   const addtoCart = async () => {
@@ -92,11 +102,12 @@ const Detail = (props: any) => {
       console.log('error :::', e?.message);
     }
   };
-  console.log({ props }, 'product data');
+  console.log({ variants }, 'product data');
   return (
     <div className="  flex flex-col gap-8 justify-between">
-      <div>
+      <div className="flex flex-col gap-4">
         <div className=" text-4xl font-semibold text-text">
+          <p className=" text-sm  uppercase font-bold text-text-gray">Soap</p>
           {props?.data?.title}
           <div>
             {props?.reviews?.response?.bottomline && (
@@ -163,22 +174,47 @@ const Detail = (props: any) => {
           </div>
           <Progress value={variant?.quantityAvailable} />
         </div>
-
-        <div className="text-text">
-          Quantity
-          <div className="flex  items-center gap-2">
-            <Counter
-              range={range}
-              setRange={setRange}
-              min={1}
-              max={variant?.quantityAvailable}
-            />
-            <RenderButton
-              forSale={variant?.availableForSale}
-              quantity={variant?.quantityAvailable}
-              cartView={cartView}
-              addtoCart={addtoCart}
-            />
+        <div className="flex items-center gap-2">
+          {variants && variants?.length > 1 && (
+            <div className="text-text">
+              Size
+              <div className="flex  items-center gap-2">
+                <Select
+                // onValueChange={toggleLanguageHandler}
+                // defaultValue={filters.sortKey}
+                // value={filters.sortKey}
+                >
+                  <SelectTrigger className=" flex font-bold justify-between h-10 gap-1 w-full xsm:w-36  text-text rounded-md border line-clamp-1 text-center shadow-none   ">
+                    <SelectValue placeholder="Relevance" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="RELEVANCE">Relevance</SelectItem>
+                      <SelectItem value="TITLE">Title</SelectItem>
+                      <SelectItem value="BEST_SELLING">Best Selling</SelectItem>
+                      <SelectItem value="CREATED">New Arival</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+          )}
+          <div className="text-text w-full">
+            Quantity
+            <div className="flex  items-center gap-2">
+              <Counter
+                range={range}
+                setRange={setRange}
+                min={1}
+                max={variant?.quantityAvailable}
+              />
+              <RenderButton
+                forSale={variant?.availableForSale}
+                quantity={variant?.quantityAvailable}
+                cartView={cartView}
+                addtoCart={addtoCart}
+              />
+            </div>
           </div>
         </div>
       </div>

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toggleCategory } from '~/store/reducers/category';
 import { RootState } from '~/store/store';
 import NextImage from '../custom_image';
+import { useEffect } from 'react';
 
 const CategoryCard = (props: { item: any; index: number }) => {
   console.log(props?.item, 'props?.item');
@@ -19,6 +20,16 @@ const CategoryCard = (props: { item: any; index: number }) => {
       }),
     );
   };
+  useEffect(() => {
+    dispatch(
+      toggleCategory({
+        title: 'Bar Soap',
+        handle: 'soap',
+        index: 0,
+        category_id: 'gid://shopify/Collection/178979176587',
+      }),
+    );
+  }, []);
   return (
     <>
       <div

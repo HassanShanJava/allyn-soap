@@ -10,6 +10,7 @@ import { Button } from '~/components/ui/button';
 import { getCollectionProductsQuery } from '~/server/lib/shopify/query/collection';
 import { toggleFilters } from '~/store/reducers/filters';
 import { RootState } from '~/store/store';
+import { defaultSort } from '~/utils/constant';
 import { removeEdgesAndNodes } from '~/utils/helper';
 
 const ProductListing = () => {
@@ -28,10 +29,13 @@ const ProductListing = () => {
     dispatch(
       toggleFilters({
         ...filters,
+        sortKey: defaultSort.sortKey,
+        reverse: false,
         first: 12,
         last: null,
         after: null,
         before: null,
+        price: null,
       }),
     );
   }, [router?.query?.id]);
