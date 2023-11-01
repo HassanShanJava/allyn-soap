@@ -48,14 +48,14 @@ const DetailPage = () => {
           <div className="relative w-full px-4 py-12 2xl:container sm:px-6  ">
             <div className="relative grid grid-cols-12 gap-2">
               <div className="col-span-12 md:col-span-6 relative     ">
-                {true ? (
+                {false ? (
                   <>Slider</>
                 ) : (
                   <DetailSlider data={productData?.product} />
                 )}
               </div>
               <div className="col-span-12 md:col-span-6">
-                {true ? (
+                {false ? (
                   <>Detail</>
                 ) : (
                   <Detail data={productData?.product} reviews={reviews} />
