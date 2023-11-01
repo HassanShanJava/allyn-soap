@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import FilterSkeleton from '~/components/common/skeleton/filters-skeleton';
 import {
@@ -17,13 +17,10 @@ import {
   SheetContent,
   SheetDescription,
   SheetHeader,
-  SheetTitle,
-  SheetTrigger,
 } from '~/components/ui/sheet';
 import { getFilterQuery } from '~/server/lib/shopify/query/menu';
 import { toggleFilters } from '~/store/reducers/filters';
 import { RootState } from '~/store/store';
-import { defaultSort } from '~/utils/constant';
 import { getRoutData } from '~/utils/helper';
 
 export function FilterSection() {
@@ -69,11 +66,7 @@ export function FilterSheet(props: FilterSheetType) {
 }
 
 export function FilterContent(props: { isSheet: boolean }) {
-  const {
-    error,
-    loading,
-    data: FilterData,
-  } = useQuery(getFilterQuery, {
+  const { loading, data: FilterData } = useQuery(getFilterQuery, {
     variables: { handle: 'main-menu' },
   });
   const dispatch = useDispatch();
@@ -81,18 +74,27 @@ export function FilterContent(props: { isSheet: boolean }) {
   const { filters } = useSelector((state: RootState) => state.filters);
 
   const [range, setRange] = useState([5, 200]);
+  const [priceChange, setPriceChange] = useState(false);
   const [category, setCategory] = useState<any>(null);
   const [activeIndex, seActiveIndex] = useState<any>(null);
   console.log({ range, category });
+  useEffect(() => {
+    if (!filters?.price) {
+      setRange([5, 200]);
+    }
+  }, [filters?.price]);
   const handleCategory = (text: string, index: number) => {
     setCategory(text);
     seActiveIndex(index);
   };
   const applyFilter = () => {
-    const price = {
-      min: range[0] ?? 0,
-      max: range[1] ?? 0,
-    };
+    let price = null;
+    if (priceChange) {
+      price = {
+        min: range[0] ?? 0,
+        max: range[1] ?? 0,
+      };
+    }
     category && router.replace(category);
 
     dispatch(
@@ -105,24 +107,9 @@ export function FilterContent(props: { isSheet: boolean }) {
         price: price,
       }),
     );
+    setPriceChange(false);
   };
-  const clearFilter = () => {
-    seActiveIndex(null);
-    setCategory(null);
-    setRange([5, 200]);
-    dispatch(
-      toggleFilters({
-        ...filters,
-        sortKey: defaultSort.sortKey,
 
-        first: 12,
-        last: null,
-        after: null,
-        before: null,
-        price: null,
-      }),
-    );
-  };
   return (
     <div className="  p-4 text-text font-poppins">
       <div className="flex items-center justify-between text-dark border-b border-border-light pb-4 ">
@@ -195,9 +182,9 @@ export function FilterContent(props: { isSheet: boolean }) {
                       }}
                       className={`${
                         category === '/products/' + getRoutData(item?.url)
-                          ? ' font-bold bg-text-light-secondary '
+                          ? ' font-bold bg-text-light-secondary  '
                           : ' '
-                      } cursor-pointer py-1 indent-1 hover:bg-text-light-secondary mt-1 rounded-md`}
+                      } cursor-pointer py-1 indent-1 hover:bg-text-light-secondary mt-1 rounded-md captialize-first  lowercase font-sans font-semibold text-sm`}
                       key={index}
                     >
                       {item?.title}
@@ -234,6 +221,7 @@ export function FilterContent(props: { isSheet: boolean }) {
                   className={'w-full mt-6'}
                   onValueChange={(e: any) => {
                     setRange(e);
+                    setPriceChange(true);
                   }}
                 />
               </div>

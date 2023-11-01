@@ -2,11 +2,8 @@ import { useRouter } from 'next/router';
 import Detail from './detail';
 import { getProductQuery } from '~/server/lib/shopify/query/product';
 import { useQuery } from '@apollo/client';
-import { LoadingDialog } from '~/components/common/loading/loadingModal';
-import Script from 'next/script';
 import DescriptionSkeleton from '~/components/common/skeleton/description-skeleton';
 import DetailSlider from './slider';
-import jqeury from 'jquery';
 import { useEffect, useRef, useState } from 'react';
 import Slider from 'react-slick';
 import { Button } from '~/components/ui/button';
@@ -24,20 +21,11 @@ const DetailPage = () => {
     variables: { handle: id },
   });
   useEffect(() => {
-    if (!loading && !error) {
-      console.log(
-        productData?.product?.id?.split('/')[
-          productData?.product?.id?.split('/').length - 1
-        ],
-        'product ID',
-      );
+    if (!loading && !error && productData?.product) {
+      const dataID = productData?.product?.id?.split('/');
       const url = `https://api-cdn.yotpo.com/v1/widget/${
         process.env.NEXT_PUBLIC_SHOPIFY_REVIEW
-      }/products/${
-        productData?.product?.id?.split('/')[
-          productData?.product?.id?.split('/').length - 1
-        ]
-      }/reviews.json`;
+      }/products/${dataID[dataID.length - 1]}/reviews.jsons`;
       const options = {
         method: 'GET',
         headers: {
@@ -52,7 +40,6 @@ const DetailPage = () => {
         .catch((err) => console.error('error:' + err));
     }
   }, [productData?.product]);
-  console.log({ reviews });
   return (
     <>
       <div className="relative  font-poppins">
@@ -169,19 +156,27 @@ const ReveiewContent = (props: any) => {
     <>
       <div className="flex flex-col gap-4 ">
         {/* heading */}
-        <div className=" flex  justify-between gap-2 items-center">
-          <h1 className=" font-bold text-text text-4xl">
-            All Reviews{' '}
-            <span className=" text-text-light-gray text-base font-normal ">
-              {props?.reviews?.response?.reviews?.length > 0 &&
-                '( ' + props?.reviews?.response?.reviews?.length + ' )'}
-            </span>
-          </h1>
+        <div className=" flex flex-col sm:flex-row   gap-2 justify-between items-center">
+          <div>
+            <h1 className=" font-bold text-text text-4xl">
+              All Reviews{' '}
+              <span className=" text-text-light-gray text-base font-normal ">
+                {props?.reviews?.response?.reviews?.length > 0 &&
+                  '( ' + props?.reviews?.response?.reviews?.length + ' )'}
+              </span>
+            </h1>
+            {!props?.reviews?.response?.reviews?.length && (
+              <span className=" text-text-light-gray text-sm font-normal ">
+                No Reviews Available
+              </span>
+            )}
+          </div>
+
           <Button
             onClick={() => {
               props?.setIsModal(true);
             }}
-            className="rounded-sm h-12"
+            className="rounded-sm h-12 w-max"
           >
             Write a Review
           </Button>
@@ -193,7 +188,6 @@ const ReveiewContent = (props: any) => {
                 {props?.reviews?.response?.reviews?.length &&
                   props?.reviews?.response?.reviews?.map(
                     (item: any, index: number) => {
-                      console.log({ item }, 'review item');
                       return (
                         <div key={index} className="flex gap-2 p-2 relative">
                           <div className=" h-60  w-full     m-auto  border border-border max-w-1/2 rounded-2xl p-4 flex flex-col gap-4  ">
@@ -208,6 +202,16 @@ const ReveiewContent = (props: any) => {
                                   );
                                 },
                               )}
+                              {Array.from(
+                                Array(5 - Math.floor(item?.score)).keys(),
+                              ).map((item, index) => {
+                                return (
+                                  <i
+                                    key={index}
+                                    className="fa-regular fa-star text-text-yellow"
+                                  ></i>
+                                );
+                              })}
                               {!Number.isInteger(item?.score) && (
                                 <i className="fa-solid fa-star-half text-text-yellow"></i>
                               )}
@@ -229,32 +233,6 @@ const ReveiewContent = (props: any) => {
                       );
                     },
                   )}
-                {/* {Array.from(Array(8).keys()).map((item, index) => {
-                  return (
-                    <div key={index} className="flex gap-2 p-2 relative">
-                      <div className=" h-60  w-full     m-auto  border border-border max-w-1/2 rounded-2xl p-4 flex flex-col gap-4  ">
-                        <div className=" text-lg mt-4">
-                          <i className="fa-solid fa-star  text-text-yellow"></i>
-                          <i className="fa-solid fa-star  text-text-yellow"></i>
-                          <i className="fa-solid fa-star  text-text-yellow"></i>
-                          <i className="fa-solid fa-star  text-text-yellow"></i>
-                          <i className="fa-solid fa-star-half text-text-yellow"></i>
-                        </div>
-                        <div className=" text-text text-lg font-bold">
-                          Samantha D.
-                        </div>
-                        <div className=" text-text-light text-base ">
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. Scelerisque duis ultrices sollicitudin aliquam
-                          sem. Scelerisque duis ultrices sollicitudin
-                        </div>
-                        <div className=" text-black/60">
-                          Posted on August 14, 2023
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })} */}
               </Slider>
             </div>
             <div className="flex gap-2 justify-center mt-4">
@@ -273,42 +251,6 @@ const ReveiewContent = (props: any) => {
             </div>
           </>
         )}
-
-        {/* <div className=" grid grid-cols-2 gap-2">
-          <div className=" h-54 m-auto border border-border rounded-xl p-4 flex flex-col gap-4">
-            <div>
-              <i className="fa-solid fa-star  text-text-yellow"></i>
-              <i className="fa-solid fa-star  text-text-yellow"></i>
-              <i className="fa-solid fa-star  text-text-yellow"></i>
-              <i className="fa-solid fa-star  text-text-yellow"></i>
-              <i className="fa-solid fa-star-half text-text-yellow"></i>
-            </div>
-            <div className=" text-text text-lg font-bold">Samantha D.</div>
-            <div className=" text-text-light text-base ">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Scelerisque duis ultrices sollicitudin aliquam sem. Scelerisque
-              duis ultrices sollicitudin
-            </div>
-            <div className=" text-black/60">Posted on August 14, 2023</div>
-          </div>
-          <div className=" h-54 m-auto border border-border rounded-xl p-4 flex flex-col gap-4">
-            <div>
-              <i className="fa-solid fa-star  text-text-yellow"></i>
-              <i className="fa-solid fa-star  text-text-yellow"></i>
-              <i className="fa-solid fa-star  text-text-yellow"></i>
-              <i className="fa-solid fa-star  text-text-yellow"></i>
-              <i className="fa-solid fa-star-half text-text-yellow"></i>
-            </div>
-            <div className=" text-text text-lg font-bold">Samantha D.</div>
-            <div className=" text-text-light text-base ">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Scelerisque duis ultrices sollicitudin aliquam sem. Scelerisque
-              duis ultrices sollicitudin
-            </div>
-            <div className=" text-black/60">Posted on August 14, 2023</div>
-          </div>
-        </div> */}
-        {/* section */}
       </div>
     </>
   );

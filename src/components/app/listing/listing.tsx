@@ -51,6 +51,7 @@ const ListingSection = () => {
       }),
     );
   };
+  console.log({ filters }, 'clear filter issue');
   return (
     <div className="relative grid grid-cols-12  text-black px-4 py-4 sm:p-6 lg:px-12 gap-4">
       <div className=" h-max sticky top-36  shadow-md border border-text-light-secondary  col-span-3 hidden lg:block  rounded-2xl">
@@ -71,11 +72,7 @@ const ListingSection = () => {
                 Filters
               </p>
               <div className="flex flex-col xsm:flex-row gap-2 justify-start xsm:justify-end w-full items-center">
-                {(filters.last ||
-                  filters.before ||
-                  filters.sortKey !== defaultSort.sortKey ||
-                  filters.price ||
-                  filters.after) && (
+                {(filters.sortKey !== defaultSort.sortKey || filters.price) && (
                   <>
                     <div
                       onClick={() => {

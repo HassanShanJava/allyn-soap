@@ -11,6 +11,7 @@ import {
   getCartQuery,
 } from '~/server/lib/shopify/query/cart';
 import { toggleCart, toggleCartModal } from '~/store/reducers/cart';
+import { Progress } from '~/components/ui/progress';
 
 const Detail = (props: any) => {
   const [variant, setVariant] = useState<any>(null);
@@ -22,8 +23,7 @@ const Detail = (props: any) => {
 
   const [cartCreate] = useMutation(createCartMutation);
   const [cartAdd] = useMutation(addToCartMutation);
-  const [getCart, { data: cartData, loading: cartLoading, error: cartError }] =
-    useLazyQuery(getCartQuery);
+  const [getCart] = useLazyQuery(getCartQuery);
   useEffect(() => {
     const variants = props?.data?.variants?.edges
       ? removeEdgesAndNodes(props?.data?.variants)
@@ -39,9 +39,7 @@ const Detail = (props: any) => {
     try {
       let cartAddData: any;
       if (!cart?.cart_id) {
-        console.log('add to cart');
         const data: any = await cartCreate();
-        console.log(data, 'add to Cart');
         if (data?.data?.cartCreate?.cart) {
           localStorage.setItem(
             'cartID',
@@ -94,41 +92,95 @@ const Detail = (props: any) => {
       console.log('error :::', e?.message);
     }
   };
-  console.log({ cart }, 'setCartItem');
+  console.log({ props }, 'product data');
   return (
-    <div className="  p-4 flex flex-col gap-4">
-      <div className=" text-4xl font-semibold">{props?.data?.title}</div>
-      <div className="flex items-center">
-        <div className=" text-xl font-semibold">
-          ${(+variant?.price?.amount ?? 0)?.toFixed(2)}
-        </div>
-        {variant?.compareAtPrice && (
-          <div className=" text-base font-semibold text-text-light-secondary">
-            ${(+variant?.compareAtPrice?.amount ?? 0)?.toFixed(2)}
+    <div className="  flex flex-col gap-8 justify-between">
+      <div>
+        <div className=" text-4xl font-semibold text-text">
+          {props?.data?.title}
+          <div>
+            {props?.reviews?.response?.bottomline && (
+              <div className=" text-text-light-gray text-sm font-normal flex items-center gap-2  ">
+                <div>
+                  {Array.from(
+                    Array(
+                      Math.floor(
+                        props?.reviews?.response?.bottomline?.average_score,
+                      ),
+                    ).keys(),
+                  ).map((item, index) => {
+                    return (
+                      <i
+                        key={index}
+                        className="fa-solid fa-star  text-primary"
+                      ></i>
+                    );
+                  })}
+                  {Array.from(
+                    Array(
+                      5 -
+                        Math.floor(
+                          props?.reviews?.response?.bottomline?.average_score,
+                        ),
+                    ).keys(),
+                  ).map((item, index) => {
+                    return (
+                      <i
+                        key={index}
+                        className="fa-regular fa-star text-primary"
+                      ></i>
+                    );
+                  })}
+                </div>
+                <span className=" text-text-light-gray text-sm font-normal ">
+                  {props?.reviews?.response?.reviews?.length > 0 &&
+                    '( ' + props?.reviews?.response?.reviews?.length + ' )'}
+                </span>
+              </div>
+            )}
           </div>
-        )}
+        </div>
+        <div className="flex items-center">
+          <div className=" text-2xl font-semibold text-text">
+            ${(+variant?.price?.amount ?? 0)?.toFixed(2)}
+          </div>
+          {variant?.compareAtPrice && (
+            <div className=" text-base font-semibold text-text-light-secondary">
+              ${(+variant?.compareAtPrice?.amount ?? 0)?.toFixed(2)}
+            </div>
+          )}
+        </div>
       </div>
       <div
-        className=" "
+        className=" text-text-gray text-base"
         dangerouslySetInnerHTML={{ __html: props?.data?.descriptionHtml }}
-      >
-        {/* {props?.data?.description} */}
-      </div>
-      <div>Only {variant?.quantityAvailable} item(s) left in stock!</div>
-      Quantity
-      <div className="flex  items-center gap-2">
-        <Counter
-          range={range}
-          setRange={setRange}
-          min={1}
-          max={variant?.quantityAvailable}
-        />
-        <RenderButton
-          forSale={variant?.availableForSale}
-          quantity={variant?.quantityAvailable}
-          cartView={cartView}
-          addtoCart={addtoCart}
-        />
+      ></div>
+      <div className="space-y-10 text-text-gray">
+        <div className="space-y-4">
+          <div className=" text-base">
+            Only <span className="font-bold">{variant?.quantityAvailable}</span>{' '}
+            item(s) left in stock!
+          </div>
+          <Progress value={variant?.quantityAvailable} />
+        </div>
+
+        <div className="text-text">
+          Quantity
+          <div className="flex  items-center gap-2">
+            <Counter
+              range={range}
+              setRange={setRange}
+              min={1}
+              max={variant?.quantityAvailable}
+            />
+            <RenderButton
+              forSale={variant?.availableForSale}
+              quantity={variant?.quantityAvailable}
+              cartView={cartView}
+              addtoCart={addtoCart}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -157,9 +209,9 @@ const RenderButton = (props: {
         className="w-full "
         variant={'outline'}
         // disabled={true}
-        onClick={() => {
-          dispatch(toggleCartModal());
-        }}
+        // onClick={() => {
+        //   dispatch(toggleCartModal());
+        // }}
       >
         View Cart
       </Button>
@@ -171,5 +223,9 @@ const RenderButton = (props: {
       </Button>
     );
   }
+};
+
+const RenderSocials = () => {
+  return <Button className="w-full">Add to Cart</Button>;
 };
 export default Detail;
