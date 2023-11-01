@@ -4,7 +4,6 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from '~/components/ui/dialog';
@@ -47,31 +46,15 @@ export function ReviewDialog(props: reviewDialogInterface) {
   const [rating, setRating] = useState(0);
 
   // Catch Rating value
-  const handleRating = (rate: number) => {
-    setRating(rate);
-  };
-  const handleClick = async () => {
-    try {
-      setLoading(true);
 
-      toast({
-        variant: 'success',
-        title: 'Address Updated Successfully!',
-      });
-    } catch (e: any) {
-      setLoading(false);
-
-      props.setIsModal(false);
-      toast({
-        variant: 'destructive',
-        title: e.message,
-      });
-    }
-  };
   console.log({ rating });
   async function onSubmit(values: z.infer<typeof addCustomerAddress>) {
     try {
       setLoading(true);
+      console.log(
+        props?.data?.id?.split('/')[props?.data?.id?.split('/').length - 1],
+        'product Add ID',
+      );
 
       const Addoptions = {
         method: 'POST',
@@ -85,17 +68,15 @@ export function ReviewDialog(props: reviewDialogInterface) {
           sku: `${
             props?.data?.id?.split('/')[props?.data?.id?.split('/').length - 1]
           }`,
-          product_title: `${props?.data?.title}`,
-          product_description: `${props?.data?.title}`,
+          product_title: props?.data?.title,
+          product_description: props?.data?.title,
           product_url: `${
             process.env.NEXT_PUBLIC_BASE_URL
           }product-detail/${'boll-weevil-soap'}}`,
           ...values,
           product_image_url: 'http://www.shop.com/phone.jpg',
-
-          is_incentivized: true,
-
-          time_stamp: '1415107190',
+          is_incentivized: false,
+          time_stamp: new Date().getTime().toString(),
         }),
       };
 

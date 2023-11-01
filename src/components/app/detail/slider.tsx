@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Slider from 'react-slick';
 
@@ -9,7 +9,6 @@ import NextImage from '~/components/common/custom_image';
 
 const DetailSlider = (props: any) => {
   const [imagesData, setImagesData] = useState<any>(null);
-  console.log({ props, imagesData }, 'slider image');
 
   // FOR ANIMATION IN THE
   useEffect(() => {
@@ -24,14 +23,14 @@ const DetailSlider = (props: any) => {
     className: ' h-full  w-full    items-center relative   ',
     customPaging: function (i: number) {
       return (
-        <a className=" h-16 w-20 mx-auto    cursor-pointer ">
+        <a className=" h-16 w-20 mx-auto     cursor-pointer ">
           <NextImage
             alt="feature"
             src={imagesData[i]?.url}
             width={1000}
             height={1000}
             loading="lazy"
-            className="h-16 w-20  object-cover  object-center  rounded-sm   duration-700 ease-in-out"
+            className="h-[4.5rem] w-[4.3rem] mt-6 object-cover  object-center  rounded-sm   duration-700 ease-in-out"
           />
           {/* <img src={`${baseUrl}/abstract0${i + 1}.jpg`} /> */}
         </a>
@@ -41,7 +40,7 @@ const DetailSlider = (props: any) => {
 
     appendDots: (dots: any) => <ul>{dots}</ul>,
     dotsClass:
-      'hidden md:flex flex-row flex-wrap gap-2 relative bottom-0 justify-center ',
+      'hidden md:flex flex-row flex-wrap gap-4 relative bottom-0 justify-center ',
 
     infinite: true,
     speed: 700,
@@ -55,7 +54,7 @@ const DetailSlider = (props: any) => {
   };
   // lg:w-[34rem]
   return (
-    <div className="relative   rounded-md  w-full lg:w-[42rem] h-full ">
+    <div className="relative   rounded-md  w-full xl:w-[40rem] h-full ">
       <Slider {...settings}>
         {imagesData &&
           imagesData?.length &&
@@ -68,7 +67,7 @@ const DetailSlider = (props: any) => {
                   width={5000}
                   height={5000}
                   loading="lazy"
-                  className="relative object-cover rounded-sm object-center h-full w-full   ease-in-out"
+                  className="relative object-cover rounded-md object-center h-full w-full   ease-in-out"
                 />
               </div>
             );

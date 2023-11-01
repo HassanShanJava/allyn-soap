@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Button } from '@/ui/button';
 import LogoImage from '~/public/assets/logo.png';
 import Image from 'next/image';
 
-import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { getMenuQuery } from '~/server/lib/shopify/query/menu';
 
-import { useLazyQuery, useMutation, useQuery } from '@apollo/client';
+import { useLazyQuery, useQuery } from '@apollo/client';
 
 import { Menu } from '~/server/lib/shopify/type';
 import { getRoutData } from '~/utils/helper';
@@ -15,7 +13,7 @@ import { Search, ShoppingCart, User } from 'lucide-react';
 import { getCartQuery } from '~/server/lib/shopify/query/cart';
 import { RootState } from '~/store/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleCart, toggleCartModal } from '~/store/reducers/cart';
+import { toggleCart } from '~/store/reducers/cart';
 
 interface SideBarMenuProps {
   nav: boolean;
@@ -24,16 +22,13 @@ interface SideBarMenuProps {
 }
 
 export default function Header() {
-  const router = useRouter();
-
   const [color, setColor] = useState(false);
   const [nav, setNav] = useState<boolean>(false);
   const [navList, setNavList] = useState([]);
   const { cart } = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
 
-  const [getCart, { data: cartData, loading: cartLoading, error: cartError }] =
-    useLazyQuery(getCartQuery);
+  const [getCart, { data: cartData }] = useLazyQuery(getCartQuery);
 
   useEffect(() => {
     const changeColor = () =>
@@ -64,7 +59,7 @@ export default function Header() {
     })();
   }, []);
 
-  const { error, data, loading } = useQuery(getMenuQuery, {
+  const { data } = useQuery(getMenuQuery, {
     variables: { handle: 'main-menu' },
   });
   useEffect(() => {
@@ -170,9 +165,6 @@ export const SideBarMenu: React.FC<SideBarMenuProps> = ({
   closeFn,
   list,
 }) => {
-  const [hide, setHide] = useState(false);
-  const router = useRouter();
-
   useEffect(() => {
     window.addEventListener('resize', () => closeFn(false));
     return () => {

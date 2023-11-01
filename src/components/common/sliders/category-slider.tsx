@@ -12,7 +12,7 @@ const CategorySlider = () => {
   const slider = useRef<any>(null);
   const [active, setActive] = useState(0);
 
-  const { error, data, loading } = useQuery(getCollectionsQuery);
+  const { data, loading } = useQuery(getCollectionsQuery);
   const collectionData = data?.collections
     ? removeEdgesAndNodes(data?.collections)
     : [];
@@ -129,7 +129,7 @@ const CategorySlider = () => {
           {loading &&
             Array.from(Array(8).keys()).map((item, index) => {
               return (
-                <div key={index}>
+                <div key={index} className={` w-full sm:mr-4 mx-auto`}>
                   <CategorySkeleton />
                 </div>
               );
