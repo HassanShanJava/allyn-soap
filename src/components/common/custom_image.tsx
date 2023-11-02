@@ -1,5 +1,6 @@
 import Image, { ImageProps } from 'next/image';
 import React from 'react';
+import { cn } from '~/utils/cn';
 
 export default function NextImage(props: ImageProps) {
   return (

@@ -101,7 +101,9 @@ export function FilterContent(props: { isSheet: boolean; setModal?: any }) {
       }),
     );
     setPriceChange(false);
-    props?.setModal(false);
+    if (props?.setModal) {
+      props?.setModal(false);
+    }
   };
 
   return (

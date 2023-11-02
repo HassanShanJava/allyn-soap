@@ -28,6 +28,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '~/components/ui/popover';
+import { SocialDialouge } from '~/components/common/modals/social-modal';
 
 const Detail = (props: any) => {
   const [variant, setVariant] = useState<any>(null);
@@ -280,9 +281,15 @@ const RenderButton = (props: {
 };
 
 const RenderSocials = () => {
+  const [isModal, setIsModal] = useState(false);
   return (
     <div className=" ">
-      <span className=" flex gap-2 items-center text-text text-xl  cursor-pointer">
+      <span
+        onClick={() => {
+          setIsModal(!isModal);
+        }}
+        className=" flex gap-2 items-center text-text text-xl  cursor-pointer"
+      >
         <Share2 className="h-[1.3rem]" /> Share
       </span>
 
@@ -294,6 +301,13 @@ const RenderSocials = () => {
         </span>
         calculated at checkout.
       </span>
+      <SocialDialouge
+        isModal={isModal}
+        setIsModal={setIsModal}
+        data={''}
+        title={'Share this Product'}
+        type={'Share this Product'}
+      />
     </div>
   );
 };
