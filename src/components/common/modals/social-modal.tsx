@@ -69,7 +69,7 @@ export function SocialDialouge(props: socialDialogInterface) {
               If you like this product share it with your friends.
             </p>
           </DialogHeader>
-          <DialogDescription className=" mt-6 space-y-4">
+          <DialogDescription className=" mt-6 space-y-8">
             <div className="flex justify-between items-center ">
               {SocialShareData?.map((item, index: number) => {
                 return (

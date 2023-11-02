@@ -4,14 +4,14 @@ import { getProductQuery } from '~/server/lib/shopify/query/product';
 import { useQuery } from '@apollo/client';
 import DescriptionSkeleton from '~/components/common/skeleton/description-skeleton';
 import DetailSlider from './slider';
-import { useEffect, useRef, useState } from 'react';
-import Slider from 'react-slick';
-import { Button } from '~/components/ui/button';
+import { useEffect, useState } from 'react';
+
 import { ReviewDialog } from '~/components/common/modals/review-modal';
 import ReveiewContent from './review';
 import RelatedProducts from './related-products';
 const DetailPage = () => {
   const router = useRouter();
+
   const id = router?.query?.id ?? '';
   const [reviews, setReviews] = useState(null);
   const [isModal, setIsModal] = useState(false);
@@ -42,7 +42,6 @@ const DetailPage = () => {
         .catch((err) => console.error('error:' + err));
     }
   }, [productData?.product]);
-  console.log({ productData });
   return (
     <>
       <div className="relative  font-poppins">

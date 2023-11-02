@@ -63,6 +63,7 @@ html {
     --text-white: 0, 0%, 100%, 1;
     --text-light-secondary: 0, 0%, 97%, 1;
     --text-light-gray: 0, 0%, 37%, 0.69;
+    --text-gray: 0, 0%, 40%, 1;
     --text-light-blue: 202, 100%, 52%, 1;
     --text-light-yellow: 43, 100%, 60%, 1;
     --text-light-green: 137, 98%, 34%, 1;
@@ -93,7 +94,6 @@ html {
     --name: 231, 33%, 23%, 1;
     --seperator: 0, 0%, 28%, 1;
   }
-
 }
 
 .swiper {

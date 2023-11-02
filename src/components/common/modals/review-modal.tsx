@@ -93,6 +93,12 @@ export function ReviewDialog(props: reviewDialogInterface) {
         });
         setLoading(false);
         props.setIsModal(!props?.isModal);
+        form.resetField('display_name');
+        form.resetField('email');
+        form.resetField('review_content');
+        form.resetField('review_score');
+        form.resetField('review_title');
+        setRating(0);
       }, 2000);
     } catch (error: any) {
       setLoading(false);
@@ -111,7 +117,9 @@ export function ReviewDialog(props: reviewDialogInterface) {
   return (
     <>
       <Dialog open={props?.isModal} onOpenChange={(e) => props.setIsModal(e)}>
-        <DialogContent className={`${poppins.variable} ${poppins.className} sm:max-w-[425px]`}>
+        <DialogContent
+          className={`${poppins.variable} ${poppins.className} sm:max-w-[425px]`}
+        >
           <DialogHeader>
             <DialogTitle className="capitalize">{props?.title}</DialogTitle>
             <DialogDescription>
