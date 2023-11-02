@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useToast } from '~/components/ui/use-toast';
 
 import {
   Dialog,
@@ -25,6 +26,8 @@ interface socialDialogInterface {
 
 export function SocialDialouge(props: socialDialogInterface) {
   const [url, setUrl] = useState(props?.type);
+  const { toast } = useToast();
+
   const SocialShareData = [
     {
       title: 'twitter',
@@ -39,23 +42,25 @@ export function SocialDialouge(props: socialDialogInterface) {
     {
       title: 'instagram',
       image: Social3,
-      link: 'https://twitter.com/intent/tweet?text=',
+      link: '',
     },
     {
       title: 'whatsapp',
       image: Social4,
-      link: 'https://twitter.com/intent/tweet?text=',
+      link: 'whatsapp://send?text=' + 'pageTitle' + '%20',
     },
   ];
   function shareOnTwitter(text: string) {
-    const navUrl = text + url;
+    const navUrl = text + props?.type;
     setUrl(navUrl);
     // window.open(navUrl, '_blank');
   }
   return (
     <>
       <Dialog open={props?.isModal} onOpenChange={(e) => props.setIsModal(e)}>
-        <DialogContent className={`${poppins.variable} ${poppins.className} lg:max-w-[620px]`}>
+        <DialogContent
+          className={`${poppins.variable} ${poppins.className} lg:max-w-[620px]`}
+        >
           <DialogHeader>
             <DialogTitle className="capitalize text-4xl font-semibold">
               {props?.title}
@@ -80,9 +85,18 @@ export function SocialDialouge(props: socialDialogInterface) {
                 );
               })}
             </div>
-            <div className="border border-border h-14 rounded-md px-4 justify-between  flex items-center  ">
-              <p className="line-clamp-1">{url}</p>
-              <Copy className=" cursor-pointer text-text" />
+            <div className="border border-border h-14 rounded-md px-4 justify-between  flex items-center gap-2 ">
+              <p className="line-clamp-1 flex-1">{url}</p>
+              <Copy
+                onClick={() => {
+                  navigator.clipboard.writeText(url);
+                  toast({
+                    variant: 'success',
+                    title: `Link copy to clipboard`,
+                  });
+                }}
+                className=" cursor-pointer text-text"
+              />
             </div>
           </DialogDescription>
         </DialogContent>

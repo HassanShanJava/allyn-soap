@@ -81,8 +81,8 @@ const ArrivalSlider = () => {
       {
         breakpoint: 1280,
         settings: {
-          slidesToShow: 2.4,
-          slidesToScroll: 2.4,
+          slidesToShow: 2,
+          slidesToScroll: 2,
           centerMode: false,
         },
       },

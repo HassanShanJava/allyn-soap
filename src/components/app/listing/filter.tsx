@@ -213,7 +213,7 @@ export function FilterContent(props: { isSheet: boolean; setModal?: any }) {
                   value={range}
                   min={1}
                   max={200}
-                  className={'w-full mt-6'}
+                  className={'w-full my-6'}
                   onValueChange={(e: any) => {
                     setRange(e);
                     setPriceChange(true);
