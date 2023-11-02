@@ -70,7 +70,7 @@ export function SocialDialouge(props: socialDialogInterface) {
             </p>
           </DialogHeader>
           <DialogDescription className="  pt-10 space-y-8">
-            <div className="flex justify-between items-center ">
+            <div className="grid grid-cols-4 gap-2 justify-between items-center ">
               {SocialShareData?.map((item, index: number) => {
                 return (
                   <Image
@@ -80,7 +80,7 @@ export function SocialDialouge(props: socialDialogInterface) {
                     src={item?.image}
                     alt=""
                     onClick={() => shareOnTwitter(item?.link)}
-                    className=" h-32 w-24  object-cover object-center rounded-3xl !bg-none cursor-pointer"
+                    className=" w-20 md:h-32 md:w-24  object-cover object-center rounded-3xl !bg-none cursor-pointer"
                   />
                 );
               })}

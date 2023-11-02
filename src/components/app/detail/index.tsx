@@ -42,10 +42,21 @@ const DetailPage = () => {
         .catch((err) => console.error('error:' + err));
     }
   }, [productData?.product]);
+  console.log({ router });
   return (
     <>
-      <div className="relative  font-poppins">
+      <div className="relative  font-poppins ">
         <div className="absolute -z-10 bg-secondary min-w-[200px] w-full  max-w-[70%] md:max-w-[80%] h-8  rounded-br-[250px] transform-all ease-in-out duration-300"></div>
+
+        {productData?.product && (
+          <p className=" text-xs text-text-gray  md:text-sm  md:px-12 pt-16">
+            {`Home > `}
+            {`Detail > `}
+            <span className="capitalize text-text">
+              {(productData?.product?.title as string).split('-').join(' ')}
+            </span>
+          </p>
+        )}
         {!loading ? (
           <div className="relative w-full px-4 py-12 2xl:container sm:px-6  ">
             <div className="relative grid grid-cols-12 gap-2">

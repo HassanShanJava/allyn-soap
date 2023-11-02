@@ -37,26 +37,26 @@ export default function CartSheet() {
   return (
     <Sheet open={isCartOpen} onOpenChange={(e) => dispatch(toggleCartModal())}>
       <SheetContent
-        className={` ${poppins.variable} ${poppins.className} w-full p-2 md:min-w-[420px] h-screen`}
+        className={` ${poppins.variable} ${poppins.className} w-full p-2 md:min-w-[420px] h-max flex flex-col`}
       >
-        <SheetHeader>
-          <div className=" text-text font-bold !font-poppins text-3xl">
-            Shopping Cart
-          </div>
-          {cart?.cart?.cost?.totalAmount?.amount > 100 ? (
-            'Free Shipping'
-          ) : (
-            <div className=" text-text-light-gray capitalize text-xl">
-              Buy{' '}
-              <span className=" text-text  font-bold ">
-                ${100 - cart?.cart?.cost?.totalAmount?.amount}
-              </span>{' '}
-              More and get{' '}
-              <span className=" text-text  font-bold ">free shipping</span>
-            </div>
-          )}
-        </SheetHeader>
         <SheetDescription className="mt-4 h-screen   p-0">
+          <SheetHeader>
+            <div className=" text-text font-bold !font-poppins text-3xl">
+              Shopping Cart
+            </div>
+            {cart?.cart?.cost?.totalAmount?.amount > 100 ? (
+              'Free Shipping'
+            ) : (
+              <div className=" text-text-light-gray capitalize text-xl">
+                Buy{' '}
+                <span className=" text-text  font-bold ">
+                  ${100 - cart?.cart?.cost?.totalAmount?.amount}
+                </span>{' '}
+                More and get{' '}
+                <span className=" text-text  font-bold ">free shipping</span>
+              </div>
+            )}
+          </SheetHeader>
           <ScrollArea className="h-3/5  pb-8 pt-8 px-2 font-poppins w-full relative">
             <ScrollBar orientation="vertical" />
             <CartProduct products={lines} cart_id={cart?.cart_id} />

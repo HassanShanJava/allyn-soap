@@ -127,7 +127,7 @@ const Detail = (props: any) => {
     <div className="  flex flex-col gap-8 justify-between">
       <div className="flex flex-col gap-4">
         <div className=" text-4xl font-semibold text-text">
-          <p className=" text-sm  uppercase font-bold text-text-gray">Soap</p>
+          {/* <p className=" text-sm  uppercase font-bold text-text-gray">Soap</p> */}
           {props?.data?.title}
           <div className="mt-2">
             {props?.reviews?.response?.bottomline && (
