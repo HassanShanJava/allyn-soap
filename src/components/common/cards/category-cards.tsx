@@ -9,7 +9,7 @@ const CategoryCard = (props: { item: any; index: number }) => {
   console.log(props?.item, 'CategoryCard');
   const dispatch = useDispatch();
   const { category } = useSelector((state: RootState) => state.category);
-  //   console.log({category})
+    console.log({category})
   const onDataSubmit = (data: any) => {
     dispatch(
       toggleCategory({
@@ -23,10 +23,10 @@ const CategoryCard = (props: { item: any; index: number }) => {
   useEffect(() => {
     dispatch(
       toggleCategory({
-        title: 'Bar Soap',
-        handle: 'soap',
+        title: 'Body',
+        handle: 'body',
         index: 0,
-        category_id: 'gid://shopify/Collection/178979176587',
+        category_id: 'gid://shopify/Collection/463137538321',
       }),
     );
   }, []);

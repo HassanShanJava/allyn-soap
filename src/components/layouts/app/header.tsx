@@ -111,9 +111,7 @@ export default function Header() {
       </div>
 
       <div className=" hidden md:w-[20%]  p-6 lg:px-12 xl:flex text-text-dark  gap-4 justify-center text-lg items-center">
-        {/* <i className="fas fa-magnifying-glass  text-center text-xl"></i>
-        <i className="fas fa-shopping-cart  text-center text-xl"></i>
-        <i className="fas fa-user  text-center text-xl"></i> */}
+        
         <Search className="text-lg" />
         <div
           className="relative cursor-pointer"

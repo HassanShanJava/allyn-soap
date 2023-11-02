@@ -14,7 +14,6 @@ const BannerSection = ({ list }: any) => {
   const [sliderData, setSliderData] = useState([]);
   const { error, data, loading } = useQuery(getProductsQuery, {
     variables: {
-
       reverse: false,
       sortKey: 'BEST_SELLING',
       first: 5,
@@ -74,7 +73,9 @@ const BannerSection = ({ list }: any) => {
                     <div className="mt-4 flex justify-between flex-row md:flex-col  items-center md:items-start  w-full md:w-fit">
                       <Button
                         className="text-center w-32 h-10 md:w-40 md:h-12   shadow-xl"
-                        // onClick={() => router.push(item.link)}
+                        onClick={() =>
+                          router.push(`/product-detail/${item?.handle}`)
+                        }
                       >
                         Shop Now
                       </Button>
@@ -147,5 +148,3 @@ const BannerSection = ({ list }: any) => {
 };
 
 export default BannerSection;
-
-
