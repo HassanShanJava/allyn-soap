@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import {
   Dialog,
   DialogContent,
@@ -21,6 +23,7 @@ interface socialDialogInterface {
 }
 
 export function SocialDialouge(props: socialDialogInterface) {
+  const [url, setUrl] = useState('');
   const SocialShareData = [
     {
       title: 'twitter',

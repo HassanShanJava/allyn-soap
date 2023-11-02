@@ -20,14 +20,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '~/components/ui/select';
-import { Share2Icon } from '@radix-ui/react-icons';
-import { Package2, Share2, Ship } from 'lucide-react';
-import { ShipIcon } from 'lucide-react';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '~/components/ui/popover';
+import { Package2, Share2 } from 'lucide-react';
+
 import { SocialDialouge } from '~/components/common/modals/social-modal';
 
 const Detail = (props: any) => {
@@ -112,7 +106,6 @@ const Detail = (props: any) => {
     }
   };
   function toggleVariant(text: string) {
-    console.log({ text });
     const selectedVariant = variants?.find((item: any) => item?.title === text);
     setVariant(selectedVariant);
   }
@@ -236,7 +229,7 @@ const Detail = (props: any) => {
             </div>
           </div>
         </div>
-        <RenderSocials />
+        <RenderSocials data={props?.data} />
       </div>
     </div>
   );
@@ -280,8 +273,9 @@ const RenderButton = (props: {
   }
 };
 
-const RenderSocials = () => {
+const RenderSocials = (props: any) => {
   const [isModal, setIsModal] = useState(false);
+  console.log(props, 'render social button');
   return (
     <div className=" ">
       <span

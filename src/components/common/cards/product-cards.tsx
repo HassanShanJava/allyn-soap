@@ -1,15 +1,9 @@
 import Image from 'next/image';
-import { useDispatch, useSelector } from 'react-redux';
-import { toggleCategory } from '~/store/reducers/category';
-import { RootState } from '~/store/store';
+
 import NextImage from '../custom_image';
 import Link from 'next/link';
 import SoldOut from '../../../public/assets/soldout.svg';
 const ProductCard = (props: { item: any; index: number }) => {
-  const dispatch = useDispatch();
-  const { category } = useSelector((state: RootState) => state.category);
-  //   console.log({category})
-
   return (
     <Link href={`/product-detail/${props?.item?.handle}`}>
       <div
