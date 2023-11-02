@@ -4,6 +4,7 @@ import * as AccordionPrimitive from '@radix-ui/react-accordion';
 import { cn } from '~/utils/cn';
 
 import { ChevronRightIcon } from '@radix-ui/react-icons';
+import { poppins } from '../layouts/app';
 
 const Accordion = AccordionPrimitive.Root;
 
@@ -13,7 +14,10 @@ const AccordionItem = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <AccordionPrimitive.Item
     ref={ref}
-    className={cn('border-none', className)}
+    className={cn(
+      `border-none ${poppins.variable} ${poppins.className}`,
+      className,
+    )}
     {...props}
   />
 ));
@@ -46,7 +50,7 @@ const AccordionContent = React.forwardRef<
   <AccordionPrimitive.Content
     ref={ref}
     className={cn(
-      'overflow-hidden font-poppins text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down',
+      'overflow-hidden  text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down',
       className,
     )}
     {...props}
