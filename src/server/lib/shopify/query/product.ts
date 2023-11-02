@@ -6,6 +6,11 @@ export const getProductQuery = gql`
       ...product
       totalInventory
     }
+    shop {
+      paymentSettings {
+        acceptedCardBrands
+      }
+    }
   }
   ${productFragment}
 `;

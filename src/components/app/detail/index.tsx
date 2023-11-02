@@ -40,6 +40,7 @@ const DetailPage = () => {
         .catch((err) => console.error('error:' + err));
     }
   }, [productData?.product]);
+  console.log({ productData });
   return (
     <>
       <div className="relative  font-poppins">
@@ -58,7 +59,11 @@ const DetailPage = () => {
                 {false ? (
                   <>Detail</>
                 ) : (
-                  <Detail data={productData?.product} reviews={reviews} />
+                  <Detail
+                    data={productData?.product}
+                    reviews={reviews}
+                    shop={productData?.shop}
+                  />
                 )}
               </div>
               {productData?.product && !loading && !error && (

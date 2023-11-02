@@ -118,7 +118,8 @@ export default function Header() {
         <div
           className="relative cursor-pointer"
           onClick={() => {
-            dispatch(toggleCartModal());
+            if (cart?.cart && cart?.cart?.totalQuantity > 0)
+              dispatch(toggleCartModal());
           }}
         >
           {cart?.cart && cart?.cart?.totalQuantity > 0 && (
@@ -137,7 +138,8 @@ export default function Header() {
         <div
           className="relative cursor-pointer"
           onClick={() => {
-            dispatch(toggleCartModal());
+            if (cart?.cart && cart?.cart?.totalQuantity > 0)
+              dispatch(toggleCartModal());
           }}
         >
           {cart?.cart && cart?.cart?.totalQuantity > 0 && (

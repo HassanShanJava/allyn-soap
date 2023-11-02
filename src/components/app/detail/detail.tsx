@@ -23,6 +23,7 @@ import {
 import { Package2, Share2 } from 'lucide-react';
 
 import { SocialDialouge } from '~/components/common/modals/social-modal';
+import Image from 'next/image';
 
 const Detail = (props: any) => {
   const [variant, setVariant] = useState<any>(null);
@@ -229,7 +230,7 @@ const Detail = (props: any) => {
             </div>
           </div>
         </div>
-        <RenderSocials data={props?.data} />
+        <RenderSocials data={props?.data} shop={props?.shop} />
       </div>
     </div>
   );
@@ -275,7 +276,29 @@ const RenderButton = (props: {
 
 const RenderSocials = (props: any) => {
   const [isModal, setIsModal] = useState(false);
-  console.log(props, 'render social button');
+  const cardData = [
+    {
+      title: 'VISA',
+      image:
+        'https://cdn.shopify.com/shopifycloud/web/assets/v1/71a20f5a6c5413cb.svg',
+    },
+    {
+      title: 'MASTERCARD',
+      image:
+        'https://cdn.shopify.com/shopifycloud/web/assets/v1/2659ae94c062303b.svg',
+    },
+    {
+      title: 'AMERICAN_EXPRESS',
+      image:
+        'https://cdn.shopify.com/shopifycloud/web/assets/v1/7b32514134e62ce3.svg',
+    },
+    {
+      title: 'DISCOVER',
+      image:
+        'https://cdn.shopify.com/shopifycloud/web/assets/v1/bc21afcd8821554e.svg',
+    },
+  ];
+  console.log(props?.shop?.paymentSettings?.acceptedCardBrands, 'props?.shop');
   return (
     <div className=" ">
       <span
@@ -295,6 +318,35 @@ const RenderSocials = (props: any) => {
         </span>
         calculated at checkout.
       </span>
+
+      <div className=" flex flex-col gap-2 items-center rounded-md my-6 text-text text-xl w-full h-40 bg-text-light-secondary mx-auto text-center justify-center  cursor-pointer">
+        <div className="flex items-center gap-2">
+          {props?.shop?.paymentSettings?.acceptedCardBrands &&
+            props?.shop?.paymentSettings?.acceptedCardBrands.map(
+              (item: any, index: number) => {
+                const selectImage = cardData.find(
+                  (value) => value.title === item,
+                );
+                if (selectImage)
+                  return (
+                    <Image
+                      key={index}
+                      src={selectImage?.image ?? ''}
+                      alt={item}
+                      height={30}
+                      width={30}
+                      className=" h-6 w-9"
+                    />
+                  );
+              },
+            )}
+        </div>
+
+        <span className=" underline text-text-blue font-semibold">
+          Shipping
+        </span>
+        <p>Guarantee safe & secure checkout</p>
+      </div>
       <SocialDialouge
         isModal={isModal}
         setIsModal={setIsModal}
