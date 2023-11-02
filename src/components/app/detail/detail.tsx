@@ -300,7 +300,7 @@ const RenderSocials = (props: any) => {
         setIsModal={setIsModal}
         data={''}
         title={'Share this Product'}
-        type={'Share this Product'}
+        type={`${process.env.NEXT_PUBLIC_BASE_URL}/product-detail/${props?.data?.handle}`}
       />
     </div>
   );

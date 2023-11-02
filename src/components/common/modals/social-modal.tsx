@@ -23,25 +23,34 @@ interface socialDialogInterface {
 }
 
 export function SocialDialouge(props: socialDialogInterface) {
-  const [url, setUrl] = useState('');
+  const [url, setUrl] = useState(props?.type);
   const SocialShareData = [
     {
       title: 'twitter',
       image: Social1,
+      link: 'https://twitter.com/intent/tweet?text=',
     },
     {
       title: 'facebook',
       image: Social2,
+      link: 'https://www.facebook.com/sharer/sharer.php?u=',
     },
     {
       title: 'instagram',
       image: Social3,
+      link: 'https://twitter.com/intent/tweet?text=',
     },
     {
       title: 'whatsapp',
       image: Social4,
+      link: 'https://twitter.com/intent/tweet?text=',
     },
   ];
+  function shareOnTwitter(text: string) {
+    const navUrl = text + url;
+    setUrl(navUrl);
+    // window.open(navUrl, '_blank');
+  }
   return (
     <>
       <Dialog open={props?.isModal} onOpenChange={(e) => props.setIsModal(e)}>
@@ -64,13 +73,14 @@ export function SocialDialouge(props: socialDialogInterface) {
                     width={1000}
                     src={item?.image}
                     alt=""
+                    onClick={() => shareOnTwitter(item?.link)}
                     className=" h-32 w-24  object-cover object-center rounded-3xl !bg-none cursor-pointer"
                   />
                 );
               })}
             </div>
             <div className="border border-border h-14 rounded-md px-4 justify-between  flex items-center  ">
-              <p>https://example.com/article/social-share-modal</p>
+              <p className="line-clamp-1">{url}</p>
               <Copy className=" cursor-pointer text-text" />
             </div>
           </DialogDescription>
