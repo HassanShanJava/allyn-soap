@@ -61,7 +61,7 @@ const Home = () => {
         <RelatedProducts />
         <ArrivalSection />
         <CustomerTestimonials />
-        <DiscountSection />
+        
       </div>
     </>
   );

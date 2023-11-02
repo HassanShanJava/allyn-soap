@@ -7,7 +7,7 @@ export default function NextImage(props: ImageProps) {
     <Image
       {...props}
       onLoadingComplete={(image) => image?.classList?.remove('animate-pulse')}
-      className={` ${props?.className} bg-text-light-secondary  transition-all duration-[2s] animate-pulse`}
+      className={` ${props?.className} bg-text-light-secondary  transition-all duration-[2000ms] animate-pulse`}
     />
   );
 }

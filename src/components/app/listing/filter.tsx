@@ -183,7 +183,9 @@ export function FilterContent(props: { isSheet: boolean; setModal?: any }) {
                         category === '/products/' + getRoutData(item?.url)
                           ? ' font-bold bg-text-light-secondary  '
                           : ' font-medium '
-                      } cursor-pointer ${poppins.variable} ${poppins.className} py-2 indent-1 hover:bg-text-light-secondary mt-1 rounded-md captialize-first  lowercase text-sm`}
+                      } cursor-pointer ${poppins.variable} ${
+                        poppins.className
+                      } py-2 indent-1 hover:bg-text-light-secondary mt-1 rounded-md captialize-first  lowercase text-sm`}
                       key={index}
                     >
                       {item?.title}
@@ -211,7 +213,9 @@ export function FilterContent(props: { isSheet: boolean; setModal?: any }) {
           className={`${poppins.variable} ${poppins.className} w-full`}
         >
           <AccordionItem value={`item-price`}>
-            <AccordionTrigger className={`${poppins.variable} ${poppins.className} text-text text-xl font-bold`}>
+            <AccordionTrigger
+              className={`${poppins.variable} ${poppins.className} text-text text-xl font-bold`}
+            >
               Price
             </AccordionTrigger>
             <AccordionContent className=" ">
@@ -221,7 +225,9 @@ export function FilterContent(props: { isSheet: boolean; setModal?: any }) {
                   value={range}
                   min={1}
                   max={200}
-                  className={'w-full my-6 ${poppins.variable} ${poppins.className}'}
+                  className={
+                    'w-full my-6 ${poppins.variable} ${poppins.className}'
+                  }
                   onValueChange={(e: any) => {
                     setRange(e);
                     setPriceChange(true);
