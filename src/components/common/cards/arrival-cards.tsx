@@ -4,7 +4,7 @@ import { RootState } from '~/store/store';
 import NextImage from '../custom_image';
 
 const ArrivalCard = (props: { item: any; index: number }) => {
-  console.log(props?.item, 'props?.item');
+  console.log(props?.item, 'ArrivalCard');
   const { category } = useSelector((state: RootState) => state.category);
   //   console.log({category})
 

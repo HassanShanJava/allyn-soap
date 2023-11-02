@@ -84,7 +84,7 @@ const ProductListing = () => {
               );
             })
           ) : (
-            <p className="py-3 text-lg">{`Sorry, there are no products in this collection.`}</p>
+            <p className="py-3 text-lg col-span-2">{`Sorry, there are no products in this collection.`}</p>
           )}
         </div>
       ) : (

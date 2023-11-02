@@ -14,7 +14,7 @@ const BannerSection = ({ list }: any) => {
   const [sliderData, setSliderData] = useState([]);
   const { error, data, loading } = useQuery(getProductsQuery, {
     variables: {
-      query: 'totalInventory:>=1',
+
       reverse: false,
       sortKey: 'BEST_SELLING',
       first: 5,
