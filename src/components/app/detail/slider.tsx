@@ -60,7 +60,7 @@ const DetailSlider = (props: any) => {
           imagesData?.length &&
           imagesData?.map((item: any, index: number) => {
             return (
-              <div className={`h-[18rem] md:h-[34rem]  relative`} key={index}>
+              <div className={`h-[18rem] md:h-[38rem]  relative`} key={index}>
                 <NextImage
                   alt="feature"
                   src={item?.url}

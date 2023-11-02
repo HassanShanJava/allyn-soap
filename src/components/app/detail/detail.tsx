@@ -121,6 +121,8 @@ const Detail = (props: any) => {
     const selectedVariant = variants?.find((item: any) => item?.title === text);
     setVariant(selectedVariant);
   }
+  console.log('props :::', props?.data?.tags);
+
   return (
     <div className="  flex flex-col gap-8 justify-between">
       <div className="flex flex-col gap-4">
