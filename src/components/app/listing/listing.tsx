@@ -23,7 +23,7 @@ const ListingSection = () => {
   const [modal, setModal] = useState(false);
   const { filters } = useSelector((state: RootState) => state.filters);
 
-  function toggleLanguageHandler(text: string) {
+  function toggleFilter(text: string) {
     dispatch(
       toggleFilters({
         ...filters,
@@ -87,7 +87,7 @@ const ListingSection = () => {
                   <div className=" text-right w-max ">Sort by:</div>
                   <div>
                     <Select
-                      onValueChange={toggleLanguageHandler}
+                      onValueChange={toggleFilter}
                       defaultValue={filters.sortKey}
                       value={filters.sortKey}
                     >

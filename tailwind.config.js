@@ -62,6 +62,7 @@ module.exports = {
           'light-secondary': 'hsl(var(--text-light-secondary))',
           'light-gray': 'hsl(var(--text-light-gray))',
           gray: 'hsl(var(--text-light-lightGray))',
+          green: 'hsl(var(--text-light-green))',
           blue: 'hsl(var(--text-light-blue))',
           yellow: 'hsl(var(--text-light-yellow))',
         },

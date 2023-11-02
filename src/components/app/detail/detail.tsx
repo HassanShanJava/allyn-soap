@@ -20,6 +20,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from '~/components/ui/select';
+import { Share2Icon } from '@radix-ui/react-icons';
+import { Package2, Share2, Ship } from 'lucide-react';
+import { ShipIcon } from 'lucide-react';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '~/components/ui/popover';
 
 const Detail = (props: any) => {
   const [variant, setVariant] = useState<any>(null);
@@ -227,6 +235,7 @@ const Detail = (props: any) => {
             </div>
           </div>
         </div>
+        <RenderSocials />
       </div>
     </div>
   );
@@ -271,6 +280,21 @@ const RenderButton = (props: {
 };
 
 const RenderSocials = () => {
-  return <Button className="w-full">Add to Cart</Button>;
+  return (
+    <div className=" ">
+      <span className=" flex gap-2 items-center text-text text-xl  cursor-pointer">
+        <Share2 className="h-[1.3rem]" /> Share
+      </span>
+
+      <hr className=" my-6" />
+      <span className=" flex gap-2 items-center text-text text-xl  cursor-pointer">
+        <Package2 className="h-[1.3rem]" />
+        <span className=" underline text-text-blue font-semibold">
+          Shipping
+        </span>
+        calculated at checkout.
+      </span>
+    </div>
+  );
 };
 export default Detail;

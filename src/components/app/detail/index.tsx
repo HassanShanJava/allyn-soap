@@ -7,7 +7,7 @@ import DetailSlider from './slider';
 import { useEffect, useRef, useState } from 'react';
 import Slider from 'react-slick';
 import { Button } from '~/components/ui/button';
-import { ReviewDialog } from '~/components/common/modals/reviewModal';
+import { ReviewDialog } from '~/components/common/modals/review-modal';
 const DetailPage = () => {
   const router = useRouter();
   const id = router?.query?.id ?? '';
@@ -191,7 +191,7 @@ const ReveiewContent = (props: any) => {
                       return (
                         <div key={index} className="flex gap-2 p-2 relative">
                           <div className=" h-60  w-full     m-auto  border border-border max-w-1/2 rounded-2xl p-4 flex flex-col gap-4  ">
-                            <div className=" text-lg mt-4">
+                            <div className=" text-base flex items-center gap-1 mt-4">
                               {Array.from(Array(item?.score).keys()).map(
                                 (item, index) => {
                                   return (
@@ -217,9 +217,10 @@ const ReveiewContent = (props: any) => {
                               )}
                             </div>
                             <div className=" text-text text-lg font-bold">
-                              {item?.user?.display_name}
+                              {item?.user?.display_name}{' '}
+                              <i className="fa-solid fa-circle-check text-text-green"></i>
                             </div>
-                            <div className=" text-text-light text-base ">
+                            <div className=" text-text-light text-base font-medium ">
                               {item?.title}
                               <br />
                               {item?.content}
