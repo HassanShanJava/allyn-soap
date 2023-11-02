@@ -15,6 +15,7 @@ import { FilterSection, FilterSheet } from './filter';
 import { useState } from 'react';
 import { RootState } from '~/store/store';
 import { defaultSort } from '~/utils/constant';
+import { poppins } from '~/components/layouts/app';
 
 const ListingSection = () => {
   const router = useRouter();
@@ -95,7 +96,7 @@ const ListingSection = () => {
                         <SelectValue placeholder="Relevance" />
                       </SelectTrigger>
                       <SelectContent >
-                        <SelectGroup className='font-poppins'>
+                        <SelectGroup className={`${poppins.variable} ${poppins.className} `}>
                           <SelectItem value="RELEVANCE">Relevance</SelectItem>
                           <SelectItem value="TITLE">Title</SelectItem>
                           <SelectItem value="BEST_SELLING">

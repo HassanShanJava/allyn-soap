@@ -11,6 +11,7 @@ import Social3 from '~/public/assets/Social3.svg';
 import Social4 from '~/public/assets/Social4.svg';
 import Image from 'next/image';
 import { Copy } from 'lucide-react';
+import { poppins } from '~/components/layouts/app';
 
 interface socialDialogInterface {
   isModal: boolean;
@@ -42,7 +43,7 @@ export function SocialDialouge(props: socialDialogInterface) {
   return (
     <>
       <Dialog open={props?.isModal} onOpenChange={(e) => props.setIsModal(e)}>
-        <DialogContent className="lg:max-w-[620px]">
+        <DialogContent className={`${poppins.variable} ${poppins.className} lg:max-w-[620px]`}>
           <DialogHeader>
             <DialogTitle className="capitalize text-4xl font-semibold">
               {props?.title}
