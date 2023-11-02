@@ -39,25 +39,12 @@ export function FilterSheet(props: FilterSheetType) {
   return (
     <Sheet open={props?.modal} onOpenChange={(e) => props.setModal(e)}>
       <SheetContent className="font-poppins w-full ">
-        <SheetHeader>
-          {/* <div className="flex items-center justify-between text-dark border-b border-border-light pb-4 ">
-            <div
-              className={` font-bold font-poppins text-2xl`}
-            >
-              Filters
-            </div>
-            
-              <div>
-                <i className="fa-solid fa-sliders text-xl rotate-90 text-text-light-gray"></i>
-              </div>
-          
-          </div> */}
-        </SheetHeader>
+        <SheetHeader></SheetHeader>
         <SheetDescription className="mt-4">
           <ScrollArea className="h-screen  pb-8  font-poppins">
             <ScrollBar orientation="vertical" />
 
-            <FilterContent isSheet={true} />
+            <FilterContent isSheet={true} setModal={props?.setModal} />
           </ScrollArea>
         </SheetDescription>
       </SheetContent>
@@ -65,7 +52,7 @@ export function FilterSheet(props: FilterSheetType) {
   );
 }
 
-export function FilterContent(props: { isSheet: boolean }) {
+export function FilterContent(props: { isSheet: boolean; setModal?: any }) {
   const { loading, data: FilterData } = useQuery(getFilterQuery, {
     variables: { handle: 'main-menu' },
   });
@@ -114,6 +101,7 @@ export function FilterContent(props: { isSheet: boolean }) {
       }),
     );
     setPriceChange(false);
+    props?.setModal(false);
   };
 
   return (
