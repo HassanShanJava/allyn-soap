@@ -332,13 +332,13 @@ const RenderSocials = (props: any) => {
       </span>
 
       <hr className=" my-6" />
-      <span className=" flex gap-2 items-center text-text text-xl  cursor-pointer">
+      <div className="w-full flex gap-2 items-center text-text text-xl  cursor-pointer overflow-hidden line-clamp-1">
         <Package2 className="h-[1.3rem]" />
         <span className=" underline text-text-blue font-semibold">
           Shipping
         </span>
         calculated at checkout.
-      </span>
+      </div>
 
       <div className=" flex flex-col gap-2 items-center rounded-sm my-6 text-text text-xl w-full h-28 bg-text-light-secondary mx-auto text-center justify-center  cursor-pointer">
         <div className="flex items-center gap-2">

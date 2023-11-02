@@ -67,13 +67,15 @@ export function FilterContent(props: { isSheet: boolean; setModal?: any }) {
   const [priceChange, setPriceChange] = useState(false);
   const [category, setCategory] = useState<any>(null);
   const [activeIndex, seActiveIndex] = useState<any>(null);
-  console.log({ range, category });
   useEffect(() => {
     if (!filters?.price) {
       setRange([5, 200]);
     }
   }, [filters?.price]);
-
+  useEffect(() => {
+    setCategory(null);
+    seActiveIndex(null);
+  }, [router?.query?.id]);
   const handleCategory = (text: string, index: number) => {
     if (text === category) {
       setCategory(null);
