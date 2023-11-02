@@ -23,7 +23,7 @@ const ListingSection = () => {
   const [modal, setModal] = useState(false);
   const { filters } = useSelector((state: RootState) => state.filters);
 
-  function toggleLanguageHandler(text: string) {
+  function toggleFilter(text: string) {
     dispatch(
       toggleFilters({
         ...filters,
@@ -71,11 +71,7 @@ const ListingSection = () => {
                 Filters
               </p>
               <div className="flex flex-col xsm:flex-row gap-2 justify-start xsm:justify-end w-full items-center">
-                {(filters.last ||
-                  filters.before ||
-                  filters.sortKey !== defaultSort.sortKey ||
-                  filters.price ||
-                  filters.after) && (
+                {(filters.sortKey !== defaultSort.sortKey || filters.price) && (
                   <>
                     <div
                       onClick={() => {
@@ -91,7 +87,7 @@ const ListingSection = () => {
                   <div className=" text-right w-max ">Sort by:</div>
                   <div>
                     <Select
-                      onValueChange={toggleLanguageHandler}
+                      onValueChange={toggleFilter}
                       defaultValue={filters.sortKey}
                       value={filters.sortKey}
                     >

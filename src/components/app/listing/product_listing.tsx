@@ -6,12 +6,11 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ProductCard from '~/components/common/cards/product-cards';
 import ProductSkeleton from '~/components/common/skeleton/product-skeleton';
-import { LoadingContent } from '~/components/common/loading/loadingContent';
 import { Button } from '~/components/ui/button';
-import { Skeleton } from '~/components/ui/skeleton';
 import { getCollectionProductsQuery } from '~/server/lib/shopify/query/collection';
 import { toggleFilters } from '~/store/reducers/filters';
 import { RootState } from '~/store/store';
+import { defaultSort } from '~/utils/constant';
 import { removeEdgesAndNodes } from '~/utils/helper';
 
 const ProductListing = () => {
@@ -30,10 +29,13 @@ const ProductListing = () => {
     dispatch(
       toggleFilters({
         ...filters,
+        sortKey: defaultSort.sortKey,
+        reverse: false,
         first: 12,
         last: null,
         after: null,
         before: null,
+        price: null,
       }),
     );
   }, [router?.query?.id]);
@@ -52,7 +54,7 @@ const ProductListing = () => {
           before: null,
         }),
       );
-      if (window) window?.scrollTo(0, 0);
+      if (window) window?.scrollTo(0, 400);
     }
   };
 
@@ -68,7 +70,7 @@ const ProductListing = () => {
           before: data?.collection?.products?.pageInfo?.startCursor,
         }),
       );
-      if (window) window?.scrollTo(0, 0);
+      if (window) window?.scrollTo(0, 400);
     }
   };
   return (

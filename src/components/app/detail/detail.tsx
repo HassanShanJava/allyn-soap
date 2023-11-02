@@ -11,9 +11,28 @@ import {
   getCartQuery,
 } from '~/server/lib/shopify/query/cart';
 import { toggleCart, toggleCartModal } from '~/store/reducers/cart';
+import { Progress } from '~/components/ui/progress';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '~/components/ui/select';
+import { Share2Icon } from '@radix-ui/react-icons';
+import { Package2, Share2, Ship } from 'lucide-react';
+import { ShipIcon } from 'lucide-react';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '~/components/ui/popover';
+import { SocialDialouge } from '~/components/common/modals/social-modal';
 
 const Detail = (props: any) => {
   const [variant, setVariant] = useState<any>(null);
+  const [variants, setVariants] = useState<any>(null);
   const [cartItem, setCartItem] = useState<any>(null);
   const [cartView, setCartView] = useState<boolean>(false);
   const [range, setRange] = useState<number>(1);
@@ -22,8 +41,7 @@ const Detail = (props: any) => {
 
   const [cartCreate] = useMutation(createCartMutation);
   const [cartAdd] = useMutation(addToCartMutation);
-  const [getCart, { data: cartData, loading: cartLoading, error: cartError }] =
-    useLazyQuery(getCartQuery);
+  const [getCart] = useLazyQuery(getCartQuery);
   useEffect(() => {
     const variants = props?.data?.variants?.edges
       ? removeEdgesAndNodes(props?.data?.variants)
@@ -33,15 +51,14 @@ const Detail = (props: any) => {
       : [];
 
     setCartItem(lines);
+    setVariants(variants);
     setVariant(variants[0]);
   }, [props?.data?.variants]);
   const addtoCart = async () => {
     try {
       let cartAddData: any;
       if (!cart?.cart_id) {
-        console.log('add to cart');
         const data: any = await cartCreate();
-        console.log(data, 'add to Cart');
         if (data?.data?.cartCreate?.cart) {
           localStorage.setItem(
             'cartID',
@@ -94,41 +111,132 @@ const Detail = (props: any) => {
       console.log('error :::', e?.message);
     }
   };
-  console.log({ cart }, 'setCartItem');
+  function toggleVariant(text: string) {
+    console.log({ text });
+    const selectedVariant = variants?.find((item: any) => item?.title === text);
+    setVariant(selectedVariant);
+  }
   return (
-    <div className="  p-4 flex flex-col gap-4">
-      <div className=" text-4xl font-semibold">{props?.data?.title}</div>
-      <div className="flex items-center">
-        <div className=" text-xl font-semibold">
-          ${(+variant?.price?.amount ?? 0)?.toFixed(2)}
-        </div>
-        {variant?.compareAtPrice && (
-          <div className=" text-base font-semibold text-text-light-secondary">
-            ${(+variant?.compareAtPrice?.amount ?? 0)?.toFixed(2)}
+    <div className="  flex flex-col gap-8 justify-between">
+      <div className="flex flex-col gap-4">
+        <div className=" text-4xl font-semibold text-text">
+          <p className=" text-sm  uppercase font-bold text-text-gray">Soap</p>
+          {props?.data?.title}
+          <div>
+            {props?.reviews?.response?.bottomline && (
+              <div className=" text-text-light-gray text-sm font-normal flex items-center gap-2  ">
+                <div>
+                  {Array.from(
+                    Array(
+                      Math.floor(
+                        props?.reviews?.response?.bottomline?.average_score,
+                      ),
+                    ).keys(),
+                  ).map((item, index) => {
+                    return (
+                      <i
+                        key={index}
+                        className="fa-solid fa-star  text-primary"
+                      ></i>
+                    );
+                  })}
+                  {Array.from(
+                    Array(
+                      5 -
+                        Math.floor(
+                          props?.reviews?.response?.bottomline?.average_score,
+                        ),
+                    ).keys(),
+                  ).map((item, index) => {
+                    return (
+                      <i
+                        key={index}
+                        className="fa-regular fa-star text-primary"
+                      ></i>
+                    );
+                  })}
+                </div>
+                <span className=" text-text-light-gray text-sm font-normal ">
+                  {props?.reviews?.response?.reviews?.length > 0 &&
+                    '( ' + props?.reviews?.response?.reviews?.length + ' )'}
+                </span>
+              </div>
+            )}
           </div>
-        )}
+        </div>
+        <div className="flex items-center">
+          <div className=" text-2xl font-semibold text-text">
+            ${(+variant?.price?.amount ?? 0)?.toFixed(2)}
+          </div>
+          {variant?.compareAtPrice && (
+            <div className=" text-base font-semibold text-text-light-secondary">
+              ${(+variant?.compareAtPrice?.amount ?? 0)?.toFixed(2)}
+            </div>
+          )}
+        </div>
       </div>
       <div
-        className=" "
+        className=" text-text-gray text-base"
         dangerouslySetInnerHTML={{ __html: props?.data?.descriptionHtml }}
-      >
-        {/* {props?.data?.description} */}
-      </div>
-      <div>Only {variant?.quantityAvailable} item(s) left in stock!</div>
-      Quantity
-      <div className="flex  items-center gap-2">
-        <Counter
-          range={range}
-          setRange={setRange}
-          min={1}
-          max={variant?.quantityAvailable}
-        />
-        <RenderButton
-          forSale={variant?.availableForSale}
-          quantity={variant?.quantityAvailable}
-          cartView={cartView}
-          addtoCart={addtoCart}
-        />
+      ></div>
+      <div className="space-y-10 text-text-gray">
+        <div className="space-y-4">
+          <div className=" text-base">
+            Only <span className="font-bold">{variant?.quantityAvailable}</span>{' '}
+            item(s) left in stock!
+          </div>
+          <Progress value={variant?.quantityAvailable} />
+        </div>
+        <div className="flex items-center gap-2">
+          {variants && variants?.length > 1 && (
+            <div className="text-text">
+              {props?.data?.options[0]?.name}
+
+              <div className="flex  items-center gap-2">
+                <Select
+                  onValueChange={toggleVariant}
+                  defaultValue={variant?.title}
+                  value={variant?.title}
+                >
+                  <SelectTrigger className=" flex font-bold justify-between h-10 gap-1 w-full xsm:w-32  text-text rounded-md border line-clamp-1 text-center shadow-none   ">
+                    <SelectValue placeholder={variant?.title} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      {props?.data?.options[0]?.values?.map(
+                        (item: any, index: number) => {
+                          return (
+                            <SelectItem key={index} value={item}>
+                              {item}
+                            </SelectItem>
+                          );
+                        },
+                      )}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+          )}
+          <div className="text-text w-full">
+            Quantity
+            <div className="flex  items-center gap-2">
+              <Counter
+                range={range}
+                setRange={setRange}
+                min={1}
+                max={variant?.quantityAvailable}
+              />
+              <RenderButton
+                forSale={variant?.availableForSale}
+                quantity={variant?.quantityAvailable}
+                cartView={cartView}
+                addtoCart={addtoCart}
+              />
+            </div>
+          </div>
+        </div>
+        <RenderSocials />
       </div>
     </div>
   );
@@ -156,7 +264,6 @@ const RenderButton = (props: {
       <Button
         className="w-full "
         variant={'outline'}
-        // disabled={true}
         onClick={() => {
           dispatch(toggleCartModal());
         }}
@@ -171,5 +278,37 @@ const RenderButton = (props: {
       </Button>
     );
   }
+};
+
+const RenderSocials = () => {
+  const [isModal, setIsModal] = useState(false);
+  return (
+    <div className=" ">
+      <span
+        onClick={() => {
+          setIsModal(!isModal);
+        }}
+        className=" flex gap-2 items-center text-text text-xl  cursor-pointer"
+      >
+        <Share2 className="h-[1.3rem]" /> Share
+      </span>
+
+      <hr className=" my-6" />
+      <span className=" flex gap-2 items-center text-text text-xl  cursor-pointer">
+        <Package2 className="h-[1.3rem]" />
+        <span className=" underline text-text-blue font-semibold">
+          Shipping
+        </span>
+        calculated at checkout.
+      </span>
+      <SocialDialouge
+        isModal={isModal}
+        setIsModal={setIsModal}
+        data={''}
+        title={'Share this Product'}
+        type={'Share this Product'}
+      />
+    </div>
+  );
 };
 export default Detail;

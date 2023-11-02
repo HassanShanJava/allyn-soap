@@ -2,18 +2,16 @@
 // import { getCollections } from 'lib/shopify';
 import { useRef, useState } from 'react';
 import Slider from 'react-slick';
-import CategoryCard from '../cards/category-cards';
 import { useQuery } from '@apollo/client';
 import { removeEdgesAndNodes } from '~/utils/helper';
 import ArrivalCard from '../cards/arrival-cards';
-import { getCollectionsQuery } from '~/server/lib/shopify/query/collection';
 import { getProductsQuery } from '~/server/lib/shopify/query/product';
 import ArrivalSkeleton from '../skeleton/arrival-skeleton';
 
 const ArrivalSlider = () => {
   const slider = useRef<any>(null);
   const [active, setActive] = useState(0);
-  const { error, data, loading } = useQuery(getProductsQuery, {
+  const { data, loading } = useQuery(getProductsQuery, {
     variables: {
       query: 'totalInventory:>=1',
       reverse: true,
@@ -127,7 +125,7 @@ const ArrivalSlider = () => {
           {newArrivalData.length > 0 &&
             newArrivalData?.map((item: any, index: number) => {
               return (
-                <div key={index} className={` w-full sm:mr-4  `}>
+                <div key={index} className={`w-full sm:mr-4`}>
                   <ArrivalCard item={item} index={active} />
                 </div>
               );
@@ -135,7 +133,7 @@ const ArrivalSlider = () => {
           {loading &&
             Array.from(Array(8).keys()).map((item, index) => {
               return (
-                <div key={index}>
+                <div key={index} className={`w-full sm:mr-4`}>
                   <ArrivalSkeleton />
                 </div>
               );

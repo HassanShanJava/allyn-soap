@@ -1,7 +1,5 @@
-import { useMutation } from '@apollo/client';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { editCartItemsMutation } from '~/server/lib/shopify/query/cart';
 import { toggleCart } from '~/store/reducers/cart';
 
 type CounterType = {
