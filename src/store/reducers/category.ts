@@ -16,10 +16,10 @@ interface CategoryState {
 // Define the initial state using that type
 const initialState: CategoryState = {
   category: {
-    title: 'Bar Soap',
-    handle: 'soap',
+    title: 'Body',
+    handle: 'body',
     index: 0,
-    category_id: 'gid://shopify/Collection/178979176587',
+    category_id: 'gid://shopify/Collection/463137538321',
   },
 };
 
