@@ -9,6 +9,7 @@ export const getProductQuery = gql`
     shop {
       paymentSettings {
         acceptedCardBrands
+        supportedDigitalWallets
       }
     }
   }

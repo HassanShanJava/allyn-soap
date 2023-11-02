@@ -298,7 +298,6 @@ const RenderSocials = (props: any) => {
         'https://cdn.shopify.com/shopifycloud/web/assets/v1/bc21afcd8821554e.svg',
     },
   ];
-  console.log(props?.shop?.paymentSettings?.acceptedCardBrands, 'props?.shop');
   return (
     <div className=" ">
       <span
@@ -319,7 +318,7 @@ const RenderSocials = (props: any) => {
         calculated at checkout.
       </span>
 
-      <div className=" flex flex-col gap-2 items-center rounded-md my-6 text-text text-xl w-full h-40 bg-text-light-secondary mx-auto text-center justify-center  cursor-pointer">
+      <div className=" flex flex-col gap-2 items-center rounded-sm my-6 text-text text-xl w-full h-28 bg-text-light-secondary mx-auto text-center justify-center  cursor-pointer">
         <div className="flex items-center gap-2">
           {props?.shop?.paymentSettings?.acceptedCardBrands &&
             props?.shop?.paymentSettings?.acceptedCardBrands.map(
@@ -335,17 +334,14 @@ const RenderSocials = (props: any) => {
                       alt={item}
                       height={30}
                       width={30}
-                      className=" h-6 w-9"
+                      className=" h-7 w-10"
                     />
                   );
               },
             )}
         </div>
 
-        <span className=" underline text-text-blue font-semibold">
-          Shipping
-        </span>
-        <p>Guarantee safe & secure checkout</p>
+        <p className=" text-text text-base">Guarantee safe & secure checkout</p>
       </div>
       <SocialDialouge
         isModal={isModal}
