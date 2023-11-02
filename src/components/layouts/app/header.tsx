@@ -13,7 +13,7 @@ import { Search, ShoppingCart, User } from 'lucide-react';
 import { getCartQuery } from '~/server/lib/shopify/query/cart';
 import { RootState } from '~/store/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleCart } from '~/store/reducers/cart';
+import { toggleCart, toggleCartModal } from '~/store/reducers/cart';
 
 interface SideBarMenuProps {
   nav: boolean;
@@ -117,9 +117,9 @@ export default function Header() {
         <Search className="text-lg" />
         <div
           className="relative cursor-pointer"
-          // onClick={() => {
-          //   dispatch(toggleCartModal());
-          // }}
+          onClick={() => {
+            dispatch(toggleCartModal());
+          }}
         >
           {cart?.cart && cart?.cart?.totalQuantity > 0 && (
             <div className=" absolute text-sm -top-4 -right-2 p-1">
@@ -136,9 +136,9 @@ export default function Header() {
       <div className="flex justify-center items-center gap-4 py-6 xsm:p-6  xl:hidden w-[30%] md:w-[20%]">
         <div
           className="relative cursor-pointer"
-          // onClick={() => {
-          //   dispatch(toggleCartModal());
-          // }}
+          onClick={() => {
+            dispatch(toggleCartModal());
+          }}
         >
           {cart?.cart && cart?.cart?.totalQuantity > 0 && (
             <div className=" absolute text-sm -top-4 -right-2 p-1">
