@@ -31,7 +31,7 @@ const BannerCard = ({ banner, key, type }: any) => {
 
   return (
     <>
-      <div className="relative  bottom-6 md:-bottom-6 ">
+      <div className="relative  bottom-6  ">
         {id && (
           <p className="absolute text-xs md:text-sm p-6 md:px-12">
             {`Home > `}
@@ -46,7 +46,7 @@ const BannerCard = ({ banner, key, type }: any) => {
           key={key}
           className="!flex flex-col md:!flex-row w-full  gap-5 md:gap-10 justify-between items-start  "
         >
-          <div className="p-6 md:px-12 my-auto w-full md:max-w-[50%]">
+          <div className="p-6 md:px-12 my-auto md:my-6  w-full md:max-w-[50%]">
             <p className="text-text-dark uppercase leading-none text-3xl  lg:text-[3.5rem] font-black">
               {collectionBanner?.title}
             </p>

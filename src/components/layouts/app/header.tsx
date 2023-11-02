@@ -79,7 +79,7 @@ export default function Header() {
           color
             ? '!bg-white transform ease-in-out duration-300 '
             : 'bg-secondary transform ease-in-out duration-300'
-        }   transform-all ease-in-out   p-4 xs:p-6 lg:px-12 lg:py-6 `}
+        }   transform-all ease-in-out   p-4 xs:px-6 lg:px-12 lg:py-6 `}
       >
         <Link
           href="/"
@@ -111,7 +111,6 @@ export default function Header() {
       </div>
 
       <div className=" hidden md:w-[20%]  p-6 lg:px-12 xl:flex text-text-dark  gap-4 justify-center text-lg items-center">
-        
         <Search className="text-lg" />
         <div
           className="relative cursor-pointer"
@@ -214,7 +213,7 @@ export const SideBarMenu: React.FC<SideBarMenuProps> = ({
                 className={`group py-3 text-lg w-full text-center ${
                   list.length - 1 === i ? 'border-y-[1px]' : 'border-t-[1px]'
                 }
-             border-gray-200 hover:bg-primary hover:text-primary-foreground hover:border-transparent transition-colors duration-300 ease-in-out cursor-pointer`}
+             border-gray-200 hover:bg-primary captialize-first  lowercase hover:text-primary-foreground hover:border-transparent transition-colors duration-300 ease-in-out cursor-pointer`}
                 onClick={() => {
                   closeFn(false);
                 }}
