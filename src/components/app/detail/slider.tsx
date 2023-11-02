@@ -54,7 +54,7 @@ const DetailSlider = (props: any) => {
   };
   // lg:w-[34rem]
   return (
-    <div className="relative   rounded-md  w-full xl:w-[40rem] h-full ">
+    <div className="relative   rounded-md  w-full xl:w-[88%] h-full ">
       <Slider {...settings}>
         {imagesData &&
           imagesData?.length &&

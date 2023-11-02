@@ -4,9 +4,7 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
   darkMode: ['class'],
-  content: [
-    './src/**/*.{js,ts,jsx,tsx}',
-  ],
+  content: ['./src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     container: {
       center: true,
@@ -62,6 +60,7 @@ module.exports = {
           'light-secondary': 'hsl(var(--text-light-secondary))',
           'light-gray': 'hsl(var(--text-light-gray))',
           gray: 'hsl(var(--text-light-lightGray))',
+          'dark-gray': 'hsl(var(--text-gray))',
           green: 'hsl(var(--text-light-green))',
           blue: 'hsl(var(--text-light-blue))',
           yellow: 'hsl(var(--text-light-yellow))',

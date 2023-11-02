@@ -24,8 +24,11 @@ import { Package2, Share2 } from 'lucide-react';
 
 import { SocialDialouge } from '~/components/common/modals/social-modal';
 import Image from 'next/image';
+import { useToast } from '~/components/ui/use-toast';
 
 const Detail = (props: any) => {
+  const { toast } = useToast();
+
   const [variant, setVariant] = useState<any>(null);
   const [variants, setVariants] = useState<any>(null);
   const [cartItem, setCartItem] = useState<any>(null);
@@ -79,6 +82,10 @@ const Detail = (props: any) => {
                 }),
               );
           }
+          toast({
+            variant: 'success',
+            title: `Added to cart successfully!`,
+          });
           setCartView(true);
         }
       } else {
@@ -103,6 +110,10 @@ const Detail = (props: any) => {
         setCartView(true);
       }
     } catch (e: any) {
+      toast({
+        variant: 'destructive',
+        title: e.message,
+      });
       console.log('error :::', e?.message);
     }
   };
@@ -116,7 +127,7 @@ const Detail = (props: any) => {
         <div className=" text-4xl font-semibold text-text">
           <p className=" text-sm  uppercase font-bold text-text-gray">Soap</p>
           {props?.data?.title}
-          <div>
+          <div className="mt-2">
             {props?.reviews?.response?.bottomline && (
               <div className=" text-text-light-gray text-sm font-normal flex items-center gap-2  ">
                 <div>
@@ -158,13 +169,24 @@ const Detail = (props: any) => {
             )}
           </div>
         </div>
-        <div className="flex items-center">
+        <div className="flex items-center gap-1">
           <div className=" text-2xl font-semibold text-text">
             ${(+variant?.price?.amount ?? 0)?.toFixed(2)}
           </div>
           {variant?.compareAtPrice && (
-            <div className=" text-base font-semibold text-text-light-secondary">
+            <div className=" text-base font-semibold text-text-gray  line-through">
               ${(+variant?.compareAtPrice?.amount ?? 0)?.toFixed(2)}
+            </div>
+          )}
+          {variant?.compareAtPrice && (
+            <div className=" text-[10px] bg-red-600 p-1 w-[4.6rem] text-center text-white rounded-full  text-text-gray  ">
+              SAVE{' '}
+              {Math.round(
+                ((+variant?.compareAtPrice?.amount - +variant?.price?.amount) /
+                  variant?.compareAtPrice?.amount) *
+                  100 ?? 0,
+              )}
+              %
             </div>
           )}
         </div>

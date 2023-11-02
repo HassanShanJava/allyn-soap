@@ -37,7 +37,7 @@ export default function CartSheet() {
   return (
     <Sheet open={isCartOpen} onOpenChange={(e) => dispatch(toggleCartModal())}>
       <SheetContent
-        className={` ${poppins.variable} ${poppins.className} w-full p-2 md:min-w-[420px]`}
+        className={` ${poppins.variable} ${poppins.className} w-full p-2 md:min-w-[420px] h-screen`}
       >
         <SheetHeader>
           <div className=" text-text font-bold !font-poppins text-3xl">
