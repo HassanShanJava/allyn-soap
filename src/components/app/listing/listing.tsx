@@ -78,7 +78,7 @@ const ListingSection = () => {
                       onClick={() => {
                         clearFilter();
                       }}
-                      className="w-full cursor-pointer flex text-xl underline text-text-blue justify-start bg-red-600s xsm:justify-end"
+                      className="w-full cursor-pointer flex text-base underline text-text-blue justify-start bg-red-600s xsm:justify-end"
                     >
                       Clear Filter
                     </div>
@@ -92,11 +92,15 @@ const ListingSection = () => {
                       defaultValue={filters.sortKey}
                       value={filters.sortKey}
                     >
-                      <SelectTrigger className=" flex font-bold justify-between h-8 gap-1 w-full xsm:w-36  text-text rounded-none border-none line-clamp-1 text-center shadow-none   ">
+                      <SelectTrigger
+                        className={`${poppins.variable} ${poppins.className}  flex font-bold justify-between h-8 gap-1 w-full xsm:w-36  text-text rounded-none border-none line-clamp-1 text-center shadow-none text-base   `}
+                      >
                         <SelectValue placeholder="Relevance" />
                       </SelectTrigger>
-                      <SelectContent >
-                        <SelectGroup className={`${poppins.variable} ${poppins.className} `}>
+                      <SelectContent
+                        className={`${poppins.variable} ${poppins.className} text-base`}
+                      >
+                        <SelectGroup>
                           <SelectItem value="RELEVANCE">Relevance</SelectItem>
                           <SelectItem value="TITLE">Title</SelectItem>
                           <SelectItem value="BEST_SELLING">
