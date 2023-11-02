@@ -39,6 +39,9 @@ const discountList = [
 ];
 
 const DiscountSection = () => {
+
+  
+
   return (
     <div className="relative p-6 lg:px-12  flex flex-col md:flex-row gap-4 justify-between items-center">
       <div className="w-full my-5 md:my-0 md:max-w-[40%]">

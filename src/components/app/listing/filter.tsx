@@ -113,7 +113,7 @@ export function FilterContent(props: { isSheet: boolean; setModal?: any }) {
     <div className="  p-4 text-text font-poppins">
       <div className="flex items-center justify-between text-dark border-b border-border-light pb-4 ">
         <div
-          className={` font-bold font-poppins ${
+          className={` font-bold ${poppins.variable} ${poppins.className} ${
             props?.isSheet ? 'text-2xl' : 'text-xl'
           } `}
         >
@@ -129,7 +129,9 @@ export function FilterContent(props: { isSheet: boolean; setModal?: any }) {
         <Accordion
           type="single"
           collapsible
-          className={`w-full ${loading ? '' : ' '}`}
+          className={`w-full ${poppins.variable} ${poppins.className} ${
+            loading ? '' : ' '
+          }`}
         >
           {!loading ? (
             <>
@@ -137,7 +139,9 @@ export function FilterContent(props: { isSheet: boolean; setModal?: any }) {
                 if (item?.items?.length > 0) {
                   return (
                     <AccordionItem value={`item-${index}`} key={index}>
-                      <AccordionTrigger className="indent-1 font-poppins">
+                      <AccordionTrigger
+                        className={`indent-1 ${poppins.variable} ${poppins.className}`}
+                      >
                         {item?.title}
                       </AccordionTrigger>
                       <AccordionContent>
@@ -178,8 +182,8 @@ export function FilterContent(props: { isSheet: boolean; setModal?: any }) {
                       className={`${
                         category === '/products/' + getRoutData(item?.url)
                           ? ' font-bold bg-text-light-secondary  '
-                          : ' font-semibold '
-                      } cursor-pointer py-2 indent-1 hover:bg-text-light-secondary mt-1 rounded-md captialize-first  lowercase font-sans text-sm`}
+                          : ' font-medium '
+                      } cursor-pointer ${poppins.variable} ${poppins.className} py-2 indent-1 hover:bg-text-light-secondary mt-1 rounded-md captialize-first  lowercase text-sm`}
                       key={index}
                     >
                       {item?.title}
@@ -201,19 +205,23 @@ export function FilterContent(props: { isSheet: boolean; setModal?: any }) {
           )}
         </Accordion>
         <hr className="mt-4" />
-        <Accordion type="single" collapsible className="w-full">
+        <Accordion
+          type="single"
+          collapsible
+          className={`${poppins.variable} ${poppins.className} w-full`}
+        >
           <AccordionItem value={`item-price`}>
-            <AccordionTrigger className=" text-text text-xl font-bold">
+            <AccordionTrigger className={`${poppins.variable} ${poppins.className} text-text text-xl font-bold`}>
               Price
             </AccordionTrigger>
-            <AccordionContent className=" h-20">
+            <AccordionContent className=" ">
               <div>
                 <Slider
                   defaultValue={range}
                   value={range}
                   min={1}
                   max={200}
-                  className={'w-full mt-6'}
+                  className={'w-full my-6 ${poppins.variable} ${poppins.className}'}
                   onValueChange={(e: any) => {
                     setRange(e);
                     setPriceChange(true);
@@ -226,7 +234,7 @@ export function FilterContent(props: { isSheet: boolean; setModal?: any }) {
 
         <div className="w-full max-w-lg mx-auto space-y-2">
           <Button
-            className="w-full rounded-md"
+            className={`${poppins.variable} ${poppins.className} w-full rounded-md`}
             onClick={() => {
               applyFilter();
             }}
