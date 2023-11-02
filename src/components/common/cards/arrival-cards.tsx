@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { useSelector } from 'react-redux';
 import { RootState } from '~/store/store';
 import NextImage from '../custom_image';
+import Link from 'next/link';
 
 const ArrivalCard = (props: { item: any; index: number }) => {
   console.log(props?.item, 'ArrivalCard');
@@ -9,7 +10,7 @@ const ArrivalCard = (props: { item: any; index: number }) => {
   //   console.log({category})
 
   return (
-    <>
+    <Link href={`/product-detail/${props?.item?.handle}`}>
       <div
         className={`group relative   ${
           category?.category_id == props?.item?.id ? '' : 'bg-card'
@@ -56,7 +57,7 @@ border-solid border-tranparent border-l-card-foreground overflow-hidden   "
           ></p>
         </div>
       </div>
-    </>
+    </Link>
   );
 };
 
