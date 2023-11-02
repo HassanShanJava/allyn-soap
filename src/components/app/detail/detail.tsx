@@ -102,7 +102,11 @@ const Detail = (props: any) => {
       console.log('error :::', e?.message);
     }
   };
-  console.log({ variants }, 'product data');
+  function toggleVariant(text: string) {
+    console.log({ text });
+    const selectedVariant = variants?.find((item: any) => item?.title === text);
+    setVariant(selectedVariant);
+  }
   return (
     <div className="  flex flex-col gap-8 justify-between">
       <div className="flex flex-col gap-4">
@@ -177,22 +181,28 @@ const Detail = (props: any) => {
         <div className="flex items-center gap-2">
           {variants && variants?.length > 1 && (
             <div className="text-text">
-              Size
+              {props?.data?.options[0]?.name}
+
               <div className="flex  items-center gap-2">
                 <Select
-                // onValueChange={toggleLanguageHandler}
-                // defaultValue={filters.sortKey}
-                // value={filters.sortKey}
+                  onValueChange={toggleVariant}
+                  defaultValue={variant?.title}
+                  value={variant?.title}
                 >
                   <SelectTrigger className=" flex font-bold justify-between h-10 gap-1 w-full xsm:w-32  text-text rounded-md border line-clamp-1 text-center shadow-none   ">
-                    <SelectValue placeholder="Relevance" />
+                    <SelectValue placeholder={variant?.title} />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
-                      <SelectItem value="RELEVANCE">Relevance</SelectItem>
-                      <SelectItem value="TITLE">Title</SelectItem>
-                      <SelectItem value="BEST_SELLING">Best Selling</SelectItem>
-                      <SelectItem value="CREATED">New Arival</SelectItem>
+                      {props?.data?.options[0]?.values?.map(
+                        (item: any, index: number) => {
+                          return (
+                            <SelectItem key={index} value={item}>
+                              {item}
+                            </SelectItem>
+                          );
+                        },
+                      )}
                     </SelectGroup>
                   </SelectContent>
                 </Select>
