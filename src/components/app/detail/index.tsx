@@ -46,7 +46,7 @@ const DetailPage = () => {
   return (
     <>
       <div className="relative  font-poppins">
-        <div className="absolute -z-10 bg-secondary min-w-[200px] w-full  max-w-[70%] md:max-w-[80%] h-8  rounded-br-[250px] transform-all ease-in-out duration-300"></div>
+        <div className="absolute -z-10 bg-secondary min-w-[200px] w-full  max-w-[70%] md:max-w-[80%] h-8  rounded-br-[350px] transform-all ease-in-out duration-300"></div>
         {!loading ? (
           <div className="relative w-full px-4 py-12 2xl:container sm:px-6  ">
             <div className="relative grid grid-cols-12 gap-2">
