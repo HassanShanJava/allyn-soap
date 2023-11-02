@@ -15,7 +15,7 @@ const RelatedProducts = () => {
   const { error, data, loading } = useQuery(getCollectionProductsQuery, {
     variables: { handle: category?.handle, first: 8 },
   });
-  const productData = data
+  const productData = data?.collection?.products
     ? removeEdgesAndNodes(data?.collection?.products)
     : [];
 

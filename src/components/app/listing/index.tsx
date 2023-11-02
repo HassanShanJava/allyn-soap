@@ -1,5 +1,6 @@
 import BannerCard from '~/components/common/banner-card';
 import ListingSection from './listing';
+import ProductSlider from './product-slider';
 
 const ListingPage = () => {
   return (
@@ -10,6 +11,8 @@ const ListingPage = () => {
         <BannerCard banner={undefined} key={1} type="product-listing" />
 
         <ListingSection />
+        <div className="py-4" />
+        <ProductSlider />
       </div>
     </>
   );

@@ -20,11 +20,13 @@ import {
 import CartSkeleton from '../skeleton/cart-skeleton';
 import { Button } from '~/components/ui/button';
 import Link from 'next/link';
+import { poppins } from '~/components/layouts/app';
 
 type FilterSheetType = {
   modal: boolean;
   setModal: (e: boolean) => void;
 };
+
 export default function CartSheet() {
   const { isCartOpen, cart } = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
@@ -34,7 +36,9 @@ export default function CartSheet() {
   console.log({ cart, lines }, 'cart Drawer data');
   return (
     <Sheet open={isCartOpen} onOpenChange={(e) => dispatch(toggleCartModal())}>
-      <SheetContent className="font-poppins w-full p-2 md:min-w-[420px] ">
+      <SheetContent
+        className={` ${poppins.variable} ${poppins.className} w-full p-2 md:min-w-[420px]`}
+      >
         <SheetHeader>
           <div className=" text-text font-bold !font-poppins text-3xl">
             Shopping Cart

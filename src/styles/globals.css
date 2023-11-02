@@ -5,39 +5,14 @@
 @import 'slick-carousel/slick/slick.css';
 @import 'slick-carousel/slick/slick-theme.css';
 
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,700,900');
+
 html {
-  font-family: var(--font-poppins), sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   scroll-behavior: smooth;
 }
-
-body {
-  font-family: var(--font-poppins), sans-serif;
-}
-
-.swiper {
-  width: 100%;
-  padding-top: 50px;
-  padding-bottom: 50px;
-}
-
-.swiper-slide {
-  background-position: center;
-  background-size: cover;
-  width: 300px;
-  height: 300px;
-}
-
-.swiper-pagination {
-  margin-top: 10px;
-}
-
-/* 
-.home-banner {
-  background-image: url('/public/home-banner.jpg');
-} */
 
 @layer components {
   .team-card {
@@ -118,6 +93,24 @@ body {
     --name: 231, 33%, 23%, 1;
     --seperator: 0, 0%, 28%, 1;
   }
+
+}
+
+.swiper {
+  width: 100%;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 300px;
+  height: 300px;
+}
+
+.swiper-pagination {
+  margin-top: 10px;
 }
 
 .scroll-hide {

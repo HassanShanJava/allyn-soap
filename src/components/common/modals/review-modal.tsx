@@ -21,6 +21,7 @@ import {
 } from '~/components/ui/form';
 import { Input } from '~/components/ui/input';
 import ReactStars from 'react-stars';
+import { poppins } from '~/components/layouts/app';
 
 interface reviewDialogInterface {
   isModal: boolean;
@@ -110,7 +111,7 @@ export function ReviewDialog(props: reviewDialogInterface) {
   return (
     <>
       <Dialog open={props?.isModal} onOpenChange={(e) => props.setIsModal(e)}>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className={`${poppins.variable} ${poppins.className} sm:max-w-[425px]`}>
           <DialogHeader>
             <DialogTitle className="capitalize">{props?.title}</DialogTitle>
             <DialogDescription>

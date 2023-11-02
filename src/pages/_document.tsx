@@ -21,8 +21,9 @@ export default function Document() {
           src={`https://cdn-widgetsrepository.yotpo.com/v1/loader/${process.env.NEXT_PUBLIC_SHOPIFY_REVIEW}`}
           async
         ></Script>
+        
       </Head>
-      <body>
+      <body className={`font-poppins`}>
         <Main />
         <NextScript />
       </body>

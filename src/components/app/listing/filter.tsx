@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import FilterSkeleton from '~/components/common/skeleton/filters-skeleton';
+import { poppins } from '~/components/layouts/app';
 import {
   Accordion,
   AccordionContent,
@@ -38,7 +39,9 @@ type FilterSheetType = {
 export function FilterSheet(props: FilterSheetType) {
   return (
     <Sheet open={props?.modal} onOpenChange={(e) => props.setModal(e)}>
-      <SheetContent className="font-poppins w-full ">
+      <SheetContent
+        className={`${poppins.variable} ${poppins.className} w-full`}
+      >
         <SheetHeader></SheetHeader>
         <SheetDescription className="mt-4">
           <ScrollArea className="h-screen  pb-8  font-poppins">

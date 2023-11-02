@@ -134,7 +134,6 @@ const CustomerTestimonials = () => {
 export default CustomerTestimonials;
 
 const ReviewCard: React.FC<ReviewCard> = (customer: ReviewCard) => {
-  console.log({ customer });
   return (
     <div
       className={`  ${
