@@ -22,6 +22,7 @@ import { Button } from '~/components/ui/button';
 import Link from 'next/link';
 import { poppins } from '~/components/layouts/app';
 import { useToast } from '~/components/ui/use-toast';
+import { Input } from '~/components/ui/input';
 
 type FilterSheetType = {
   modal: boolean;
@@ -63,13 +64,19 @@ export default function CartSheet() {
             {/* <FilterContent isSheet={true} /> */}
           </ScrollArea>
           <div className=" items-start h-[30%]">
-            <hr className="mb-4" />
-            <div className="flex flex-col gap-4 ">
-              <div>Coupon Code apply</div>
+            <hr className="mb-6" />
+            <div className="flex flex-col gap-4  space-y-4">
+              <div>
+                <Input
+                  type="text"
+                  placeholder="Special instructions for seller"
+                  className="bg-text-light-secondary border-none"
+                />
+              </div>
               <div className=" flex flex-col gap-2">
                 {cart?.cart?.cost?.totalAmount?.amount <
                   cart?.cart?.cost?.subtotalAmount?.amount && (
-                  <div className=" flex justify-between items-center">
+                  <div className=" flex justify-between items-center ">
                     <div>{'Discount (-20%)'}</div>
                     <div>
                       -$
@@ -103,7 +110,7 @@ export default function CartSheet() {
                 </div>
               </div>
             </div>
-            <div className="flex gap-2 items-center justify-between mt-8">
+            <div className="flex gap-2 items-center justify-between mt-3">
               <Button
                 onClick={() => {
                   dispatch(toggleCartModal());
@@ -157,7 +164,7 @@ const CartProduct = (props: any) => {
           );
           toast({
             variant: 'success',
-            title: `Cart updated Succesfully`,
+            title: `Cart item deleted Succesfully!`,
           });
         } else {
           const deleteStorage = localStorage.removeItem('cartID');
@@ -224,7 +231,7 @@ const CartProduct = (props: any) => {
                       className={`w-full  font-normal   flex justify-between items-center   `}
                     >
                       <p
-                        className={`w-full text-xl font-normal   line-clamp-1     `}
+                        className={`w-full text-lg font-normal   line-clamp-1     `}
                       >
                         {item?.merchandise?.product?.title}
                       </p>
