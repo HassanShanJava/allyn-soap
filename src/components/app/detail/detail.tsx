@@ -25,6 +25,7 @@ import { Package2, Share2 } from 'lucide-react';
 import { SocialDialouge } from '~/components/common/modals/social-modal';
 import Image from 'next/image';
 import { useToast } from '~/components/ui/use-toast';
+import Link from 'next/link';
 
 const Detail = (props: any) => {
   const { toast } = useToast();
@@ -354,9 +355,11 @@ const RenderSocials = (props: any) => {
       <hr className=" my-6" />
       <div className="w-full flex gap-2 items-center text-text text-xl  cursor-pointer overflow-hidden line-clamp-1">
         <Package2 className="h-[1.3rem]" />
-        <span className=" underline text-text-blue font-semibold">
-          Shipping
-        </span>
+        <Link href="/shipping">
+          <span className=" underline text-text-blue font-semibold">
+            Shipping
+          </span>
+        </Link>
         calculated at checkout.
       </div>
 

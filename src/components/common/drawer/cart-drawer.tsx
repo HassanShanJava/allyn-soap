@@ -93,7 +93,11 @@ export default function CartSheet() {
                 <div className=" flex justify-between items-center">
                   <div>
                     Taxes and{' '}
-                    <span className="text-text-blue underline ">shipping</span>{' '}
+                    <Link href="/shipping">
+                      <span className="text-text-blue underline cursor-pointer">
+                        shipping
+                      </span>{' '}
+                    </Link>
                     calculated at checkout
                   </div>
                 </div>
