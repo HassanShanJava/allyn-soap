@@ -73,7 +73,7 @@ export function FilterContent(props: { isSheet: boolean; setModal?: any }) {
     }
   }, [filters?.price]);
   useEffect(() => {
-    setCategory(null);
+    setCategory('/products/' + router.query.id);
     seActiveIndex(null);
   }, [router?.query?.id]);
   const handleCategory = (text: string, index: number) => {
@@ -159,9 +159,7 @@ export function FilterContent(props: { isSheet: boolean; setModal?: any }) {
                                 }}
                                 className={`${
                                   category ===
-                                    '/products/' + getRoutData(subItem?.url) ||
-                                  router.query.id ==
-                                    '/products/' + getRoutData(subItem?.url)
+                                  '/products/' + getRoutData(subItem?.url)
                                     ? ' font-bold bg-text-light-secondary '
                                     : ' '
                                 } cursor-pointer p-2 hover:bg-text-light-secondary mt-1 rounded-md`}
