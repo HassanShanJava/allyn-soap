@@ -6,10 +6,8 @@ import NextImage from '../custom_image';
 import { useEffect } from 'react';
 
 const CategoryCard = (props: { item: any; index: number }) => {
-  console.log(props?.item, 'CategoryCard');
   const dispatch = useDispatch();
   const { category } = useSelector((state: RootState) => state.category);
-    console.log({category})
   const onDataSubmit = (data: any) => {
     dispatch(
       toggleCategory({

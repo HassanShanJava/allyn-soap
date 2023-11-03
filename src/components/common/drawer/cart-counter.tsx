@@ -48,8 +48,6 @@ const CartCounter = (props: CounterType) => {
               variables: { cartId: props?.cart_id },
             });
             if (cartData) {
-              console.log({ cartData });
-
               dispatch(
                 toggleCart({
                   cart_id: props?.cart_id,

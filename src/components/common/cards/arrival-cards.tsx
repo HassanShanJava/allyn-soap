@@ -5,7 +5,6 @@ import NextImage from '../custom_image';
 import Link from 'next/link';
 
 const ArrivalCard = (props: { item: any; index: number }) => {
-  console.log(props?.item, 'ArrivalCard');
   const { category } = useSelector((state: RootState) => state.category);
   //   console.log({category})
 

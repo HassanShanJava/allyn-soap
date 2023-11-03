@@ -34,7 +34,6 @@ export default function CartSheet() {
   const lines = cart?.cart?.lines?.edges
     ? removeEdgesAndNodes(cart?.cart?.lines)
     : [];
-  console.log({ cart }, 'cartID delete');
   return (
     <Sheet open={isCartOpen} onOpenChange={(e) => dispatch(toggleCartModal())}>
       <SheetContent
@@ -161,7 +160,6 @@ const CartProduct = (props: any) => {
             title: `Cart updated Succesfully`,
           });
         } else {
-          console.log('cartDelete');
           const deleteStorage = localStorage.removeItem('cartID');
           dispatch(toggleCartModal());
           dispatch(
