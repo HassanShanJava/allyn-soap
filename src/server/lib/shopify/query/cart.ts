@@ -53,16 +53,3 @@ export const removeFromCartMutation = gql`
   }
   ${cartFragment}
 `;
-export const noteCartMutation = gql`
-  mutation removeFromCart($cartId: ID!, $note: String) {
-     cartNoteUpdate(cartId: $cartId) {
-    cart {
-      note:$note
-    }
-    userErrors {
-      field
-      message
-    }
-  }
-  }
-`;
