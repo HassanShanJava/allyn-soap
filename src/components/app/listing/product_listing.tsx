@@ -23,7 +23,6 @@ const ProductListing = () => {
   const { error, data, loading } = useQuery(getCollectionProductsQuery, {
     variables: { handle: id, ...filters },
   });
-  console.log({ data }, 'filters toggle');
 
   useEffect(() => {
     dispatch(

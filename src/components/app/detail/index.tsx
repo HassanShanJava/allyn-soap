@@ -42,7 +42,6 @@ const DetailPage = () => {
         .catch((err) => console.error('error:' + err));
     }
   }, [productData?.product]);
-  console.log({ router });
   return (
     <>
       <div className="relative  font-poppins">

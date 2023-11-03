@@ -14,6 +14,7 @@ import { getCartQuery } from '~/server/lib/shopify/query/cart';
 import { RootState } from '~/store/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleCart, toggleCartModal } from '~/store/reducers/cart';
+import { useRouter } from 'next/router';
 
 interface SideBarMenuProps {
   nav: boolean;
@@ -27,6 +28,7 @@ export default function Header() {
   const [navList, setNavList] = useState([]);
   const { cart } = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const [getCart, { data: cartData }] = useLazyQuery(getCartQuery);
 
@@ -65,6 +67,20 @@ export default function Header() {
   useEffect(() => {
     if (data) setNavList(data?.menu.items);
   }, [data]);
+  useEffect(() => {
+    console.log(router?.query, 'router?.query');
+    if (router?.query?.status == 'true') {
+      const cartID = localStorage.removeItem('cartID');
+
+      dispatch(
+        toggleCart({
+          cart_id: null,
+          cart: null,
+        }),
+      );
+      router.replace('/');
+    }
+  }, [router?.query]);
 
   console.log({ cartData });
   return (

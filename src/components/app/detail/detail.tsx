@@ -37,9 +37,10 @@ const Detail = (props: any) => {
   const { cart } = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
 
-  const [cartCreate] = useMutation(createCartMutation);
-  const [cartAdd] = useMutation(addToCartMutation);
-  const [getCart] = useLazyQuery(getCartQuery);
+  const [cartCreate, { loading: cartCreatLoading }] =
+    useMutation(createCartMutation);
+  const [cartAdd, { loading: cartAddLoading }] = useMutation(addToCartMutation);
+  const [getCart, { loading: cartLoading }] = useLazyQuery(getCartQuery);
   useEffect(() => {
     const variants = props?.data?.variants?.edges
       ? removeEdgesAndNodes(props?.data?.variants)
@@ -109,6 +110,7 @@ const Detail = (props: any) => {
         }
         setCartView(true);
       }
+      setRange(1);
     } catch (e: any) {
       toast({
         variant: 'destructive',
@@ -121,7 +123,6 @@ const Detail = (props: any) => {
     const selectedVariant = variants?.find((item: any) => item?.title === text);
     setVariant(selectedVariant);
   }
-  console.log('props :::', props?.data?.tags);
 
   return (
     <div className="  flex flex-col gap-8 justify-between">
@@ -175,22 +176,25 @@ const Detail = (props: any) => {
           <div className=" text-2xl font-semibold text-text">
             ${(+variant?.price?.amount ?? 0)?.toFixed(2)}
           </div>
-          {variant?.compareAtPrice && (
-            <div className=" text-base font-semibold text-text-gray  line-through">
-              ${(+variant?.compareAtPrice?.amount ?? 0)?.toFixed(2)}
-            </div>
-          )}
-          {variant?.compareAtPrice && (
-            <div className=" text-[10px] bg-red-600 p-1 w-[4.6rem] text-center text-white rounded-full  text-text-gray  ">
-              SAVE{' '}
-              {Math.round(
-                ((+variant?.compareAtPrice?.amount - +variant?.price?.amount) /
-                  variant?.compareAtPrice?.amount) *
-                  100 ?? 0,
-              )}
-              %
-            </div>
-          )}
+          {variant?.compareAtPrice &&
+            +variant?.price?.amount !== +variant?.compareAtPrice?.amount && (
+              <div className=" text-base font-semibold text-text-gray  line-through">
+                ${(+variant?.compareAtPrice?.amount ?? 0)?.toFixed(2)}
+              </div>
+            )}
+          {variant?.compareAtPrice &&
+            +variant?.price?.amount !== +variant?.compareAtPrice?.amount && (
+              <div className=" text-[10px] bg-red-600 p-1 w-[4.6rem] text-center text-white rounded-full  text-text-gray  ">
+                SAVE{' '}
+                {Math.round(
+                  ((+variant?.compareAtPrice?.amount -
+                    +variant?.price?.amount) /
+                    variant?.compareAtPrice?.amount) *
+                    100 ?? 0,
+                )}
+                %
+              </div>
+            )}
         </div>
       </div>
       <div
@@ -249,7 +253,10 @@ const Detail = (props: any) => {
                 forSale={variant?.availableForSale}
                 quantity={variant?.quantityAvailable}
                 cartView={cartView}
+                setCartView={setCartView}
                 addtoCart={addtoCart}
+                cartID={cart?.cart_id}
+                loading={cartLoading || cartAddLoading || cartCreatLoading}
               />
             </div>
           </div>
@@ -264,6 +271,9 @@ const RenderButton = (props: {
   cartView: boolean;
   quantity: number;
   addtoCart: () => void;
+  setCartView: (e: boolean) => unknown;
+  cartID: string | null;
+  loading: boolean;
 }) => {
   const dispatch = useDispatch();
 
@@ -283,7 +293,10 @@ const RenderButton = (props: {
         className="w-full "
         variant={'outline'}
         onClick={() => {
-          dispatch(toggleCartModal());
+          if (props?.cartID) {
+            dispatch(toggleCartModal());
+            props?.setCartView(false);
+          }
         }}
       >
         View Cart
@@ -291,7 +304,12 @@ const RenderButton = (props: {
     );
   } else {
     return (
-      <Button className="w-full" onClick={() => props?.addtoCart()}>
+      <Button
+        className="w-full flex items-center gap-2"
+        disabled={props?.loading}
+        onClick={() => props?.addtoCart()}
+      >
+        {props?.loading && <i className="fa-solid fa-spinner fa-spin"></i>}
         Add to Cart
       </Button>
     );

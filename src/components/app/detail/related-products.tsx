@@ -12,7 +12,6 @@ const RelatedProducts = (props: any) => {
   } = useQuery(getProductRecommendationsQuery, {
     variables: { productId: props?.dataID },
   });
-  console.log(relatedProducts, 'related products');
 
   return (
     <>

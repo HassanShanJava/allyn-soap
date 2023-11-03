@@ -1,13 +1,9 @@
-import Image from 'next/image';
-
 import CategorySection from './category_section';
-import Demo from '~/public/assets/demo.png';
-import Outline from '~/public/assets/outline.png';
 import BannerSection from './banner_section';
 import RelatedProducts from './related_product';
 import ArrivalSection from './arrival_section';
 import CustomerTestimonials from '~/components/common/customer-testimonials';
-import DiscountSection from '~/components/common/discount-section';
+import { useRouter } from 'next/router';
 
 const demoList = [
   {

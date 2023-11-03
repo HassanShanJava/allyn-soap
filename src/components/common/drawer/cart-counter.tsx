@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { poppins } from '~/components/layouts/app';
+import { useToast } from '~/components/ui/use-toast';
 import { toggleCart } from '~/store/reducers/cart';
 
 type CounterType = {
@@ -15,6 +16,8 @@ type CounterType = {
 };
 
 const CartCounter = (props: CounterType) => {
+  const { toast } = useToast();
+
   const [range, setRange] = useState(props?.qty);
   const dispatch = useDispatch();
 
@@ -45,8 +48,6 @@ const CartCounter = (props: CounterType) => {
               variables: { cartId: props?.cart_id },
             });
             if (cartData) {
-              console.log({ cartData });
-
               dispatch(
                 toggleCart({
                   cart_id: props?.cart_id,
@@ -55,14 +56,27 @@ const CartCounter = (props: CounterType) => {
               );
             }
           }
+          if (range === props?.min || range === props?.max) {
+          } else {
+            toast({
+              variant: 'success',
+              title: `Cart updated Succesfully`,
+            });
+          }
         }
       }
-    } catch (e) {
+    } catch (e: any) {
       console.log(e);
+      toast({
+        variant: 'destructive',
+        title: e.message,
+      });
     }
   };
   return (
-    <div className={`${poppins.variable} ${poppins.className} text-base px-2 py-1 h-8  bg-text-light-secondary w-fit rounded-sm flex gap-4 items-center`}>
+    <div
+      className={`${poppins.variable} ${poppins.className} text-base px-2 py-1 h-8  bg-text-light-secondary w-fit rounded-sm flex gap-4 items-center`}
+    >
       <i
         className={`fa-solid fa-minus ${
           range === props?.min ? ' cursor-not-allowed' : 'cursor-pointer'

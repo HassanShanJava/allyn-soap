@@ -48,14 +48,9 @@ export function ReviewDialog(props: reviewDialogInterface) {
 
   // Catch Rating value
 
-  console.log({ rating });
   async function onSubmit(values: z.infer<typeof addCustomerAddress>) {
     try {
       setLoading(true);
-      console.log(
-        props?.data?.id?.split('/')[props?.data?.id?.split('/').length - 1],
-        'product Add ID',
-      );
 
       const Addoptions = {
         method: 'POST',
@@ -110,7 +105,6 @@ export function ReviewDialog(props: reviewDialogInterface) {
     }
   }
   const ratingChanged = (newRating: any) => {
-    console.log({ newRating });
     form.setValue('review_score', newRating);
     setRating(newRating);
   };
