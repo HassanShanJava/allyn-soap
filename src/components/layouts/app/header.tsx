@@ -113,15 +113,14 @@ export default function Header() {
               return (
                 <Link
                   key={item.title}
-                  href={
-                    item?.type === 'COLLECTION' || item?.title !== 'Home'
-                      ? `/products/${getRoutData(item?.url)}`
-                      : `/`
-                  }
+                  href={`/products/${getRoutData(item?.url)}`}
                 >
+                  {/* item?.type === 'COLLECTION' || item?.title !== 'Home'
+                      ? `/products/${getRoutData(item?.url)}`
+                      : `/` */}
                   <li
                     className={` captialize-first  lowercase font-semibold ${
-                      id ==getRoutData(item?.url)
+                      id == getRoutData(item?.url)
                         ? 'text-primary'
                         : 'text-text-dark'
                     }  hover:text-primary  hover:cursor-pointer `}
@@ -231,11 +230,7 @@ export const SideBarMenu: React.FC<SideBarMenuProps> = ({
           list.map((item: any, i: number) => {
             return (
               <Link
-                href={
-                  item?.type === 'COLLECTION' || item?.title !== 'Home'
-                    ? `/products/${getRoutData(item?.url)}`
-                    : `/`
-                }
+                href={`/products/${getRoutData(item?.url)}`}
                 key={i}
                 className={`group py-3 text-lg w-full text-center ${
                   list.length - 1 === i ? 'border-y-[1px]' : 'border-t-[1px]'
