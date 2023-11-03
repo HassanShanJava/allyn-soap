@@ -63,7 +63,7 @@ const ListingSection = () => {
             <p className="w-full text-text text-4xl capitalize font-semibold">
               {id?.toString()?.replaceAll('-', ' ')}
             </p>
-            <div className="w-full flex flex-row  items-center xsm:justify-between gap-2 xsm:gap-4">
+            <div className="w-full flex  flex-row  items-end justify-end xsm:justify-end gap-2 xsm:gap-4">
               <p
                 onClick={() => setModal(!modal)}
                 className="w-full cursor-pointer text-text font-bold flex text-base xsm:text-xl items-center gap-2 lg:hidden"
@@ -71,20 +71,21 @@ const ListingSection = () => {
                 <i className="fa-solid fa-sliders  rotate-90 text-text-light-gray"></i>
                 Filters
               </p>
-              <div className="flex flex-col xsm:flex-row gap-2 justify-start xsm:justify-end w-full items-center">
+
+              <div className="flex flex-col xsm:flex-row gap-x-2 justify-end xsm:justify-end  items-center">
                 {(filters.sortKey !== defaultSort.sortKey || filters.price) && (
                   <>
                     <div
                       onClick={() => {
                         clearFilter();
                       }}
-                      className="w-full cursor-pointer flex text-base underline text-text-blue justify-start bg-red-600s xsm:justify-end"
+                      className="w-max cursor-pointer px-2 flex ml-auto text-base underline text-text-blue justify-start  xsm:justify-end"
                     >
                       Clear Filter
                     </div>
                   </>
                 )}
-                <div className="   w-max   flex items-center gap-1 xsm:gap-2  justify-start xsm:justify-end text-sm xsm:text-base">
+                <div className="   w-max   flex items-center gap-x-1 xsm:gap-x-2  justify-start xsm:justify-end text-sm xsm:text-base">
                   <div className=" text-right w-max ">Sort by:</div>
                   <div>
                     <Select
