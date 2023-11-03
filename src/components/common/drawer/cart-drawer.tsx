@@ -21,6 +21,7 @@ import CartSkeleton from '../skeleton/cart-skeleton';
 import { Button } from '~/components/ui/button';
 import Link from 'next/link';
 import { poppins } from '~/components/layouts/app';
+import { useToast } from '~/components/ui/use-toast';
 
 type FilterSheetType = {
   modal: boolean;
@@ -33,13 +34,13 @@ export default function CartSheet() {
   const lines = cart?.cart?.lines?.edges
     ? removeEdgesAndNodes(cart?.cart?.lines)
     : [];
-  console.log({ cart, lines }, 'cart Drawer data');
+  console.log({ cart }, 'cartID delete');
   return (
     <Sheet open={isCartOpen} onOpenChange={(e) => dispatch(toggleCartModal())}>
       <SheetContent
         className={` ${poppins.variable} ${poppins.className} w-full p-2 md:min-w-[420px] h-max flex flex-col`}
       >
-        <SheetDescription className="mt-4 h-screen   p-0">
+        <SheetDescription className="mt-4 h-screen  flex flex-col item-start justify-evenly   p-0">
           <SheetHeader>
             <div className=" text-text font-bold !font-poppins text-3xl">
               Shopping Cart
@@ -57,65 +58,70 @@ export default function CartSheet() {
               </div>
             )}
           </SheetHeader>
-          <ScrollArea className="h-3/5  pb-8 pt-8 px-2 font-poppins w-full relative">
+          <ScrollArea className="h-3/6  pb-8 pt-8 px-2 item-start font-poppins w-full relative">
             <ScrollBar orientation="vertical" />
             <CartProduct products={lines} cart_id={cart?.cart_id} />
             {/* <FilterContent isSheet={true} /> */}
           </ScrollArea>
-          <hr className="mb-4" />
-          <div className="flex flex-col gap-4 ">
-            <div>Coupon Code apply</div>
-            <div className=" flex flex-col gap-2">
-              {cart?.cart?.cost?.totalAmount?.amount <
-                cart?.cart?.cost?.subtotalAmount?.amount && (
+          <div>
+            <hr className="mb-4" />
+            <div className="flex flex-col gap-4 ">
+              <div>Coupon Code apply</div>
+              <div className=" flex flex-col gap-2">
+                {cart?.cart?.cost?.totalAmount?.amount <
+                  cart?.cart?.cost?.subtotalAmount?.amount && (
+                  <div className=" flex justify-between items-center">
+                    <div>{'Discount (-20%)'}</div>
+                    <div>
+                      -$
+                      {(
+                        cart?.cart?.cost?.subtotalAmount?.amount -
+                        cart?.cart?.cost?.totalAmount?.amount
+                      )
+                        .toFixed(2)
+                        .toString()}
+                    </div>
+                  </div>
+                )}
+
                 <div className=" flex justify-between items-center">
-                  <div>{'Discount (-20%)'}</div>
+                  <div>{'Delivery Fee'}</div>
                   <div>
-                    -$
-                    {(
-                      cart?.cart?.cost?.subtotalAmount?.amount -
-                      cart?.cart?.cost?.totalAmount?.amount
-                    )
-                      .toFixed(2)
-                      .toString()}
+                    {cart?.cart?.cost?.totalAmount?.amount > 100
+                      ? 'Free'
+                      : '$8.00'}{' '}
                   </div>
                 </div>
-              )}
+                <hr className="mt-4" />
 
-              <div className=" flex justify-between items-center">
-                <div>{'Delivery Fee'}</div>
-                <div>
-                  {cart?.cart?.cost?.totalAmount?.amount > 100
-                    ? 'Free'
-                    : '$8.00'}{' '}
-                </div>
-              </div>
-              <hr className="mt-4" />
-
-              <div className=" flex justify-between items-center">
-                <div>{'Subtotal'}</div>
-                <div>
-                  $
-                  {cart?.cart?.cost?.totalAmount?.amount < 100
-                    ? (+cart?.cart?.cost?.totalAmount?.amount + 8).toFixed(2)
-                    : cart?.cart?.cost?.totalAmount?.amount}
+                <div className=" flex justify-between items-center">
+                  <div>{'Subtotal'}</div>
+                  <div>
+                    $
+                    {cart?.cart?.cost?.totalAmount?.amount < 100
+                      ? (+cart?.cart?.cost?.totalAmount?.amount + 8).toFixed(2)
+                      : cart?.cart?.cost?.totalAmount?.amount}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="flex gap-2 items-center justify-between mt-8">
-            <Button
-              onClick={() => {
-                dispatch(toggleCartModal());
-              }}
-              className="w-full border-primary text-primary "
-              variant={'outline'}
-            >
-              Continue Shopping
-            </Button>
-            <Link className="w-full " href={cart?.cart?.checkoutUrl}>
-              <Button className="w-full  ">Checkout</Button>
-            </Link>
+            <div className="flex gap-2 items-center justify-between mt-8">
+              <Button
+                onClick={() => {
+                  dispatch(toggleCartModal());
+                }}
+                className="w-full border-primary text-primary "
+                variant={'outline'}
+              >
+                Continue Shopping
+              </Button>
+              <Link
+                className="w-full "
+                href={cart?.cart ? cart?.cart?.checkoutUrl : ''}
+              >
+                <Button className="w-full  ">Checkout</Button>
+              </Link>
+            </div>
           </div>
         </SheetDescription>
       </SheetContent>
@@ -123,43 +129,59 @@ export default function CartSheet() {
   );
 }
 const CartProduct = (props: any) => {
-  const [
-    cartDelete,
-    {
-      data: cartDeleteData,
-      loading: cartDeleteLoading,
-      error: cartDeleteError,
-    },
-  ] = useMutation(removeFromCartMutation);
+  const { toast } = useToast();
 
-  const [
-    cartUpdate,
-    {
-      data: cartUpdateData,
-      loading: cartUpdateLoading,
-      error: cartUpdateError,
-    },
-  ] = useMutation(editCartItemsMutation);
-  const [getCart, { data: cartData, loading: cartLoading, error: cartError }] =
-    useLazyQuery(getCartQuery);
+  const [cartDelete, { loading: cartDeleteLoading }] = useMutation(
+    removeFromCartMutation,
+  );
+
+  const [cartUpdate, { loading: cartUpdateLoading }] = useMutation(
+    editCartItemsMutation,
+  );
+  const [getCart, { loading: cartLoading }] = useLazyQuery(getCartQuery);
   const dispatch = useDispatch();
 
   const deleteItem = async (item: any) => {
-    const cartDeleteData = await cartDelete({
-      variables: { cartId: props?.cart_id, lineIds: [item?.id] },
-    });
-    if (cartDeleteData) {
-      const cartData = await getCart({
-        variables: { cartId: props?.cart_id },
+    try {
+      const cartDeleteData = await cartDelete({
+        variables: { cartId: props?.cart_id, lineIds: [item?.id] },
       });
-      if (cartData) {
-        dispatch(
-          toggleCart({
-            cart_id: props?.cart_id,
-            cart: { ...cartData?.data?.cart },
-          }),
-        );
+      if (cartDeleteData) {
+        const cartData = await getCart({
+          variables: { cartId: props?.cart_id },
+        });
+        if (cartData?.data?.cart?.totalQuantity > 0) {
+          dispatch(
+            toggleCart({
+              cart_id: props?.cart_id,
+              cart: { ...cartData?.data?.cart },
+            }),
+          );
+          toast({
+            variant: 'success',
+            title: `Cart updated Succesfully`,
+          });
+        } else {
+          console.log('cartDelete');
+          const deleteStorage = localStorage.removeItem('cartID');
+          dispatch(toggleCartModal());
+          dispatch(
+            toggleCart({
+              cart_id: null,
+              cart: null,
+            }),
+          );
+          toast({
+            variant: 'success',
+            title: `Cart deleted Succesfully`,
+          });
+        }
       }
+    } catch (e: any) {
+      toast({
+        variant: 'destructive',
+        title: e.message,
+      });
     }
   };
   return (
@@ -180,7 +202,6 @@ const CartProduct = (props: any) => {
             const variants = item?.merchandise?.product?.variants
               ? removeEdgesAndNodes(item?.merchandise?.product?.variants)
               : [];
-            console.log({ item, variants }, 'item, variants');
             return (
               <div className="" key={index}>
                 <div

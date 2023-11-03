@@ -249,7 +249,9 @@ const Detail = (props: any) => {
                 forSale={variant?.availableForSale}
                 quantity={variant?.quantityAvailable}
                 cartView={cartView}
+                setCartView={setCartView}
                 addtoCart={addtoCart}
+                cartID={cart?.cart_id}
               />
             </div>
           </div>
@@ -264,6 +266,8 @@ const RenderButton = (props: {
   cartView: boolean;
   quantity: number;
   addtoCart: () => void;
+  setCartView: (e: boolean) => unknown;
+  cartID: string | null;
 }) => {
   const dispatch = useDispatch();
 
@@ -283,7 +287,10 @@ const RenderButton = (props: {
         className="w-full "
         variant={'outline'}
         onClick={() => {
-          dispatch(toggleCartModal());
+          if (props?.cartID) {
+            dispatch(toggleCartModal());
+            props?.setCartView(false);
+          }
         }}
       >
         View Cart

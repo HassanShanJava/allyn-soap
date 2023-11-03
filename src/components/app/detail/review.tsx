@@ -21,24 +21,24 @@ const ReveiewContent = (props: any) => {
       {
         breakpoint: 1536,
         settings: {
-          slidesToShow: 1.9,
-          slidesToScroll: 1.9,
+          slidesToShow: 2,
+          slidesToScroll: 2,
           centerMode: false,
         },
       },
       {
         breakpoint: 1280,
         settings: {
-          slidesToShow: 1.4,
-          slidesToScroll: 1.4,
+          slidesToShow: 2,
+          slidesToScroll: 2,
           centerMode: false,
         },
       },
       {
         breakpoint: 800,
         settings: {
-          slidesToShow: 1.2,
-          slidesToScroll: 1.2,
+          slidesToShow: 1,
+          slidesToScroll: 1,
           centerMode: false,
         },
       },
