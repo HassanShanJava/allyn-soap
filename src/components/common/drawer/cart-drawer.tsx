@@ -229,7 +229,7 @@ const CartProduct = (props: any) => {
     <div className="flex flex-col gap-4">
       {cartDeleteLoading || cartLoading ? (
         <>
-          {Array.from(Array(8).keys()).map((item, index) => {
+          {Array.from(Array(3).keys()).map((item, index) => {
             return (
               <div key={index}>
                 <CartSkeleton />
