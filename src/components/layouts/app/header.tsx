@@ -86,7 +86,7 @@ export default function Header() {
   console.log({ cartData });
   return (
     <nav
-      className={`sticky  w-full top-0 bg-white z-40 flex items-center justify-between   max-w-[1600px] mx-auto ${
+      className={`sticky  w-full top-0 bg-white  z-40 flex items-center justify-between   max-w-[1600px] mx-auto ${
         color ? 'shadow-xl' : ''
       }`}
     >
