@@ -38,32 +38,32 @@ export default function CartSheet() {
   return (
     <Sheet open={isCartOpen} onOpenChange={(e) => dispatch(toggleCartModal())}>
       <SheetContent
-        className={` ${poppins.variable} ${poppins.className} w-full p-2 md:min-w-[420px] h-max flex flex-col`}
+        className={` ${poppins.variable} ${poppins.className} w-full pt-4  md:min-w-[420px] h-screen flex flex-col`}
       >
-        <SheetDescription className="mt-4 h-screen  flex flex-col item-start justify-evenly   p-0">
-          <SheetHeader>
-            <div className=" text-text font-bold !font-poppins text-3xl">
-              Shopping Cart
+        <SheetHeader>
+          <div className=" text-text font-bold !font-poppins text-3xl">
+            Shopping Cart
+          </div>
+          {cart?.cart?.cost?.totalAmount?.amount > 100 ? (
+            'Free Shipping'
+          ) : (
+            <div className=" text-text-light-gray capitalize text-xl">
+              Buy{' '}
+              <span className=" text-text  font-bold ">
+                ${100 - cart?.cart?.cost?.totalAmount?.amount}
+              </span>{' '}
+              More and get{' '}
+              <span className=" text-text  font-bold ">free shipping</span>
             </div>
-            {cart?.cart?.cost?.totalAmount?.amount > 100 ? (
-              'Free Shipping'
-            ) : (
-              <div className=" text-text-light-gray capitalize text-xl">
-                Buy{' '}
-                <span className=" text-text  font-bold ">
-                  ${100 - cart?.cart?.cost?.totalAmount?.amount}
-                </span>{' '}
-                More and get{' '}
-                <span className=" text-text  font-bold ">free shipping</span>
-              </div>
-            )}
-          </SheetHeader>
-          <ScrollArea className="h-3/6  pb-8 pt-8 px-2 item-start font-poppins w-full relative">
+          )}
+        </SheetHeader>
+        <SheetDescription className=" h-screen  flex flex-col item-start justify-normal  ">
+          <ScrollArea className="h-[60%]  pb-6   mt-2 pr-2   font-poppins w-full relative">
             <ScrollBar orientation="vertical" />
             <CartProduct products={lines} cart_id={cart?.cart_id} />
             {/* <FilterContent isSheet={true} /> */}
           </ScrollArea>
-          <div>
+          <div className=" items-start h-[30%]">
             <hr className="mb-4" />
             <div className="flex flex-col gap-4 ">
               <div>Coupon Code apply</div>
@@ -85,11 +85,10 @@ export default function CartSheet() {
                 )}
 
                 <div className=" flex justify-between items-center">
-                  <div>{'Delivery Fee'}</div>
                   <div>
-                    {cart?.cart?.cost?.totalAmount?.amount > 100
-                      ? 'Free'
-                      : '$8.00'}{' '}
+                    Taxes and{' '}
+                    <span className="text-text-blue underline ">shipping</span>{' '}
+                    calculated at checkout
                   </div>
                 </div>
                 <hr className="mt-4" />
@@ -99,7 +98,7 @@ export default function CartSheet() {
                   <div>
                     $
                     {cart?.cart?.cost?.totalAmount?.amount < 100
-                      ? (+cart?.cart?.cost?.totalAmount?.amount + 8).toFixed(2)
+                      ? (+cart?.cart?.cost?.totalAmount?.amount).toFixed(2)
                       : cart?.cart?.cost?.totalAmount?.amount}
                   </div>
                 </div>
