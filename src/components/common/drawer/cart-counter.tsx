@@ -58,10 +58,13 @@ const CartCounter = (props: CounterType) => {
               );
             }
           }
-          toast({
-            variant: 'success',
-            title: `Cart updated Succesfully`,
-          });
+          if (range === props?.min || range === props?.max) {
+          } else {
+            toast({
+              variant: 'success',
+              title: `Cart updated Succesfully`,
+            });
+          }
         }
       }
     } catch (e: any) {
