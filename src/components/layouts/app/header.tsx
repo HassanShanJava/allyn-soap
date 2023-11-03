@@ -115,9 +115,6 @@ export default function Header() {
                   key={item.title}
                   href={`/products/${getRoutData(item?.url)}`}
                 >
-                  {/* item?.type === 'COLLECTION' || item?.title !== 'Home'
-                      ? `/products/${getRoutData(item?.url)}`
-                      : `/` */}
                   <li
                     className={` captialize-first  lowercase font-semibold ${
                       id == getRoutData(item?.url)
