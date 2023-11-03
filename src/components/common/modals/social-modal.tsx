@@ -89,7 +89,7 @@ export function SocialDialouge(props: socialDialogInterface) {
               <p className="line-clamp-1 flex-1">{url}</p>
               <Copy
                 onClick={() => {
-                  navigator.clipboard.writeText(url);
+                  if (window) navigator?.clipboard?.writeText(url);
                   toast({
                     variant: 'success',
                     title: `Link copy to clipboard`,

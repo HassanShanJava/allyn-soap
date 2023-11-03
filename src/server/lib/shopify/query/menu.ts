@@ -29,3 +29,18 @@ export const getFilterQuery = gql`
     }
   }
 `;
+export const getPageDetail = gql`
+  query MyQuery($handle: String!) {
+    pageByHandle(handle: $handle) {
+      id
+      bodySummary
+      body
+      title
+      seo {
+        description
+        title
+      }
+      onlineStoreUrl
+    }
+  }
+`;
