@@ -5,6 +5,7 @@ const cartFragment = gql`
   fragment cart on Cart {
     id
     checkoutUrl
+    note
     cost {
       subtotalAmount {
         amount
