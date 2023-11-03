@@ -8,10 +8,11 @@ import { useQuery } from '@apollo/client';
 import { getProductsQuery } from '~/server/lib/shopify/query/product';
 import { removeEdgesAndNodes } from '~/utils/helper';
 
-const BannerSection = ({ list }: any) => {
+const BannerSection = () => {
   const router = useRouter();
   const slider = useRef<any>(null);
-  const [sliderData, setSliderData] = useState([]);
+  const [index, setIndex] = useState(0);
+  const [sliderData, setSliderData] = useState<any>([]);
   const { error, data, loading } = useQuery(getProductsQuery, {
     variables: {
       reverse: false,
@@ -41,6 +42,7 @@ const BannerSection = ({ list }: any) => {
     arrows: false,
     centerMode: false,
     swipe: false,
+    beforeChange: (current: number, next: number) => setIndex(next),
   };
 
   const next = () => {
@@ -67,6 +69,7 @@ const BannerSection = ({ list }: any) => {
                     </p>
                     <div className="text-text-light py-5 w-full leading-none text-sm md:text-base md:max-w-[400px]">
                       <p className=" line-clamp-2 md:line-clamp-3 ">
+                        
                         {item?.description}
                       </p>
                     </div>
@@ -74,7 +77,9 @@ const BannerSection = ({ list }: any) => {
                       <Button
                         className="text-center w-32 h-10 md:w-40 md:h-12   shadow-xl"
                         onClick={() =>
-                          router.push(`/product-detail/${item?.handle}`)
+                          router.push(
+                            `/product-detail/${sliderData[i]?.handle}`,
+                          )
                         }
                       >
                         Shop Now

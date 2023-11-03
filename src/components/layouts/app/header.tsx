@@ -29,6 +29,7 @@ export default function Header() {
   const { cart } = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
   const router = useRouter();
+  const id = router?.query?.id ?? '';
 
   const [getCart, { data: cartData }] = useLazyQuery(getCartQuery);
 
@@ -106,20 +107,30 @@ export default function Header() {
 
         {navList ? (
           <ul className="hidden xl:flex gap-4 text-sm  text-text-dark  xl:flex-row  xl:items-center ">
-            {navList.map((item: Menu) => (
-              <Link
-                key={item.title}
-                href={
-                  item?.type === 'COLLECTION' || item?.title !== 'Home'
-                    ? `/products/${getRoutData(item?.url)}`
-                    : `/`
-                }
-              >
-                <li className=" captialize-first  lowercase font-semibold hover:text-primary  hover:cursor-pointer ">
-                  {item.title}
-                </li>
-              </Link>
-            ))}
+            {navList.map((item: Menu) => {
+              console.log({ id, item }, 'navitem');
+              // console.log()
+              return (
+                <Link
+                  key={item.title}
+                  href={
+                    item?.type === 'COLLECTION' || item?.title !== 'Home'
+                      ? `/products/${getRoutData(item?.url)}`
+                      : `/`
+                  }
+                >
+                  <li
+                    className={` captialize-first  lowercase font-semibold ${
+                      id ==getRoutData(item?.url)
+                        ? 'text-primary'
+                        : 'text-text-dark'
+                    }  hover:text-primary  hover:cursor-pointer `}
+                  >
+                    {item.title}
+                  </li>
+                </Link>
+              );
+            })}
           </ul>
         ) : (
           ''
