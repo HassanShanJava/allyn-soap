@@ -81,13 +81,13 @@ export default function CartSheet() {
             </div>
           )}
         </SheetHeader>
-        <SheetDescription className=" h-screen  flex flex-col item-start justify-normal  ">
-          <ScrollArea className="h-[60%]  pb-6   mt-2 pr-2   font-poppins w-full relative">
+        <SheetDescription className=" h-screen  flex flex-col item-start justify-between  ">
+          <ScrollArea className="h-[54%]  pb-6   mt-2 pr-2   font-poppins w-full relative">
             <ScrollBar orientation="vertical" />
             <CartProduct products={lines} cart_id={cart?.cart_id} />
             {/* <FilterContent isSheet={true} /> */}
           </ScrollArea>
-          <div className=" items-start h-[30%]">
+          <div className=" items-start h-[46%]">
             <hr className="mb-6" />
             <div className="flex flex-col gap-4  space-y-4">
               <div>
