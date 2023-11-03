@@ -33,7 +33,7 @@ const BannerCard = ({ banner, key, type }: any) => {
     <>
       <div className="relative  bottom-6  ">
         {id && (
-          <p className="absolute text-xs md:text-sm p-6 md:px-12">
+          <p className="absolute hidden md:block text-xs md:text-sm p-6 md:px-12">
             {`Home > `}
             <span className="capitalize font-[#272D4E]">
               {(id as string).split('-').join(' ')}
