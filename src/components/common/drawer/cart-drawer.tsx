@@ -15,6 +15,7 @@ import { useLazyQuery, useMutation } from '@apollo/client';
 import {
   editCartItemsMutation,
   getCartQuery,
+  noteCartMutation,
   removeFromCartMutation,
 } from '~/server/lib/shopify/query/cart';
 import CartSkeleton from '../skeleton/cart-skeleton';
@@ -23,6 +24,8 @@ import Link from 'next/link';
 import { poppins } from '~/components/layouts/app';
 import { useToast } from '~/components/ui/use-toast';
 import { Input } from '~/components/ui/input';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
 type FilterSheetType = {
   modal: boolean;
@@ -31,10 +34,31 @@ type FilterSheetType = {
 
 export default function CartSheet() {
   const { isCartOpen, cart } = useSelector((state: RootState) => state.cart);
+  const [note, setNote] = useState(null);
+  useEffect(() => {
+    setNote(cart?.cart?.note);
+  }, [cart?.cart?.note]);
   const dispatch = useDispatch();
+  const router = useRouter();
+  const [cartNote, { loading: cartNoteLoading }] =
+    useMutation(noteCartMutation);
+
   const lines = cart?.cart?.lines?.edges
     ? removeEdgesAndNodes(cart?.cart?.lines)
     : [];
+  const handleCheckout = async (text: string) => {
+    let cartAddData;
+    if (note && cart?.cart?.note !== note) {
+      cartAddData = await cartNote({
+        variables: {
+          cartId: cart?.cart_id,
+          note: note,
+        },
+      });
+    }
+    router.push(text);
+  };
+  console.log(cart?.cart?.note, 'CartID drawer');
   return (
     <Sheet open={isCartOpen} onOpenChange={(e) => dispatch(toggleCartModal())}>
       <SheetContent
@@ -70,7 +94,12 @@ export default function CartSheet() {
                 <Input
                   type="text"
                   placeholder="Special instructions for seller"
-                  className="bg-text-light-secondary border-none"
+                  className="bg-text-light-secondary border-none focus:outline-none"
+                  value={note ?? ''}
+                  autoFocus={false}
+                  onChange={(e: any) => {
+                    setNote(e.target.value);
+                  }}
                 />
               </div>
               <div className=" flex flex-col gap-2">
@@ -124,12 +153,16 @@ export default function CartSheet() {
               >
                 Continue Shopping
               </Button>
-              <Link
-                className="w-full "
-                href={cart?.cart ? cart?.cart?.checkoutUrl : ''}
+
+              <Button
+                className="w-full  "
+                disabled={cartNoteLoading}
+                onClick={() => {
+                  handleCheckout(cart?.cart ? cart?.cart?.checkoutUrl : '');
+                }}
               >
-                <Button className="w-full  ">Checkout</Button>
-              </Link>
+                Checkout
+              </Button>
             </div>
           </div>
         </SheetDescription>
