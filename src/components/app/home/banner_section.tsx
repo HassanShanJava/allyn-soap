@@ -65,12 +65,14 @@ const BannerSection = () => {
                 >
                   <div className="p-6 md:px-12 my-auto w-full md:max-w-[50%]">
                     <p className="text-text-dark uppercase leading-none text-3xl  lg:text-[3.5rem] font-black">
-                      Plant based & Handmade daily
+                      {/* Plant based & Handmade daily */}
+                      {item?.title}
                     </p>
                     <div className="text-text-light py-5 w-full leading-none text-sm md:text-base md:max-w-[400px]">
                       <p className=" line-clamp-2 md:line-clamp-3 ">
-                        Discover your perfect scent, handcrafted in a Makery
-                        near you.
+                        {/* Discover your perfect scent, handcrafted in a Makery
+                        near you. */}
+                        {item?.description}
                       </p>
                     </div>
                     <div className="mt-4 flex justify-between flex-row md:flex-col  items-center md:items-start  w-full md:w-fit">
