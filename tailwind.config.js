@@ -24,6 +24,10 @@ module.exports = {
       fontFamily: {
         sans: ['"Poppins"', ...defaultTheme.fontFamily.sans],
       },
+      transitionDuration: {
+        '0': '0ms',
+        '2000': '2000ms',
+      },
       colors: {
         border: {
           DEFAULT: 'hsl(var(--border))',
