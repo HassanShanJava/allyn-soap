@@ -156,7 +156,9 @@ export default function Header() {
             <ShoppingCart className="text-lg" />
           </div>
           <div>
-            <User className="text-lg" />
+            <Link href="/login">
+              <User className="text-lg" />
+            </Link>
           </div>
         </div>
         <div className={`${open ? 'block' : 'hidden'}`}>
