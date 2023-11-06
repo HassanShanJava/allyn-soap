@@ -18,7 +18,7 @@ const CmsContent = () => {
     <>
       {!loading ? (
         !error ? (
-          <div className=" w-1/2 mx-auto  p-8">
+          <div className=" w-full md:w-1/2 mx-auto  p-8">
             <h1 className=" text-2xl font-bold">
               {cmsData?.pageByHandle?.title}
             </h1>

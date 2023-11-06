@@ -178,13 +178,13 @@ const Detail = (props: any) => {
             ${(+variant?.price?.amount ?? 0)?.toFixed(2)}
           </div>
           {variant?.compareAtPrice &&
-            +variant?.price?.amount !== +variant?.compareAtPrice?.amount && (
+            +variant?.price?.amount < +variant?.compareAtPrice?.amount && (
               <div className=" text-base font-semibold text-text-gray  line-through">
                 ${(+variant?.compareAtPrice?.amount ?? 0)?.toFixed(2)}
               </div>
             )}
           {variant?.compareAtPrice &&
-            +variant?.price?.amount !== +variant?.compareAtPrice?.amount && (
+            +variant?.price?.amount < +variant?.compareAtPrice?.amount && (
               <div className=" text-[10px] bg-red-600 p-1 w-[4.6rem] text-center text-white rounded-full  text-text-gray  ">
                 SAVE{' '}
                 {Math.round(
