@@ -14,6 +14,7 @@ import {
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/router';
 
 type searchProps = {
   open: boolean;
@@ -27,6 +28,7 @@ const formSchema = z.object({
 });
 
 const Search: React.FC<searchProps> = ({ open, setOpen }) => {
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -37,7 +39,8 @@ const Search: React.FC<searchProps> = ({ open, setOpen }) => {
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log({values},'search');
+    localStorage.setItem('search', values.search);
+    router.push("/products/search")
   }
 
   return (

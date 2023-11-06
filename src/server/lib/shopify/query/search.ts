@@ -1,31 +1,23 @@
 import { gql } from '@apollo/client';
 import productFragment from '../fragments/product';
 export const getSearchProductsQuery = gql`
-  query getSearchProducts(
-    sortKey: $sortKey
-        reverse: $reverse
-        first: $first
-        last: $last
-        after: $after
-        before: $before
-        filters: { price: $price }
-  ){
-    search(query: $search, first: 10) {
-        edges {
-            cursor
-            node {
-              ...product
-              totalInventory
-            }
-          }
-          pageInfo {
-            endCursor
-            hasNextPage
-            hasPreviousPage
-            startCursor
-          }
+query MyQuery($query: String = "soap ", $first: Int = 10) {
+  search(query: $query, first: $first) {
+    edges {
+      node {
+        ... on Product {
+          title
+          totalInventory
+          availableForSale
         }
-
+      }
+      cursor
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+    }
   }
-  
-  `
+}`

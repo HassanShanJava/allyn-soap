@@ -16,6 +16,7 @@ import { useState } from 'react';
 import { RootState } from '~/store/store';
 import { defaultSort } from '~/utils/constant';
 import { poppins } from '~/components/layouts/app';
+import ProductSearch from './product_search';
 
 const ListingSection = () => {
   const router = useRouter();
@@ -116,7 +117,7 @@ const ListingSection = () => {
               </div>
             </div>
           </div>
-          <ProductListing />
+          {id !== 'search' ? <ProductListing /> : <ProductSearch />}
         </div>
       </div>
       <FilterSheet modal={modal} setModal={setModal} />

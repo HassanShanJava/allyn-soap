@@ -12,6 +12,7 @@ import BannerSkeleton from './skeleton/banner-skeleton';
 // will work on this component for other pages
 const BannerCard = ({ banner, key, type }: any) => {
   const router = useRouter();
+  const [title, setTitle] = useState('');
 
   const [collectionBanner, setCollectionBannner] = useState<any>(null);
   const { id } = router.query;
@@ -21,27 +22,32 @@ const BannerCard = ({ banner, key, type }: any) => {
   });
   // const [open, setOpen] = useState(false);
   useEffect(() => {
-    if (data) {
+    if (data && id !== 'search') {
       setHide(true);
       const payload = removeEdgesAndNodes(data?.collectionByHandle?.products);
       setCollectionBannner(payload[0]);
       console.log({ collectionBanner });
+    } else {
+      const searchQuery = localStorage.getItem('search') as string;
+      setTitle(searchQuery);
     }
-  }, [data]);
+  }, [data, id]);
 
   return (
     <>
       <div className="relative  bottom-6  ">
-        {id && (
-          <p className="absolute hidden md:block text-xs md:text-sm p-6 md:px-12">
-            {`Home > `}
+        <p className="absolute hidden md:block text-xs md:text-sm p-6 md:px-12">
+          {`Home > `}
+          {id !== 'search' ? (
             <span className="capitalize font-[#272D4E]">
-              {(id as string).split('-').join(' ')}
+              {(id as string)?.split('-').join(' ')}
             </span>
-          </p>
-        )}
+          ) : (
+            <span className=" font-[#272D4E]">{`Search for "${title}"`}</span>
+          )}
+        </p>
       </div>
-      {collectionBanner ? (
+      {collectionBanner && id !== 'search' ? (
         <div
           key={key}
           className="!flex flex-col md:!flex-row w-full  gap-5 md:gap-10 justify-between items-start  "
@@ -103,9 +109,8 @@ const BannerCard = ({ banner, key, type }: any) => {
           <BannerSkeleton collectionBanner={collectionBanner} />
         </div>
       ) : (
-        <div className="py-20"></div>
+        <div className="py-10"></div>
       )}
-      {/* <LoadingDialog open={open} setOpen={setOpen}/> */}
     </>
   );
 };

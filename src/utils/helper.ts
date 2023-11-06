@@ -1,7 +1,7 @@
 import { Connection } from '~/server/lib/shopify/type';
 
 export const removeEdgesAndNodes = (array: Connection<any>) => {
-  return array.edges.map((edge: any) => edge?.node);
+  return array?.edges?.map((edge: any) => edge?.node);
 };
 export const getRoutData = (url: string) => {
   const data = url?.split('/');
