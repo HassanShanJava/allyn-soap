@@ -58,14 +58,14 @@ export const validateEmail = (email: string): boolean => {
   const domain = emailParts[1];
   const domainParts = domain?.split('.');
 
-  if (domainParts.length < 2) {
+  if (domainParts && domainParts.length < 2) {
     // Ensure there's at least one subdomain and a top-level domain
     return false;
   }
 
   // Check for duplicates in the domainParts array
   const uniqueDomainParts = new Set(domainParts);
-  if (uniqueDomainParts.size !== domainParts.length) {
+  if (domainParts && uniqueDomainParts.size !== domainParts.length) {
     // If there are duplicates, return false
     return false;
   }
