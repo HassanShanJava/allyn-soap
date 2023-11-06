@@ -30,7 +30,7 @@ interface reviewDialogInterface {
   data: any;
   type: string;
 }
-export const addCustomerAddress = z.object({
+export const addCustomerReview = z.object({
   review_score: z.number(),
   email: z.string().email().trim(),
 
@@ -40,15 +40,15 @@ export const addCustomerAddress = z.object({
 });
 export function ReviewDialog(props: reviewDialogInterface) {
   const { toast } = useToast();
-  const form = useForm<z.infer<typeof addCustomerAddress>>({
-    resolver: zodResolver(addCustomerAddress),
+  const form = useForm<z.infer<typeof addCustomerReview>>({
+    resolver: zodResolver(addCustomerReview),
   });
   const [loading, setLoading] = useState<boolean>(false);
   const [rating, setRating] = useState(0);
 
   // Catch Rating value
 
-  async function onSubmit(values: z.infer<typeof addCustomerAddress>) {
+  async function onSubmit(values: z.infer<typeof addCustomerReview>) {
     try {
       setLoading(true);
 
