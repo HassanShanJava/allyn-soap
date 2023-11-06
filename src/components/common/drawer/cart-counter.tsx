@@ -84,11 +84,12 @@ const CartCounter = (props: CounterType) => {
         onClick={() => UpdateCounter('substraction')}
       ></i>
       <p className="w-6 text-base text-center">
-        {props?.cartUpdateLoading ? (
+        {range}
+        {/* {props?.cartUpdateLoading ? (
           <i className="fa-solid fa-spinner fa-spin"></i>
         ) : (
-          range
-        )}
+          // range
+        )} */}
       </p>
       <i
         className={`fa-solid fa-plus ${

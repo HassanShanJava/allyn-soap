@@ -13,16 +13,40 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useToast } from '~/components/ui/use-toast';
 import { signupCustomerSchema } from '~/schema/customer';
+import { useState } from 'react';
+import { SignUpMutation } from '~/server/lib/shopify/mutations/auth';
+import { useMutation } from '@apollo/client';
+import Link from 'next/link';
 
 const RegisterForm = () => {
   const { toast } = useToast();
+  const [loading, setLoading] = useState(false);
 
   const form = useForm<z.infer<typeof signupCustomerSchema>>({
     resolver: zodResolver(signupCustomerSchema),
   });
+  const [customerAdd, { loading: customerAddLoading }] =
+    useMutation(SignUpMutation);
+
   async function onSubmit(values: z.infer<typeof signupCustomerSchema>) {
     try {
+      setLoading(true);
+      const customerAddData = await customerAdd({
+        variables: {
+          ...values,
+        },
+      });
+      console.log({ customerAddData });
+      if (!customerAddData?.data?.customerCreate?.customer)
+        throw new Error(`Customer Already Registered with following email.`);
+
+      toast({
+        variant: 'success',
+        title: 'Customer Registered Successfull!',
+      });
+      setLoading(false);
     } catch (error: any) {
+      setLoading(false);
       toast({
         variant: 'destructive',
         title: error.message,
@@ -31,7 +55,7 @@ const RegisterForm = () => {
   }
   return (
     <>
-      <div className="relative flex flex-col gap-4 pt-8  px-8 border border-border rounded-2xl shadow-md md:w-2/6 mx-auto font-poppins">
+      <div className="relative flex flex-col gap-4 py-8  px-8 border border-border rounded-2xl shadow-md md:w-2/6 mx-auto font-poppins">
         {/* for bg color */}
         <h1 className=" text-3xl font-bold">Sign up</h1>
         <p className=" text-base text-text-light">
@@ -125,8 +149,8 @@ const RegisterForm = () => {
               )}
             />
 
-            <Button type="submit" className="w-full" disabled={false}>
-              {false ? (
+            <Button type="submit" className="w-full" disabled={loading}>
+              {loading ? (
                 <i className="fa-solid fa-spinner fa-spin"></i>
               ) : (
                 'Sign Up'
@@ -134,9 +158,12 @@ const RegisterForm = () => {
 
               {/* {props?.id ? 'Update' : 'Add'} */}
             </Button>
-            <p className="text-center mt-8 text-sm underline text-text-light cursor-pointer">
-              Already have an Account
-            </p>
+
+            <Link href={'/login'}>
+              <p className="text-center mt-8 text-sm underline text-text-light cursor-pointer">
+                Already have an Account
+              </p>
+            </Link>
           </form>
         </Form>
       </div>

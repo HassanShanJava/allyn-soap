@@ -135,7 +135,7 @@ export default function Header() {
 
       <div>
         <div className=" hidden  md:w-fit  px-6  lg:px-12 xl:flex text-text-dark  gap-4 justify-center text-lg items-center">
-          <div onClick={() => setOpen(!open)} className='cursor-pointer'>
+          <div onClick={() => setOpen(!open)} className="cursor-pointer">
             <Search className="text-lg" />
           </div>
           <div
@@ -159,7 +159,7 @@ export default function Header() {
             <User className="text-lg" />
           </div>
         </div>
-        <div className={`${open ? 'hidden' : 'block'}`}>
+        <div className={`${open ? 'block' : 'hidden'}`}>
           <SearchComponent open={open} setOpen={setOpen} />
         </div>
       </div>

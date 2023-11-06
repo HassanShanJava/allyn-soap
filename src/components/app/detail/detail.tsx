@@ -84,11 +84,6 @@ const Detail = (props: any) => {
                 }),
               );
           }
-          toast({
-            variant: 'success',
-            title: `Added to cart successfully!`,
-          });
-          setCartView(true);
         }
       } else {
         cartAddData = await cartAdd({
@@ -111,6 +106,11 @@ const Detail = (props: any) => {
         }
         setCartView(true);
       }
+      toast({
+        variant: 'success',
+        title: `Added to cart successfully!`,
+      });
+      setCartView(true);
       setRange(1);
     } catch (e: any) {
       toast({
@@ -123,6 +123,7 @@ const Detail = (props: any) => {
   function toggleVariant(text: string) {
     const selectedVariant = variants?.find((item: any) => item?.title === text);
     setVariant(selectedVariant);
+    setRange(1);
   }
 
   return (
