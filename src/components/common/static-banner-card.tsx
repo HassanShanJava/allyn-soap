@@ -6,22 +6,22 @@ const StaticBanner = ({ data, key, type }: any) => {
 
   return (
     <>
-      <div className="relative  bottom-6  ">
-        <p className="absolute hidden md:block text-xs md:text-sm p-6 md:px-12">
-          {`Home > `}
-          <span className="capitalize font-[#272D4E]">{data.title}</span>
-        </p>
-      </div>
       {data ? (
         <div
           key={key}
           className="!flex flex-col md:!flex-row w-full  gap-5 md:gap-10 justify-between items-start  "
         >
           <div className="p-6 md:px-12 my-auto md:my-6  w-full md:max-w-[50%]">
-            <p className="text-text-dark uppercase leading-none text-3xl  lg:text-[3.5rem] font-black">
+            <div className=" ">
+              <p className=" md:block text-xs md:text-sm  py-2 ">
+                {`Home > `}
+                <span className="capitalize font-[#272D4E]">{data.slug}</span>
+              </p>
+            </div>
+            <p className="text-text-dark uppercase leading-none text-3xl  lg:text-[3rem] font-black">
               {data?.title}
             </p>
-            <div className="text-text-light py-5 w-full leading-none text-sm md:text-base md:max-w-[400px]">
+            <div className="text-text-light py-5 w-full leading-none text-sm md:text-base md:w-10/12">
               <p className=" line-clamp-2 md:line-clamp-3 ">
                 {data?.description}
               </p>
@@ -45,9 +45,9 @@ const StaticBanner = ({ data, key, type }: any) => {
                   ></path>
                 </mask>
                 <image
-                  xlinkHref={`${data?.featuredImage?.url}`}
-                  className="object-cover"
-                  onLoad={() => setHide(false)}
+                  xlinkHref={`${data?.src}`}
+                  className=" object-center !width-[100%] svg-image-static"
+                  // onLoad={() => setHide(false)}
                 />
 
                 <polyline

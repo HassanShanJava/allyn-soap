@@ -67,7 +67,7 @@ const LoginForm = () => {
   }
   return (
     <>
-      <div className="relative flex flex-col gap-4 pt-8  px-8 border border-border rounded-2xl shadow-md md:w-2/6 mx-auto font-poppins">
+      <div className="relative flex flex-col gap-4 py-8  px-8 border border-border rounded-3xl shadow-xl md:w-2/6 mx-auto font-poppins">
         {/* for bg color */}
         <h1 className=" text-3xl font-bold">Login</h1>
         <p className=" text-base text-text-light">
@@ -125,12 +125,12 @@ const LoginForm = () => {
               {loading ? (
                 <i className="fa-solid fa-spinner fa-spin"></i>
               ) : (
-                'Sign Up'
+                'Sign In'
               )}
 
               {/* {props?.id ? 'Update' : 'Add'} */}
             </Button>
-            <Link href={'/register'}>
+            <Link href={'/signup'}>
               <p className="text-center mt-8 text-sm underline text-text-light cursor-pointer">
                 New customer? Sign up for an account
               </p>

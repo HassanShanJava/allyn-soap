@@ -207,6 +207,12 @@ svg image {
   width: 125%;
   max-width: max-content;
 }
+svg .svg-image-static {
+  mask: url(#top);
+  object-fit: cover;
+  width: 100%;
+  max-width: max-content;
+}
 
 @media screen and (max-width: 480px) {
   .container {

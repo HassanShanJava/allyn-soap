@@ -22,6 +22,7 @@ import {
 import { Input } from '~/components/ui/input';
 import ReactStars from 'react-stars';
 import { poppins } from '~/components/layouts/app';
+import { validateEmail } from '~/utils/helper';
 
 interface reviewDialogInterface {
   isModal: boolean;
@@ -32,7 +33,12 @@ interface reviewDialogInterface {
 }
 export const addCustomerReview = z.object({
   review_score: z.number(),
-  email: z.string({ required_error: 'Please enter Email.' }).email().trim(),
+  email: z
+    .string({ required_error: 'Please enter Email.' })
+    .email()
+    .refine((val) => validateEmail(val), {
+      message: 'Invalid email format.',
+    }),
 
   review_title: z
     .string({ required_error: 'Please enter Title.' })

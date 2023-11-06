@@ -46,3 +46,9 @@ export const loginToken = async (props: {
   });
   return true;
 };
+
+export const validateEmail = (email: string): boolean => {
+  // Use a regular expression to check for exactly one occurrence of ".com"
+  const regex = /^[^@]+@[^@]+\.com$/i;
+  return regex.test(email);
+};

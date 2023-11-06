@@ -84,11 +84,6 @@ const Detail = (props: any) => {
                 }),
               );
           }
-          toast({
-            variant: 'success',
-            title: `Added to cart successfully!`,
-          });
-          setCartView(true);
         }
       } else {
         cartAddData = await cartAdd({
@@ -111,6 +106,11 @@ const Detail = (props: any) => {
         }
         setCartView(true);
       }
+      toast({
+        variant: 'success',
+        title: `Added to cart successfully!`,
+      });
+      setCartView(true);
       setRange(1);
     } catch (e: any) {
       toast({

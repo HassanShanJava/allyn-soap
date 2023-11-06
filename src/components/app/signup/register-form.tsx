@@ -16,6 +16,7 @@ import { signupCustomerSchema } from '~/schema/customer';
 import { useState } from 'react';
 import { SignUpMutation } from '~/server/lib/shopify/mutations/auth';
 import { useMutation } from '@apollo/client';
+import Link from 'next/link';
 
 const RegisterForm = () => {
   const { toast } = useToast();
@@ -54,7 +55,7 @@ const RegisterForm = () => {
   }
   return (
     <>
-      <div className="relative flex flex-col gap-4 pt-8  px-8 border border-border rounded-2xl shadow-md md:w-2/6 mx-auto font-poppins">
+      <div className="relative flex flex-col gap-4 py-8  px-8 border border-border rounded-2xl shadow-md md:w-2/6 mx-auto font-poppins">
         {/* for bg color */}
         <h1 className=" text-3xl font-bold">Sign up</h1>
         <p className=" text-base text-text-light">
@@ -157,9 +158,12 @@ const RegisterForm = () => {
 
               {/* {props?.id ? 'Update' : 'Add'} */}
             </Button>
-            <p className="text-center mt-8 text-sm underline text-text-light cursor-pointer">
-              Already have an Account
-            </p>
+
+            <Link href={'/login'}>
+              <p className="text-center mt-8 text-sm underline text-text-light cursor-pointer">
+                Already have an Account
+              </p>
+            </Link>
           </form>
         </Form>
       </div>

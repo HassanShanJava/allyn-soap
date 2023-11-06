@@ -73,8 +73,8 @@ const ArrivalSlider = () => {
       {
         breakpoint: 1536,
         settings: {
-          slidesToShow: 2.9,
-          slidesToScroll: 2.9,
+          slidesToShow: 3,
+          slidesToScroll: 3,
           centerMode: false,
         },
       },
@@ -89,8 +89,8 @@ const ArrivalSlider = () => {
       {
         breakpoint: 800,
         settings: {
-          slidesToShow: 1.8,
-          slidesToScroll: 1.8,
+          slidesToShow: 2,
+          slidesToScroll: 2,
           centerMode: false,
         },
       },
@@ -98,8 +98,8 @@ const ArrivalSlider = () => {
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 1.5,
-          slidesToScroll: 1.5,
+          slidesToShow: 1,
+          slidesToScroll: 1,
         },
       },
       {
@@ -125,7 +125,7 @@ const ArrivalSlider = () => {
           {newArrivalData.length > 0 &&
             newArrivalData?.map((item: any, index: number) => {
               return (
-                <div key={index} className={`w-full sm:mr-4`}>
+                <div key={index} className={`w-full md:mr-4`}>
                   <ArrivalCard item={item} index={active} />
                 </div>
               );
