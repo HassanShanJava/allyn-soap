@@ -1,5 +1,6 @@
 import { Connection } from '~/server/lib/shopify/type';
 import { getCookies, setCookie, deleteCookie, getCookie } from 'cookies-next';
+import { truncate } from 'fs/promises';
 
 export const removeEdgesAndNodes = (array: Connection<any>) => {
   return array?.edges?.map((edge: any) => edge?.node);
@@ -48,7 +49,26 @@ export const loginToken = async (props: {
 };
 
 export const validateEmail = (email: string): boolean => {
-  // Use a regular expression to check for exactly one occurrence of ".com"
-  const regex = /^[^@]+@[^@]+\.com$/i;
-  return regex.test(email);
+  const emailParts = email.split('@');
+  if (emailParts.length !== 2) {
+    // Ensure there's exactly one "@" symbol in the email address
+    return false;
+  }
+
+  const domain = emailParts[1];
+  const domainParts = domain?.split('.');
+
+  if (domainParts && domainParts.length < 2) {
+    // Ensure there's at least one subdomain and a top-level domain
+    return false;
+  }
+
+  // Check for duplicates in the domainParts array
+  const uniqueDomainParts = new Set(domainParts);
+  if (domainParts && uniqueDomainParts.size !== domainParts.length) {
+    // If there are duplicates, return false
+    return false;
+  }
+
+  return true;
 };

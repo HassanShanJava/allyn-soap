@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { getAdminToken, getToken } from '~/utils/authToken';
 import { getCookie } from 'cookies-next';
 
 export function middleware(request: NextRequest, response: NextResponse) {
