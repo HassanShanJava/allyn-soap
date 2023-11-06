@@ -15,7 +15,7 @@ import { RootState } from '~/store/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleCart, toggleCartModal } from '~/store/reducers/cart';
 import { useRouter } from 'next/router';
-
+import SearchComponent from '~/components/common/search';
 interface SideBarMenuProps {
   nav: boolean;
   closeFn: React.Dispatch<React.SetStateAction<boolean>>;
@@ -25,6 +25,7 @@ interface SideBarMenuProps {
 export default function Header() {
   const [color, setColor] = useState(false);
   const [nav, setNav] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(false);
   const [navList, setNavList] = useState([]);
   const { cart } = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
@@ -83,7 +84,6 @@ export default function Header() {
     }
   }, [router?.query]);
 
-  console.log({ cartData });
   return (
     <nav
       className={`sticky  w-full top-0 bg-white  z-40 flex items-center justify-between   max-w-[1600px] mx-auto ${
@@ -133,26 +133,35 @@ export default function Header() {
         )}
       </div>
 
-      <div className=" hidden md:w-[20%]  p-6 lg:px-12 xl:flex text-text-dark  gap-4 justify-center text-lg items-center">
-        <Search className="text-lg" />
-        <div
-          className="relative cursor-pointer"
-          onClick={() => {
-            if (cart?.cart && cart?.cart?.totalQuantity > 0)
-              dispatch(toggleCartModal());
-          }}
-        >
-          {cart?.cart && cart?.cart?.totalQuantity > 0 && (
-            <div className=" absolute text-sm -top-4 -right-2 p-1">
-              {cart?.cart?.totalQuantity > 99
-                ? '99+'
-                : cart?.cart?.totalQuantity}
-            </div>
-          )}
+      <div>
+        <div className=" hidden  md:w-fit  px-6  lg:px-12 xl:flex text-text-dark  gap-4 justify-center text-lg items-center">
+          <div onClick={() => setOpen(!open)} className='cursor-pointer'>
+            <Search className="text-lg" />
+          </div>
+          <div
+            className="relative cursor-pointer"
+            onClick={() => {
+              if (cart?.cart && cart?.cart?.totalQuantity > 0)
+                dispatch(toggleCartModal());
+            }}
+          >
+            {cart?.cart && cart?.cart?.totalQuantity > 0 && (
+              <div className=" absolute text-sm -top-4 -right-2 p-1">
+                {cart?.cart?.totalQuantity > 99
+                  ? '99+'
+                  : cart?.cart?.totalQuantity}
+              </div>
+            )}
 
-          <ShoppingCart className="text-lg" />
+            <ShoppingCart className="text-lg" />
+          </div>
+          <div>
+            <User className="text-lg" />
+          </div>
         </div>
-        <User className="text-lg" />
+        <div className={`${open ? 'hidden' : 'block'}`}>
+          <SearchComponent open={open} setOpen={setOpen} />
+        </div>
       </div>
       <div className="flex justify-center items-center gap-4 py-6 xsm:p-6  xl:hidden w-[30%] md:w-[20%]">
         <div

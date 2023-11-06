@@ -1,0 +1,78 @@
+import React from 'react';
+import { Input } from '../ui/input';
+import { Search as SearchIcon } from 'lucide-react';
+
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '../ui/form';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+
+type searchProps = {
+  open: boolean;
+  setOpen: Function;
+};
+
+const formSchema = z.object({
+  search: z.string().min(2, {
+    message: 'Enter product name',
+  }),
+});
+
+const Search: React.FC<searchProps> = ({ open, setOpen }) => {
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      search: '',
+    },
+  });
+
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    // Do something with the form values.
+    // ✅ This will be type-safe and validated.
+    console.log({values},'search');
+  }
+
+  return (
+    <div
+      className={`hidden xl:block relative transition-all mx-6 duration-300 ease-in-out ${
+        open ? 'opacity-0 ' : 'opacity-100 '
+      } `}
+    >
+      {/* <SearchIcon className="absolute top-7 bottom-4 z-10 w-6 h-6 my-auto text-gray-500 right-8" /> */}
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="py-2">
+          <FormField
+            control={form.control}
+            name="search"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  {/* <Input placeholder="shadcn" {...field} /> */}
+                  {/* <SearchIcon className="absolute top-7 bottom-4 z-10 w-6 h-6 my-auto text-gray-500 -left-14" /> */}
+                  <Input
+                    className="absolute  m-2 w-48 right-4"
+                    type="text"
+                    placeholder="Search"
+                    autoFocus={true}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </form>
+      </Form>
+    </div>
+  );
+};
+
+export default Search;
