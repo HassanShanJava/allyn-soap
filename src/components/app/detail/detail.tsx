@@ -123,6 +123,7 @@ const Detail = (props: any) => {
   function toggleVariant(text: string) {
     const selectedVariant = variants?.find((item: any) => item?.title === text);
     setVariant(selectedVariant);
+    setRange(1);
   }
 
   return (
