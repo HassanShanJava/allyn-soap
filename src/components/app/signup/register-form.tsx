@@ -13,16 +13,39 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useToast } from '~/components/ui/use-toast';
 import { signupCustomerSchema } from '~/schema/customer';
+import { useState } from 'react';
+import { SignUpMutation } from '~/server/lib/shopify/mutations/auth';
+import { useMutation } from '@apollo/client';
 
 const RegisterForm = () => {
   const { toast } = useToast();
+  const [loading, setLoading] = useState(false);
 
   const form = useForm<z.infer<typeof signupCustomerSchema>>({
     resolver: zodResolver(signupCustomerSchema),
   });
+  const [customerAdd, { loading: customerAddLoading }] =
+    useMutation(SignUpMutation);
+
   async function onSubmit(values: z.infer<typeof signupCustomerSchema>) {
     try {
+      setLoading(true);
+      const customerAddData = await customerAdd({
+        variables: {
+          ...values,
+        },
+      });
+      console.log({ customerAddData });
+      if (!customerAddData?.data?.customerCreate?.customer)
+        throw new Error(`Customer Already Registered with following email.`);
+
+      toast({
+        variant: 'success',
+        title: 'Customer Registered Successfull!',
+      });
+      setLoading(false);
     } catch (error: any) {
+      setLoading(false);
       toast({
         variant: 'destructive',
         title: error.message,
@@ -125,8 +148,8 @@ const RegisterForm = () => {
               )}
             />
 
-            <Button type="submit" className="w-full" disabled={false}>
-              {false ? (
+            <Button type="submit" className="w-full" disabled={loading}>
+              {loading ? (
                 <i className="fa-solid fa-spinner fa-spin"></i>
               ) : (
                 'Sign Up'

@@ -32,11 +32,32 @@ interface reviewDialogInterface {
 }
 export const addCustomerReview = z.object({
   review_score: z.number(),
-  email: z.string().email().trim(),
+  email: z.string({ required_error: 'Please enter Email.' }).email().trim(),
 
-  review_title: z.string().trim(),
-  display_name: z.string().trim(),
-  review_content: z.string().trim(),
+  review_title: z
+    .string({ required_error: 'Please enter Title.' })
+    .min(1, {
+      message: 'Please enter Title.',
+    })
+    .refine((val) => (val.startsWith(' ') ? false : true), {
+      message: 'Please enter Title.',
+    }),
+  display_name: z
+    .string({ required_error: 'Please enter Name.' })
+    .min(1, {
+      message: 'Please enter Name.',
+    })
+    .refine((val) => (val.startsWith(' ') ? false : true), {
+      message: 'Please enter Name.',
+    }),
+  review_content: z
+    .string({ required_error: 'Please enter Review Content.' })
+    .min(1, {
+      message: 'Please enter Review Content.',
+    })
+    .refine((val) => (val.startsWith(' ') ? false : true), {
+      message: 'Please enter Review Content.',
+    }),
 });
 export function ReviewDialog(props: reviewDialogInterface) {
   const { toast } = useToast();
