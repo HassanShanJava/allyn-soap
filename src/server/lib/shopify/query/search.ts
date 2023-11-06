@@ -1,17 +1,28 @@
 import { gql } from '@apollo/client';
 import productFragment from '../fragments/product';
 export const getSearchProductsQuery = gql`
-query MyQuery($query: String = "soap ", $first: Int = 10) {
-  search(query: $query, first: $first) {
+query searchProducts(
+  $query: String!
+    $reverse: Boolean
+    $first: Int
+    $last: Int
+    $after: String
+    $before: String
+) {
+  search(
+    query:$query
+    reverse: $reverse
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    types: PRODUCT) {
     edges {
       node {
         ... on Product {
-          title
-          totalInventory
-          availableForSale
+          ...product
         }
       }
-      cursor
     }
     pageInfo {
       endCursor
@@ -20,4 +31,6 @@ query MyQuery($query: String = "soap ", $first: Int = 10) {
       startCursor
     }
   }
-}`
+}
+${productFragment}
+`

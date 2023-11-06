@@ -61,6 +61,7 @@ export function FilterContent(props: { isSheet: boolean; setModal?: any }) {
   });
   const dispatch = useDispatch();
   const router = useRouter();
+  const { id } = router.query;
   const { filters } = useSelector((state: RootState) => state.filters);
 
   const [range, setRange] = useState([5, 200]);
@@ -209,34 +210,36 @@ export function FilterContent(props: { isSheet: boolean; setModal?: any }) {
           )}
         </Accordion>
         <hr className="mt-4" />
-        <Accordion
-          type="single"
-          collapsible
-          className={`${poppins.variable} ${poppins.className} w-full`}
-        >
-          <AccordionItem value={`item-price`}>
-            <AccordionTrigger
-              className={`${poppins.variable} ${poppins.className} text-text text-xl font-bold`}
-            >
-              Price
-            </AccordionTrigger>
-            <AccordionContent className=" ">
-              <div>
-                <Slider
-                  defaultValue={range}
-                  value={range}
-                  min={1}
-                  max={200}
-                  className={`w-full my-6 ${poppins.variable} ${poppins.className}`}
-                  onValueChange={(e: any) => {
-                    setRange(e);
-                    setPriceChange(true);
-                  }}
-                />
-              </div>
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
+        {id !== 'search' && (
+          <Accordion
+            type="single"
+            collapsible
+            className={`${poppins.variable} ${poppins.className} w-full`}
+          >
+            <AccordionItem value={`item-price`}>
+              <AccordionTrigger
+                className={`${poppins.variable} ${poppins.className} text-text text-xl font-bold`}
+              >
+                Price
+              </AccordionTrigger>
+              <AccordionContent className=" ">
+                <div>
+                  <Slider
+                    defaultValue={range}
+                    value={range}
+                    min={1}
+                    max={200}
+                    className={`w-full my-6 ${poppins.variable} ${poppins.className}`}
+                    onValueChange={(e: any) => {
+                      setRange(e);
+                      setPriceChange(true);
+                    }}
+                  />
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        )}
 
         <div className="w-full max-w-lg mx-auto space-y-2">
           <Button

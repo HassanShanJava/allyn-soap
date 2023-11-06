@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/client';
+import { useLazyQuery, useQuery } from '@apollo/client';
 import { get } from 'jquery';
 
 import { ArrowLeft, ArrowRight } from 'lucide-react';
@@ -15,22 +15,20 @@ import { RootState } from '~/store/store';
 import { defaultSort } from '~/utils/constant';
 import { removeEdgesAndNodes } from '~/utils/helper';
 
-const ProductSearch = () => {
+const ProductSearch = (props:{search:string}) => {
   const router = useRouter();
   const id = router?.query?.id === 'search' ? router?.query?.id : '';
   const [search, setSearch] = useState('');
   console.log({ id });
   const dispatch = useDispatch();
-  useEffect(() => {
-    if (id) {
-      const searchQuery = localStorage.getItem('search') as string;
-      setSearch(searchQuery);
-    }
-  }, [id]);
+ 
+ 
   const { filters } = useSelector((state: RootState) => state.filters);
   const { error, data, loading } = useQuery(getSearchProductsQuery, {
-    variables: { query: search, ...filters },
+    variables: { query: props?.search,...filters },
+    
   });
+
   console.log({ data }, 'data serach');
   useEffect(() => {
     dispatch(
@@ -47,48 +45,45 @@ const ProductSearch = () => {
     );
   }, [router?.query?.id]);
 
-  //   const productData = data?.collection?.products
-  //     ? removeEdgesAndNodes(data?.collection?.products)
-  //     : [];
-  const productData: any = [];
+  const productData = data?.search ? removeEdgesAndNodes(data?.search) : [];
   const handleNextPage = () => {
-    // if (data?.collection?.products?.pageInfo?.hasNextPage) {
-    //   dispatch(
-    //     toggleFilters({
-    //       ...filters,
-    //       first: 12,
-    //       last: null,
-    //       after: data?.collection?.products?.pageInfo?.endCursor,
-    //       before: null,
-    //     }),
-    //   );
-    //   if (window) window?.scrollTo(0, 400);
-    // }
+    if (data?.search?.pageInfo?.hasNextPage) {
+      dispatch(
+        toggleFilters({
+          ...filters,
+          first: 12,
+          last: null,
+          after: data?.search?.pageInfo?.endCursor,
+          before: null,
+        }),
+      );
+      if (window) window?.scrollTo(0, 400);
+    }
   };
 
   const handlePrevPage = () => {
-    // if (data?.collection?.products?.pageInfo?.hasPreviousPage) {
-    //   dispatch(
-    //     toggleFilters({
-    //       ...filters,
-    //       first: null,
-    //       last: 12,
-    //       after: null,
-    //       before: data?.collection?.products?.pageInfo?.startCursor,
-    //     }),
-    //   );
-    //   if (window) window?.scrollTo(0, 400);
-    // }
+    if (data?.search?.pageInfo?.hasPreviousPage) {
+      dispatch(
+        toggleFilters({
+          ...filters,
+          first: null,
+          last: 12,
+          after: null,
+          before: data?.search?.pageInfo?.startCursor,
+        }),
+      );
+      if (window) window?.scrollTo(0, 400);
+    }
   };
   return (
     <div className="relative flex flex-col gap-4">
       {!loading ? (
         <div className=" grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4   gap-4">
-          {false ? (
+          {productData.length > 0 ? (
             productData.map((item: any, index: any) => {
               return (
                 <div key={index}>
-                  {/* <ProductCard item={item} index={index} /> */}
+                  <ProductCard item={item} index={index} />
                 </div>
               );
             })
@@ -121,7 +116,7 @@ const ProductSearch = () => {
                 className="h-9 flex  gap-2  w-max p-2 text-base rounded-lg"
                 onClick={() => handlePrevPage()}
                 disabled={
-                  data?.collection?.products?.pageInfo?.hasPreviousPage
+                  data?.search?.pageInfo?.hasPreviousPage
                     ? false
                     : true
                 }
@@ -136,7 +131,7 @@ const ProductSearch = () => {
                 className="h-9 flex  gap-2 w-max p-2 text-base rounded-lg"
                 onClick={() => handleNextPage()}
                 disabled={
-                  data?.collection?.products?.pageInfo?.hasNextPage
+                  data?.search?.pageInfo?.hasNextPage
                     ? false
                     : true
                 }

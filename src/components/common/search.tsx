@@ -46,7 +46,7 @@ const Search: React.FC<searchProps> = ({ open, setOpen }) => {
   return (
     <div
       className={`hidden xl:block relative transition-all mx-6 duration-300 ease-in-out ${
-        open ? 'opacity-0 ' : 'opacity-100 '
+        open ? 'opacity-100 ' : 'opacity-0 '
       } `}
     >
       {/* <SearchIcon className="absolute top-7 bottom-4 z-10 w-6 h-6 my-auto text-gray-500 right-8" /> */}
