@@ -13,7 +13,6 @@ const CmsContent = () => {
   } = useQuery(getPageDetail, {
     variables: { handle: router?.query?.index },
   });
-  console.log({ cmsData }, router?.query);
   return (
     <>
       {!loading ? (

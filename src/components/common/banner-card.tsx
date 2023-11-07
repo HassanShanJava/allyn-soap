@@ -26,7 +26,7 @@ const BannerCard = ({ banner, key, type }: any) => {
       setHide(true);
       const payload = removeEdgesAndNodes(data?.collectionByHandle?.products);
       setCollectionBannner(payload[0]);
-      console.log({ collectionBanner });
+
     } else {
       const searchQuery = localStorage.getItem('search') as string;
       setTitle(searchQuery);

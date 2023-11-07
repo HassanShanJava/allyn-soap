@@ -50,7 +50,6 @@ export default function Header() {
       const cartID = localStorage.getItem('cartID');
       if (cartID) {
         const cartData = await getCart({ variables: { cartId: cartID } });
-        console.log(cartData?.data, 'Cart DATA FOR REDUx');
         if (cartData?.data?.cart) {
           dispatch(
             toggleCart({
@@ -118,8 +117,6 @@ export default function Header() {
         {navList ? (
           <ul className="hidden xl:flex gap-4 text-sm  text-text-dark  xl:flex-row  xl:items-center ">
             {navList.map((item: Menu) => {
-              console.log({ id, item }, 'navitem');
-              // console.log()
               return (
                 <Link
                   key={item.title}

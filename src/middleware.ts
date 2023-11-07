@@ -11,7 +11,7 @@ export function middleware(request: NextRequest, response: NextResponse) {
       req: request,
       res: response,
     });
-    console.log({ token });
+
     if (request.nextUrl.pathname === '/login' && token)
       return NextResponse.redirect(new URL('/', request.url));
     if (request.nextUrl.pathname.includes('/register') && token)

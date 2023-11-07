@@ -58,7 +58,6 @@ export default function CartSheet() {
     }
     router.push(text);
   };
-  console.log(cart?.cart?.note, 'CartID drawer');
   return (
     <Sheet open={isCartOpen} onOpenChange={(e) => dispatch(toggleCartModal())}>
       <SheetContent

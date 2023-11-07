@@ -28,7 +28,6 @@ export const layoutSlice = createSlice({
       state.theme = action.payload;
     },
     toggleLang: (state, action: PayloadAction<Lang>) => {
-      console.log('action.payload', action.payload);
       state.lang = action.payload;
     },
   },
