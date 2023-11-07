@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import LogoImage from '~/public/assets/logo.png';
+import { useLazyQuery, useMutation, useQuery } from '@apollo/client';
+import { Search, ShoppingCart, User } from 'lucide-react';
+import { useDispatch, useSelector } from 'react-redux';
 import Image from 'next/image';
-
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { getCookie } from 'cookies-next';
+import LogoImage from '~/public/assets/logo.png';
 import { getMenuQuery } from '~/server/lib/shopify/query/menu';
-
-import { useLazyQuery, useQuery } from '@apollo/client';
-
 import { Menu } from '~/server/lib/shopify/type';
 import { getRoutData } from '~/utils/helper';
-import { Search, ShoppingCart, User } from 'lucide-react';
 import { getCartQuery } from '~/server/lib/shopify/query/cart';
 import { RootState } from '~/store/store';
-import { useDispatch, useSelector } from 'react-redux';
 import { toggleCart, toggleCartModal } from '~/store/reducers/cart';
-import { useRouter } from 'next/router';
 import SearchComponent from '~/components/common/search';
+import { toggleAuth } from '~/store/reducers/auth';
+import { CartUpdateMutation } from '~/server/lib/shopify/mutations/auth';
 interface SideBarMenuProps {
   nav: boolean;
   closeFn: React.Dispatch<React.SetStateAction<boolean>>;
@@ -28,11 +28,17 @@ export default function Header() {
   const [open, setOpen] = useState<boolean>(false);
   const [navList, setNavList] = useState([]);
   const { cart } = useSelector((state: RootState) => state.cart);
+  const { user } = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
   const router = useRouter();
   const id = router?.query?.id ?? '';
 
   const [getCart, { data: cartData }] = useLazyQuery(getCartQuery);
+  const [customerCartUpdate, { loading: customerCustomerUpdateLoading }] =
+    useMutation(CartUpdateMutation);
+  const { data } = useQuery(getMenuQuery, {
+    variables: { handle: 'main-menu' },
+  });
   // for changing color on scroll
   useEffect(() => {
     const changeColor = () =>
@@ -44,6 +50,7 @@ export default function Header() {
       window.removeEventListener('scroll', changeColor);
     };
   }, []);
+  console.log({ cart });
   // for cart
   useEffect(() => {
     (async () => {
@@ -61,12 +68,27 @@ export default function Header() {
         }
         // await getCart({ variables: { cartId: cartID } });
       }
+      const tokenID = await getCookie('allynssoapco_token');
+      if (tokenID) {
+        dispatch(
+          toggleAuth({
+            token_id: tokenID,
+            is_login: true,
+            user: null,
+          }),
+        );
+        if (cart?.cart_id && cart?.cart?.buyerIdentity?.customer) {
+          const customerCartData = await customerCartUpdate({
+            variables: {
+              cartId: cart?.cart_id,
+              customerAccessToken: tokenID,
+            },
+          });
+        }
+      }
     })();
   }, []);
 
-  const { data } = useQuery(getMenuQuery, {
-    variables: { handle: 'main-menu' },
-  });
   // for nav
   useEffect(() => {
     if (data) setNavList(data?.menu.items);
@@ -166,7 +188,7 @@ export default function Header() {
             <ShoppingCart className="text-lg" />
           </div>
           <div>
-            <Link href="/login">
+            <Link href={user?.is_login ? '#' : '/login'}>
               <User className="text-lg" />
             </Link>
           </div>

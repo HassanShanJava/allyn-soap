@@ -4,9 +4,11 @@ import categoryReducer from './reducers/category';
 import filtersReducer from './reducers/filters';
 import layoutReducer from './reducers/layout';
 import cartReducer from './reducers/cart';
+import authReducer from './reducers/auth';
 
 const store = configureStore({
   reducer: {
+    auth: authReducer,
     layout: layoutReducer,
     category: categoryReducer,
     filters: filtersReducer,

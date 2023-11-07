@@ -69,27 +69,27 @@ export default function CartSheet() {
             Shopping Cart
           </div>
           <div className=" text-text-light-gray capitalize text-sm md:text-xl">
-          {cart?.cart?.cost?.totalAmount?.amount > 100 ? (
-            'Free Shipping'
-          ) : (
-             <>
-              Buy{' '}
-              <span className=" text-text  font-bold ">
-                ${100 - cart?.cart?.cost?.totalAmount?.amount}
-              </span>{' '}
-              More and get{' '}
-              <span className=" text-text  font-bold ">free shipping</span>
-             </>
-          )}
+            {cart?.cart?.cost?.totalAmount?.amount > 100 ? (
+              'Free Shipping'
+            ) : (
+              <>
+                Buy{' '}
+                <span className=" text-text  font-bold ">
+                  ${100 - cart?.cart?.cost?.totalAmount?.amount}
+                </span>{' '}
+                More and get{' '}
+                <span className=" text-text  font-bold ">free shipping</span>
+              </>
+            )}
           </div>
         </SheetHeader>
-        <SheetDescription className=" h-[calc(100vh-6rem)] flex flex-col item-start justify-between  ">
-          <ScrollArea className="h-[38%] md:h-[48%]  pb-6   mt-2 pr-2   font-poppins w-full relative">
+        <SheetDescription className="relative h-[calc(100vh-6rem)]  flex flex-col item-start justify-between gap-2 ">
+          <ScrollArea className="h-full  pb-6     mt-2 pr-2   font-poppins w-full relative">
             <ScrollBar orientation="vertical" />
             <CartProduct products={lines} cart_id={cart?.cart_id} />
             {/* <FilterContent isSheet={true} /> */}
           </ScrollArea>
-          <div className="flex flex-col  justify-end mb-4 h-[52%]">
+          <div className="flex-1 flex flex-col   justify-end mb-4 h-full">
             <hr className="mb-6" />
             <div className="flex flex-col gap-4  space-y-4">
               <div>

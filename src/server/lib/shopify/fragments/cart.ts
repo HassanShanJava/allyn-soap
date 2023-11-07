@@ -6,6 +6,13 @@ const cartFragment = gql`
     id
     checkoutUrl
     note
+    buyerIdentity {
+      customer {
+        email
+        firstName
+        id
+      }
+    }
     cost {
       subtotalAmount {
         amount
