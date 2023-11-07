@@ -1,23 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import LogoImage from '~/public/assets/logo.png';
+import { useLazyQuery, useMutation, useQuery } from '@apollo/client';
+import { Search, ShoppingCart, User } from 'lucide-react';
+import { useDispatch, useSelector } from 'react-redux';
 import Image from 'next/image';
-
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { getCookie } from 'cookies-next';
+import LogoImage from '~/public/assets/logo.png';
 import { getMenuQuery } from '~/server/lib/shopify/query/menu';
-
-import { useLazyQuery, useQuery } from '@apollo/client';
 
 import { Search as SearchIcon } from 'lucide-react';
 
 import { Menu } from '~/server/lib/shopify/type';
 import { getRoutData } from '~/utils/helper';
-import { Search, ShoppingCart, User } from 'lucide-react';
 import { getCartQuery } from '~/server/lib/shopify/query/cart';
 import { RootState } from '~/store/store';
-import { useDispatch, useSelector } from 'react-redux';
 import { toggleCart, toggleCartModal } from '~/store/reducers/cart';
-import { useRouter } from 'next/router';
 import SearchComponent from '~/components/common/search';
+import { toggleAuth } from '~/store/reducers/auth';
+import { CartUpdateMutation } from '~/server/lib/shopify/mutations/auth';
 
 import {
   Form,
@@ -34,10 +35,6 @@ interface SideBarMenuProps {
   list?: any;
 }
 
-type mobileSearchProps = {
-  closeFn: Function;
-};
-
 const formSchema = z.object({
   search: z.string().min(2, {
     message: 'Enter product name',
@@ -50,11 +47,17 @@ export default function Header() {
   const [open, setOpen] = useState<boolean>(false);
   const [navList, setNavList] = useState([]);
   const { cart } = useSelector((state: RootState) => state.cart);
+  const { user } = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
   const router = useRouter();
   const id = router?.query?.id ?? '';
 
   const [getCart, { data: cartData }] = useLazyQuery(getCartQuery);
+  const [customerCartUpdate, { loading: customerCustomerUpdateLoading }] =
+    useMutation(CartUpdateMutation);
+  const { data } = useQuery(getMenuQuery, {
+    variables: { handle: 'main-menu' },
+  });
   // for changing color on scroll
   useEffect(() => {
     const changeColor = () =>
@@ -66,28 +69,45 @@ export default function Header() {
       window.removeEventListener('scroll', changeColor);
     };
   }, []);
+  console.log({ cart });
   // for cart
   useEffect(() => {
     (async () => {
-      const cartID = localStorage.getItem('cartID');
-      if (cartID) {
-        const cartData = await getCart({ variables: { cartId: cartID } });
-        if (cartData?.data?.cart) {
+      if (window) {
+        const cartID = localStorage.getItem('cartID');
+        if (cartID) {
+          const cartData = await getCart({ variables: { cartId: cartID } });
+          if (cartData?.data?.cart) {
+            dispatch(
+              toggleCart({
+                cart_id: cartID,
+                cart: { ...cartData?.data?.cart },
+              }),
+            );
+          }
+        }
+        const tokenID = await getCookie('allynssoapco_token');
+        if (tokenID) {
           dispatch(
-            toggleCart({
-              cart_id: cartID,
-              cart: { ...cartData?.data?.cart },
+            toggleAuth({
+              token_id: tokenID,
+              is_login: true,
+              user: null,
             }),
           );
+          if (cart?.cart_id && cart?.cart?.buyerIdentity?.customer) {
+            const customerCartData = await customerCartUpdate({
+              variables: {
+                cartId: cart?.cart_id,
+                customerAccessToken: tokenID,
+              },
+            });
+          }
         }
-        // await getCart({ variables: { cartId: cartID } });
       }
     })();
   }, []);
 
-  const { data } = useQuery(getMenuQuery, {
-    variables: { handle: 'main-menu' },
-  });
   // for nav
   useEffect(() => {
     if (data) setNavList(data?.menu.items);
@@ -185,7 +205,7 @@ export default function Header() {
             <ShoppingCart className="text-lg" />
           </div>
           <div>
-            <Link href="/login">
+            <Link href={user?.is_login ? '#' : '/login'}>
               <User className="text-lg" />
             </Link>
           </div>
@@ -228,6 +248,8 @@ export const SideBarMenu: React.FC<SideBarMenuProps> = ({
   list,
 }) => {
   const [searchInput, setInput] = useState('');
+  const { user } = useSelector((state: RootState) => state.auth);
+
   useEffect(() => {
     window.addEventListener('resize', () => closeFn(false));
     return () => {
@@ -247,7 +269,7 @@ export const SideBarMenu: React.FC<SideBarMenuProps> = ({
   function onSubmit(search: string) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    localStorage.setItem('search', search);
+    if (window) localStorage.setItem('search', search);
     router.push('/products/search');
     closeFn(false);
   }
@@ -327,6 +349,13 @@ export const SideBarMenu: React.FC<SideBarMenuProps> = ({
               </Link>
             );
           })}
+        <Link
+          href={user?.is_login ? '#' : '/login'}
+          className={`group py-3 text-lg w-full text-center border-y-[1px] 
+             border-gray-200 hover:bg-primary  hover:text-primary-foreground hover:border-transparent transition-colors duration-300 ease-in-out cursor-pointer`}
+        >
+          {user?.is_login ? 'My Account' : 'Login'}
+        </Link>
       </ul>
     </>
   );

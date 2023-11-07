@@ -14,6 +14,7 @@ import { useToast } from '~/components/ui/use-toast';
 import { loginCustomerSchema } from '~/schema/customer';
 import { useState } from 'react';
 import {
+  CartUpdateMutation,
   LoginMutation,
   SignUpMutation,
 } from '~/server/lib/shopify/mutations/auth';
@@ -21,18 +22,26 @@ import { useMutation } from '@apollo/client';
 import { loginToken } from '~/utils/helper';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleAuth } from '~/store/reducers/auth';
+import { RootState } from '~/store/store';
 
 const LoginForm = () => {
   const { toast } = useToast();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const { cart } = useSelector((state: RootState) => state.cart);
+
+  const dispatch = useDispatch();
 
   const form = useForm<z.infer<typeof loginCustomerSchema>>({
     resolver: zodResolver(loginCustomerSchema),
   });
   const [customerLogin, { loading: customerLoginLoading }] =
     useMutation(LoginMutation);
-
+  const [customerCartUpdate, { loading: customerCustomerUpdateLoading }] =
+    useMutation(CartUpdateMutation);
+  console.log(cart, 'cart data');
   async function onSubmit(values: z.infer<typeof loginCustomerSchema>) {
     try {
       setLoading(true);
@@ -50,10 +59,31 @@ const LoginForm = () => {
         customerLoginData?.data?.customerAccessTokenCreate?.customerAccessToken,
       );
       if (storeToken) {
+        dispatch(
+          toggleAuth({
+            token_id:
+              customerLoginData?.data?.customerAccessTokenCreate
+                ?.customerAccessToken?.accessToken,
+            is_login: true,
+            user: null,
+          }),
+        );
+        if (cart?.cart_id && !cart?.cart?.buyerIdentity?.customer) {
+          const customerCartData = await customerCartUpdate({
+            variables: {
+              cartId: cart?.cart_id,
+              customerAccessToken:
+                customerLoginData?.data?.customerAccessTokenCreate
+                  ?.customerAccessToken?.accessToken,
+            },
+          });
+          console.log({ customerCartData });
+        }
         toast({
           variant: 'success',
           title: 'Customer Login Successfully!',
         });
+
         setLoading(false);
         router.push('/');
       }

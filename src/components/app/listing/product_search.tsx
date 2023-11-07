@@ -15,17 +15,14 @@ import { RootState } from '~/store/store';
 import { defaultSort } from '~/utils/constant';
 import { removeEdgesAndNodes } from '~/utils/helper';
 
-const ProductSearch = (props:{search:string}) => {
+const ProductSearch = (props: { search: string }) => {
   const router = useRouter();
-  const id = router?.query?.id === 'search' ? router?.query?.id : '';
-  const [search, setSearch] = useState('');
+
   const dispatch = useDispatch();
- 
- 
+
   const { filters } = useSelector((state: RootState) => state.filters);
   const { error, data, loading } = useQuery(getSearchProductsQuery, {
-    variables: { query: props?.search,...filters },
-    
+    variables: { query: props?.search, ...filters },
   });
 
   useEffect(() => {
@@ -55,7 +52,7 @@ const ProductSearch = (props:{search:string}) => {
           before: null,
         }),
       );
-      if (window) window?.scrollTo(0, 400);
+      if (window) window?.scrollTo(0, 100);
     }
   };
 
@@ -70,7 +67,7 @@ const ProductSearch = (props:{search:string}) => {
           before: data?.search?.pageInfo?.startCursor,
         }),
       );
-      if (window) window?.scrollTo(0, 400);
+      if (window) window?.scrollTo(0, 100);
     }
   };
   return (
@@ -100,7 +97,6 @@ const ProductSearch = (props:{search:string}) => {
               </div>
             );
           })}
-
         </div>
       )}
       {
@@ -113,9 +109,7 @@ const ProductSearch = (props:{search:string}) => {
                 className="h-9 flex  gap-2  w-max p-2 text-base rounded-lg"
                 onClick={() => handlePrevPage()}
                 disabled={
-                  data?.search?.pageInfo?.hasPreviousPage
-                    ? false
-                    : true
+                  data?.search?.pageInfo?.hasPreviousPage ? false : true
                 }
               >
                 <ArrowLeft className="h-4 w-4" />
@@ -127,11 +121,7 @@ const ProductSearch = (props:{search:string}) => {
                 variant="outline"
                 className="h-9 flex  gap-2 w-max p-2 text-base rounded-lg"
                 onClick={() => handleNextPage()}
-                disabled={
-                  data?.search?.pageInfo?.hasNextPage
-                    ? false
-                    : true
-                }
+                disabled={data?.search?.pageInfo?.hasNextPage ? false : true}
               >
                 <span className=" ">Next</span>
                 <ArrowRight className="h-4 w-4" />

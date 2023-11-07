@@ -17,9 +17,11 @@ import { useState } from 'react';
 import { SignUpMutation } from '~/server/lib/shopify/mutations/auth';
 import { useMutation } from '@apollo/client';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const RegisterForm = () => {
   const { toast } = useToast();
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
 
   const form = useForm<z.infer<typeof signupCustomerSchema>>({
@@ -44,6 +46,7 @@ const RegisterForm = () => {
         variant: 'success',
         title: 'Customer Registered Successfull!',
       });
+      router.push('/login');
       setLoading(false);
     } catch (error: any) {
       setLoading(false);

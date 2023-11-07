@@ -1,4 +1,5 @@
 import { gql } from '@apollo/client';
+import cartFragment from '../fragments/cart';
 
 export const SignUpMutation = gql`
   mutation MyRegister(
@@ -34,4 +35,18 @@ export const LoginMutation = gql`
       }
     }
   }
+`;
+
+export const CartUpdateMutation = gql`
+  mutation MyMutation($cartId: ID!, $customerAccessToken: String!) {
+    cartBuyerIdentityUpdate(
+      buyerIdentity: { customerAccessToken: $customerAccessToken }
+      cartId: $cartId
+    ) {
+      cart {
+        ...cart
+      }
+    }
+  }
+  ${cartFragment}
 `;
