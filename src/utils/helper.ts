@@ -57,6 +57,13 @@ export const validateEmail = (email: string): boolean => {
 
   const domain = emailParts[1];
   const domainParts = domain?.split('.');
+  if (
+    domainParts &&
+    ['google', 'yahoo', 'outlook'].find((item) => domainParts.includes(item))
+  ) {
+    // Ensure there's at least one subdomain and a top-level domain
+    return false;
+  }
 
   if (domainParts && domainParts.length < 2) {
     // Ensure there's at least one subdomain and a top-level domain
@@ -71,4 +78,8 @@ export const validateEmail = (email: string): boolean => {
   }
 
   return true;
+};
+export const validateRegixEmail = (email: string): boolean => {
+  const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/;
+  return regex.test(email);
 };

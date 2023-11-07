@@ -22,7 +22,7 @@ import {
 import { Input } from '~/components/ui/input';
 import ReactStars from 'react-stars';
 import { poppins } from '~/components/layouts/app';
-import { validateEmail } from '~/utils/helper';
+import { validateEmail, validateRegixEmail } from '~/utils/helper';
 
 interface reviewDialogInterface {
   isModal: boolean;
