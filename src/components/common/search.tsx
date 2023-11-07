@@ -80,9 +80,7 @@ const Search: React.FC<searchProps> = ({ open, setOpen }) => {
       </div>
 
       <div
-        className={`block xl:hidden relative transition-all mx-6 duration-300 ease-in-out ${
-          open ? 'opacity-100 ' : 'opacity-0 '
-        } `}
+        className={`block xl:hidden relative transition-all  duration-300 ease-in-out `}
       >
         {/* <SearchIcon className="absolute top-7 bottom-4 z-10 w-6 h-6 my-auto text-gray-500 right-8" /> */}
         <Form {...form}>
@@ -96,7 +94,7 @@ const Search: React.FC<searchProps> = ({ open, setOpen }) => {
                     {/* <Input placeholder="shadcn" {...field} /> */}
                     {/* <SearchIcon className="absolute top-7 bottom-4 z-10 w-6 h-6 my-auto text-gray-500 -left-14" /> */}
                     <Input
-                      className="absolute  m-2 h-8 w-48 right-4"
+                      className=" h-8 w-full"
                       type="text"
                       placeholder="Search"
                       autoFocus={true}
