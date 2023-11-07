@@ -222,23 +222,24 @@ export const SideBarMenu: React.FC<SideBarMenuProps> = ({
     <>
       {nav && (
         <>
-          <div className="absolute flex w-full justify-between items-center p-4 xsm:px-6 py-6 xsm:py-5 md:py-4 z-50 bg-secondary ">
-            <div className="w-[80%]">
-              <Link
-                href="/"
-                className="w-full items-center  "
+          <div className="absolute w-full flex flex-col gap-2 bg-secondary p-4 xsm:px-6 py-6 xsm:py-5 md:py-4 z-50">
+            <div className="flex w-full justify-between items-center ">
+              <div className="w-[80%]">
+                <Link
+                  href="/"
+                  className="w-full items-center  "
+                  onClick={() => closeFn(false)}
+                >
+                  <Image src={LogoImage} alt="/" width={80} height={80} />
+                </Link>
+              </div>
+
+              <i
                 onClick={() => closeFn(false)}
-              >
-                <Image src={LogoImage} alt="/" width={80} height={80} />
-              </Link>
+                className="fas fa-xmark text-3xl w-[20%] text-center hover:cursor-pointer  "
+              ></i>
             </div>
 
-            <i
-              onClick={() => closeFn(false)}
-              className="fas fa-xmark text-3xl w-[20%] text-center hover:cursor-pointer  "
-            ></i>
-          </div>
-          <div>
             <SearchComponent open={open} setOpen={setOpen} />
           </div>
         </>
