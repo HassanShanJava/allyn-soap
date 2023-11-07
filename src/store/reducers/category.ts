@@ -29,7 +29,6 @@ export const categorySlice = createSlice({
   initialState,
   reducers: {
     toggleCategory: (state, action: PayloadAction<Category>) => {
-      console.log('action.payload', action.payload);
       state.category = action.payload;
     },
   },

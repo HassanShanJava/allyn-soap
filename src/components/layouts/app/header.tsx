@@ -8,6 +8,9 @@ import { useRouter } from 'next/router';
 import { getCookie } from 'cookies-next';
 import LogoImage from '~/public/assets/logo.png';
 import { getMenuQuery } from '~/server/lib/shopify/query/menu';
+
+import { Search as SearchIcon } from 'lucide-react';
+
 import { Menu } from '~/server/lib/shopify/type';
 import { getRoutData } from '~/utils/helper';
 import { getCartQuery } from '~/server/lib/shopify/query/cart';
@@ -16,11 +19,23 @@ import { toggleCart, toggleCartModal } from '~/store/reducers/cart';
 import SearchComponent from '~/components/common/search';
 import { toggleAuth } from '~/store/reducers/auth';
 import { CartUpdateMutation } from '~/server/lib/shopify/mutations/auth';
+
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Input } from '~/components/ui/input';
+import { Button } from '~/components/ui/button';
 interface SideBarMenuProps {
   nav: boolean;
   closeFn: React.Dispatch<React.SetStateAction<boolean>>;
   list?: any;
 }
+
+const formSchema = z.object({
+  search: z.string().min(2, {
+    message: 'Enter product name',
+  }),
+});
 
 export default function Header() {
   const [color, setColor] = useState(false);
@@ -57,7 +72,6 @@ export default function Header() {
       const cartID = localStorage.getItem('cartID');
       if (cartID) {
         const cartData = await getCart({ variables: { cartId: cartID } });
-        console.log(cartData?.data, 'Cart DATA FOR REDUx');
         if (cartData?.data?.cart) {
           dispatch(
             toggleCart({
@@ -66,7 +80,6 @@ export default function Header() {
             }),
           );
         }
-        // await getCart({ variables: { cartId: cartID } });
       }
       const tokenID = await getCookie('allynssoapco_token');
       if (tokenID) {
@@ -140,8 +153,6 @@ export default function Header() {
         {navList ? (
           <ul className="hidden xl:flex gap-4 text-sm  text-text-dark  xl:flex-row  xl:items-center ">
             {navList.map((item: Menu) => {
-              console.log({ id, item }, 'navitem');
-              // console.log()
               return (
                 <Link
                   key={item.title}
@@ -230,6 +241,9 @@ export const SideBarMenu: React.FC<SideBarMenuProps> = ({
   closeFn,
   list,
 }) => {
+  const [searchInput, setInput] = useState('');
+  const { user } = useSelector((state: RootState) => state.auth);
+
   useEffect(() => {
     window.addEventListener('resize', () => closeFn(false));
     return () => {
@@ -237,39 +251,77 @@ export const SideBarMenu: React.FC<SideBarMenuProps> = ({
     };
   }, []);
 
-  const [open, setOpen] = useState(false);
-  // const menuList = list ? [...list]:[];
+  // for search
+  const router = useRouter();
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      search: '',
+    },
+  });
+
+  function onSubmit(search: string) {
+    // Do something with the form values.
+    // ✅ This will be type-safe and validated.
+    localStorage.setItem('search', search);
+    router.push('/products/search');
+    form.reset();
+    closeFn(false);
+  }
 
   return (
     <>
       {nav && (
         <>
-          <div className="absolute flex w-full justify-between items-center p-4 xsm:px-6 py-6 xsm:py-5 md:py-4 z-50 bg-secondary ">
-            <div className="w-[80%]">
-              <Link
-                href="/"
-                className="w-full items-center  "
+          <div className="absolute  w-full flex flex-col gap-4 bg-secondary p-4 xsm:px-6  xsm:py-5 md:py-4 z-50">
+            <div className="flex mt-4 w-full justify-between items-center ">
+              <div className="w-[80%]">
+                <Link
+                  href="/"
+                  className="w-full items-center  "
+                  onClick={() => closeFn(false)}
+                >
+                  <Image src={LogoImage} alt="/" width={80} height={80} />
+                </Link>
+              </div>
+
+              <i
                 onClick={() => closeFn(false)}
-              >
-                <Image src={LogoImage} alt="/" width={80} height={80} />
-              </Link>
+                className="fas fa-xmark text-3xl  text-center hover:cursor-pointer  "
+              ></i>
             </div>
 
-            <i
-              onClick={() => closeFn(false)}
-              className="fas fa-xmark text-3xl w-[20%] text-center hover:cursor-pointer  "
-            ></i>
-          </div>
-          <div>
-            <SearchComponent open={open} setOpen={setOpen} />
+            {/* search input */}
+            <div>
+              <div className="flex justify-between">
+                <Input
+                  className="rounded-none focus-visible:ring-0  border-0 border-transparent  h-10  w-full"
+                  type="text"
+                  placeholder="Search"
+                  autoFocus={true}
+                  // {...field}
+                  onChange={(e) => setInput(e.target.value)}
+                />
+                <Button
+                  type="submit"
+                  className="text-center rounded-none bg-primary h-10 "
+                  onClick={() => {
+                    onSubmit(searchInput);
+                    closeFn(false);
+                  }}
+                >
+                  <SearchIcon className="text-secondary " />
+                </Button>
+              </div>
+            </div>
           </div>
         </>
       )}
       <ul
-        className={`z-10 pb-4 block font-poppins  transition-all ease-linear xl:hidden  overflow-y-scroll scroll-hide ${
+        className={`z-10  block font-poppins  transition-all ease-linear xl:hidden  overflow-y-scroll scroll-hide ${
           nav
-            ? 'absolute top-0 left-0 duration-100 w-full h-screen bg-secondary flex flex-col justify-start items-center pt-32'
-            : 'absolute top-32 left-[-100%] hidden duration-100'
+            ? 'absolute top-0 left-0 duration-100 w-full h-screen bg-secondary flex flex-col justify-start items-center pt-48'
+            : 'absolute top-48 left-[-100%] hidden duration-100'
         }`}
       >
         {list &&
@@ -290,6 +342,13 @@ export const SideBarMenu: React.FC<SideBarMenuProps> = ({
               </Link>
             );
           })}
+        <Link
+          href={user?.is_login ? '#' : '/login'}
+          className={`group py-3 text-lg w-full text-center border-y-[1px] 
+             border-gray-200 hover:bg-primary  hover:text-primary-foreground hover:border-transparent transition-colors duration-300 ease-in-out cursor-pointer`}
+        >
+          {user?.is_login ? 'My Account' : 'Login'}
+        </Link>
       </ul>
     </>
   );

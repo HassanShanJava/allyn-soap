@@ -1,7 +1,6 @@
 import { Skeleton } from '~/components/ui/skeleton';
 
 const FilterSkeleton = () => {
-  //   console.log({category})
 
   return (
     <div className="relative w-full mt-4">

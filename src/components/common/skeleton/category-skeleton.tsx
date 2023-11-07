@@ -1,7 +1,6 @@
 import { Skeleton } from '~/components/ui/skeleton';
 
 const CategorySkeleton = () => {
-  //   console.log({category})
 
   return (
     <div

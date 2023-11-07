@@ -6,7 +6,6 @@ import Link from 'next/link';
 
 const ArrivalCard = (props: { item: any; index: number }) => {
   const { category } = useSelector((state: RootState) => state.category);
-  //   console.log({category})
 
   return (
     <Link href={`/product-detail/${props?.item?.handle}`}>
