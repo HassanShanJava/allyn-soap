@@ -15,10 +15,15 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/router';
+import { Button } from '../ui/button';
 
 type searchProps = {
   open: boolean;
   setOpen: Function;
+};
+
+type mobileSearchProps = {
+  closeFn: Function;
 };
 
 const formSchema = z.object({
@@ -46,7 +51,7 @@ const Search: React.FC<searchProps> = ({ open, setOpen }) => {
   }
 
   return (
-    <>
+    <React.Fragment>
       <div
         className={`hidden xl:block relative transition-all mx-6 duration-300 ease-in-out ${
           open ? 'opacity-100 ' : 'opacity-0 '
@@ -78,38 +83,9 @@ const Search: React.FC<searchProps> = ({ open, setOpen }) => {
           </form>
         </Form>
       </div>
-
-      <div
-        className={`block xl:hidden relative transition-all  duration-300 ease-in-out `}
-      >
-        {/* <SearchIcon className="absolute top-7 bottom-4 z-10 w-6 h-6 my-auto text-gray-500 right-8" /> */}
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="">
-            <FormField
-              control={form.control}
-              name="search"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    {/* <Input placeholder="shadcn" {...field} /> */}
-                    {/* <SearchIcon className="absolute top-7 bottom-4 z-10 w-6 h-6 my-auto text-gray-500 -left-14" /> */}
-                    <Input
-                      className=" h-8 w-full"
-                      type="text"
-                      placeholder="Search"
-                      autoFocus={true}
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </form>
-        </Form>
-      </div>
-    </>
+    </React.Fragment>
   );
 };
 
 export default Search;
+
