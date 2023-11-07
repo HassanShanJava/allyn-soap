@@ -54,7 +54,7 @@ export const signupCustomerSchema = z.object({
       'Password must contain at least one special character',
     )
     .refine((val) => (val.includes(' ') ? false : true), {
-      message: 'Please enter your password',
+      message: 'Password must not contain whitespaces.',
     }),
 });
 
@@ -88,5 +88,7 @@ export const loginCustomerSchema = z.object({
       /[!@#$%^&*(),.?":{}|<>]/,
       'Password must contain at least one special character',
     )
-    .trim(),
+    .refine((val) => (val.includes(' ') ? false : true), {
+      message: 'Password must not contain whitespaces.',
+    }),
 });
