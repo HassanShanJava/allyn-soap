@@ -3,7 +3,7 @@ import { getCookies, setCookie, deleteCookie, getCookie } from 'cookies-next';
 import { truncate } from 'fs/promises';
 
 export const removeEdgesAndNodes = (array: Connection<any>) => {
-  return array.edges.map((edge: any) => edge?.node);
+  return array?.edges?.map((edge: any) => edge?.node);
 };
 export const getRoutData = (url: string) => {
   const data = url?.split('/');

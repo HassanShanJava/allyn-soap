@@ -20,12 +20,7 @@ const BannerSection = () => {
       first: 5,
     },
   });
-  // let productData;
-  // if (!loading) {
-  // productData = removeEdgesAndNodes(data?.products);
-
-  // console.log({ productData });
-  // }
+  
   useEffect(() => {
     if (data) {
       const sliderdata: any = removeEdgesAndNodes(data?.products);

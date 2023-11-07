@@ -33,7 +33,7 @@ export default function Header() {
   const id = router?.query?.id ?? '';
 
   const [getCart, { data: cartData }] = useLazyQuery(getCartQuery);
-
+  // for changing color on scroll
   useEffect(() => {
     const changeColor = () =>
       window.scrollY >= 100 ? setColor(true) : setColor(false);
@@ -44,6 +44,7 @@ export default function Header() {
       window.removeEventListener('scroll', changeColor);
     };
   }, []);
+  // for cart
   useEffect(() => {
     (async () => {
       const cartID = localStorage.getItem('cartID');
@@ -66,9 +67,11 @@ export default function Header() {
   const { data } = useQuery(getMenuQuery, {
     variables: { handle: 'main-menu' },
   });
+  // for nav
   useEffect(() => {
     if (data) setNavList(data?.menu.items);
   }, [data]);
+  // for cart
   useEffect(() => {
     console.log(router?.query, 'router?.query');
     if (router?.query?.status == 'true') {
@@ -83,6 +86,13 @@ export default function Header() {
       router.replace('/');
     }
   }, [router?.query]);
+  // for closing search on resize
+  useEffect(() => {
+    window.addEventListener('resize', () => setOpen(false));
+    return () => {
+      window.removeEventListener('resize', () => setOpen(false));
+    };
+  }, []);
 
   return (
     <nav
@@ -205,27 +215,33 @@ export const SideBarMenu: React.FC<SideBarMenuProps> = ({
     };
   }, []);
 
+  const [open, setOpen] = useState(false);
   // const menuList = list ? [...list]:[];
 
   return (
     <>
       {nav && (
-        <div className="absolute flex w-full justify-between items-center p-4 xsm:px-6 py-6 xsm:py-5 md:py-4 z-50 bg-secondary ">
-          <div className="w-[80%]">
-            <Link
-              href="/"
-              className="w-full items-center  "
-              onClick={() => closeFn(false)}
-            >
-              <Image src={LogoImage} alt="/" width={80} height={80} />
-            </Link>
-          </div>
+        <>
+          <div className="absolute flex w-full justify-between items-center p-4 xsm:px-6 py-6 xsm:py-5 md:py-4 z-50 bg-secondary ">
+            <div className="w-[80%]">
+              <Link
+                href="/"
+                className="w-full items-center  "
+                onClick={() => closeFn(false)}
+              >
+                <Image src={LogoImage} alt="/" width={80} height={80} />
+              </Link>
+            </div>
 
-          <i
-            onClick={() => closeFn(false)}
-            className="fas fa-xmark text-3xl w-[20%] text-center hover:cursor-pointer  "
-          ></i>
-        </div>
+            <i
+              onClick={() => closeFn(false)}
+              className="fas fa-xmark text-3xl w-[20%] text-center hover:cursor-pointer  "
+            ></i>
+          </div>
+          <div>
+            <SearchComponent open={open} setOpen={setOpen} />
+          </div>
+        </>
       )}
       <ul
         className={`z-10 pb-4 block font-poppins  transition-all ease-linear xl:hidden  overflow-y-scroll scroll-hide ${

@@ -83,7 +83,7 @@ const Detail = (props: any) => {
                   cart: { ...cartData?.data?.cart },
                 }),
               );
-          }
+          }     
         }
       } else {
         cartAddData = await cartAdd({

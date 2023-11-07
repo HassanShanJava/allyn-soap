@@ -33,7 +33,7 @@ function Index({ children }: DefaultLayoutProps) {
   const apolloClient = new ApolloClient({
     ssrMode: typeof window === 'undefined',
     link: new HttpLink({
-      uri: `https://${process.env.NEXT_PUBLIC_SHOPIFY_DOMAIN as string}.myshopify.com/api/2023-01/graphql.json`, // Replace with your Shopify store URL
+      uri: `https://${process.env.NEXT_PUBLIC_SHOPIFY_DOMAIN as string}.myshopify.com/api/2023-10/graphql.json`, // Replace with your Shopify store URL
       headers: {
         'X-Shopify-Storefront-Access-Token': process.env
           .NEXT_PUBLIC_SHOPIFY_HEADER as string, // Replace with your Shopify access token
