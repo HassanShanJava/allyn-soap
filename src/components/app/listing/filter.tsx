@@ -111,7 +111,6 @@ export function FilterContent(props: { isSheet: boolean; setModal?: any }) {
       props?.setModal(false);
     }
   };
-  console.log({ router }, 'filter router');
   return (
     <div className="  p-4 text-text font-poppins">
       <div className="flex items-center justify-between text-dark border-b border-border-light pb-4 ">

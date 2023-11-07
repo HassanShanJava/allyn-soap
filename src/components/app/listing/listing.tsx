@@ -26,12 +26,8 @@ const ListingSection = () => {
 
   const [modal, setModal] = useState(false);
   const { filters } = useSelector((state: RootState) => state.filters);
-  useEffect(() => {
-    if (id === 'search') {
-      const searchQuery = localStorage.getItem('search') as string;
-      setSearch(searchQuery);
-    }
-  }, [id]);
+  const searchQuery = localStorage.getItem('search') as string;
+
   function toggleFilter(text: string) {
     dispatch(
       toggleFilters({
@@ -130,7 +126,7 @@ const ListingSection = () => {
           {id !== 'search' ? (
             <ProductListing />
           ) : (
-            <ProductSearch search={search} />
+            <ProductSearch search={searchQuery} />
           )}
         </div>
       </div>

@@ -23,7 +23,7 @@ const ArrivalSlider = () => {
   const newArrivalData = data?.products
     ? removeEdgesAndNodes(data?.products)
     : [];
-  console.log({ newArrivalData });
+
   const next = () => {
     slider?.current?.slickNext();
 

@@ -19,7 +19,6 @@ const ProductSearch = (props:{search:string}) => {
   const router = useRouter();
   const id = router?.query?.id === 'search' ? router?.query?.id : '';
   const [search, setSearch] = useState('');
-  console.log({ id });
   const dispatch = useDispatch();
  
  
@@ -29,7 +28,6 @@ const ProductSearch = (props:{search:string}) => {
     
   });
 
-  console.log({ data }, 'data serach');
   useEffect(() => {
     dispatch(
       toggleFilters({
@@ -103,7 +101,6 @@ const ProductSearch = (props:{search:string}) => {
             );
           })}
 
-          {/* <LoadingContent text={'Loading...'} /> */}
         </div>
       )}
       {

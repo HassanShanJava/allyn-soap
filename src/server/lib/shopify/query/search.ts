@@ -21,6 +21,7 @@ query searchProducts(
       node {
         ... on Product {
           ...product
+          totalInventory
         }
       }
     }

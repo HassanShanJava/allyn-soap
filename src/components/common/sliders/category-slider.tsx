@@ -16,7 +16,7 @@ const CategorySlider = () => {
   const collectionData = data?.collections
     ? removeEdgesAndNodes(data?.collections)
     : [];
-  console.log({ collectionData });
+
   const next = () => {
     slider?.current?.slickNext();
 
