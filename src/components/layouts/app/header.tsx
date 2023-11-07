@@ -21,13 +21,8 @@ import SearchComponent from '~/components/common/search';
 
 import {
   Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
 } from '~/components/ui/form';
+
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -254,7 +249,6 @@ export const SideBarMenu: React.FC<SideBarMenuProps> = ({
     // ✅ This will be type-safe and validated.
     localStorage.setItem('search', search);
     router.push('/products/search');
-    form.reset();
     closeFn(false);
   }
 
@@ -282,26 +276,28 @@ export const SideBarMenu: React.FC<SideBarMenuProps> = ({
 
             {/* search input */}
             <div>
-              <div className="flex justify-between">
-                <Input
-                  className="rounded-none focus-visible:ring-0  border-0 border-transparent  h-10  w-full"
-                  type="text"
-                  placeholder="Search"
-                  autoFocus={true}
-                  // {...field}
-                  onChange={(e) => setInput(e.target.value)}
-                />
-                <Button
-                  type="submit"
-                  className="text-center rounded-none bg-primary h-10 "
-                  onClick={() => {
-                    onSubmit(searchInput);
-                    closeFn(false);
-                  }}
-                >
-                  <SearchIcon className="text-secondary " />
-                </Button>
-              </div>
+              <Form {...form}>
+                <div className="flex justify-between">
+                  <Input
+                    className="rounded-none focus-visible:ring-0  border-0 border-transparent  h-10  w-full"
+                    type="text"
+                    placeholder="Search"
+                    autoFocus={true}
+                    // {...field}
+                    onChange={(e) => setInput(e.target.value)}
+                  />
+                  <Button
+                    type="submit"
+                    className="text-center rounded-none bg-primary h-10 "
+                    onClick={() => {
+                      onSubmit(searchInput);
+                      closeFn(false);
+                    }}
+                  >
+                    <SearchIcon className="text-secondary " />
+                  </Button>
+                </div>
+              </Form>
             </div>
           </div>
         </>
