@@ -120,6 +120,9 @@ const LoginForm = () => {
                 </FormItem>
               )}
             />
+            <p className="-mt-4 mb-8 text-sm underline text-text-light cursor-pointer">
+              Forgot your password?
+            </p>
 
             <Button type="submit" className="w-full" disabled={loading}>
               {loading ? (
