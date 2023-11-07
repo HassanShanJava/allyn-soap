@@ -63,8 +63,13 @@ const ListingSection = () => {
       <div className=" relative w-full col-span-12 lg:col-span-9 text-black  ">
         <div className="relative flex flex-col gap-8">
           <div className=" flex  lg:flex-row justify-start   lg:justify-between flex-col-reverse">
-            <p className="w-full text-text text-4xl capitalize font-semibold">
-              {id?.toString()?.replaceAll('-', ' ')}
+            <p className="w-full text-text text-2xl md:text-4xl capitalize font-semibold">
+              {id?.toString()?.replaceAll('-', ' ')}{' '}
+              {id === 'search' ? (
+                <span className="md:hidden">{`for "${searchQuery}"`}</span>
+              ) : (
+                ''
+              )}
             </p>
             <div className="w-full flex  flex-row  items-end justify-end xsm:justify-end gap-2 xsm:gap-4">
               <p
