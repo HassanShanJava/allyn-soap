@@ -6,8 +6,6 @@ module.exports = {
   },
 
   images: {
-    unoptimized: true,
-    dangerouslyAllowSVG: true,
     formats: ['image/avif', 'image/webp'],
     remotePatterns: [
       {
