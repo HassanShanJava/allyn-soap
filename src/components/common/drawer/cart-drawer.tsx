@@ -65,29 +65,31 @@ export default function CartSheet() {
         className={` ${poppins.variable} ${poppins.className} w-full pt-4  md:min-w-[420px] h-screen flex flex-col`}
       >
         <SheetHeader>
-          <div className=" text-text font-bold !font-poppins text-3xl">
+          <div className=" text-text font-bold !font-poppins text-xl md:text-3xl">
             Shopping Cart
           </div>
+          <div className=" text-text-light-gray capitalize text-sm md:text-xl">
           {cart?.cart?.cost?.totalAmount?.amount > 100 ? (
             'Free Shipping'
           ) : (
-            <div className=" text-text-light-gray capitalize text-xl">
+             <>
               Buy{' '}
               <span className=" text-text  font-bold ">
                 ${100 - cart?.cart?.cost?.totalAmount?.amount}
               </span>{' '}
               More and get{' '}
               <span className=" text-text  font-bold ">free shipping</span>
-            </div>
+             </>
           )}
+          </div>
         </SheetHeader>
-        <SheetDescription className=" h-screen  flex flex-col item-start justify-between  ">
-          <ScrollArea className="h-[54%]  pb-6   mt-2 pr-2   font-poppins w-full relative">
+        <SheetDescription className=" h-[calc(100vh-6rem)] flex flex-col item-start justify-between  ">
+          <ScrollArea className="h-[38%] md:h-[48%]  pb-6   mt-2 pr-2   font-poppins w-full relative">
             <ScrollBar orientation="vertical" />
             <CartProduct products={lines} cart_id={cart?.cart_id} />
             {/* <FilterContent isSheet={true} /> */}
           </ScrollArea>
-          <div className=" items-start h-[46%]">
+          <div className="flex flex-col  justify-end mb-4 h-[52%]">
             <hr className="mb-6" />
             <div className="flex flex-col gap-4  space-y-4">
               <div>
