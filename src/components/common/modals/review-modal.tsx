@@ -135,9 +135,18 @@ export function ReviewDialog(props: reviewDialogInterface) {
     form.setValue('review_score', newRating);
     setRating(newRating);
   };
+  const handleClose = () => {
+    props.setIsModal(!props?.isModal);
+    form.resetField('display_name');
+    form.resetField('email');
+    form.resetField('review_content');
+    form.resetField('review_score');
+    form.resetField('review_title');
+    setRating(0);
+  };
   return (
     <>
-      <Dialog open={props?.isModal} onOpenChange={(e) => props.setIsModal(e)}>
+      <Dialog open={props?.isModal} onOpenChange={(e) => handleClose()}>
         <DialogContent
           className={`${poppins.variable} ${poppins.className} sm:max-w-[425px]`}
         >
@@ -264,9 +273,7 @@ export function ReviewDialog(props: reviewDialogInterface) {
                         variant="secondary"
                         type="button"
                         disabled={loading}
-                        onClick={() => {
-                          props.setIsModal(!props?.isModal);
-                        }}
+                        onClick={() => handleClose()}
                       >
                         Cancel
                       </Button>
@@ -285,20 +292,8 @@ export function ReviewDialog(props: reviewDialogInterface) {
               </div>
             </DialogDescription>
           </DialogHeader>
-          {/* <DialogFooter>
-            <Button
-              variant={'secondary'}
-              onClick={() => props.setIsModal(false)}
-            >
-              NO
-            </Button>
-            <Button type="submit" onClick={() => handleClick()}>
-              YES
-            </Button>
-          </DialogFooter> */}
         </DialogContent>
       </Dialog>
-      {/* <LoadingDialog open={loading} text={'Saving data...'} /> */}
     </>
   );
 }

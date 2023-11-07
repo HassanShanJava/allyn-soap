@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { validateEmail } from '~/utils/helper';
 
 export const signupCustomerSchema = z.object({
   firstName: z
@@ -9,7 +10,9 @@ export const signupCustomerSchema = z.object({
     .max(30, {
       message: 'firstname must not exceed 30 characters',
     })
-    .trim(),
+    .refine((val) => (val.startsWith(' ') ? false : true), {
+      message: 'Please enter your firstname',
+    }),
   lastName: z
     .string({ required_error: 'Please enter your lastname' })
     .min(2, {
@@ -18,7 +21,9 @@ export const signupCustomerSchema = z.object({
     .max(30, {
       message: 'lastname must not exceed 30 characters',
     })
-    .trim(),
+    .refine((val) => (val.startsWith(' ') ? false : true), {
+      message: 'Please enter your lastname',
+    }),
   email: z
     .string({
       required_error: 'Please enter your email',
@@ -27,9 +32,11 @@ export const signupCustomerSchema = z.object({
     .email({
       message: 'Please use a valid email ',
     })
-    .trim()
     .refine((val) => (val.includes('*') ? false : true), {
       message: 'Please use a valid email ',
+    })
+    .refine((val) => validateEmail(val), {
+      message: 'Invalid email format.',
     }),
   password: z
     .string({ required_error: 'Please enter your password' })
@@ -46,7 +53,9 @@ export const signupCustomerSchema = z.object({
       /[!@#$%^&*(),.?":{}|<>]/,
       'Password must contain at least one special character',
     )
-    .trim(),
+    .refine((val) => (val.includes(' ') ? false : true), {
+      message: 'Password must not contain whitespaces.',
+    }),
 });
 
 export const loginCustomerSchema = z.object({
@@ -58,9 +67,11 @@ export const loginCustomerSchema = z.object({
     .email({
       message: 'Please use a valid email ',
     })
-    .trim()
     .refine((val) => (val.includes('*') ? false : true), {
       message: 'Please use a valid email ',
+    })
+    .refine((val) => validateEmail(val), {
+      message: 'Invalid email format.',
     }),
   password: z
     .string({ required_error: 'Please enter your password' })
@@ -77,5 +88,7 @@ export const loginCustomerSchema = z.object({
       /[!@#$%^&*(),.?":{}|<>]/,
       'Password must contain at least one special character',
     )
-    .trim(),
+    .refine((val) => (val.includes(' ') ? false : true), {
+      message: 'Password must not contain whitespaces.',
+    }),
 });

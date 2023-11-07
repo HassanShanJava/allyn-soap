@@ -125,7 +125,14 @@ const Detail = (props: any) => {
     setVariant(selectedVariant);
     setRange(1);
   }
-
+  console.log(
+    Math.floor(
+      props?.reviews?.response?.bottomline?.average_score % 1 > 0
+        ? Math.ceil(props?.reviews?.response?.bottomline?.average_score)
+        : Math.floor(props?.reviews?.response?.bottomline?.average_score),
+    ),
+    'friction value',
+  );
   return (
     <div className="  flex flex-col gap-8 justify-between">
       <div className="flex flex-col gap-4">
@@ -150,11 +157,26 @@ const Detail = (props: any) => {
                       ></i>
                     );
                   })}
+                  {/* Check if there's a fractional part and display a half star */}
+                  {props?.reviews?.response?.bottomline?.average_score % 1 >
+                    0 && (
+                    <i className="fa-solid fa-star-half-stroke text-primary"></i>
+                  )}
                   {Array.from(
                     Array(
                       5 -
                         Math.floor(
-                          props?.reviews?.response?.bottomline?.average_score,
+                          props?.reviews?.response?.bottomline?.average_score %
+                            1 >
+                            0
+                            ? Math.ceil(
+                                props?.reviews?.response?.bottomline
+                                  ?.average_score,
+                              )
+                            : Math.floor(
+                                props?.reviews?.response?.bottomline
+                                  ?.average_score,
+                              ),
                         ),
                     ).keys(),
                   ).map((item, index) => {
