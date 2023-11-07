@@ -17,8 +17,7 @@ import { removeEdgesAndNodes } from '~/utils/helper';
 
 const ProductSearch = (props: { search: string }) => {
   const router = useRouter();
-  const id = router?.query?.id === 'search' ? router?.query?.id : '';
-  const [search, setSearch] = useState('');
+
   const dispatch = useDispatch();
 
   const { filters } = useSelector((state: RootState) => state.filters);

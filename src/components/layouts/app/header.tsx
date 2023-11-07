@@ -69,34 +69,36 @@ export default function Header() {
   // for cart
   useEffect(() => {
     (async () => {
-      const cartID = localStorage.getItem('cartID');
-      if (cartID) {
-        const cartData = await getCart({ variables: { cartId: cartID } });
-        if (cartData?.data?.cart) {
+      if (window) {
+        const cartID = localStorage.getItem('cartID');
+        if (cartID) {
+          const cartData = await getCart({ variables: { cartId: cartID } });
+          if (cartData?.data?.cart) {
+            dispatch(
+              toggleCart({
+                cart_id: cartID,
+                cart: { ...cartData?.data?.cart },
+              }),
+            );
+          }
+        }
+        const tokenID = await getCookie('allynssoapco_token');
+        if (tokenID) {
           dispatch(
-            toggleCart({
-              cart_id: cartID,
-              cart: { ...cartData?.data?.cart },
+            toggleAuth({
+              token_id: tokenID,
+              is_login: true,
+              user: null,
             }),
           );
-        }
-      }
-      const tokenID = await getCookie('allynssoapco_token');
-      if (tokenID) {
-        dispatch(
-          toggleAuth({
-            token_id: tokenID,
-            is_login: true,
-            user: null,
-          }),
-        );
-        if (cart?.cart_id && cart?.cart?.buyerIdentity?.customer) {
-          const customerCartData = await customerCartUpdate({
-            variables: {
-              cartId: cart?.cart_id,
-              customerAccessToken: tokenID,
-            },
-          });
+          if (cart?.cart_id && cart?.cart?.buyerIdentity?.customer) {
+            const customerCartData = await customerCartUpdate({
+              variables: {
+                cartId: cart?.cart_id,
+                customerAccessToken: tokenID,
+              },
+            });
+          }
         }
       }
     })();
@@ -263,7 +265,7 @@ export const SideBarMenu: React.FC<SideBarMenuProps> = ({
   function onSubmit(search: string) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    localStorage.setItem('search', search);
+    if (window) localStorage.setItem('search', search);
     router.push('/products/search');
     form.reset();
     closeFn(false);

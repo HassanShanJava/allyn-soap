@@ -12,7 +12,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleFilters } from '~/store/reducers/filters';
 import { FilterSection, FilterSheet } from './filter';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { RootState } from '~/store/store';
 import { defaultSort } from '~/utils/constant';
 import { poppins } from '~/components/layouts/app';
@@ -22,11 +22,10 @@ const ListingSection = () => {
   const router = useRouter();
   const id = router?.query?.id ?? '';
   const dispatch = useDispatch();
-  const [search, setSearch] = useState('');
 
   const [modal, setModal] = useState(false);
   const { filters } = useSelector((state: RootState) => state.filters);
-  const searchQuery = localStorage.getItem('search') as string;
+  const searchQuery = window ? (localStorage.getItem('search') as string) : '';
 
   function toggleFilter(text: string) {
     dispatch(
