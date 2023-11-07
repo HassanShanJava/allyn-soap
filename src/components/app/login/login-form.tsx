@@ -120,7 +120,7 @@ const LoginForm = () => {
                 </FormItem>
               )}
             />
-            <p className="-mt-4 mb-8 text-sm underline text-text-light cursor-pointer">
+            <p className=" mb-8 text-sm underline text-text-light cursor-pointer">
               Forgot your password?
             </p>
 
