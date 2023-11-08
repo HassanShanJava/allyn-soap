@@ -152,6 +152,7 @@ const CustomerAddressForm = (props: AccountDetailType) => {
           address: { ...values },
         },
       });
+      props?.setAddAdress(null);
       console.log({ customerAddressData });
     } catch (error: any) {
       toast({
