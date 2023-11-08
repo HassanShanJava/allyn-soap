@@ -43,6 +43,7 @@ html {
     --primary: 163, 66%, 53%, 1;
     /*#39D7A9 */
     --primary-foreground: 0, 0%, 98%, 1;
+    --primary-light: 204, 15%, 96%, 1;
     --secondary: 162, 73.91%, 95.49%, 1;
     /* #ebfcf7 */
     --secondary-foreground: 240 5.9% 10%;

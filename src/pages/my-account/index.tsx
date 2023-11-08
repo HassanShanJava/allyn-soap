@@ -7,14 +7,14 @@ export const LoadingComponent: React.FC = () => {
   return <p>Loading form dynamic import</p>;
 };
 
-const SignUp = dynamic(() => import('~/components/app/signup'), {
+const MyAccount = dynamic(() => import('~/components/app/my-account'), {
   loading: () => <LoadingComponent />,
 });
 
 const IndexPage: NextPageWithLayout = () => {
   return (
     <Suspense fallback={<p>Loading home from fallback</p>}>
-      <SignUp />
+      <MyAccount />
     </Suspense>
   );
 };
