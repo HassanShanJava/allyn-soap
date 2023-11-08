@@ -1,4 +1,5 @@
 import { accountNavigation } from './my-account-grid';
+import AccountAddress from './my-address';
 
 type AccountViewType = {
   selectedMenu: string;
@@ -7,21 +8,44 @@ type AccountViewType = {
 const MyAccountView = (props: AccountViewType) => {
   const selectViewTitle = accountNavigation.find(
     (item) => item?.slug === props?.selectedMenu,
+  )?.view_title;
+  return (
+    <>
+      {props?.selectedMenu === 'account' ? (
+        <AccountDetail
+          selectViewTitle={selectViewTitle}
+          customerData={props?.customerData}
+          selectedMenu={props?.selectedMenu}
+        />
+      ) : props?.selectedMenu === 'address' ? (
+        <AccountAddress
+          selectViewTitle={selectViewTitle}
+          customerData={props?.customerData}
+          selectedMenu={props?.selectedMenu}
+        />
+      ) : (
+        <></>
+      )}
+    </>
   );
+};
+type AccountDetailType = {
+  selectedMenu: string;
+  customerData: any;
+  selectViewTitle: string | undefined;
+};
+const AccountDetail = (props: AccountDetailType) => {
   return (
     <div className="relative  font-poppins px-4 py-2">
       {/* for bg color */}
       <div className=" text-text text-xl font-semibold">
-        {selectViewTitle?.view_title}
+        {props?.selectViewTitle}
       </div>
-      <div className=" grid grid-cols-2 md:w-1/4 gap-4">
+      <div className="mt-6 grid grid-cols-2 w-full md:w-1/4 gap-4">
         <div>Name:</div>
-        <div className="redux">{props?.customerData?.displayName}</div>
-        <div>Location:</div>
-        <div>United States</div>
+        <div className=" capitalize">{props?.customerData?.displayName}</div>
       </div>
     </div>
   );
 };
-
 export default MyAccountView;
