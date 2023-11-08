@@ -46,6 +46,7 @@ const MyAccountGrid = () => {
   const dispatch = useDispatch();
 
   // queries & mutations
+
   const {
     error,
     data: customerData,
@@ -54,10 +55,8 @@ const MyAccountGrid = () => {
   } = useQuery(getCustomerQuery, {
     variables: { customerAccessToken: user?.token_id },
   });
-  console.log('i am running');
   const [customerLogout, { loading: customerLogoutLoading }] =
     useMutation(LogoutMutation);
-  console.log({ customerData });
   // functions
   const handleActive = (type: string) => {
     setSelectMenu(type);

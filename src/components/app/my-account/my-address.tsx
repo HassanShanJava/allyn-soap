@@ -14,7 +14,8 @@ type AccountDetailType = {
 };
 const AccountAddress = (props: AccountDetailType) => {
   const [addAddress, setAddAdress] = useState(null);
-
+  const { user } = useSelector((state: RootState) => state.auth);
+  console.log({ props }, 'props data');
   // queries & mutations
 
   const optionData = {

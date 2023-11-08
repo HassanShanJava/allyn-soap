@@ -248,7 +248,6 @@ const CartProduct = (props: any) => {
             const price = variants?.find(
               (variantItem) => variantItem?.title == item?.merchandise?.title,
             )?.price?.amount;
-            console.log(price, 'price Data');
             return (
               <div className="" key={index}>
                 <div
