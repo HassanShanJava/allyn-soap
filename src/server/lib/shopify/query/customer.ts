@@ -65,14 +65,3 @@ export const getCustomerAddressQuery = gql`
     }
   }
 `;
-export const AddCustomerAddressQuery = gql`
-  mutation MyMutation(
-    $customerAccessToken: String!
-    $address: MailingAddressInput!
-  ) {
-    customerAddressCreate(
-      address: $address
-      customerAccessToken: $customerAccessToken
-    )
-  }
-`;

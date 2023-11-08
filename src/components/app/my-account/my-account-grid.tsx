@@ -6,7 +6,10 @@ import { LogoutMutation } from '~/server/lib/shopify/mutations/auth';
 import { toggleAuth } from '~/store/reducers/auth';
 import { RootState } from '~/store/store';
 import { deleteCookie } from 'cookies-next';
-import { getCustomerQuery } from '~/server/lib/shopify/query/customer';
+import {
+  getCustomerAddressQuery,
+  getCustomerQuery,
+} from '~/server/lib/shopify/query/customer';
 import MyAccountView from './my-tab';
 import { LoadingDialog } from '~/components/common/loading/loadingModal';
 export const accountNavigation = [
@@ -47,9 +50,11 @@ const MyAccountGrid = () => {
     error,
     data: customerData,
     loading,
+    refetch,
   } = useQuery(getCustomerQuery, {
     variables: { customerAccessToken: user?.token_id },
   });
+  console.log('i am running');
   const [customerLogout, { loading: customerLogoutLoading }] =
     useMutation(LogoutMutation);
   console.log({ customerData });

@@ -83,7 +83,7 @@ const Detail = (props: any) => {
                   cart: { ...cartData?.data?.cart },
                 }),
               );
-          }     
+          }
         }
       } else {
         cartAddData = await cartAdd({
@@ -120,9 +120,11 @@ const Detail = (props: any) => {
       console.log('error :::', e?.message);
     }
   };
+  console.log({ variant });
   function toggleVariant(text: string) {
     const selectedVariant = variants?.find((item: any) => item?.title === text);
     setVariant(selectedVariant);
+    setCartView(false);
     setRange(1);
   }
   console.log(
