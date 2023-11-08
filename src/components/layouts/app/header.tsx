@@ -20,6 +20,8 @@ import SearchComponent from '~/components/common/search';
 import { toggleAuth } from '~/store/reducers/auth';
 import { CartUpdateMutation } from '~/server/lib/shopify/mutations/auth';
 
+import { Form } from '~/components/ui/form';
+
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -65,7 +67,7 @@ export default function Header() {
       window.removeEventListener('scroll', changeColor);
     };
   }, []);
-  console.log({ cart });
+
   // for cart
   useEffect(() => {
     (async () => {
@@ -267,7 +269,6 @@ export const SideBarMenu: React.FC<SideBarMenuProps> = ({
     // ✅ This will be type-safe and validated.
     if (window) localStorage.setItem('search', search);
     router.push('/products/search');
-    form.reset();
     closeFn(false);
   }
 
@@ -276,7 +277,7 @@ export const SideBarMenu: React.FC<SideBarMenuProps> = ({
       {nav && (
         <>
           <div className="absolute  w-full flex flex-col gap-4 bg-secondary p-4 xsm:px-6  xsm:py-5 md:py-4 z-50">
-            <div className="flex mt-4 w-full justify-between items-center ">
+            <div className="flex mt-12 w-full justify-between items-center ">
               <div className="w-[80%]">
                 <Link
                   href="/"
@@ -295,26 +296,28 @@ export const SideBarMenu: React.FC<SideBarMenuProps> = ({
 
             {/* search input */}
             <div>
-              <div className="flex justify-between">
-                <Input
-                  className="rounded-none focus-visible:ring-0  border-0 border-transparent  h-10  w-full"
-                  type="text"
-                  placeholder="Search"
-                  autoFocus={true}
-                  // {...field}
-                  onChange={(e) => setInput(e.target.value)}
-                />
-                <Button
-                  type="submit"
-                  className="text-center rounded-none bg-primary h-10 "
-                  onClick={() => {
-                    onSubmit(searchInput);
-                    closeFn(false);
-                  }}
-                >
-                  <SearchIcon className="text-secondary " />
-                </Button>
-              </div>
+              <Form {...form}>
+                <div className="flex justify-between">
+                  <Input
+                    className="rounded-none focus-visible:ring-0  border-0 border-transparent  h-10  w-full"
+                    type="text"
+                    placeholder="Search"
+                    autoFocus={true}
+                    // {...field}
+                    onChange={(e) => setInput(e.target.value)}
+                  />
+                  <Button
+                    type="submit"
+                    className="text-center rounded-none bg-primary h-10 "
+                    onClick={() => {
+                      onSubmit(searchInput);
+                      closeFn(false);
+                    }}
+                  >
+                    <SearchIcon className="text-secondary " />
+                  </Button>
+                </div>
+              </Form>
             </div>
           </div>
         </>
@@ -322,8 +325,8 @@ export const SideBarMenu: React.FC<SideBarMenuProps> = ({
       <ul
         className={`z-10  block font-poppins  transition-all ease-linear xl:hidden  overflow-y-scroll scroll-hide ${
           nav
-            ? 'absolute top-0 left-0 duration-100 w-full h-screen bg-secondary flex flex-col justify-start items-center pt-48'
-            : 'absolute top-48 left-[-100%] hidden duration-100'
+            ? 'absolute top-0 left-0 duration-100 w-full h-screen bg-secondary flex flex-col justify-start items-center pt-40'
+            : 'absolute top-40 left-[-100%] hidden duration-100'
         }`}
       >
         {list &&

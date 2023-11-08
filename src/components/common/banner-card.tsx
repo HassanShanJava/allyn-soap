@@ -20,15 +20,16 @@ const BannerCard = ({ banner, key, type }: any) => {
   const { error, data, loading } = useQuery(getBestCollectionProductsQuery, {
     variables: { handle: id },
   });
-  // const [open, setOpen] = useState(false);
+
   useEffect(() => {
     if (data && id !== 'search') {
       setHide(true);
       const payload = removeEdgesAndNodes(data?.collectionByHandle?.products);
       setCollectionBannner(payload[0]);
-
     } else {
-      const searchQuery = localStorage.getItem('search') as string;
+      const searchQuery = window
+        ? (localStorage.getItem('search') as string)
+        : '';
       setTitle(searchQuery);
     }
   }, [data, id]);
@@ -104,12 +105,14 @@ const BannerCard = ({ banner, key, type }: any) => {
             </div>
           </div>
         </div>
-      ) : loading ? (
-        <div className="py-20">
+      ) : loading && id !== 'search'? (
+        <div className="py-14">
           <BannerSkeleton collectionBanner={collectionBanner} />
         </div>
+      ) : id === 'search' ? (
+        <div className="py-2 sm:py-6 md:py-8"></div>
       ) : (
-        <div className="py-10"></div>
+        <div className="py-2 sm:py-6 md:py-8"></div>
       )}
     </>
   );

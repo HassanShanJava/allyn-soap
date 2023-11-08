@@ -7,11 +7,11 @@ const ProductCard = (props: { item: any; index: number }) => {
   return (
     <Link href={`/product-detail/${props?.item?.handle}`}>
       <div
-        className={`group relative   hover:bg-primary hover:border-none py-8 mx-auto w-full h-72 rounded-3xl shadow-md  transition ease-in  cursor-pointer border border-border`}
+        className={`group relative   hover:bg-primary hover:border-none py-4 mx-auto w-full h-72 rounded-3xl shadow-md  transition ease-in  cursor-pointer border border-border`}
       >
         {(props?.item?.totalInventory === 0 ||
           !props?.item?.availableForSale) && (
-          <div className=" absolute top-1  -right-[22px] px-2    text-white text-sm ">
+          <div className=" absolute top-1  -right-[22px] px-2    text-white text-sm z-20">
             <Image
               height={1000}
               width={1000}
@@ -36,7 +36,7 @@ const ProductCard = (props: { item: any; index: number }) => {
               width={1000}
               src={props?.item?.featuredImage?.url}
               alt=""
-              className=" h-full w-full object-cover object-center rounded-3xl"
+              className=" h-full w-full object-cover object-center rounded-2xl"
             />
           ) : (
             <div className=" h-full w-full flex items-center justify-center bg-white border border-text-light rounded-xl">
