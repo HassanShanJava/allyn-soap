@@ -1,33 +1,86 @@
+import { useMutation, useQuery } from '@apollo/client';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
-const accountNavigation = [
+import { useDispatch, useSelector } from 'react-redux';
+import { LogoutMutation } from '~/server/lib/shopify/mutations/auth';
+import { toggleAuth } from '~/store/reducers/auth';
+import { RootState } from '~/store/store';
+import { deleteCookie } from 'cookies-next';
+import { getCustomerQuery } from '~/server/lib/shopify/query/customer';
+import MyAccountView from './my-tab';
+export const accountNavigation = [
   {
     title: 'Account',
+    view_title: 'Account Details',
     slug: 'account',
   },
   {
     title: 'Address',
+    view_title: 'Details Address',
+
     slug: 'address',
   },
   {
     title: 'Orders',
+    view_title: 'Orders History',
+
     slug: 'orders',
   },
   {
     title: 'Log Out',
+    view_title: 'Orders History',
+
     slug: 'logout',
   },
 ];
 const MyAccountGrid = () => {
+  // states
+  const router = useRouter();
   const [selectedMenu, setSelectMenu] = useState('account');
+  const { user } = useSelector((state: RootState) => state.auth);
 
+  const dispatch = useDispatch();
+
+  // queries & mutations
+  const {
+    error,
+    data: customerData,
+    loading,
+  } = useQuery(getCustomerQuery, {
+    variables: { customerAccessToken: user?.token_id },
+  });
+  const [customerLogout, { loading: customerLogoutLoading }] =
+    useMutation(LogoutMutation);
+  console.log({ customerData });
+  // functions
   const handleActive = (type: string) => {
     setSelectMenu(type);
     if (type == 'logout') {
       handleLogout();
     }
   };
-  const handleLogout = () => {
-    console.log(' logout ');
+  const handleLogout = async () => {
+    // router.replace('/');
+    // router.reload();
+    const customerLogoutData = await customerLogout({
+      variables: {
+        customerAccessToken: user?.token_id,
+      },
+    });
+    if (
+      customerLogoutData?.data?.customerAccessTokenDelete?.deletedAccessToken
+    ) {
+      deleteCookie('allynssoapco_token');
+      dispatch(
+        toggleAuth({
+          token_id: null,
+          is_login: false,
+          user: null,
+        }),
+      );
+      if (window) window.location.href = '/';
+    }
+    console.log({ customerLogoutData });
   };
   return (
     <div className="relative grid grid-cols-12 gap-4 items-center align-middle px-2 md:px-8">
@@ -36,14 +89,20 @@ const MyAccountGrid = () => {
           data={accountNavigation}
           selectedMenu={selectedMenu}
           handleActive={handleActive}
+          customerData={customerData?.customer}
         />
       </div>
       <div className="w-full h-full col-span-9">
-        <MyAccountMenu
+        <MyAccountView
+          selectedMenu={selectedMenu}
+          customerData={customerData?.customer}
+        />
+
+        {/* <MyAccountMenu
           data={accountNavigation}
           selectedMenu={selectedMenu}
           handleActive={handleActive}
-        />
+        /> */}
       </div>
     </div>
   );
@@ -56,14 +115,17 @@ type AccountMenuType = {
   data: accountDataType[];
   selectedMenu: string;
   handleActive: (type: string) => unknown;
+  customerData: any;
 };
 const MyAccountMenu = (props: AccountMenuType) => {
   return (
     <div className="relative w-full bg-primary-light h-full flex flex-col gap-4 py-8  px-1 border border-border rounded-2xl shadow-xl  mx-auto font-poppins">
       {/* for bg color */}
-      <div className=" flex flex-col gap-2 justify-center items-center">
-        <div className="photo-wrapper   h-20 w-20 rounded-full  bg-gradient-to-r from-green-500 via-orange-500 to-yellow-500"></div>
-        <div className=" text-text text-xl font-semibold">Sofia Havertz</div>
+      <div className=" flex flex-col gap-2 justify-center items-center capitalize">
+        <div className="photo-wrapper   h-20 w-20 rounded-full   bg-gradient-to-r from-green-500 via-orange-500 to-yellow-500"></div>
+        <div className=" text-text text-xl font-semibold">
+          {props?.customerData?.displayName}
+        </div>
       </div>
       <ul className="px-2 mt-6">
         {props?.data &&
