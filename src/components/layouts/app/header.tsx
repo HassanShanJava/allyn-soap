@@ -350,7 +350,10 @@ export const SideBarMenu: React.FC<SideBarMenuProps> = ({
         <Link
           href={user?.is_login ? '/my-account' : '/login'}
           className={`group py-3 text-lg w-full text-center border-y-[1px] 
-             border-gray-200 hover:bg-primary  hover:text-primary-foreground hover:border-transparent transition-colors duration-300 ease-in-out cursor-pointer`}
+          border-gray-200 hover:bg-primary  hover:text-primary-foreground hover:border-transparent transition-colors duration-300 ease-in-out cursor-pointer`}
+          onClick={() => {
+            closeFn(false);
+          }}
         >
           {user?.is_login ? 'My Account' : 'Login'}
         </Link>

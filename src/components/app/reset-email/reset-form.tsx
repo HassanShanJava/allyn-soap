@@ -11,13 +11,9 @@ import { Input } from '~/components/ui/input';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useToast } from '~/components/ui/use-toast';
-import { loginCustomerSchema } from '~/schema/customer';
+import { loginCustomerSchema, resetEmailSchema } from '~/schema/customer';
 import { useState } from 'react';
-import {
-  CartUpdateMutation,
-  LoginMutation,
-  SignUpMutation,
-} from '~/server/lib/shopify/mutations/auth';
+import { recoverAccountMutation } from '~/server/lib/shopify/mutations/auth';
 import { useMutation } from '@apollo/client';
 import { loginToken } from '~/utils/helper';
 import { useRouter } from 'next/router';
@@ -34,17 +30,28 @@ const ResetEmailForm = () => {
 
   const dispatch = useDispatch();
 
-  const form = useForm<z.infer<typeof loginCustomerSchema>>({
-    resolver: zodResolver(loginCustomerSchema),
+  const form = useForm<z.infer<typeof resetEmailSchema>>({
+    resolver: zodResolver(resetEmailSchema),
   });
-  const [customerLogin, { loading: customerLoginLoading }] =
-    useMutation(LoginMutation);
-  const [customerCartUpdate, { loading: customerCustomerUpdateLoading }] =
-    useMutation(CartUpdateMutation);
-  console.log(cart, 'cart data');
-  async function onSubmit(values: z.infer<typeof loginCustomerSchema>) {
+
+  const [recoverAccount, { loading: recoverAccountLoading, error }] =
+    useMutation(recoverAccountMutation);
+
+  async function onSubmit(values: z.infer<typeof resetEmailSchema>) {
     try {
       setLoading(true);
+      console.log({ values }, 'send email');
+      const recoverAcc = await recoverAccount({
+        variables: {
+          ...values,
+        },
+      });
+      toast({
+        variant: 'success',
+        title: 'Email Sent!',
+      });
+      console.log({recoverAcc},"recoverAcc")
+      setLoading(false);
     } catch (error: any) {
       setLoading(false);
       toast({
@@ -54,7 +61,7 @@ const ResetEmailForm = () => {
     }
   }
   return (
-    <div className='px-4'>
+    <div className="px-4">
       <div className="relative flex flex-col gap-4  p-8  border border-border rounded-3xl shadow-xl w-fit max-w-[30rem] mx-auto font-poppins">
         {/* for bg color */}
         <h1 className=" text-2xl md:text-3xl font-bold">Reset your password</h1>

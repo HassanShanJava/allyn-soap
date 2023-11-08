@@ -59,3 +59,29 @@ export const CartUpdateMutation = gql`
   }
   ${cartFragment}
 `;
+
+
+export const recoverAccountMutation = gql`
+  mutation MyMutation($email: String!) {
+    customerRecover(email: $email) {
+      customerUserErrors {
+        code
+        field
+        message
+      }
+      userErrors {
+        field
+        message
+      }
+    }
+  }
+`;
+
+export const resetAccountMutation = gql`
+  mutation MyMutation($customerAccessToken: String!) {
+    customerAccessTokenDelete(customerAccessToken: $customerAccessToken) {
+      deletedAccessToken
+      deletedCustomerAccessTokenId
+    }
+  }
+`;
