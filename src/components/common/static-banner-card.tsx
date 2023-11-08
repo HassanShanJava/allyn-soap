@@ -11,8 +11,8 @@ const StaticBanner = ({ data, key, type }: any) => {
           key={key}
           className="!flex flex-col md:!flex-row w-full  gap-5 md:gap-10 justify-between items-start  "
         >
-          <div className="p-6 md:px-12 my-auto md:my-6  w-full md:max-w-[50%]">
-            <div className=" ">
+          <div className="p-6 md:px-12 my-auto md:-my-2  w-full md:max-w-[50%]  ">
+            <div className=" mb-6">
               <p className=" md:block text-xs md:text-sm  py-2 ">
                 {`Home > `}
                 <span className="capitalize font-[#272D4E]">{data.slug}</span>
