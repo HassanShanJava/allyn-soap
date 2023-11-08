@@ -8,6 +8,7 @@ import { RootState } from '~/store/store';
 import { deleteCookie } from 'cookies-next';
 import { getCustomerQuery } from '~/server/lib/shopify/query/customer';
 import MyAccountView from './my-tab';
+import { LoadingDialog } from '~/components/common/loading/loadingModal';
 export const accountNavigation = [
   {
     title: 'Account',
@@ -83,28 +84,31 @@ const MyAccountGrid = () => {
     console.log({ customerLogoutData });
   };
   return (
-    <div className="relative grid grid-cols-12 gap-4 items-center align-middle px-2 md:px-8">
-      <div className="w-full h-full col-span-3">
-        <MyAccountMenu
-          data={accountNavigation}
-          selectedMenu={selectedMenu}
-          handleActive={handleActive}
-          customerData={customerData?.customer}
-        />
-      </div>
-      <div className="w-full h-full col-span-9">
-        <MyAccountView
-          selectedMenu={selectedMenu}
-          customerData={customerData?.customer}
-        />
+    <>
+      <div className="relative grid grid-cols-12 gap-4 items-center align-middle px-2 md:px-8">
+        <div className="w-full h-full col-span-3">
+          <MyAccountMenu
+            data={accountNavigation}
+            selectedMenu={selectedMenu}
+            handleActive={handleActive}
+            customerData={customerData?.customer}
+          />
+        </div>
+        <div className="w-full h-full col-span-9">
+          <MyAccountView
+            selectedMenu={selectedMenu}
+            customerData={customerData?.customer}
+          />
 
-        {/* <MyAccountMenu
+          {/* <MyAccountMenu
           data={accountNavigation}
           selectedMenu={selectedMenu}
           handleActive={handleActive}
         /> */}
+        </div>
       </div>
-    </div>
+      <LoadingDialog open={loading} text="Loading..." />
+    </>
   );
 };
 type accountDataType = {
