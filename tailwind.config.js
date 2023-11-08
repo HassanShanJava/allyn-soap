@@ -25,8 +25,8 @@ module.exports = {
         sans: ['"Poppins"', ...defaultTheme.fontFamily.sans],
       },
       transitionDuration: {
-        '0': '0ms',
-        '2000': '2000ms',
+        0: '0ms',
+        2000: '2000ms',
       },
       colors: {
         border: {
@@ -43,6 +43,7 @@ module.exports = {
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',
+          light: 'hsl(var(--primary-light))',
           muted: 'hsl(var(--dot-color))',
         },
         card: {
