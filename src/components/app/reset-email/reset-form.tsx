@@ -54,11 +54,11 @@ const ResetEmailForm = () => {
     }
   }
   return (
-    <>
-      <div className="relative flex flex-col gap-4 py-8  px-8 border border-border rounded-3xl shadow-xl md:w-2/6 mx-auto font-poppins">
+    <div className='px-4'>
+      <div className="relative flex flex-col gap-4  p-8  border border-border rounded-3xl shadow-xl w-fit max-w-[30rem] mx-auto font-poppins">
         {/* for bg color */}
-        <h1 className=" text-3xl font-bold">Reset your password</h1>
-        <p className=" text-base text-text-light">
+        <h1 className=" text-2xl md:text-3xl font-bold">Reset your password</h1>
+        <p className=" taxt-sm md:text-base text-text-light">
           Small Batch Bars of Soap. Made with the freshest ingredients for a
           rich.
         </p>
@@ -105,7 +105,7 @@ const ResetEmailForm = () => {
           </form>
         </Form>
       </div>
-    </>
+    </div>
   );
 };
 

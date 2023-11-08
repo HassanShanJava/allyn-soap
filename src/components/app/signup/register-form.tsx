@@ -57,8 +57,8 @@ const RegisterForm = () => {
     }
   }
   return (
-    <>
-      <div className="relative flex flex-col gap-4 py-8  px-8 border border-border rounded-2xl shadow-md md:w-2/6 mx-auto font-poppins">
+    <div className="px-4">
+      <div className="relative flex flex-col gap-4  p-8  border border-border rounded-3xl shadow-xl w-fit max-w-[30rem] mx-auto font-poppins">
         {/* for bg color */}
         <h1 className=" text-3xl font-bold">Sign up</h1>
         <p className=" text-base text-text-light">
@@ -170,7 +170,7 @@ const RegisterForm = () => {
           </form>
         </Form>
       </div>
-    </>
+    </div>
   );
 };
 
