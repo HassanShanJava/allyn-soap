@@ -30,6 +30,9 @@ import {
   TableRow,
 } from '@/ui/table';
 import { ScrollArea, ScrollBar } from '~/components/ui/scroll-area';
+import { ArrowRight } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
+import { Skeleton } from '~/components/ui/skeleton';
 type AccountOrdersType = {
   selectedMenu: string;
   selectViewTitle: string | undefined;
@@ -85,11 +88,11 @@ const AccountOrders = (props: AccountOrdersType) => {
       ),
     },
     {
-      accessorKey: 'Discount',
-      header: 'Discount',
+      accessorKey: 'Status',
+      header: 'Status',
       cell: ({ row }) => (
         <div className="capitalize text-ellipsis whitespace-nowrap ">
-          {' AED'}
+          {row?.original?.fulfillmentStatus}
         </div>
       ),
     },
@@ -129,6 +132,15 @@ const AccountOrders = (props: AccountOrdersType) => {
       rowSelection,
     },
   });
+  const handleNextPage = () => {
+    if (customerData?.customer?.orders?.pageInfo?.hasNextPage) {
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (customerData?.customer?.orders?.pageInfo?.hasPreviousPage) {
+    }
+  };
   return (
     <div className="relative h-full font-poppins px-4 py-2">
       <div className="flex items-center justify-between">
@@ -137,66 +149,114 @@ const AccountOrders = (props: AccountOrdersType) => {
         </div>
       </div>
       {loading ? (
-        <></>
-      ) : orderData && orderData?.length > 0 ? (
-        <div className="rounded-md border border-border">
-          <ScrollArea className="w-full ">
-            <ScrollBar orientation="horizontal"></ScrollBar>
-            <Table>
-              <TableHeader className="bg-secondary/80">
-                {table?.getHeaderGroups().map((headerGroup) => (
-                  <TableRow key={headerGroup.id}>
-                    {headerGroup.headers.map((header) => {
-                      return (
-                        <TableHead key={header.id}>
-                          {header.isPlaceholder
-                            ? null
-                            : flexRender(
-                                header.column.columnDef.header,
-                                header.getContext(),
-                              )}
-                        </TableHead>
-                      );
-                    })}
-                  </TableRow>
-                ))}
-              </TableHeader>
-              <TableBody>
-                {table?.getRowModel()?.rows?.length ? (
-                  table?.getRowModel()?.rows?.map((row) => (
-                    <TableRow
-                      key={row.id}
-                      data-state={row.getIsSelected() && 'selected'}
-                    >
-                      {row.getVisibleCells().map((cell) => (
-                        <TableCell key={cell.id}>
-                          {flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext(),
-                          )}
-                        </TableCell>
-                      ))}
-                    </TableRow>
-                  ))
-                ) : (
-                  <TableRow>
-                    <TableCell
-                      colSpan={columns.length}
-                      className=" text-center"
-                    >
-                      <div className="flex flex-col my-auto h-full items-center justify-center">
-                        <Image src={Current} alt="/" />
-                        <p className="text-center text-gray-300 text-md my-2 px-6">
-                          No Data
-                        </p>
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
-          </ScrollArea>
+        <div className="flex flex-col gap-2 w-full">
+          {' '}
+          <Skeleton className=" h-60 w-full object-cover object-center rounded-md " />
+          <Skeleton className=" h-2 w-full object-cover mt-4 object-center rounded-md " />
+          <div className="  flex items-center w-full justify-center xsm:justify-end  gap-2 xsm:gap-8 my-2 ">
+            <div className=" flex gap-4 items-center ">
+              <Skeleton className=" h-8 w-16 object-cover  object-center rounded-md " />
+            </div>
+            <div className=" flex gap-4 items-center ">
+              <Skeleton className=" h-8 w-16 object-cover  object-center rounded-md " />
+            </div>
+          </div>
         </div>
+      ) : orderData && orderData?.length > 0 ? (
+        <>
+          <div className="rounded-md border border-border  mt-4">
+            <ScrollArea className="w-full ">
+              <ScrollBar orientation="horizontal"></ScrollBar>
+              <Table>
+                <TableHeader className="bg-secondary/80">
+                  {table?.getHeaderGroups().map((headerGroup) => (
+                    <TableRow key={headerGroup.id}>
+                      {headerGroup.headers.map((header) => {
+                        return (
+                          <TableHead key={header.id}>
+                            {header.isPlaceholder
+                              ? null
+                              : flexRender(
+                                  header.column.columnDef.header,
+                                  header.getContext(),
+                                )}
+                          </TableHead>
+                        );
+                      })}
+                    </TableRow>
+                  ))}
+                </TableHeader>
+                <TableBody>
+                  {table?.getRowModel()?.rows?.length ? (
+                    table?.getRowModel()?.rows?.map((row) => (
+                      <TableRow
+                        key={row.id}
+                        data-state={row.getIsSelected() && 'selected'}
+                      >
+                        {row.getVisibleCells().map((cell) => (
+                          <TableCell key={cell.id}>
+                            {flexRender(
+                              cell.column.columnDef.cell,
+                              cell.getContext(),
+                            )}
+                          </TableCell>
+                        ))}
+                      </TableRow>
+                    ))
+                  ) : (
+                    <TableRow>
+                      <TableCell
+                        colSpan={columns.length}
+                        className=" text-center"
+                      >
+                        <div className="flex flex-col my-auto h-full items-center justify-center">
+                          <Image src={Current} alt="/" />
+                          <p className="text-center text-gray-300 text-md my-2 px-6">
+                            No Data
+                          </p>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  )}
+                </TableBody>
+              </Table>
+            </ScrollArea>
+          </div>
+          <hr className="mt-4" />
+
+          <div className="  flex items-center w-full justify-center xsm:justify-end  gap-2 xsm:gap-8 my-2 ">
+            <div className=" flex gap-4 items-center ">
+              <Button
+                variant="outline"
+                className="h-9 flex  gap-2  w-max p-2 text-base rounded-lg"
+                onClick={() => handlePrevPage()}
+                disabled={
+                  customerData?.customer?.orders?.pageInfo?.hasPreviousPage
+                    ? false
+                    : true
+                }
+              >
+                <ArrowLeft className="h-4 w-4" />
+                <span className=" ">Previous</span>
+              </Button>
+            </div>
+            <div className=" flex gap-4 items-center ">
+              <Button
+                variant="outline"
+                className="h-9 flex  gap-2 w-max p-2 text-base rounded-lg"
+                onClick={() => handleNextPage()}
+                disabled={
+                  customerData?.customer?.orders?.pageInfo?.hasNextPage
+                    ? false
+                    : true
+                }
+              >
+                <span className=" ">Next</span>
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
+        </>
       ) : (
         <div className="flex flex-col my-auto h-full items-center justify-center rounded-lg border border-border mt-4">
           <Image src={Current} alt="/" />

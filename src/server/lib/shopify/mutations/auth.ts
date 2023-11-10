@@ -75,6 +75,24 @@ export const orderAccountMutation = gql`
             fulfillmentStatus
             orderNumber
             name
+            shippingDiscountAllocations {
+              allocatedAmount {
+                amount
+                currencyCode
+              }
+              discountApplication {
+                allocationMethod
+                targetSelection
+                targetType
+                value {
+                  ... on MoneyV2 {
+                    __typename
+                    amount
+                    currencyCode
+                  }
+                }
+              }
+            }
             originalTotalDuties {
               amount
               currencyCode
