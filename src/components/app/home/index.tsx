@@ -4,6 +4,7 @@ import RelatedProducts from './related_product';
 import ArrivalSection from './arrival_section';
 import CustomerTestimonials from '~/components/common/customer-testimonials';
 import { useRouter } from 'next/router';
+import CompressImage from '~/components/common/compress_image';
 
 const demoList = [
   {
@@ -47,6 +48,7 @@ const Home = () => {
 
         <CategorySection />
         <RelatedProducts />
+        {/* <CompressImage/> */}
         <ArrivalSection />
         <CustomerTestimonials />
       </div>

@@ -83,3 +83,27 @@ export const validateRegixEmail = (email: string): boolean => {
   const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/;
   return regex.test(email);
 };
+
+
+// compress image
+
+export async function compressImage(fileImage: File, fileType = 'image/webp') {
+  const bitmap = await createImageBitmap(fileImage);
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = bitmap.width;
+  canvas.height = bitmap.height;
+  ctx?.drawImage(bitmap, 0, 0);
+  // Convert canvas content to a new Blob with reduced quality
+  const reducedBlob: Blob = await new Promise((resolve) => {
+    canvas.toBlob((blob) => resolve(blob as Blob), fileType, 0.5);
+  });
+
+  // Create a new File object from the reduced Blob
+  const reducedFile = new File([reducedBlob], fileImage.name, {
+    type: fileType, // Adjust the type if needed
+    lastModified: fileImage.lastModified,
+  });
+
+  return reducedFile;
+}
