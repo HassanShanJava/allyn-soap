@@ -108,6 +108,7 @@ type AccountDetailType = {
   selectViewTitle: string | undefined;
   addAddress: string | null;
   setAddAdress: any;
+  refetch: () => unknown;
 };
 const CustomerAddressForm = (props: AccountDetailType) => {
   // states
@@ -153,6 +154,11 @@ const CustomerAddressForm = (props: AccountDetailType) => {
         },
       });
       props?.setAddAdress(null);
+      props?.refetch();
+      toast({
+        variant: 'success',
+        title: 'Address Added Successfully',
+      });
       console.log({ customerAddressData });
     } catch (error: any) {
       toast({

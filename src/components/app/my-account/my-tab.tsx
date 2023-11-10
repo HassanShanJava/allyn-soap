@@ -4,6 +4,7 @@ import AccountAddress from './my-address';
 type AccountViewType = {
   selectedMenu: string;
   customerData: any;
+  refetch: () => unknown;
 };
 const MyAccountView = (props: AccountViewType) => {
   const selectViewTitle = accountNavigation.find(
@@ -22,6 +23,7 @@ const MyAccountView = (props: AccountViewType) => {
           selectViewTitle={selectViewTitle}
           customerData={props?.customerData}
           selectedMenu={props?.selectedMenu}
+          refetch={props?.refetch}
         />
       ) : (
         <></>

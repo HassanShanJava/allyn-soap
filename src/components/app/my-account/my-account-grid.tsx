@@ -102,6 +102,7 @@ const MyAccountGrid = () => {
           <MyAccountView
             selectedMenu={selectedMenu}
             customerData={customerData?.customer}
+            refetch={refetch}
           />
 
           {/* <MyAccountMenu

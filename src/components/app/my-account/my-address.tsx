@@ -7,11 +7,13 @@ import { RootState } from '~/store/store';
 import { useQuery } from '@apollo/client';
 import { getCustomerAddressQuery } from '~/server/lib/shopify/query/customer';
 import { removeEdgesAndNodes } from '~/utils/helper';
+import { AddressDialouge } from '~/components/common/modals/address-modal';
 
 type AccountDetailType = {
   selectedMenu: string;
   customerData: any;
   selectViewTitle: string | undefined;
+  refetch: () => unknown;
 };
 const AccountAddress = (props: AccountDetailType) => {
   const [addAddress, setAddAdress] = useState(null);
@@ -21,12 +23,12 @@ const AccountAddress = (props: AccountDetailType) => {
   const addresses = props?.customerData?.addresses
     ? removeEdgesAndNodes(props?.customerData?.addresses)
     : [];
-  console.log({ addresses }, 'addresses data');
 
   const optionData = {
     ...props,
     addAddress,
     setAddAdress,
+    refetch: props?.refetch,
   };
   return (
     <div className="relative  font-poppins px-4 py-2">
@@ -47,6 +49,12 @@ type customerAddressViewType = AccountDetailType & {
   addresses: any;
 };
 const CustomerAddressView = (props: customerAddressViewType) => {
+  const [isModal, setIsModal] = useState(false);
+  const [addressID, setAddressId] = useState<string | null>(null);
+  const DeleteAddress = (id: string) => {
+    setIsModal(true);
+    setAddressId(id);
+  };
   return (
     <div>
       <div className="flex items-center justify-between">
@@ -64,7 +72,7 @@ const CustomerAddressView = (props: customerAddressViewType) => {
               return (
                 <div
                   key={index}
-                  className=" p-2 border border-border rounded-lg"
+                  className=" p-4 border border-border rounded-lg"
                 >
                   <div className="grid grid-cols-2 gap-2 items-center">
                     First Name: <span>{item?.firstName}</span>
@@ -92,7 +100,11 @@ const CustomerAddressView = (props: customerAddressViewType) => {
                   </div>
                   <div className="grid grid-cols-2 gap-2 items-center pt-4">
                     <Button className=" h-8">Edit</Button>
-                    <Button className=" h-8" variant={'outline'}>
+                    <Button
+                      onClick={() => DeleteAddress(item?.id)}
+                      className=" h-8 text-red-500"
+                      variant={'outline'}
+                    >
                       Delete
                     </Button>
                   </div>
@@ -104,6 +116,14 @@ const CustomerAddressView = (props: customerAddressViewType) => {
           <></>
         )}
       </div>
+      <AddressDialouge
+        isModal={isModal}
+        setIsModal={setIsModal}
+        refetch={props?.refetch}
+        data={''}
+        title={'Share this Product'}
+        addressID={addressID}
+      />
     </div>
   );
 };

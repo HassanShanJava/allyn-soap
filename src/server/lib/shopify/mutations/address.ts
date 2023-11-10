@@ -16,3 +16,11 @@ export const AddCustomerAddressQuery = gql`
     }
   }
 `;
+
+export const DeleteCustomerAddressQuery = gql`
+  mutation MyMutation($customerAccessToken: String!, $id: ID!) {
+    customerAddressDelete(customerAccessToken: $customerAccessToken, id: $id) {
+      deletedCustomerAddressId
+    }
+  }
+`;

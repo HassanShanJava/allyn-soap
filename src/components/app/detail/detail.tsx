@@ -127,14 +127,7 @@ const Detail = (props: any) => {
     setCartView(false);
     setRange(1);
   }
-  console.log(
-    Math.floor(
-      props?.reviews?.response?.bottomline?.average_score % 1 > 0
-        ? Math.ceil(props?.reviews?.response?.bottomline?.average_score)
-        : Math.floor(props?.reviews?.response?.bottomline?.average_score),
-    ),
-    'friction value',
-  );
+
   return (
     <div className="  flex flex-col gap-8 justify-between">
       <div className="flex flex-col gap-4">
