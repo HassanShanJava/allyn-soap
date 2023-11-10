@@ -6,7 +6,9 @@ export function middleware(request: NextRequest, response: NextResponse) {
   if (request.nextUrl.pathname.startsWith('/')) {
     const storeRequestHeaders = new Headers(request.headers);
 
-    const isProtectedRoutes = ['/account'].includes(request.nextUrl.pathname);
+    const isProtectedRoutes = ['/my-account'].includes(
+      request.nextUrl.pathname,
+    );
     const token = getCookie('allynssoapco_token', {
       req: request,
       res: response,

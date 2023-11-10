@@ -48,7 +48,7 @@ const Home = () => {
 
         <CategorySection />
         <RelatedProducts />
-        {/* <CompressImage/> */}
+        {/* <CompressImage /> */}
         <ArrivalSection />
         <CustomerTestimonials />
       </div>

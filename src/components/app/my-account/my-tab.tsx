@@ -1,5 +1,6 @@
 import { accountNavigation } from './my-account-grid';
 import AccountAddress from './my-address';
+import AccountOrders from './my-orders';
 
 type AccountViewType = {
   selectedMenu: string;
@@ -22,6 +23,12 @@ const MyAccountView = (props: AccountViewType) => {
         <AccountAddress
           selectViewTitle={selectViewTitle}
           customerData={props?.customerData}
+          selectedMenu={props?.selectedMenu}
+          refetch={props?.refetch}
+        />
+      ) : props?.selectedMenu === 'orders' ? (
+        <AccountOrders
+          selectViewTitle={selectViewTitle}
           selectedMenu={props?.selectedMenu}
           refetch={props?.refetch}
         />

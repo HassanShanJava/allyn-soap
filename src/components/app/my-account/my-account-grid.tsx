@@ -27,7 +27,6 @@ export const accountNavigation = [
   {
     title: 'Orders',
     view_title: 'Orders History',
-
     slug: 'orders',
   },
   {

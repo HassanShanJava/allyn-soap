@@ -84,7 +84,6 @@ export const validateRegixEmail = (email: string): boolean => {
   return regex.test(email);
 };
 
-
 // compress image
 
 export async function compressImage(fileImage: File, fileType = 'image/webp') {
@@ -107,3 +106,8 @@ export async function compressImage(fileImage: File, fileType = 'image/webp') {
 
   return reducedFile;
 }
+export const displayDate = (payload = '' as any) => {
+  if (!payload) return 'N/A';
+  const date = new Date(payload);
+  return date?.toDateString();
+};

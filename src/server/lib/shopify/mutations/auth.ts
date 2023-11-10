@@ -59,7 +59,50 @@ export const CartUpdateMutation = gql`
   }
   ${cartFragment}
 `;
-
+export const orderAccountMutation = gql`
+  query MyQuery($customerAccessToken: String = "") {
+    customer(customerAccessToken: $customerAccessToken) {
+      orders(first: 10) {
+        pageInfo {
+          endCursor
+          hasNextPage
+          hasPreviousPage
+          startCursor
+        }
+        edges {
+          node {
+            email
+            fulfillmentStatus
+            orderNumber
+            name
+            originalTotalDuties {
+              amount
+              currencyCode
+            }
+            originalTotalPrice {
+              amount
+              currencyCode
+            }
+            phone
+            processedAt
+            totalTax {
+              amount
+              currencyCode
+            }
+            totalPrice {
+              amount
+              currencyCode
+            }
+            subtotalPrice {
+              amount
+              currencyCode
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 
 export const recoverAccountMutation = gql`
   mutation MyMutation($email: String!) {

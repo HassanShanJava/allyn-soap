@@ -12,6 +12,7 @@ export const AddCustomerAddressQuery = gql`
       customerAddress {
         address1
         address2
+        id
       }
     }
   }
@@ -31,6 +32,7 @@ export const EditCustomerAddressQuery = gql`
       customerAddress {
         address1
         address2
+        id
       }
     }
   }

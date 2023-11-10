@@ -25,6 +25,7 @@ import { CustomerAddressSchema } from '~/schema/address';
 import { Checkbox } from '~/components/ui/checkbox';
 import {
   AddCustomerAddressQuery,
+  DefaultAddressCustomerAddressQuery,
   EditCustomerAddressQuery,
 } from '~/server/lib/shopify/mutations/address';
 import { useMutation } from '@apollo/client';
@@ -116,11 +117,13 @@ type AccountDetailType = {
   addressData: any;
 };
 const CustomerAddressForm = (props: AccountDetailType) => {
+  console.log(props?.customerData?.defaultAddress?.id, 'customer address form');
   // states
   const { toast } = useToast();
   const [provinces, setProvinces] = useState<any>(null);
+  const [defaultCheck, setDefaultCheck] = useState<boolean>(false);
   const { user } = useSelector((state: RootState) => state.auth);
-
+  console.log({ defaultCheck });
   const form = useForm<z.infer<typeof CustomerAddressSchema>>({
     resolver: zodResolver(CustomerAddressSchema),
     defaultValues: {
@@ -135,8 +138,29 @@ const CustomerAddressForm = (props: AccountDetailType) => {
   const [editAddress, { loading: editAddressLoading }] = useMutation(
     EditCustomerAddressQuery,
   );
-
+  const [defaultAddress, { loading: defaultAddressLoading }] = useMutation(
+    DefaultAddressCustomerAddressQuery,
+  );
   // use Effects
+  useEffect(() => {
+    if (props?.addAddress === 'edit') {
+      form.setValue('firstName', props?.addressData?.firstName);
+      form.setValue('lastName', props?.addressData?.lastName);
+      form.setValue('company', props?.addressData?.company);
+      form.setValue('address1', props?.addressData?.address1);
+      form.setValue('address2', props?.addressData?.address2);
+      form.setValue('city', props?.addressData?.city);
+      form.setValue('country', props?.addressData?.country);
+      form.setValue('province', props?.addressData?.province);
+      form.setValue('zip', props?.addressData?.zip);
+      form.setValue('phone', props?.addressData?.phone);
+      setDefaultCheck(
+        props?.addressData?.id == props?.customerData?.defaultAddress?.id
+          ? true
+          : false,
+      );
+    }
+  }, [props?.addressData, props?.addAddress === 'edit']);
   useEffect(() => {
     const countryname = form.watch('country') ?? 'United States';
     const selectCountry: any = CountriesData.countries?.find(
@@ -145,23 +169,12 @@ const CustomerAddressForm = (props: AccountDetailType) => {
     if (selectCountry && selectCountry?.provinces.length > 0) {
       setProvinces(selectCountry?.provinces as any);
 
-      form.setValue('province', selectCountry?.provinces[0]?.name);
+      // form.setValue('province', selectCountry?.provinces[0]?.name);
     } else {
       setProvinces(null);
     }
-  }, [form.watch('country'), props?.addAddress == 'add']);
-  useEffect(() => {
-    form.setValue('firstName', props?.addressData?.firstName);
-    form.setValue('lastName', props?.addressData?.lastName);
-    form.setValue('company', props?.addressData?.company);
-    form.setValue('address1', props?.addressData?.address1);
-    form.setValue('address2', props?.addressData?.address2);
-    form.setValue('city', props?.addressData?.city);
-    form.setValue('country', props?.addressData?.country);
-    form.setValue('province', props?.addressData?.province);
-    form.setValue('zip', props?.addressData?.zip);
-    form.setValue('phone', props?.addressData?.phone);
-  }, [props?.addressData]);
+  }, [form.watch('country')]);
+
   // submit function
   async function onSubmit(values: z.infer<typeof CustomerAddressSchema>) {
     try {
@@ -190,6 +203,19 @@ const CustomerAddressForm = (props: AccountDetailType) => {
           props?.addAddress == 'add' ? 'added' : 'edited'
         } Successfully`,
       });
+      if (defaultCheck) {
+        const customerDefaultData = await defaultAddress({
+          variables: {
+            customerAccessToken: user?.token_id,
+            addressId:
+              props?.addressData?.id ??
+              customerAddressData?.data?.customerAddressCreate?.customerAddress
+                ?.id,
+          },
+        });
+      }
+      // if (customerAddressData?.data?.customerAddressCreate?.customerAddress?.id)
+      // if (customerAddressData?.data?.customerAddressUpdate?.customerAddress?.id)
       props?.setAddAdress(null);
       props?.setAddressData(null);
       props?.refetch();
@@ -248,7 +274,7 @@ const CustomerAddressForm = (props: AccountDetailType) => {
                       <FormItem>
                         <Select
                           onValueChange={(value) => field.onChange(value)}
-                          value={field.value + ''}
+                          {...field}
                           defaultValue="United States"
                         >
                           <FormControl>
@@ -297,7 +323,8 @@ const CustomerAddressForm = (props: AccountDetailType) => {
                       <FormItem>
                         <Select
                           onValueChange={(value) => field.onChange(value)}
-                          value={field.value + ''}
+                          {...field}
+                          defaultValue={provinces[0]?.name}
                         >
                           <FormControl>
                             <SelectTrigger className=" h-10  bg-text-light-secondary">
@@ -336,6 +363,8 @@ const CustomerAddressForm = (props: AccountDetailType) => {
             <div className="w-full flex items-center gap-2 ">
               <Checkbox
                 id="terms"
+                onCheckedChange={(e: boolean) => setDefaultCheck(e)}
+                checked={defaultCheck}
                 className="h-5 w-5 bg-text-light-secondary border-none"
               />
               <label
