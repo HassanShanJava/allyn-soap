@@ -58,6 +58,7 @@ export default function CartSheet() {
     }
     router.push(text);
   };
+  console.log(cart?.cart, 'cart?.cart');
   return (
     <Sheet open={isCartOpen} onOpenChange={(e) => dispatch(toggleCartModal())}>
       <SheetContent
@@ -244,6 +245,9 @@ const CartProduct = (props: any) => {
             const variants = item?.merchandise?.product?.variants
               ? removeEdgesAndNodes(item?.merchandise?.product?.variants)
               : [];
+            const price = variants?.find(
+              (variantItem) => variantItem?.title == item?.merchandise?.title,
+            )?.price?.amount;
             return (
               <div className="" key={index}>
                 <div
@@ -289,15 +293,15 @@ const CartProduct = (props: any) => {
                       $
                       {item?.discountAllocations[0]?.discountedAmount ? (
                         <>
-                          {+variants[0].price?.amount * +item?.quantity -
+                          {+price * +item?.quantity -
                             +item?.discountAllocations[0]?.discountedAmount
                               ?.amount}
                           <span className=" text-sm text-red-500 line-through">
-                            ${+variants[0].price?.amount * +item?.quantity}
+                            ${+price * +item?.quantity}
                           </span>
                         </>
                       ) : (
-                        +variants[0].price?.amount * +item?.quantity
+                        +price * +item?.quantity
                       )}
                     </p>
                     <CartCounter
