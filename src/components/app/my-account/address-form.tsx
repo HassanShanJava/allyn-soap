@@ -298,7 +298,7 @@ const CustomerAddressForm = (props: AccountDetailType) => {
               }
             })}
           </div>
-          <div className="flex items-center gap-2">
+          <div className="grid  grid-cols-2 gap-4">
             <div className="w-full flex items-center gap-2 ">
               <Checkbox
                 id="terms"

@@ -90,7 +90,7 @@ const MyAccountGrid = () => {
   return (
     <>
       <div className="relative grid grid-cols-12 gap-4 items-center align-middle px-2 md:px-8">
-        <div className="w-full h-full col-span-3">
+        <div className="w-full h-full col-span-12 md:col-span-3">
           <MyAccountMenu
             data={accountNavigation}
             selectedMenu={selectedMenu}
@@ -98,7 +98,7 @@ const MyAccountGrid = () => {
             customerData={customerData?.customer}
           />
         </div>
-        <div className="w-full h-full col-span-9">
+        <div className="w-full h-full col-span-12 md:col-span-9">
           <MyAccountView
             selectedMenu={selectedMenu}
             customerData={customerData?.customer}

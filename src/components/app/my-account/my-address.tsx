@@ -65,7 +65,7 @@ const CustomerAddressView = (props: customerAddressViewType) => {
           Add Address
         </Button>
       </div>
-      <div className="mt-6 grid grid-cols-2 md:grid-cols-3 w-full   gap-4">
+      <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full   gap-4">
         {props?.addresses ? (
           <>
             {props?.addresses?.map((item: any, index: number) => {
