@@ -193,6 +193,7 @@ const CustomerAddressForm = (props: AccountDetailType) => {
           props?.addAddress == 'add' ? 'added' : 'edited'
         } Successfully`,
       });
+      // if (customerAddressData?.data?.customerAddressUpdate?.customerAddress?.id)
       props?.setAddAdress(null);
       props?.setAddressData(null);
       props?.refetch();
