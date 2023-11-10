@@ -48,3 +48,11 @@ export const getProductRecommendationsQuery = gql`
   }
   ${productFragment}
 `;
+
+
+// export const allDiscountProductsQuery = gql`
+//   query getDiscountProducts($compareAtPriceRange: Int!,$priceRange: Int!) {
+
+//   }
+//   ${productFragment}
+// `;

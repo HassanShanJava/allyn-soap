@@ -18,6 +18,7 @@ import {
   LoginMutation,
   SignUpMutation,
 } from '~/server/lib/shopify/mutations/auth';
+
 import { useMutation } from '@apollo/client';
 import { loginToken } from '~/utils/helper';
 import { useRouter } from 'next/router';
@@ -37,11 +38,15 @@ const LoginForm = () => {
   const form = useForm<z.infer<typeof loginCustomerSchema>>({
     resolver: zodResolver(loginCustomerSchema),
   });
+
   const [customerLogin, { loading: customerLoginLoading }] =
     useMutation(LoginMutation);
+
   const [customerCartUpdate, { loading: customerCustomerUpdateLoading }] =
     useMutation(CartUpdateMutation);
+
   console.log(cart, 'cart data');
+
   async function onSubmit(values: z.infer<typeof loginCustomerSchema>) {
     try {
       setLoading(true);
@@ -51,6 +56,7 @@ const LoginForm = () => {
         },
       });
       console.log({ customerLoginData });
+
       if (
         !customerLoginData?.data?.customerAccessTokenCreate?.customerAccessToken
       )
@@ -96,11 +102,11 @@ const LoginForm = () => {
     }
   }
   return (
-    <>
-      <div className="relative flex flex-col gap-4 py-8  px-8 border border-border rounded-3xl shadow-xl md:w-2/6 mx-auto font-poppins">
+    <div className="px-4">
+      <div className="relative flex flex-col gap-4  p-8  border border-border rounded-3xl shadow-xl w-fit max-w-[30rem] mx-auto font-poppins">
         {/* for bg color */}
-        <h1 className=" text-3xl font-bold">Login</h1>
-        <p className=" text-base text-text-light">
+        <h1 className=" text-2xl md:text-3xl font-bold">Login</h1>
+        <p className=" text-sm md:text-base text-text-light">
           Small Batch Bars of Soap. Made with the freshest ingredients for a
           rich.
         </p>
@@ -173,7 +179,7 @@ const LoginForm = () => {
           </form>
         </Form>
       </div>
-    </>
+    </div>
   );
 };
 
