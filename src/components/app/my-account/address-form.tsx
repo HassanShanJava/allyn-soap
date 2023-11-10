@@ -109,6 +109,8 @@ type AccountDetailType = {
   addAddress: string | null;
   setAddAdress: any;
   refetch: () => unknown;
+  setAddressData: (e: any) => unknown;
+  addressData: any;
 };
 const CustomerAddressForm = (props: AccountDetailType) => {
   // states
@@ -142,7 +144,18 @@ const CustomerAddressForm = (props: AccountDetailType) => {
       setProvinces(null);
     }
   }, [form.watch('country')]);
-
+  useEffect(() => {
+    form.setValue('firstName', props?.addressData?.firstName);
+    form.setValue('lastName', props?.addressData?.lastName);
+    form.setValue('company', props?.addressData?.company);
+    form.setValue('address1', props?.addressData?.address1);
+    form.setValue('address2', props?.addressData?.address2);
+    form.setValue('city', props?.addressData?.city);
+    form.setValue('country', props?.addressData?.country);
+    form.setValue('province', props?.addressData?.province);
+    form.setValue('zip', props?.addressData?.zip);
+    form.setValue('phone', props?.addressData?.phone);
+  }, [props?.addressData]);
   // submit function
   async function onSubmit(values: z.infer<typeof CustomerAddressSchema>) {
     try {
@@ -318,8 +331,10 @@ const CustomerAddressForm = (props: AccountDetailType) => {
             >
               {addAddressLoading ? (
                 <i className="fa-solid fa-spinner fa-spin"></i>
-              ) : (
+              ) : props?.addAddress === 'add' ? (
                 'Add  Address'
+              ) : (
+                'Edit  Address'
               )}
 
               {/* {props?.id ? 'Update' : 'Add'} */}

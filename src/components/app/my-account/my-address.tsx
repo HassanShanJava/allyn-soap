@@ -17,6 +17,8 @@ type AccountDetailType = {
 };
 const AccountAddress = (props: AccountDetailType) => {
   const [addAddress, setAddAdress] = useState(null);
+  const [addressData, setAddressData] = useState<any>(null);
+
   const { user } = useSelector((state: RootState) => state.auth);
   console.log({ props }, 'props data');
   // queries & mutations
@@ -29,6 +31,8 @@ const AccountAddress = (props: AccountDetailType) => {
     addAddress,
     setAddAdress,
     refetch: props?.refetch,
+    addressData: addressData,
+    setAddressData: setAddressData,
   };
   return (
     <div className="relative  font-poppins px-4 py-2">
@@ -47,6 +51,8 @@ type customerAddressViewType = AccountDetailType & {
   addAddress: string | null;
   setAddAdress: any;
   addresses: any;
+  setAddressData: (e: any) => unknown;
+  addressData: any;
 };
 const CustomerAddressView = (props: customerAddressViewType) => {
   const [isModal, setIsModal] = useState(false);
@@ -55,15 +61,19 @@ const CustomerAddressView = (props: customerAddressViewType) => {
     setIsModal(true);
     setAddressId(id);
   };
+  const EditAddress = (data: string) => {
+    console.log('edit address');
+    props?.setAddressData(data);
+    props?.setAddAdress('edit');
+  };
+
   return (
     <div>
       <div className="flex items-center justify-between">
         <div className=" text-text text-xl font-semibold">
           {props?.selectViewTitle}
         </div>
-        <Button onClick={() => props?.setAddAdress('addAdress')}>
-          Add Address
-        </Button>
+        <Button onClick={() => props?.setAddAdress('add')}>Add Address</Button>
       </div>
       <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full   gap-4">
         {props?.addresses ? (
@@ -99,7 +109,9 @@ const CustomerAddressView = (props: customerAddressViewType) => {
                     Province: <span>{item?.province}</span>
                   </div>
                   <div className="grid grid-cols-2 gap-2 items-center pt-4">
-                    <Button className=" h-8">Edit</Button>
+                    <Button onClick={() => EditAddress(item)} className=" h-8">
+                      Edit
+                    </Button>
                     <Button
                       onClick={() => DeleteAddress(item?.id)}
                       className=" h-8 text-red-500"
