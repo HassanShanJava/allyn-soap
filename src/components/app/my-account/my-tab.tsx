@@ -47,6 +47,10 @@ const AccountDetail = (props: AccountDetailType) => {
         <div>Name:</div>
         <div className=" capitalize">{props?.customerData?.displayName}</div>
       </div>
+      <div className="mt-6 grid grid-cols-2 w-full md:w-1/4 gap-4">
+        <div>Email:</div>
+        <div className=" ">{props?.customerData?.email}</div>
+      </div>
     </div>
   );
 };

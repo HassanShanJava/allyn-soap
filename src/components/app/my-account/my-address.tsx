@@ -17,6 +17,8 @@ type AccountDetailType = {
 };
 const AccountAddress = (props: AccountDetailType) => {
   const [addAddress, setAddAdress] = useState(null);
+  const [addressData, setAddressData] = useState<any>(null);
+
   const { user } = useSelector((state: RootState) => state.auth);
   console.log({ props }, 'props data');
   // queries & mutations
@@ -29,6 +31,8 @@ const AccountAddress = (props: AccountDetailType) => {
     addAddress,
     setAddAdress,
     refetch: props?.refetch,
+    addressData: addressData,
+    setAddressData: setAddressData,
   };
   return (
     <div className="relative  font-poppins px-4 py-2">
@@ -47,7 +51,19 @@ type customerAddressViewType = AccountDetailType & {
   addAddress: string | null;
   setAddAdress: any;
   addresses: any;
+  setAddressData: (e: any) => unknown;
+  addressData: any;
 };
+const addressFields = [
+  { label: 'First Name', key: 'firstName' },
+  { label: 'Last Name', key: 'lastName' },
+  { label: 'Company', key: 'company' },
+  { label: 'Address1', key: 'address1' },
+  { label: 'Address2', key: 'address2' },
+  { label: 'City', key: 'city' },
+  { label: 'Country', key: 'country' },
+  { label: 'Province', key: 'province' },
+];
 const CustomerAddressView = (props: customerAddressViewType) => {
   const [isModal, setIsModal] = useState(false);
   const [addressID, setAddressId] = useState<string | null>(null);
@@ -55,15 +71,19 @@ const CustomerAddressView = (props: customerAddressViewType) => {
     setIsModal(true);
     setAddressId(id);
   };
+  const EditAddress = (data: string) => {
+    console.log('edit address');
+    props?.setAddressData(data);
+    props?.setAddAdress('edit');
+  };
+
   return (
     <div>
       <div className="flex items-center justify-between">
         <div className=" text-text text-xl font-semibold">
           {props?.selectViewTitle}
         </div>
-        <Button onClick={() => props?.setAddAdress('addAdress')}>
-          Add Address
-        </Button>
+        <Button onClick={() => props?.setAddAdress('add')}>Add Address</Button>
       </div>
       <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full   gap-4">
         {props?.addresses ? (
@@ -72,34 +92,22 @@ const CustomerAddressView = (props: customerAddressViewType) => {
               return (
                 <div
                   key={index}
-                  className=" p-4 border border-border rounded-lg"
+                  className="relative p-4 border border-border flex flex-col justify-between rounded-lg"
                 >
-                  <div className="grid grid-cols-2 gap-2 items-center">
-                    First Name: <span>{item?.firstName}</span>
+                  <div>
+                    {addressFields.map((field) => (
+                      <div
+                        key={field.key}
+                        className="grid grid-cols-2 gap-2 items-center"
+                      >
+                        {field.label}: <span>{item?.[field.key]}</span>
+                      </div>
+                    ))}
                   </div>
-                  <div className="grid grid-cols-2 gap-2 items-center">
-                    Last Name: <span>{item?.lastName}</span>
-                  </div>
-                  <div className="grid grid-cols-2 gap-2 items-center">
-                    Company: <span>{item?.company}</span>
-                  </div>
-                  <div className="grid grid-cols-2 gap-2 items-center">
-                    Address1: <span>{item?.address1}</span>
-                  </div>
-                  <div className="grid grid-cols-2 gap-2 items-center">
-                    Address2: <span>{item?.address2}</span>
-                  </div>
-                  <div className="grid grid-cols-2 gap-2 items-center">
-                    City: <span> {item?.city}</span>
-                  </div>
-                  <div className="grid grid-cols-2 gap-2  items-center">
-                    Country: <span>{item?.country}</span>
-                  </div>
-                  <div className="grid grid-cols-2 gap-2 items-center">
-                    Province: <span>{item?.province}</span>
-                  </div>
-                  <div className="grid grid-cols-2 gap-2 items-center pt-4">
-                    <Button className=" h-8">Edit</Button>
+                  <div className="flex items-end   justify-end gap-2 pt-4">
+                    <Button onClick={() => EditAddress(item)} className=" h-8">
+                      Edit
+                    </Button>
                     <Button
                       onClick={() => DeleteAddress(item?.id)}
                       className=" h-8 text-red-500"

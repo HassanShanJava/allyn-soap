@@ -23,7 +23,10 @@ import {
 } from '~/components/ui/select';
 import { CustomerAddressSchema } from '~/schema/address';
 import { Checkbox } from '~/components/ui/checkbox';
-import { AddCustomerAddressQuery } from '~/server/lib/shopify/mutations/address';
+import {
+  AddCustomerAddressQuery,
+  EditCustomerAddressQuery,
+} from '~/server/lib/shopify/mutations/address';
 import { useMutation } from '@apollo/client';
 import { RootState } from '~/store/store';
 import { useSelector } from 'react-redux';
@@ -109,6 +112,8 @@ type AccountDetailType = {
   addAddress: string | null;
   setAddAdress: any;
   refetch: () => unknown;
+  setAddressData: (e: any) => unknown;
+  addressData: any;
 };
 const CustomerAddressForm = (props: AccountDetailType) => {
   // states
@@ -127,10 +132,13 @@ const CustomerAddressForm = (props: AccountDetailType) => {
   const [addAddress, { loading: addAddressLoading }] = useMutation(
     AddCustomerAddressQuery,
   );
+  const [editAddress, { loading: editAddressLoading }] = useMutation(
+    EditCustomerAddressQuery,
+  );
 
   // use Effects
   useEffect(() => {
-    const countryname = form.watch('country');
+    const countryname = form.watch('country') ?? 'United States';
     const selectCountry: any = CountriesData.countries?.find(
       (item) => item?.name === countryname,
     );
@@ -141,24 +149,50 @@ const CustomerAddressForm = (props: AccountDetailType) => {
     } else {
       setProvinces(null);
     }
-  }, [form.watch('country')]);
-
+  }, [form.watch('country'), props?.addAddress == 'add']);
+  useEffect(() => {
+    form.setValue('firstName', props?.addressData?.firstName);
+    form.setValue('lastName', props?.addressData?.lastName);
+    form.setValue('company', props?.addressData?.company);
+    form.setValue('address1', props?.addressData?.address1);
+    form.setValue('address2', props?.addressData?.address2);
+    form.setValue('city', props?.addressData?.city);
+    form.setValue('country', props?.addressData?.country);
+    form.setValue('province', props?.addressData?.province);
+    form.setValue('zip', props?.addressData?.zip);
+    form.setValue('phone', props?.addressData?.phone);
+  }, [props?.addressData]);
   // submit function
   async function onSubmit(values: z.infer<typeof CustomerAddressSchema>) {
     try {
       console.log({ values });
-      const customerAddressData = await addAddress({
-        variables: {
-          customerAccessToken: user?.token_id,
-          address: { ...values },
-        },
-      });
-      props?.setAddAdress(null);
-      props?.refetch();
+      let customerAddressData;
+      if (props?.addAddress == 'add') {
+        customerAddressData = await addAddress({
+          variables: {
+            customerAccessToken: user?.token_id,
+            address: { ...values },
+          },
+        });
+      } else {
+        customerAddressData = await editAddress({
+          variables: {
+            customerAccessToken: user?.token_id,
+            id: props?.addressData?.id,
+            address: { ...values },
+          },
+        });
+      }
+
       toast({
         variant: 'success',
-        title: 'Address Added Successfully',
+        title: `Address  ${
+          props?.addAddress == 'add' ? 'added' : 'edited'
+        } Successfully`,
       });
+      props?.setAddAdress(null);
+      props?.setAddressData(null);
+      props?.refetch();
       console.log({ customerAddressData });
     } catch (error: any) {
       toast({
@@ -314,12 +348,14 @@ const CustomerAddressForm = (props: AccountDetailType) => {
             <Button
               type="submit"
               className="w-full h-12"
-              disabled={addAddressLoading}
+              disabled={addAddressLoading || editAddressLoading}
             >
-              {addAddressLoading ? (
+              {addAddressLoading || editAddressLoading ? (
                 <i className="fa-solid fa-spinner fa-spin"></i>
-              ) : (
+              ) : props?.addAddress === 'add' ? (
                 'Add  Address'
+              ) : (
+                'Edit  Address'
               )}
 
               {/* {props?.id ? 'Update' : 'Add'} */}

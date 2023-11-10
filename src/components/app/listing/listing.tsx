@@ -34,7 +34,7 @@ const ListingSection = () => {
 
         sortKey: text,
         reverse: text === 'CREATED' ? true : false,
-        first: 12,
+        first: 20,
         last: null,
         after: null,
         before: null,
@@ -47,7 +47,7 @@ const ListingSection = () => {
         ...filters,
         sortKey: defaultSort.sortKey,
         reverse: false,
-        first: 12,
+        first: 20,
         last: null,
         after: null,
         before: null,
