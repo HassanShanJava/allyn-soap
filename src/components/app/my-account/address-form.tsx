@@ -166,12 +166,16 @@ const CustomerAddressForm = (props: AccountDetailType) => {
           address: { ...values },
         },
       });
-      props?.setAddAdress(null);
-      props?.refetch();
+
       toast({
         variant: 'success',
-        title: 'Address Added Successfully',
+        title: `Address  ${
+          props?.addAddress == 'add' ? 'added' : 'edited'
+        } Successfully`,
       });
+      props?.setAddAdress(null);
+      props?.setAddressData(null);
+      props?.refetch();
       console.log({ customerAddressData });
     } catch (error: any) {
       toast({

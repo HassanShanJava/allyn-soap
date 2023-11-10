@@ -26,7 +26,7 @@ const initialState: FiltersState = {
   filters: {
     sortKey: defaultSort?.sortKey,
     reverse: defaultSort?.reverse,
-    first: 12,
+    first: 20,
     last: null,
     after: null,
     before: null,

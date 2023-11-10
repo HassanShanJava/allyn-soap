@@ -30,7 +30,7 @@ const ProductListing = () => {
         ...filters,
         sortKey: defaultSort.sortKey,
         reverse: false,
-        first: 12,
+        first: 20,
         last: null,
         after: null,
         before: null,
@@ -46,7 +46,7 @@ const ProductListing = () => {
       dispatch(
         toggleFilters({
           ...filters,
-          first: 12,
+          first: 20,
           last: null,
 
           after: data?.collection?.products?.pageInfo?.endCursor,
