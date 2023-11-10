@@ -118,6 +118,7 @@ const BannerSection = () => {
                         <image
                           xlinkHref={`${item?.featuredImage.url}`}
                           className="object-cover "
+                          loading="lazy"
                         />
 
                         <polyline
