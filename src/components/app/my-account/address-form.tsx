@@ -25,6 +25,7 @@ import { CustomerAddressSchema } from '~/schema/address';
 import { Checkbox } from '~/components/ui/checkbox';
 import {
   AddCustomerAddressQuery,
+  DefaultAddressCustomerAddressQuery,
   EditCustomerAddressQuery,
 } from '~/server/lib/shopify/mutations/address';
 import { useMutation } from '@apollo/client';
@@ -116,11 +117,13 @@ type AccountDetailType = {
   addressData: any;
 };
 const CustomerAddressForm = (props: AccountDetailType) => {
+  console.log(props?.customerData?.defaultAddress?.id, 'customer address form');
   // states
   const { toast } = useToast();
   const [provinces, setProvinces] = useState<any>(null);
+  const [defaultCheck, setDefaultCheck] = useState<boolean>(false);
   const { user } = useSelector((state: RootState) => state.auth);
-
+  console.log({ defaultCheck });
   const form = useForm<z.infer<typeof CustomerAddressSchema>>({
     resolver: zodResolver(CustomerAddressSchema),
     defaultValues: {
@@ -135,7 +138,9 @@ const CustomerAddressForm = (props: AccountDetailType) => {
   const [editAddress, { loading: editAddressLoading }] = useMutation(
     EditCustomerAddressQuery,
   );
-
+  const [defaultAddress, { loading: defaultAddressLoading }] = useMutation(
+    DefaultAddressCustomerAddressQuery,
+  );
   // use Effects
   useEffect(() => {
     if (props?.addAddress === 'edit') {
@@ -149,6 +154,11 @@ const CustomerAddressForm = (props: AccountDetailType) => {
       form.setValue('province', props?.addressData?.province);
       form.setValue('zip', props?.addressData?.zip);
       form.setValue('phone', props?.addressData?.phone);
+      setDefaultCheck(
+        props?.addressData?.id == props?.customerData?.defaultAddress?.id
+          ? true
+          : false,
+      );
     }
   }, [props?.addressData, props?.addAddress === 'edit']);
   useEffect(() => {
@@ -193,6 +203,18 @@ const CustomerAddressForm = (props: AccountDetailType) => {
           props?.addAddress == 'add' ? 'added' : 'edited'
         } Successfully`,
       });
+      if (defaultCheck) {
+        const customerDefaultData = await defaultAddress({
+          variables: {
+            customerAccessToken: user?.token_id,
+            addressId:
+              props?.addressData?.id ??
+              customerAddressData?.data?.customerAddressCreate?.customerAddress
+                ?.id,
+          },
+        });
+      }
+      // if (customerAddressData?.data?.customerAddressCreate?.customerAddress?.id)
       // if (customerAddressData?.data?.customerAddressUpdate?.customerAddress?.id)
       props?.setAddAdress(null);
       props?.setAddressData(null);
@@ -341,6 +363,8 @@ const CustomerAddressForm = (props: AccountDetailType) => {
             <div className="w-full flex items-center gap-2 ">
               <Checkbox
                 id="terms"
+                onCheckedChange={(e: boolean) => setDefaultCheck(e)}
+                checked={defaultCheck}
                 className="h-5 w-5 bg-text-light-secondary border-none"
               />
               <label

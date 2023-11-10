@@ -4,8 +4,7 @@ import { useState } from 'react';
 import CustomerAddressForm from './address-form';
 import { useSelector } from 'react-redux';
 import { RootState } from '~/store/store';
-import { useQuery } from '@apollo/client';
-import { getCustomerAddressQuery } from '~/server/lib/shopify/query/customer';
+
 import { removeEdgesAndNodes } from '~/utils/helper';
 import { AddressDialouge } from '~/components/common/modals/address-modal';
 

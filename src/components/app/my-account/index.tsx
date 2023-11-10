@@ -1,5 +1,5 @@
 import StaticBanner from '~/components/common/static-banner-card';
-import SignIn from '~/public/assets/Signin.jpg';
+import MyAccount from '~/public/assets/my_account.webp';
 import MyAccountGrid from './my-account-grid';
 
 const MyAccountSection = () => {
@@ -17,7 +17,7 @@ const MyAccountSection = () => {
             slug: 'Account Details',
             description:
               'Small Batch Bars of Soap. Made with the freshest ingredients for a rich and soft lather that will leave your skin feeling silky smooth!!',
-            src: SignIn.src,
+            src: MyAccount.src,
           }}
         />
         <MyAccountGrid />
