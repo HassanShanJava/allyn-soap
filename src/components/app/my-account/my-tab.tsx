@@ -26,12 +26,14 @@ const MyAccountView = (props: AccountViewType) => {
           selectedMenu={props?.selectedMenu}
           refetch={props?.refetch}
         />
-      ) : (
+      ) : props?.selectedMenu === 'orders' ? (
         <AccountOrders
           selectViewTitle={selectViewTitle}
           selectedMenu={props?.selectedMenu}
           refetch={props?.refetch}
         />
+      ) : (
+        <></>
       )}
     </>
   );
