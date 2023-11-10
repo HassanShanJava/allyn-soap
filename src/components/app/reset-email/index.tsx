@@ -1,6 +1,6 @@
-import BannerCard from '~/components/common/banner-card';
+
 import StaticBanner from '~/components/common/static-banner-card';
-import SignIn from '~/public/assets/Signin.jpg';
+import ForgotPass from '~/public/assets/forgot.webp';
 import ResetEmailForm from './reset-form';
 
 const ResetEmailSection = () => {
@@ -18,7 +18,7 @@ const ResetEmailSection = () => {
             slug: 'Forget Password',
             description:
               'Small Batch Bars of Soap. Made with the freshest ingredients for a rich and soft lather that will leave your skin feeling silky smooth!!',
-            src: SignIn.src,
+            src: ForgotPass.src,
           }}
         />
         <ResetEmailForm />

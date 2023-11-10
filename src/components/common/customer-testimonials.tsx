@@ -1,6 +1,6 @@
 import Image, { StaticImageData } from 'next/image';
 import React, { useRef, useState } from 'react';
-import User1 from '~/public/assets/user1.jpg';
+import User1 from '~/public/assets/user1.webp';
 import User2 from '~/public/assets/user2.png';
 import User3 from '~/public/assets/user3.png';
 
@@ -148,7 +148,7 @@ const ReviewCard: React.FC<ReviewCard> = (customer: ReviewCard) => {
           className="relative object-cover w-16 xs:w-20  sm:w-44 h-16 xs:h-20 sm:h-44 top-0 right-0"
           fill
           quality={100}
-          src={customer.image}
+          src={customer.image.src}
           alt="/"
         />
       </div>
