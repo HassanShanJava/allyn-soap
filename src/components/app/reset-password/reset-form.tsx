@@ -11,7 +11,7 @@ import { Input } from '~/components/ui/input';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useToast } from '~/components/ui/use-toast';
-import { loginCustomerSchema } from '~/schema/customer';
+import { loginCustomerSchema, resetPasswordSchema } from '~/schema/customer';
 import { useState } from 'react';
 import {
   CartUpdateMutation,
@@ -33,18 +33,24 @@ const ResetPasswordForm = () => {
   const { cart } = useSelector((state: RootState) => state.cart);
 
   const dispatch = useDispatch();
-
-  const form = useForm<z.infer<typeof loginCustomerSchema>>({
-    resolver: zodResolver(loginCustomerSchema),
+  console.log(router?.query, 'query');
+  const form = useForm<z.infer<typeof resetPasswordSchema>>({
+    resolver: zodResolver(resetPasswordSchema),
   });
   const [customerLogin, { loading: customerLoginLoading }] =
     useMutation(LoginMutation);
   const [customerCartUpdate, { loading: customerCustomerUpdateLoading }] =
     useMutation(CartUpdateMutation);
   console.log(cart, 'cart data');
-  async function onSubmit(values: z.infer<typeof loginCustomerSchema>) {
+  async function onSubmit(values: z.infer<typeof resetPasswordSchema>) {
     try {
-      setLoading(true);
+      console.log({ values });
+      toast({
+        variant: 'success',
+        title: 'Password Reset Successfully!',
+      });
+      router.push('/login');
+      // setLoading(true);
     } catch (error: any) {
       setLoading(false);
       toast({
@@ -53,9 +59,11 @@ const ResetPasswordForm = () => {
       });
     }
   }
+  console.log(form.formState.errors, 'form.formState.errors');
+
   return (
     <>
-      <div className="relative flex flex-col gap-4  p-8 m-8 border border-border rounded-3xl shadow-xl w-fit max-w-[20rem] md:mx-auto font-poppins">
+      <div className="relative flex flex-col gap-4  p-8  border border-border rounded-3xl shadow-xl w-fit max-w-[30rem] mx-auto font-poppins">
         {/* for bg color */}
         <h1 className=" text-3xl font-bold">Reset your password</h1>
         <p className=" text-base text-text-light">
@@ -89,7 +97,7 @@ const ResetPasswordForm = () => {
             />
             <FormField
               control={form.control}
-              name="password"
+              name="confirm_password"
               render={({ field }) => (
                 <FormItem className=" w-full ">
                   <FormControl>
@@ -112,16 +120,16 @@ const ResetPasswordForm = () => {
               {loading ? (
                 <i className="fa-solid fa-spinner fa-spin"></i>
               ) : (
-                'Submit'
+                'Reset Password'
               )}
 
               {/* {props?.id ? 'Update' : 'Add'} */}
             </Button>
-            <Link href={'/login'}>
+            {/* <Link href={'/login'}>
               <p className="text-center mt-8 text-sm underline text-text-light cursor-pointer">
                 Cancel
               </p>
-            </Link>
+            </Link> */}
           </form>
         </Form>
       </div>
