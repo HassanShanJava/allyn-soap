@@ -13,6 +13,7 @@ import uuidv4 from 'uuid';
 import { config } from 'react-spring';
 
 import { Button } from '../ui/button';
+import NextImage from './custom_image';
 
 type ReviewCard = {
   review: string;
@@ -144,7 +145,7 @@ const ReviewCard: React.FC<ReviewCard> = (customer: ReviewCard) => {
     >
       <div className="relative w-fit h-fit">
         <div className="relative bg-[#D9D9D9] w-16 xs:w-20 sm:w-44 h-16 xs:h-20 sm:h-44 top-1 xs:top-2 sm:top-3 -left-1 xs:-left-2 sm:-left-3 "></div>
-        <Image
+        <NextImage
           className="relative object-cover w-16 xs:w-20  sm:w-44 h-16 xs:h-20 sm:h-44 top-0 right-0"
           fill
           quality={100}

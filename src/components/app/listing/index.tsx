@@ -19,6 +19,7 @@ const ListingPage = () => {
 
         <ListingSection />
         <div className="py-4" />
+        <ProductSlider />
       </div>
     </>
   );
