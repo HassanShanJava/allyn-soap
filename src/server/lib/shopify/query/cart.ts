@@ -22,8 +22,16 @@ export const addToCartMutation = gql`
 `;
 
 export const createCartMutation = gql`
-  mutation createCart($lineItems: [CartLineInput!]) {
-    cartCreate(input: { lines: $lineItems }) {
+  mutation createCart(
+    $lineItems: [CartLineInput!]
+    $customerAccessToken: String = ""
+  ) {
+    cartCreate(
+      input: {
+        buyerIdentity: { customerAccessToken: $customerAccessToken }
+        lines: $lineItems
+      }
+    ) {
       cart {
         ...cart
       }

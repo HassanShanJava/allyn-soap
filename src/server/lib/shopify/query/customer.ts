@@ -14,7 +14,7 @@ export const getCustomerQuery = gql`
       updatedAt
       createdAt
       acceptsMarketing
-      addresses(first: 10) {
+      addresses(first: 40) {
         edges {
           node {
             address1
@@ -83,6 +83,82 @@ export const getCustomerAddressQuery = gql`
             province
             provinceCode
             zip
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const orderAccountQuery = gql`
+  query MyQuery(
+    $customerAccessToken: String = ""
+    $reverse: Boolean
+    $first: Int
+    $last: Int
+    $after: String
+    $before: String
+  ) {
+    customer(customerAccessToken: $customerAccessToken) {
+      orders(
+        reverse: $reverse
+        first: $first
+        last: $last
+        after: $after
+        before: $before
+      ) {
+        pageInfo {
+          endCursor
+          hasNextPage
+          hasPreviousPage
+          startCursor
+        }
+        edges {
+          node {
+            email
+            fulfillmentStatus
+            orderNumber
+            name
+            shippingDiscountAllocations {
+              allocatedAmount {
+                amount
+                currencyCode
+              }
+              discountApplication {
+                allocationMethod
+                targetSelection
+                targetType
+                value {
+                  ... on MoneyV2 {
+                    __typename
+                    amount
+                    currencyCode
+                  }
+                }
+              }
+            }
+            originalTotalDuties {
+              amount
+              currencyCode
+            }
+            originalTotalPrice {
+              amount
+              currencyCode
+            }
+            phone
+            processedAt
+            totalTax {
+              amount
+              currencyCode
+            }
+            totalPrice {
+              amount
+              currencyCode
+            }
+            subtotalPrice {
+              amount
+              currencyCode
+            }
           }
         }
       }
