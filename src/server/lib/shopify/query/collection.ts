@@ -86,3 +86,32 @@ export const getBestCollectionProductsQuery = gql`
   ${productFragment}
 
 `;
+
+
+export const getSalesProductQuery = gql`
+  query getCollectionProducts(
+    $handle: String!) {
+    collectionByHandle(handle: $handle) {
+    id
+      products(sortKey: BEST_SELLING, filters: {available: true},first: 10) {
+        edges {
+          node {
+            ...product
+            compareAtPriceRange {
+              maxVariantPrice {
+                amount
+                currencyCode
+              }
+              minVariantPrice {
+                currencyCode
+                amount
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  ${productFragment}
+
+`;
