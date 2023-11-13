@@ -11,45 +11,59 @@ import { Input } from '~/components/ui/input';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useToast } from '~/components/ui/use-toast';
-import { loginCustomerSchema, resetPasswordSchema } from '~/schema/customer';
-import { useState } from 'react';
-import {
-  CartUpdateMutation,
-  LoginMutation,
-  SignUpMutation,
-} from '~/server/lib/shopify/mutations/auth';
+import { resetPasswordSchema } from '~/schema/customer';
+import { useEffect, useState } from 'react';
+import { resetByUrlaccountMutation } from '~/server/lib/shopify/mutations/auth';
 import { useMutation } from '@apollo/client';
-import { loginToken } from '~/utils/helper';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleAuth } from '~/store/reducers/auth';
 import { RootState } from '~/store/store';
 
 const ResetPasswordForm = () => {
   const { toast } = useToast();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [resetUrl, setResetUrl] = useState<string | null>(null);
   const { cart } = useSelector((state: RootState) => state.cart);
 
-  const dispatch = useDispatch();
-  console.log(router?.query, 'query');
   const form = useForm<z.infer<typeof resetPasswordSchema>>({
     resolver: zodResolver(resetPasswordSchema),
   });
-  const [customerLogin, { loading: customerLoginLoading }] =
-    useMutation(LoginMutation);
-  const [customerCartUpdate, { loading: customerCustomerUpdateLoading }] =
-    useMutation(CartUpdateMutation);
+
+  const [customerResetAccount, { loading: customerResetLoading }] = useMutation(
+    resetByUrlaccountMutation,
+  );
+  useEffect(() => {
+    if (router?.query?.url) {
+      setResetUrl(router?.query?.url as string);
+      router.replace('/reset-password');
+    }
+  }, [router?.query?.url]);
   console.log(cart, 'cart data');
   async function onSubmit(values: z.infer<typeof resetPasswordSchema>) {
     try {
+      setLoading(true);
+
+      const payload = {
+        password: values?.password,
+        resetUrl,
+      };
       console.log({ values });
-      toast({
-        variant: 'success',
-        title: 'Password Reset Successfully!',
+      const recoverAcc = await customerResetAccount({
+        variables: {
+          ...payload,
+        },
       });
-      router.push('/login');
+      if (recoverAcc?.data?.customerResetByUrl?.customerAccessToken) {
+        toast({
+          variant: 'success',
+          title: 'Password Reset Successfully!',
+        });
+        if (window) window.location.href = '/login';
+      } else {
+        throw new Error('Reset Token has been expired');
+      }
+
       // setLoading(true);
     } catch (error: any) {
       setLoading(false);
@@ -57,9 +71,9 @@ const ResetPasswordForm = () => {
         variant: 'destructive',
         title: error.message,
       });
+      if (window) window.location.href = '/login';
     }
   }
-  console.log(form.formState.errors, 'form.formState.errors');
 
   return (
     <>

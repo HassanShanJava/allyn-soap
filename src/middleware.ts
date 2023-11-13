@@ -18,6 +18,10 @@ export function middleware(request: NextRequest, response: NextResponse) {
       return NextResponse.redirect(new URL('/', request.url));
     if (request.nextUrl.pathname.includes('/register') && token)
       return NextResponse.redirect(new URL('/', request.url));
+    if (request.nextUrl.pathname.includes('/reset-password') && token)
+      return NextResponse.redirect(new URL('/', request.url));
+    if (request.nextUrl.pathname.includes('/reset') && token)
+      return NextResponse.redirect(new URL('/', request.url));
     if (isProtectedRoutes && !token)
       return NextResponse.redirect(new URL('/login', request.url));
     return NextResponse.next();
