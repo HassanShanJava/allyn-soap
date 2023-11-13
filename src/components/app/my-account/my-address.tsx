@@ -139,33 +139,35 @@ const CustomerAddressView = (props: customerAddressViewType) => {
                         key={field.key}
                         className="grid grid-cols-2 md:grid-cols-3 my-4 items-center"
                       >
-                        <span className="w-fit">{field.label}: </span>
-                        <span className="">{item?.[field.key]}</span>
+                        <div>{field.label}: </div>
+                        <div>{item?.[field.key]}</div>
                       </div>
                     ))}
                   </div>
-                  <div className="w-full h-full  flex flex-col justify-between">
-                    <div>
-                      {addressFields1.map((field) => (
-                        <div
-                          key={field.key}
-                          className="grid grid-cols-2 md:grid-cols-3  items-center my-4"
-                        >
-                          <div>{field.label}: </div>
-                          <div>{item?.[field.key]}</div>
-                        </div>
-                      ))}
-                    </div>
-                    <div className="flex items-end    justify-end gap-2 pt-4">
+                  <div className="w-full h-max  flex flex-col justify-between">
+                    {addressFields1.map((field) => (
+                      <div
+                        key={field.key}
+                        className="grid grid-cols-2 md:grid-cols-3  items-center my-4"
+                      >
+                        <div>{field.label}: </div>
+                        <div>{item?.[field.key]}</div>
+                      </div>
+                    ))}
+                    <div className="hidden md:grid grid-cols-2 md:grid-cols-3  items-center my-4"></div>
+                    <div className="hidden md:grid grid-cols-2 md:grid-cols-3  items-center my-4"></div>
+                    <div className="hidden md:grid grid-cols-2 md:grid-cols-3  items-center my-2"></div>
+                    <div className="flex items-end mb-auto   justify-end gap-2 ">
                       <Button
                         onClick={() => EditAddress(item)}
-                        className=" h-8"
+                        variant={'outline'}
+                        className=" h-10 w-20 border-primary text-primary hover:text-text"
                       >
                         Edit
                       </Button>
                       <Button
                         onClick={() => DeleteAddress(item?.id)}
-                        className=" h-8 text-red-500"
+                        className=" h-10  text-red-500 border-none"
                         variant={'outline'}
                       >
                         Delete

@@ -1,6 +1,8 @@
+import Image from 'next/image';
 import { AccountAddressFilterType, accountNavigation } from './my-account-grid';
 import AccountAddress from './my-address';
 import AccountOrders from './my-orders';
+import MyAccount from '~/public/assets/Illustration.svg';
 
 type AccountViewType = {
   selectedMenu: string;
@@ -49,19 +51,21 @@ type AccountDetailType = {
 };
 const AccountDetail = (props: AccountDetailType) => {
   return (
-    <div className="relative  font-poppins px-4 py-2">
+    <div className="relative  font-poppins px-4 py-2 w-full h-full ">
       {/* for bg color */}
       <div className=" text-text text-xl font-semibold">
         {props?.selectViewTitle}
       </div>
-      <div className="mt-6 grid grid-cols-2 w-full md:w-1/4 gap-4">
+      <div className="mt-6 flex gap-6 w-full md:w-1/4  items-center">
         <div>Name:</div>
         <div className=" capitalize">{props?.customerData?.displayName}</div>
       </div>
-      <div className="mt-6 grid grid-cols-2 w-full md:w-1/4 gap-4">
-        <div>Email:</div>
+      <div className="mt-6 flex gap-6 w-full md:w-1/4  items-center">
+        <div>Email:&nbsp; </div>{' '}
         <div className=" ">{props?.customerData?.email}</div>
       </div>
+
+      <Image className="  relative ml-auto" src={MyAccount} alt="this image" />
     </div>
   );
 };
