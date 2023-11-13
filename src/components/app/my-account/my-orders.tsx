@@ -3,11 +3,9 @@ import { useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Button } from '~/components/ui/button';
 import { RootState } from '~/store/store';
-import OrdersDataByIdTable from './order-table';
 import Image from 'next/image';
 import Current from '~/public/assets/not-current-entrie.png';
 import { useQuery } from '@apollo/client';
-import { orderAccountMutation } from '~/server/lib/shopify/mutations/auth';
 import { displayDate, removeEdgesAndNodes } from '~/utils/helper';
 import {
   ColumnDef,
@@ -33,10 +31,18 @@ import { ScrollArea, ScrollBar } from '~/components/ui/scroll-area';
 import { ArrowRight } from 'lucide-react';
 import { ArrowLeft } from 'lucide-react';
 import { Skeleton } from '~/components/ui/skeleton';
+import { orderAccountQuery } from '~/server/lib/shopify/query/customer';
 type AccountOrdersType = {
   selectedMenu: string;
   selectViewTitle: string | undefined;
   refetch: () => unknown;
+};
+type AccountOrdersFilterType = {
+  customerAccessToken: string | null;
+  first: number | null;
+  last: number | null;
+  after: string | null;
+  before: string | null;
 };
 const AccountOrders = (props: AccountOrdersType) => {
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -45,21 +51,20 @@ const AccountOrders = (props: AccountOrdersType) => {
   const [rowSelection, setRowSelection] = useState({});
   const { user } = useSelector((state: RootState) => state.auth);
   console.log({ props }, 'props data orders');
-  const [filters, setFilters] = useState({
+  const [filters, setFilters] = useState<AccountOrdersFilterType>({
     customerAccessToken: user?.token_id,
-    first: 20,
+    first: 10,
     last: null,
     after: null,
     before: null,
-    price: null,
   });
   const {
     error,
     data: customerData,
     loading,
     refetch,
-  } = useQuery(orderAccountMutation, {
-    variables: { customerAccessToken: user?.token_id },
+  } = useQuery(orderAccountQuery, {
+    variables: { ...filters },
   });
   const orderData = useMemo(() => {
     return Array.isArray(customerData?.customer?.orders?.edges)
@@ -134,11 +139,27 @@ const AccountOrders = (props: AccountOrdersType) => {
   });
   const handleNextPage = () => {
     if (customerData?.customer?.orders?.pageInfo?.hasNextPage) {
+      setFilters((prev) => ({
+        ...prev,
+        customerAccessToken: user?.token_id,
+        first: 10,
+        last: null,
+        after: customerData?.customer?.orders?.pageInfo?.endCursor,
+        before: null,
+      }));
     }
   };
 
   const handlePrevPage = () => {
     if (customerData?.customer?.orders?.pageInfo?.hasPreviousPage) {
+      setFilters((prev) => ({
+        ...prev,
+        customerAccessToken: user?.token_id,
+        first: null,
+        last: 10,
+        after: null,
+        before: customerData?.customer?.orders?.pageInfo?.startCursor,
+      }));
     }
   };
   return (
