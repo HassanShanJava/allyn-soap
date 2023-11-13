@@ -75,8 +75,8 @@ export const recoverAccountMutation = gql`
     }
   }
 `;
-export const resetByUrlccountMutation = gql`
-  mutation MyMutation($password: String = "", $resetUrl: URL = "") {
+export const resetByUrlaccountMutation = gql`
+  mutation MyMutation($password: String!, $resetUrl: URL!) {
     customerResetByUrl(password: $password, resetUrl: $resetUrl) {
       customerAccessToken {
         accessToken
