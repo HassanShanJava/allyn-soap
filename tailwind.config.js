@@ -3,8 +3,8 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
-  darkMode: ['class'],
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
+  darkMode: ['class'],
   theme: {
     container: {
       center: true,
@@ -134,5 +134,5 @@ module.exports = {
   plugins: [
     require('tailwindcss-animate'),
     require('@tailwindcss/aspect-ratio'),
-  ],
+  ]
 };

@@ -38,7 +38,7 @@ const BannerSection = () => {
     arrows: false,
     centerMode: false,
     swipe: false,
-    lazyLoad: true,
+    // lazyLoad: true,
     beforeChange: (current: number, next: number) => setIndex(next),
   };
 
@@ -51,11 +51,12 @@ const BannerSection = () => {
   };
 
   return (
-    <section id="banner">
-      <>
-        <Slider ref={slider} {...settings}>
-          {sliderData ? (
-            sliderData.map((item: any, i: number) => (
+    <>
+      <section id="banner">
+        {loading && <BannerSkeleton />}
+        {sliderData && !loading ? (
+          <Slider ref={slider} {...settings}>
+            {sliderData.map((item: any, i: number) => (
               <div
                 key={i}
                 className="!flex flex-col md:!flex-row w-full  gap-5 md:gap-10 justify-between items-start  "
@@ -117,7 +118,6 @@ const BannerSection = () => {
                       <image
                         xlinkHref={`${item?.featuredImage.url}`}
                         className="object-cover "
-                        loading="lazy"
                       />
 
                       <polyline
@@ -139,13 +139,13 @@ const BannerSection = () => {
                   </div>
                 </div>
               </div>
-            ))
-          ) : (
-            <BannerSkeleton />
-          )}
-        </Slider>
-      </>
-    </section>
+            ))}
+          </Slider>
+        ) : (
+          ''
+        )}
+      </section>
+    </>
   );
 };
 

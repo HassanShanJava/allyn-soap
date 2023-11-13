@@ -15,7 +15,7 @@ interface LayoutState {
 
 // Define the initial state using that type
 const initialState: LayoutState = {
-  theme: 'dark',
+  theme: 'light',
   lang: { dir: 'ltr', lang: 'en', lang_id: 1 },
 };
 
