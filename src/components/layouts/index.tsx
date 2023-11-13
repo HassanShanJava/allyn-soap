@@ -16,7 +16,7 @@ export default function DefaultLayout({ children }: DefaultLayoutProps) {
   return (
     <Provider store={store}>
       <Toaster position="top-right" reverseOrder={false} />
-      <ThemeProvider attribute="class" >
+      <ThemeProvider attribute="class" defaultTheme='light' enableSystem>
         <SeoHead/>
         <AppLayout>{children}</AppLayout>
 
