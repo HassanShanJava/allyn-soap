@@ -36,6 +36,7 @@ const Detail = (props: any) => {
   const [cartView, setCartView] = useState<boolean>(false);
   const [range, setRange] = useState<number>(1);
   const { cart } = useSelector((state: RootState) => state.cart);
+  const { user } = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
 
   const [cartCreate, { loading: cartCreatLoading }] =
@@ -58,7 +59,11 @@ const Detail = (props: any) => {
     try {
       let cartAddData: any;
       if (!cart?.cart_id) {
-        const data: any = await cartCreate();
+        const data: any = await cartCreate({
+          variables: {
+            customerAccessToken: user?.token_id,
+          },
+        });
         if (data?.data?.cartCreate?.cart) {
           localStorage.setItem(
             'cartID',
