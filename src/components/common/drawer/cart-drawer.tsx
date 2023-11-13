@@ -67,7 +67,7 @@ export default function CartSheet() {
           <div className=" text-text font-bold !font-poppins text-xl md:text-3xl">
             Shopping Cart
           </div>
-          <div className=" text-text-light-gray capitalize text-sm md:text-xl">
+          <div className=" text-text-light-gray capitalize text-sm md:text-lg">
             {cart?.cart?.cost?.totalAmount?.amount > 100 ? (
               'Free Shipping'
             ) : (
