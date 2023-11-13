@@ -245,7 +245,7 @@ const AccountOrders = (props: AccountOrdersType) => {
           </div>
           <hr className="mt-4" />
 
-          <div className="  flex items-center w-full justify-center xsm:justify-end  gap-2 xsm:gap-8 my-2 ">
+          <div className="  flex items-center w-full justify-center   gap-2 xsm:gap-8 my-2 ">
             <div className=" flex gap-4 items-center ">
               <Button
                 variant="outline"

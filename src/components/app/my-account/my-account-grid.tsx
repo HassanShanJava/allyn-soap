@@ -36,6 +36,13 @@ export const accountNavigation = [
     slug: 'logout',
   },
 ];
+export type AccountAddressFilterType = {
+  customerAccessToken: string | null;
+  first: number | null;
+  last: number | null;
+  after: string | null;
+  before: string | null;
+};
 const MyAccountGrid = () => {
   // states
   const router = useRouter();
@@ -43,7 +50,13 @@ const MyAccountGrid = () => {
   const { user } = useSelector((state: RootState) => state.auth);
 
   const dispatch = useDispatch();
-
+  const [filters, setFilters] = useState<AccountAddressFilterType>({
+    customerAccessToken: user?.token_id,
+    first: 2,
+    last: null,
+    after: null,
+    before: null,
+  });
   // queries & mutations
 
   const {
@@ -52,13 +65,20 @@ const MyAccountGrid = () => {
     loading,
     refetch,
   } = useQuery(getCustomerQuery, {
-    variables: { customerAccessToken: user?.token_id },
+    variables: { ...filters },
   });
   const [customerLogout, { loading: customerLogoutLoading }] =
     useMutation(LogoutMutation);
   // functions
   const handleActive = (type: string) => {
     setSelectMenu(type);
+    setFilters({
+      customerAccessToken: user?.token_id,
+      first: 2,
+      last: null,
+      after: null,
+      before: null,
+    });
     if (type == 'logout') {
       handleLogout();
     }
@@ -102,6 +122,8 @@ const MyAccountGrid = () => {
             selectedMenu={selectedMenu}
             customerData={customerData?.customer}
             refetch={refetch}
+            filters={filters}
+            setFilters={setFilters}
           />
 
           {/* <MyAccountMenu

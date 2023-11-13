@@ -1,7 +1,14 @@
 import { gql } from '@apollo/client';
 
 export const getCustomerQuery = gql`
-  query MyQuery($customerAccessToken: String!) {
+  query MyQuery(
+    $customerAccessToken: String = ""
+    $reverse: Boolean
+    $first: Int
+    $last: Int
+    $after: String
+    $before: String
+  ) {
     customer(customerAccessToken: $customerAccessToken) {
       displayName
       email
@@ -14,7 +21,19 @@ export const getCustomerQuery = gql`
       updatedAt
       createdAt
       acceptsMarketing
-      addresses(first: 40) {
+      addresses(
+        reverse: $reverse
+        first: $first
+        last: $last
+        after: $after
+        before: $before
+      ) {
+        pageInfo {
+          endCursor
+          hasNextPage
+          hasPreviousPage
+          startCursor
+        }
         edges {
           node {
             address1
@@ -60,9 +79,22 @@ export const getCustomerQuery = gql`
   }
 `;
 export const getCustomerAddressQuery = gql`
-  query MyQuery($customerAccessToken: String!) {
+  query MyQuery(
+    $customerAccessToken: String!
+    $reverse: Boolean
+    $first: Int
+    $last: Int
+    $after: String
+    $before: String
+  ) {
     customer(customerAccessToken: $customerAccessToken) {
-      addresses(first: 10) {
+      addresses(
+        reverse: $reverse
+        first: $first
+        last: $last
+        after: $after
+        before: $before
+      ) {
         edges {
           node {
             address1

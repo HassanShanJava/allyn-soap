@@ -1,4 +1,4 @@
-import { accountNavigation } from './my-account-grid';
+import { AccountAddressFilterType, accountNavigation } from './my-account-grid';
 import AccountAddress from './my-address';
 import AccountOrders from './my-orders';
 
@@ -6,6 +6,8 @@ type AccountViewType = {
   selectedMenu: string;
   customerData: any;
   refetch: () => unknown;
+  filters: AccountAddressFilterType;
+  setFilters: (e: AccountAddressFilterType) => unknown;
 };
 const MyAccountView = (props: AccountViewType) => {
   const selectViewTitle = accountNavigation.find(
@@ -25,6 +27,8 @@ const MyAccountView = (props: AccountViewType) => {
           customerData={props?.customerData}
           selectedMenu={props?.selectedMenu}
           refetch={props?.refetch}
+          filters={props?.filters}
+          setFilters={props?.setFilters}
         />
       ) : props?.selectedMenu === 'orders' ? (
         <AccountOrders
