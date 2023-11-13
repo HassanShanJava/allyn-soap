@@ -11,21 +11,12 @@ import { Input } from '~/components/ui/input';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useToast } from '~/components/ui/use-toast';
-import { loginCustomerSchema, resetPasswordSchema } from '~/schema/customer';
+import { resetPasswordSchema } from '~/schema/customer';
 import { useState } from 'react';
-import {
-  CartUpdateMutation,
-  LoginMutation,
-  SignUpMutation,
-  resetAccountMutation,
-  resetByUrlaccountMutation,
-} from '~/server/lib/shopify/mutations/auth';
+import { resetByUrlaccountMutation } from '~/server/lib/shopify/mutations/auth';
 import { useMutation } from '@apollo/client';
-import { loginToken } from '~/utils/helper';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleAuth } from '~/store/reducers/auth';
 import { RootState } from '~/store/store';
 
 const ResetPasswordForm = () => {
@@ -35,7 +26,6 @@ const ResetPasswordForm = () => {
   const { cart } = useSelector((state: RootState) => state.cart);
 
   const dispatch = useDispatch();
-  console.log(router?.query, 'query');
   const form = useForm<z.infer<typeof resetPasswordSchema>>({
     resolver: zodResolver(resetPasswordSchema),
   });
@@ -73,7 +63,6 @@ const ResetPasswordForm = () => {
       });
     }
   }
-  console.log(router?.query, 'form.formState.errors');
 
   return (
     <>

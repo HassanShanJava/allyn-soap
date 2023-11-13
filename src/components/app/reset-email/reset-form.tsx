@@ -11,26 +11,20 @@ import { Input } from '~/components/ui/input';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useToast } from '~/components/ui/use-toast';
-import { loginCustomerSchema, resetEmailSchema } from '~/schema/customer';
+import { resetEmailSchema } from '~/schema/customer';
 import { useState } from 'react';
 import { recoverAccountMutation } from '~/server/lib/shopify/mutations/auth';
 import { useMutation } from '@apollo/client';
-import { loginToken } from '~/utils/helper';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleAuth } from '~/store/reducers/auth';
 import { RootState } from '~/store/store';
 import { ArrowLeft } from 'lucide-react';
 
 const ResetEmailForm = () => {
   const { toast } = useToast();
-  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [isFormSubmit, setIsFormSubmit] = useState<boolean>(false);
-  const { cart } = useSelector((state: RootState) => state.cart);
-
-  const dispatch = useDispatch();
 
   const form = useForm<z.infer<typeof resetEmailSchema>>({
     resolver: zodResolver(resetEmailSchema),
