@@ -107,7 +107,7 @@ const BannerCard = ({ banner, key, type }: any) => {
         </div>
       ) : loading && id !== 'search'? (
         <div className="py-14">
-          <BannerSkeleton collectionBanner={collectionBanner} />
+          <BannerSkeleton />
         </div>
       ) : id === 'search' ? (
         <div className="py-2 sm:py-6 md:py-8"></div>

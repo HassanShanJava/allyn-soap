@@ -1,5 +1,5 @@
 import StaticBanner from '~/components/common/static-banner-card';
-import SignIn from '~/public/assets/Signin.jpg';
+import ResetPass from '~/public/assets/pass.webp';
 import ResetPasswordForm from './reset-form';
 
 const ResetPasswordSection = () => {
@@ -17,7 +17,7 @@ const ResetPasswordSection = () => {
             slug: 'Reset Account',
             description:
               'Small Batch Bars of Soap. Made with the freshest ingredients for a rich and soft lather that will leave your skin feeling silky smooth!!',
-            src: SignIn.src,
+            src: ResetPass.src,
           }}
         />
         <ResetPasswordForm />
