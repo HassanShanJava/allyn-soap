@@ -12,7 +12,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useToast } from '~/components/ui/use-toast';
 import { resetPasswordSchema } from '~/schema/customer';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { resetByUrlaccountMutation } from '~/server/lib/shopify/mutations/auth';
 import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
@@ -23,9 +23,9 @@ const ResetPasswordForm = () => {
   const { toast } = useToast();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [resetUrl, setResetUrl] = useState<string | null>(null);
   const { cart } = useSelector((state: RootState) => state.cart);
 
-  const dispatch = useDispatch();
   const form = useForm<z.infer<typeof resetPasswordSchema>>({
     resolver: zodResolver(resetPasswordSchema),
   });
@@ -33,6 +33,12 @@ const ResetPasswordForm = () => {
   const [customerResetAccount, { loading: customerResetLoading }] = useMutation(
     resetByUrlaccountMutation,
   );
+  useEffect(() => {
+    if (router?.query?.url) {
+      setResetUrl(router?.query?.url as string);
+      router.replace('/reset-password');
+    }
+  }, [router?.query?.url]);
   console.log(cart, 'cart data');
   async function onSubmit(values: z.infer<typeof resetPasswordSchema>) {
     try {
@@ -40,7 +46,7 @@ const ResetPasswordForm = () => {
 
       const payload = {
         password: values?.password,
-        resetUrl: router?.query?.url,
+        resetUrl,
       };
       console.log({ values });
       const recoverAcc = await customerResetAccount({
@@ -48,11 +54,15 @@ const ResetPasswordForm = () => {
           ...payload,
         },
       });
-      toast({
-        variant: 'success',
-        title: 'Password Reset Successfully!',
-      });
-      if (window) window.location.href = '/login';
+      if (recoverAcc?.data?.customerResetByUrl?.customerAccessToken) {
+        toast({
+          variant: 'success',
+          title: 'Password Reset Successfully!',
+        });
+        if (window) window.location.href = '/login';
+      } else {
+        throw new Error('Reset Token has been expired');
+      }
 
       // setLoading(true);
     } catch (error: any) {
@@ -61,6 +71,7 @@ const ResetPasswordForm = () => {
         variant: 'destructive',
         title: error.message,
       });
+      if (window) window.location.href = '/login';
     }
   }
 
