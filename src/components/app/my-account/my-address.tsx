@@ -122,7 +122,9 @@ const CustomerAddressView = (props: customerAddressViewType) => {
         <div className=" text-text text-xl font-semibold">
           {props?.selectViewTitle}
         </div>
-        <Button onClick={() => props?.setAddAdress('add')}>Add Address</Button>
+        <Button onClick={() => props?.setAddAdress('add')}>
+          Add A New Address
+        </Button>
       </div>
       <div className="mt-6 grid grid-cols-1  w-full   gap-4">
         {props?.addresses ? (
