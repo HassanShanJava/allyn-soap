@@ -17,6 +17,7 @@ import {
   CartUpdateMutation,
   LoginMutation,
   SignUpMutation,
+  resetAccountMutation,
 } from '~/server/lib/shopify/mutations/auth';
 import { useMutation } from '@apollo/client';
 import { loginToken } from '~/utils/helper';
@@ -37,13 +38,16 @@ const ResetPasswordForm = () => {
   const form = useForm<z.infer<typeof resetPasswordSchema>>({
     resolver: zodResolver(resetPasswordSchema),
   });
-  const [customerLogin, { loading: customerLoginLoading }] =
-    useMutation(LoginMutation);
-  const [customerCartUpdate, { loading: customerCustomerUpdateLoading }] =
-    useMutation(CartUpdateMutation);
+
+  const [customerResetAccount, { loading: customerResetLoading }] =
+    useMutation(resetAccountMutation);
   console.log(cart, 'cart data');
   async function onSubmit(values: z.infer<typeof resetPasswordSchema>) {
     try {
+      const payload = {
+        password: values?.password,
+        resetUrl: router?.query?.url,
+      };
       console.log({ values });
       toast({
         variant: 'success',
