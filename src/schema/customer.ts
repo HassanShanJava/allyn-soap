@@ -107,5 +107,49 @@ export const resetEmailSchema = z.object({
     })
     .refine((val) => validateEmail(val), {
       message: 'Invalid email format.',
-    })
-})
+    }),
+});
+
+export const resetPasswordSchema = z
+  .object({
+    password: z
+      .string({ required_error: 'Please enter your password' })
+      .min(6, {
+        message: 'Password must be at least 6 characters',
+      })
+      .max(30, {
+        message: 'Password must not exceed 30 characters',
+      })
+      .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
+      .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
+      .regex(/\d/, 'Password must contain at least one digit')
+      .regex(
+        /[!@#$%^&*(),.?":{}|<>]/,
+        'Password must contain at least one special character',
+      )
+      .refine((val) => (val.includes(' ') ? false : true), {
+        message: 'Password must not contain whitespaces.',
+      }),
+    confirm_password: z
+      .string({ required_error: 'Please enter your password' })
+      .min(6, {
+        message: 'Password must be at least 6 characters',
+      })
+      .max(30, {
+        message: 'Password must not exceed 30 characters',
+      })
+      .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
+      .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
+      .regex(/\d/, 'Password must contain at least one digit')
+      .regex(
+        /[!@#$%^&*(),.?":{}|<>]/,
+        'Password must contain at least one special character',
+      )
+      .refine((val) => (val.includes(' ') ? false : true), {
+        message: 'Password must not contain whitespaces.',
+      }),
+  })
+  .refine((data) => data.password === data.confirm_password, {
+    message: "Passwords don't match",
+    path: ['confirm_password'],
+  });
