@@ -49,7 +49,7 @@ const ResetPasswordForm = () => {
         variant: 'success',
         title: 'Password Reset Successfully!',
       });
-      router.push('/login');
+      // router.push('/login');
       // setLoading(true);
     } catch (error: any) {
       setLoading(false);
