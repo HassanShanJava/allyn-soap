@@ -170,16 +170,16 @@ const AccountOrders = (props: AccountOrdersType) => {
         </div>
       </div>
       {loading ? (
-        <div className="flex flex-col gap-2 w-full">
+        <div className="flex flex-col gap-2 w-full mt-4">
           {' '}
           <Skeleton className=" h-60 w-full object-cover object-center rounded-md " />
           <Skeleton className=" h-2 w-full object-cover mt-4 object-center rounded-md " />
-          <div className="  flex items-center w-full justify-center xsm:justify-end  gap-2 xsm:gap-8 my-2 ">
+          <div className="  flex items-center w-full justify-center   gap-2 xsm:gap-8 my-2 ">
             <div className=" flex gap-4 items-center ">
-              <Skeleton className=" h-8 w-16 object-cover  object-center rounded-md " />
+              <Skeleton className=" h-8 w-20 object-cover  object-center rounded-md " />
             </div>
             <div className=" flex gap-4 items-center ">
-              <Skeleton className=" h-8 w-16 object-cover  object-center rounded-md " />
+              <Skeleton className=" h-8 w-20 object-cover  object-center rounded-md " />
             </div>
           </div>
         </div>

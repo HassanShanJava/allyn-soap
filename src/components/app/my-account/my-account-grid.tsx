@@ -109,7 +109,7 @@ const MyAccountGrid = () => {
   return (
     <>
       <div className="relative grid grid-cols-12 gap-4 items-start align-middle px-2 md:px-8">
-        <div className="w-full h-max col-span-12 md:col-span-3">
+        <div className="w-full h-max col-span-12 md:col-span-3 px-4 md:px-2">
           <MyAccountMenu
             data={accountNavigation}
             selectedMenu={selectedMenu}
@@ -152,12 +152,14 @@ const MyAccountMenu = (props: AccountMenuType) => {
     <div className="relative w-full bg-primary-light h-full flex flex-col gap-4 py-8  px-1 border border-border rounded-2xl shadow-xl  mx-auto font-poppins">
       {/* for bg color */}
       <div className=" flex flex-col gap-2 justify-center items-center capitalize">
-        <div className="photo-wrapper   h-20 w-20 rounded-full   bg-gradient-to-r from-green-500 via-orange-500 to-yellow-500"></div>
+        <div className="photo-wrapper relative text-center flex items-center justify-center   h-20 w-20 rounded-full   bg-border  ">
+          <i className="fa-solid fa-user text-center text-text-gray text-3xl"></i>
+        </div>
         <div className=" text-text text-xl font-semibold">
           {props?.customerData?.displayName}
         </div>
       </div>
-      <ul className="px-2 mt-6">
+      <ul className="px-2 mt-6 space-y-2">
         {props?.data &&
           props?.data.map((item, index) => {
             return (
@@ -169,8 +171,8 @@ const MyAccountMenu = (props: AccountMenuType) => {
                 className={`p-2 ${
                   props?.selectedMenu == item?.slug
                     ? 'text-text border-b border-text'
-                    : 'text-text-light'
-                } text-text-light font-semibold text-base hover:text-text hover:border-b hover:border-text cursor-pointer`}
+                    : 'text-text-light border-b border-transparent'
+                } text-text-light font-semibold text-base  hover:text-text hover:border-b hover:border-text cursor-pointer`}
               >
                 {item?.title}
               </li>

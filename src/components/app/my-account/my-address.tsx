@@ -131,13 +131,13 @@ const CustomerAddressView = (props: customerAddressViewType) => {
               return (
                 <div
                   key={index}
-                  className="relative p-4 border border-border grid grid-cols-2 justify-between rounded-lg"
+                  className="relative p-4 border border-border grid grid-cols-1 md:grid-cols-2 justify-between rounded-lg"
                 >
-                  <div>
+                  <div className="w-full h-full  flex flex-col justify-between">
                     {addressFields.map((field) => (
                       <div
                         key={field.key}
-                        className="grid grid-cols-3 my-6 items-center"
+                        className="grid grid-cols-2 md:grid-cols-3 my-4 items-center"
                       >
                         <span className="w-fit">{field.label}: </span>
                         <span className="">{item?.[field.key]}</span>
@@ -149,7 +149,7 @@ const CustomerAddressView = (props: customerAddressViewType) => {
                       {addressFields1.map((field) => (
                         <div
                           key={field.key}
-                          className="grid grid-cols-3  items-center my-6"
+                          className="grid grid-cols-2 md:grid-cols-3  items-center my-4"
                         >
                           <div>{field.label}: </div>
                           <div>{item?.[field.key]}</div>
