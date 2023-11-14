@@ -57,7 +57,7 @@ export async function getServerSideProps({ params }: any) {
   });
 
   // Pass data to the page via props
-  return { props: { productData: data } };
+  return { props: { productData: data }, revalidate: 10 };
 }
 
 const ProductDetailsPage = ({ productData }: any) => {
