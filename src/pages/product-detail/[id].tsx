@@ -22,16 +22,14 @@ export async function getServerSideProps(context: any) {
 }
 
 const ProductDetailsPage = (props: any) => {
-  console.log(props?.productData, 'propspropspropspropspropsprops');
   return (
     <>
       {props?.productData?.product && (
         <SeoHead
           title={props?.productData?.product?.title ?? ''}
           description={props?.productData?.product?.description ?? ''}
-          image_url={
-            'https://cdn.shopify.com/s/files/1/0372/6124/6603/files/fb_logo_with_kraft_paper.png?v=1613915363'
-          }
+          // src={props?.productData?.featuredImage?.url}
+          image_url={props?.productData?.featuredImage?.url}
         />
       )}
       <Suspense fallback={<p>Loading home</p>}>
