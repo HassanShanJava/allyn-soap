@@ -1,6 +1,7 @@
 import { NextPageWithLayout } from '~/pages/_app';
 import { Suspense } from 'react';
 import dynamic from 'next/dynamic';
+import SeoHead from '~/components/common/seo-head';
 
 // import Home from '~/components/app/home';
 export const LoadingComponent: React.FC = () => {
@@ -13,9 +14,18 @@ const HomePage = dynamic(() => import('~/components/app/home'), {
 
 const IndexPage: NextPageWithLayout = () => {
   return (
-    <Suspense fallback={<p>Loading home from fallback</p>}>
-      <HomePage />
-    </Suspense>
+    <>
+      <SeoHead
+        title="Allyn's Soap Co."
+        description="Allyn's Soap Co. is dedicated to producing quality handmade soaps and lotions and other bath products with ingredients you can pronounce and understand."
+        image_url={
+          'https://cdn.shopify.com/s/files/1/0372/6124/6603/files/fb_logo_with_kraft_paper.png?v=1613915363'
+        }
+      />
+      <Suspense fallback={<p>Loading home from fallback</p>}>
+        <HomePage />
+      </Suspense>
+    </>
   );
 };
 
