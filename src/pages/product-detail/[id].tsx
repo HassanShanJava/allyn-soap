@@ -38,13 +38,25 @@ export async function getStaticPaths() {
 
   return { paths, fallback: true };
 }
-export async function getStaticProps({ params }: any) {
+// export async function getStaticProps({ params }: any) {
+//   const client = apolloClient();
+
+//   const { data } = await client.query({
+//     query: getProductQuery,
+//     variables: { handle: params?.id },
+//   });
+//   return { props: { productData: data } };
+// }
+export async function getServerSideProps({ params }: any) {
+  // Fetch data from external API
   const client = apolloClient();
 
   const { data } = await client.query({
     query: getProductQuery,
     variables: { handle: params?.id },
   });
+
+  // Pass data to the page via props
   return { props: { productData: data } };
 }
 
