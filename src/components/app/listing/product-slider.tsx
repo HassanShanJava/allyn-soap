@@ -2,11 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import NextImage from '~/components/common/custom_image';
 import { Button } from '~/components/ui/button';
 
-import Soap1 from '~/public/assets/soap1.png';
-import Soap2 from '~/public/assets/soap2.png';
-import Soap3 from '~/public/assets/soap3.png';
-import Soap4 from '~/public/assets/soap4.png';
-
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -14,7 +9,6 @@ import { useQuery } from '@apollo/client';
 import { getSalesProductQuery } from '~/server/lib/shopify/query/collection';
 import { removeEdgesAndNodes } from '~/utils/helper';
 import { useRouter } from 'next/router';
-
 
 const ProductSlider = () => {
   const productSlider = useRef<any>(null);

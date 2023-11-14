@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { LogoutMutation } from '~/server/lib/shopify/mutations/auth';
 import { toggleAuth } from '~/store/reducers/auth';
@@ -58,7 +58,6 @@ const MyAccountGrid = () => {
     before: null,
   });
   // queries & mutations
-
   const {
     error,
     data: customerData,
@@ -66,9 +65,23 @@ const MyAccountGrid = () => {
     refetch,
   } = useQuery(getCustomerQuery, {
     variables: { ...filters },
+    skip: user?.token_id ? false : true,
   });
   const [customerLogout, { loading: customerLogoutLoading }] =
     useMutation(LogoutMutation);
+
+  // useEffect
+  useEffect(() => {
+    setFilters({
+      customerAccessToken: user?.token_id,
+      first: 2,
+      last: null,
+      after: null,
+      before: null,
+    });
+    // refetch();
+  }, [user?.token_id]);
+
   // functions
   const handleActive = (type: string) => {
     setSelectMenu(type);
