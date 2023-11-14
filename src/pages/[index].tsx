@@ -53,12 +53,12 @@ const CmsContent = () => {
             ></div>
           </div>
         ) : (
-          <div className="w-full md:w-1/2 mx-auto  p-8 flex flex-col gap-4 relative">
+          <div className="w-full md:w-3/5 mx-auto  p-8 flex flex-col gap-4 relative">
             No Data Found!
           </div>
         )
       ) : (
-        <div className="w-full md:w-1/2 mx-auto  p-8 flex flex-col gap-4 relative">
+        <div className="w-full md:w-3/5 mx-auto  p-8 flex flex-col gap-4 relative">
           <Skeleton className=" h-10 w-1/5 object-cover object-center rounded-md " />
           <Skeleton className=" h-60 w-full object-cover object-center rounded-md " />
         </div>
