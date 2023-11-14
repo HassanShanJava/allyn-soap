@@ -44,3 +44,15 @@ export const getPageDetail = gql`
     }
   }
 `;
+export const getTermsDetail = gql`
+  query MyQuery {
+    shop {
+      termsOfService {
+        body
+        handle
+        title
+        id
+      }
+    }
+  }
+`;

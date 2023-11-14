@@ -23,8 +23,6 @@ export const poppins = Poppins({
 type DefaultLayoutProps = { children: ReactNode };
 
 function Index({ children }: DefaultLayoutProps) {
-  const router = useRouter();
-
   const apolloClient = new ApolloClient({
     ssrMode: typeof window === 'undefined',
     link: new HttpLink({

@@ -51,10 +51,9 @@ export default function Header() {
   const router = useRouter();
   const id = router?.query?.id ?? '';
 
-  const [getCart, { data: cartData }] = useLazyQuery(getCartQuery);
-  const [customerCartUpdate, { loading: customerCustomerUpdateLoading }] =
-    useMutation(CartUpdateMutation);
-  const { data, loading } = useQuery(getMenuQuery, {
+  const [getCart] = useLazyQuery(getCartQuery);
+  const [customerCartUpdate] = useMutation(CartUpdateMutation);
+  const { data,loading } = useQuery(getMenuQuery, {
     variables: { handle: 'main-menu' },
   });
   // for changing color on scroll
@@ -95,7 +94,7 @@ export default function Header() {
             }),
           );
           if (cart?.cart_id && cart?.cart?.buyerIdentity?.customer) {
-            const customerCartData = await customerCartUpdate({
+            await customerCartUpdate({
               variables: {
                 cartId: cart?.cart_id,
                 customerAccessToken: tokenID,
@@ -115,7 +114,7 @@ export default function Header() {
   useEffect(() => {
     console.log(router?.query, 'router?.query');
     if (router?.query?.status == 'true') {
-      const cartID = localStorage.removeItem('cartID');
+      localStorage.removeItem('cartID');
 
       dispatch(
         toggleCart({

@@ -55,7 +55,7 @@ const ProductSlider = () => {
     ],
   };
 
-  const { error, data, loading } = useQuery(getSalesProductQuery, {
+  const { data, loading } = useQuery(getSalesProductQuery, {
     variables: { handle: 'special-sale' },
   });
 

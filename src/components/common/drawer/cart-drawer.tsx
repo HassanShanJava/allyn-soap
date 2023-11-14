@@ -27,11 +27,6 @@ import { Input } from '~/components/ui/input';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
-type FilterSheetType = {
-  modal: boolean;
-  setModal: (e: boolean) => void;
-};
-
 export default function CartSheet() {
   const { isCartOpen, cart } = useSelector((state: RootState) => state.cart);
   const [note, setNote] = useState(null);
@@ -47,9 +42,8 @@ export default function CartSheet() {
     ? removeEdgesAndNodes(cart?.cart?.lines)
     : [];
   const handleCheckout = async (text: string) => {
-    let cartAddData;
     if (note && cart?.cart?.note !== note) {
-      cartAddData = await cartNote({
+      await cartNote({
         variables: {
           cartId: cart?.cart_id,
           note: note,
@@ -59,7 +53,7 @@ export default function CartSheet() {
     router.push(text);
   };
   return (
-    <Sheet open={isCartOpen} onOpenChange={(e) => dispatch(toggleCartModal())}>
+    <Sheet open={isCartOpen} onOpenChange={() => dispatch(toggleCartModal())}>
       <SheetContent
         className={` ${poppins.variable} ${poppins.className} w-full pt-4  md:min-w-[420px] h-full flex flex-col`}
       >
@@ -205,7 +199,7 @@ const CartProduct = (props: any) => {
             title: `Cart item deleted Succesfully!`,
           });
         } else {
-          const deleteStorage = localStorage.removeItem('cartID');
+          await localStorage.removeItem('cartID');
           dispatch(toggleCartModal());
           dispatch(
             toggleCart({

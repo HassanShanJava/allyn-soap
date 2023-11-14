@@ -41,7 +41,6 @@ function Footer() {
     variables: { handle: 'footer' },
   });
   const footerData = data?.menu?.items;
-
   return (
     <section id="footer">
       {/* relative bottom-0 */}
@@ -70,7 +69,12 @@ function Footer() {
               {footerData &&
                 footerData.map((item: any, i: number) => (
                   <li key={i} className="">
-                    <Link href={item.url}>{item.title}</Link>
+                    <Link
+                      href={`/${getRoutData(item.url) ?? '#'}`}
+                      // href={item.url}
+                    >
+                      {item.title}
+                    </Link>
                   </li>
                 ))}
             </ul>

@@ -1,15 +1,11 @@
 import { useMutation, useQuery } from '@apollo/client';
-import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { LogoutMutation } from '~/server/lib/shopify/mutations/auth';
 import { toggleAuth } from '~/store/reducers/auth';
 import { RootState } from '~/store/store';
 import { deleteCookie } from 'cookies-next';
-import {
-  getCustomerAddressQuery,
-  getCustomerQuery,
-} from '~/server/lib/shopify/query/customer';
+import { getCustomerQuery } from '~/server/lib/shopify/query/customer';
 import MyAccountView from './my-tab';
 import { LoadingDialog } from '~/components/common/loading/loadingModal';
 export const accountNavigation = [
@@ -45,7 +41,6 @@ export type AccountAddressFilterType = {
 };
 const MyAccountGrid = () => {
   // states
-  const router = useRouter();
   const [selectedMenu, setSelectMenu] = useState('account');
   const { user } = useSelector((state: RootState) => state.auth);
 
@@ -59,7 +54,6 @@ const MyAccountGrid = () => {
   });
   // queries & mutations
   const {
-    error,
     data: customerData,
     loading,
     refetch,
@@ -67,8 +61,7 @@ const MyAccountGrid = () => {
     variables: { ...filters },
     skip: user?.token_id ? false : true,
   });
-  const [customerLogout, { loading: customerLogoutLoading }] =
-    useMutation(LogoutMutation);
+  const [customerLogout] = useMutation(LogoutMutation);
 
   // useEffect
   useEffect(() => {
