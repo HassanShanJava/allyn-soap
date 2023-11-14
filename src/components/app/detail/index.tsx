@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import { ReviewDialog } from '~/components/common/modals/review-modal';
 import ReveiewContent from './review';
 import RelatedProducts from './related-products';
+import SeoHead from '~/components/common/seo-head';
 const DetailPage = () => {
   const router = useRouter();
 
@@ -44,6 +45,13 @@ const DetailPage = () => {
   }, [productData?.product]);
   return (
     <>
+      <SeoHead
+        title={productData?.product?.title}
+        description={productData?.product?.description}
+        image_url={
+          'https://cdn.shopify.com/s/files/1/0372/6124/6603/files/fb_logo_with_kraft_paper.png?v=1613915363'
+        }
+      />
       <div className="relative  font-poppins">
         <div className="absolute -z-10 bg-secondary min-w-[200px] w-full  max-w-[70%] md:max-w-[80%] h-8  rounded-br-[350px] transform-all ease-in-out duration-300"></div>
         {productData?.product && (

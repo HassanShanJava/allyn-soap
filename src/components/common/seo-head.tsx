@@ -1,8 +1,13 @@
 import React from 'react';
-import Head from 'next/head';
 import logo from '~/public/assets/logo.png';
 
-const SeoHead = () => {
+import Head from 'next/head';
+type seoType = {
+  title: string;
+  description: string;
+  image_url: string;
+};
+const SeoHead = (props: seoType) => {
   return (
     <Head>
       <meta charSet="utf-8"></meta>
@@ -11,38 +16,32 @@ const SeoHead = () => {
         content="width=device-width, initial-scale=1, user-scalable=0"
       ></meta>
       <meta httpEquiv="X-UA-Compatible" content="ie=edge"></meta>
-      <meta
-        name="description"
-        content="Allyn's Soap Co. is dedicated to producing quality handmade soaps and lotions and other bath products with ingredients you can pronounce and understand."
-      ></meta>
-      <meta name="keywords" content="Allyn's Soap Co."></meta>
+      <meta name="description" content={props?.description}></meta>
+      <meta name="keywords" content={props?.title}></meta>
 
-      <meta property="og:site_name" content="Allyn&#39;s Soap Co" />
+      <meta
+        property="og:site_name"
+        content={`${props?.title} - Allyn's Soap Co`}
+      />
       <meta property="og:url" content="https://allynssoapco.com/" />
       <meta property="og:type" content="website" />
-      <meta property="og:title" content="Allyn's Soap Co."></meta>
       <meta
-        property="og:description"
-        content="Allyn's Soap Co. is dedicated to producing quality handmade soaps and lotions and other bath products with ingredients you can pronounce and understand."
+        property="og:title"
+        content={`${props?.title} - Allyn's Soap Co`}
       ></meta>
+      <meta property="og:description" content={props?.description}></meta>
 
       <meta name="twitter:card" content="summary_large_image"></meta>
-      <meta name="twitter:title" content="Allyn's Soap Co."></meta>
       <meta
-        name="twitter:description"
-        content="Allyn's Soap Co., the prestige car raffle company that offers car enthusiasts the thrilling opportunity to win their coveted dream car and many other prizes."
+        name="twitter:title"
+        content={`${props?.title} - Allyn's Soap Co`}
       ></meta>
-      <meta
-        property="og:image"
-        content="https://cdn.shopify.com/s/files/1/0372/6124/6603/files/fb_logo_with_kraft_paper.png?v=1613915363"
-      />
-      <meta
-        property="og:image:secure_url"
-        content="https://cdn.shopify.com/s/files/1/0372/6124/6603/files/fb_logo_with_kraft_paper.png?v=1613915363"
-      />
+      <meta name="twitter:description" content={props?.description}></meta>
+      <meta property="og:image" content={props?.image_url} />
+      <meta property="og:image:secure_url" content={props?.image_url} />
       <meta property="og:image:width" content="2050" />
       <meta property="og:image:height" content="780" />
-      <title>Allyn's Soap Co.</title>
+      <title>{`${props?.title} - Allyn's Soap Co`}</title>
 
       <link rel="icon" href={logo.src} sizes="any" />
       <link
