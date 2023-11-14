@@ -53,7 +53,7 @@ export default function Header() {
 
   const [getCart] = useLazyQuery(getCartQuery);
   const [customerCartUpdate] = useMutation(CartUpdateMutation);
-  const { data,loading } = useQuery(getMenuQuery, {
+  const { data, loading } = useQuery(getMenuQuery, {
     variables: { handle: 'main-menu' },
   });
   // for changing color on scroll
