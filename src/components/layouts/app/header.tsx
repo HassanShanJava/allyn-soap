@@ -249,9 +249,15 @@ export const SideBarMenu: React.FC<SideBarMenuProps> = ({
   const { user } = useSelector((state: RootState) => state.auth);
 
   useEffect(() => {
-    window.addEventListener('resize', () => closeFn(false));
+    window.addEventListener(
+      'resize',
+      () => window.innerWidth >= 1000 && closeFn(false),
+    );
     return () => {
-      window.removeEventListener('resize', () => closeFn(false));
+      window.removeEventListener(
+        'resize',
+        () => window.innerWidth >= 1000 && closeFn(false),
+      );
     };
   }, []);
 
