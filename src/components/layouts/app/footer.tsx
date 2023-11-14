@@ -41,7 +41,6 @@ function Footer() {
     variables: { handle: 'footer' },
   });
   const footerData = data?.menu?.items;
-  console.log(data?.menu?.items, 'data?.menu?.items');
   return (
     <section id="footer">
       {/* relative bottom-0 */}
