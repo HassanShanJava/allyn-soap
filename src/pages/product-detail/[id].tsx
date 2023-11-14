@@ -22,6 +22,10 @@ export async function getServerSideProps(context: any) {
 }
 
 const ProductDetailsPage = (props: any) => {
+  console.log(
+    'props?.productData?.productprops?.productData?.product',
+    props?.productData?.product,
+  );
   return (
     <>
       {props?.productData?.product && (
@@ -29,7 +33,7 @@ const ProductDetailsPage = (props: any) => {
           title={props?.productData?.product?.title ?? ''}
           description={props?.productData?.product?.description ?? ''}
           // src={props?.productData?.featuredImage?.url}
-          image_url={props?.productData?.featuredImage?.url}
+          image_url={props?.productData?.product?.featuredImage?.url}
         />
       )}
       <Suspense fallback={<p>Loading home</p>}>
