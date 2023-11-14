@@ -274,7 +274,7 @@ const AccountOrders = (props: AccountOrdersType) => {
           </div>
         </>
       ) : (
-        <div className="flex flex-col my-auto h-full items-center justify-center rounded-lg border border-border mt-4">
+        <div className="flex flex-col my-auto h-3/4 items-center justify-center rounded-lg border border-border mt-4">
           <Image src={Current} alt="/" />
           <p className="text-center text-gray-300 text-md my-2 px-6">
             No Data Found!

@@ -9,6 +9,8 @@ import { removeEdgesAndNodes } from '~/utils/helper';
 import { AddressDialouge } from '~/components/common/modals/address-modal';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { AccountAddressFilterType } from './my-account-grid';
+import Image from 'next/image';
+import Current from '~/public/assets/not-current-entrie.png';
 
 type AccountDetailType = {
   selectedMenu: string;
@@ -37,7 +39,7 @@ const AccountAddress = (props: AccountDetailType) => {
     setAddressData: setAddressData,
   };
   return (
-    <div className="relative  font-poppins px-4 py-2">
+    <div className="relative h-full font-poppins px-4 py-2">
       {/* for bg color */}
       {!addAddress ? (
         <CustomerAddressView
@@ -117,7 +119,7 @@ const CustomerAddressView = (props: customerAddressViewType) => {
     }
   };
   return (
-    <div>
+    <div className="relative h-full">
       <div className="flex items-center justify-between">
         <div className=" text-text text-xl font-semibold">
           {props?.selectViewTitle}
@@ -126,8 +128,8 @@ const CustomerAddressView = (props: customerAddressViewType) => {
           Add A New Address
         </Button>
       </div>
-      <div className="mt-6 grid grid-cols-1  w-full   gap-4">
-        {props?.addresses ? (
+      <div className="mt-4 grid grid-cols-1 h-full  w-full   gap-4">
+        {props?.addresses && props?.addresses?.length ? (
           <>
             {props?.addresses?.map((item: any, index: number) => {
               return (
@@ -206,7 +208,12 @@ const CustomerAddressView = (props: customerAddressViewType) => {
             </div>
           </>
         ) : (
-          <></>
+          <div className="flex flex-col  h-3/4 items-center justify-center rounded-lg border border-border mt-4">
+            <Image src={Current} alt="/" />
+            <p className="text-center text-gray-300 text-md my-2 px-6">
+              No Data Found!
+            </p>
+          </div>
         )}
       </div>
       <AddressDialouge
