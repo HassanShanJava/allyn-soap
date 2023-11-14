@@ -15,28 +15,6 @@ import { getSalesProductQuery } from '~/server/lib/shopify/query/collection';
 import { removeEdgesAndNodes } from '~/utils/helper';
 import { useRouter } from 'next/router';
 
-const productData = [
-  {
-    name: 'New Products Sale',
-    price: '30% OFF',
-    img: Soap1,
-  },
-  {
-    name: 'New Products Sale',
-    price: '30% OFF',
-    img: Soap2,
-  },
-  {
-    name: 'New Products Sale',
-    price: '30% OFF',
-    img: Soap3,
-  },
-  {
-    name: 'New Products Sale',
-    price: '30% OFF',
-    img: Soap4,
-  },
-];
 
 const ProductSlider = () => {
   const productSlider = useRef<any>(null);
