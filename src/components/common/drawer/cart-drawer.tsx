@@ -81,92 +81,92 @@ export default function CartSheet() {
               </>
             )}
           </div>
-        </SheetHeader>
-        <SheetDescription className="relative h-[calc(100vh-6rem)]  flex flex-col item-start justify-between gap-2 ">
-          <ScrollArea className="h-full  pb-6     mt-2 pr-2   font-poppins w-full relative">
-            <ScrollBar orientation="vertical" />
-            <CartProduct products={lines} cart_id={cart?.cart_id} />
-            {/* <FilterContent isSheet={true} /> */}
-          </ScrollArea>
-          <div className="flex-1 flex flex-col   justify-end mb-4 h-full">
-            <hr className="mb-6" />
-            <div className="flex flex-col gap-4  space-y-4">
-              <div>
-                <Input
-                  type="text"
-                  placeholder="Special instructions for seller"
-                  className="bg-text-light-secondary border-none focus:outline-none"
-                  value={note ?? ''}
-                  autoFocus={false}
-                  onChange={(e: any) => {
-                    setNote(e.target.value);
-                  }}
-                />
-              </div>
-              <div className=" flex flex-col gap-2">
-                {cart?.cart?.cost?.totalAmount?.amount <
-                  cart?.cart?.cost?.subtotalAmount?.amount && (
-                  <div className=" flex justify-between items-center ">
-                    <div>{'Discount (-20%)'}</div>
+          <SheetDescription className="relative h-[calc(100vh-6rem)]  flex flex-col item-start justify-between gap-2 ">
+            <ScrollArea className="h-full  pb-6     mt-2 pr-2   font-poppins w-full relative">
+              <ScrollBar orientation="vertical" />
+              <CartProduct products={lines} cart_id={cart?.cart_id} />
+              {/* <FilterContent isSheet={true} /> */}
+            </ScrollArea>
+            <div className="flex-1 flex flex-col   justify-end mb-4 h-full">
+              <hr className="mb-6" />
+              <div className="flex flex-col gap-4  space-y-4">
+                <div>
+                  <Input
+                    type="text"
+                    placeholder="Special instructions for seller"
+                    className="bg-text-light-secondary border-none focus:outline-none focus-visible:outline-none focus-visible:ring-0   focus-visible:ring-offset-0"
+                    value={note ?? ''}
+                    autoFocus={false}
+                    onChange={(e: any) => {
+                      setNote(e.target.value);
+                    }}
+                  />
+                </div>
+                <div className=" flex flex-col gap-2">
+                  {cart?.cart?.cost?.totalAmount?.amount <
+                    cart?.cart?.cost?.subtotalAmount?.amount && (
+                    <div className=" flex justify-between items-center ">
+                      <div>{'Discount (-20%)'}</div>
+                      <div>
+                        -$
+                        {(
+                          cart?.cart?.cost?.subtotalAmount?.amount -
+                          cart?.cart?.cost?.totalAmount?.amount
+                        )
+                          .toFixed(2)
+                          .toString()}
+                      </div>
+                    </div>
+                  )}
+
+                  <div className=" flex justify-between items-center">
                     <div>
-                      -$
-                      {(
-                        cart?.cart?.cost?.subtotalAmount?.amount -
-                        cart?.cart?.cost?.totalAmount?.amount
-                      )
-                        .toFixed(2)
-                        .toString()}
+                      Taxes and{' '}
+                      <Link href="/shipping">
+                        <span className="text-text-blue underline cursor-pointer">
+                          shipping
+                        </span>{' '}
+                      </Link>
+                      calculated at checkout
                     </div>
                   </div>
-                )}
+                  <hr className="mt-4" />
 
-                <div className=" flex justify-between items-center">
-                  <div>
-                    Taxes and{' '}
-                    <Link href="/shipping">
-                      <span className="text-text-blue underline cursor-pointer">
-                        shipping
-                      </span>{' '}
-                    </Link>
-                    calculated at checkout
-                  </div>
-                </div>
-                <hr className="mt-4" />
-
-                <div className=" flex justify-between items-center">
-                  <div>{'Subtotal'}</div>
-                  <div>
-                    $
-                    {cart?.cart?.cost?.totalAmount?.amount < 100
-                      ? (+cart?.cart?.cost?.totalAmount?.amount).toFixed(2)
-                      : cart?.cart?.cost?.totalAmount?.amount}
+                  <div className=" flex justify-between items-center">
+                    <div>{'Subtotal'}</div>
+                    <div>
+                      $
+                      {cart?.cart?.cost?.totalAmount?.amount < 100
+                        ? (+cart?.cart?.cost?.totalAmount?.amount).toFixed(2)
+                        : cart?.cart?.cost?.totalAmount?.amount}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="flex gap-2 items-center justify-between mt-3">
-              <Button
-                onClick={() => {
-                  dispatch(toggleCartModal());
-                }}
-                className="w-full border-primary text-primary "
-                variant={'outline'}
-              >
-                Continue Shopping
-              </Button>
+              <div className="flex gap-2 items-center justify-between mt-3">
+                <Button
+                  onClick={() => {
+                    dispatch(toggleCartModal());
+                  }}
+                  className="w-full border-primary text-primary "
+                  variant={'outline'}
+                >
+                  Continue Shopping
+                </Button>
 
-              <Button
-                className="w-full  "
-                disabled={cartNoteLoading}
-                onClick={() => {
-                  handleCheckout(cart?.cart ? cart?.cart?.checkoutUrl : '');
-                }}
-              >
-                Checkout
-              </Button>
+                <Button
+                  className="w-full  "
+                  disabled={cartNoteLoading}
+                  onClick={() => {
+                    handleCheckout(cart?.cart ? cart?.cart?.checkoutUrl : '');
+                  }}
+                >
+                  Checkout
+                </Button>
+              </div>
             </div>
-          </div>
-        </SheetDescription>
+          </SheetDescription>
+        </SheetHeader>
       </SheetContent>
     </Sheet>
   );
