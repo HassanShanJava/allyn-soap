@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { LoadingDialog } from '~/components/common/loading/loadingModal';
 import { Skeleton } from '~/components/ui/skeleton';
-import { getPageDetail } from '~/server/lib/shopify/query/menu';
+import { getPageDetail, getTermsDetail } from '~/server/lib/shopify/query/menu';
 
 const CmsContent = () => {
   const router = useRouter();
@@ -14,23 +14,36 @@ const CmsContent = () => {
   } = useQuery(getPageDetail, {
     variables: { handle: router?.query?.index },
   });
+  const {
+    error: termsError,
+    data: termsData,
+    loading: termsLoading,
+  } = useQuery(getTermsDetail, {
+    skip: router?.query?.index === 'terms-of-service' ? false : true,
+  });
+  console.log(termsData?.shop?.termsOfService?.body, 'termsData');
   return (
     <>
-      {!loading ? (
-        !error ? (
+      {!termsLoading && !loading ? (
+        !termsError && !error ? (
           <div className=" w-full md:w-1/2 mx-auto  p-8">
             <h1 className=" text-2xl font-bold mb-4">
-              {cmsData?.pageByHandle?.title}
+              {cmsData?.pageByHandle?.title ??
+                termsData?.shop?.termsOfService?.title}
             </h1>
             <div
-              className=" text-text-gray text-base text-left"
+              className="  text-base text-left"
               dangerouslySetInnerHTML={{
-                __html: cmsData?.pageByHandle?.body,
+                __html:
+                  cmsData?.pageByHandle?.body ??
+                  termsData?.shop?.termsOfService?.body,
               }}
             ></div>
           </div>
         ) : (
-          <>No Data Found</>
+          <div className="w-full md:w-1/2 mx-auto  p-8 flex flex-col gap-4 relative">
+            No Data Found!
+          </div>
         )
       ) : (
         <div className="w-full md:w-1/2 mx-auto  p-8 flex flex-col gap-4 relative">
