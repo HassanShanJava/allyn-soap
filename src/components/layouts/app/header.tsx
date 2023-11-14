@@ -27,6 +27,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from '~/components/ui/input';
 import { Button } from '~/components/ui/button';
+import NavSkeleton from '~/components/common/skeleton/nav-skeleton';
 interface SideBarMenuProps {
   nav: boolean;
   closeFn: React.Dispatch<React.SetStateAction<boolean>>;
@@ -52,7 +53,7 @@ export default function Header() {
 
   const [getCart] = useLazyQuery(getCartQuery);
   const [customerCartUpdate] = useMutation(CartUpdateMutation);
-  const { data } = useQuery(getMenuQuery, {
+  const { data,loading } = useQuery(getMenuQuery, {
     variables: { handle: 'main-menu' },
   });
   // for changing color on scroll
@@ -153,8 +154,13 @@ export default function Header() {
           <Image src={LogoImage} alt="/" width={80} height={80} />
         </Link>
 
-        {navList ? (
-          <ul className="hidden xl:flex gap-4 text-sm  text-text-dark  xl:flex-row  xl:items-center ">
+        {loading && (
+          <>
+            <NavSkeleton />
+          </>
+        )}
+        {navList && !loading ? (
+          <ul className="hidden xl:flex gap-4 text-sm  2xl:gap-8   text-text-dark  xl:flex-row  xl:items-center ">
             {navList.map((item: Menu) => {
               return (
                 <Link
