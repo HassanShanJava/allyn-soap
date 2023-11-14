@@ -1,72 +1,33 @@
-import { gql } from '@apollo/client';
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
-import DetailPage from '~/components/app/detail';
 import SeoHead from '~/components/common/seo-head';
-import { NextPageWithLayout } from '~/pages/_app';
 import { getProductQuery } from '~/server/lib/shopify/query/product';
 import apolloClient from '~/utils/apolloClient';
-import { removeEdgesAndNodes } from '~/utils/helper';
 const ProductDetails = dynamic(() => import('~/components/app/detail'), {
   ssr: true,
 });
-export async function getStaticPaths() {
-  const client = apolloClient();
-  const { data } = await client.query({
-    query: gql`
-      query Products {
-        products(first: 10) {
-          edges {
-            node {
-              handle
-              id
-              title
-            }
-          }
-        }
-      }
-    `,
-  });
-  const productData = data?.products
-    ? await removeEdgesAndNodes(data?.products)
-    : [];
-  console.log('productData productData', productData);
 
-  const paths = productData?.map((post: any) => ({
-    params: { id: post?.handle as string },
-  }));
-
-  return { paths, fallback: true };
-}
-// export async function getStaticProps({ params }: any) {
-//   const client = apolloClient();
-
-//   const { data } = await client.query({
-//     query: getProductQuery,
-//     variables: { handle: params?.id },
-//   });
-//   return { props: { productData: data } };
-// }
-export async function getServerSideProps({ params }: any) {
+export async function getServerSideProps(context: any) {
   // Fetch data from external API
+  const { id } = context.query;
   const client = apolloClient();
 
   const { data } = await client.query({
     query: getProductQuery,
-    variables: { handle: params?.id },
+    variables: { handle: id },
   });
 
   // Pass data to the page via props
-  return { props: { productData: data }, revalidate: 10 };
+  return { props: { productData: data } };
 }
 
-const ProductDetailsPage = ({ productData }: any) => {
+const ProductDetailsPage = (props: any) => {
   return (
     <>
-      {productData?.product && (
+      {props?.productData?.product && (
         <SeoHead
-          title={productData?.product?.title}
-          description={productData?.product?.description}
+          title={props?.productData?.product?.title ?? ''}
+          description={props?.productData?.product?.description ?? ''}
           image_url={
             'https://cdn.shopify.com/s/files/1/0372/6124/6603/files/fb_logo_with_kraft_paper.png?v=1613915363'
           }
