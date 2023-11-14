@@ -35,12 +35,10 @@ export async function getStaticPaths() {
   const paths = productData?.map((post: any) => ({
     params: { id: post?.handle as string },
   }));
-  console.log('paths paths paths', paths);
 
   return { paths, fallback: true };
 }
 export async function getStaticProps({ params }: any) {
-  console.log(params?.id, 'params?.id params?.id');
   const client = apolloClient();
 
   const { data } = await client.query({
@@ -53,13 +51,15 @@ export async function getStaticProps({ params }: any) {
 const ProductDetailsPage = ({ productData }: any) => {
   return (
     <>
-      <SeoHead
-        title={productData?.product?.title}
-        description={productData?.product?.description}
-        image_url={
-          'https://cdn.shopify.com/s/files/1/0372/6124/6603/files/fb_logo_with_kraft_paper.png?v=1613915363'
-        }
-      />
+      {productData?.product && (
+        <SeoHead
+          title={productData?.product?.title}
+          description={productData?.product?.description}
+          image_url={
+            'https://cdn.shopify.com/s/files/1/0372/6124/6603/files/fb_logo_with_kraft_paper.png?v=1613915363'
+          }
+        />
+      )}
       <Suspense fallback={<p>Loading home</p>}>
         <ProductDetails />
       </Suspense>
