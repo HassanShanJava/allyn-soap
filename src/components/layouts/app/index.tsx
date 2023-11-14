@@ -1,7 +1,6 @@
-import React, { ReactNode, Suspense, useEffect } from 'react';
+import React, { ReactNode, Suspense } from 'react';
 import Header from './header';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '~/store/store';
+
 import Footer from './footer';
 import { Toaster } from '~/components/ui/toaster';
 import { useRouter } from 'next/router';
@@ -10,12 +9,9 @@ import {
   ApolloProvider,
   HttpLink,
   InMemoryCache,
-  useQuery,
 } from '@apollo/client';
-import { makeApolloClient } from '~/utils/apolloClient';
 import { Poppins } from 'next/font/google';
 import CartSheet from '~/components/common/drawer/cart-drawer';
-import { getMenuQuery } from '~/server/lib/shopify/query/menu';
 
 export const poppins = Poppins({
   subsets: ['latin'],
@@ -29,11 +25,12 @@ type DefaultLayoutProps = { children: ReactNode };
 function Index({ children }: DefaultLayoutProps) {
   const router = useRouter();
 
-
   const apolloClient = new ApolloClient({
     ssrMode: typeof window === 'undefined',
     link: new HttpLink({
-      uri: `https://${process.env.NEXT_PUBLIC_SHOPIFY_DOMAIN as string}.myshopify.com/api/2023-10/graphql.json`, // Replace with your Shopify store URL
+      uri: `https://${
+        process.env.NEXT_PUBLIC_SHOPIFY_DOMAIN as string
+      }.myshopify.com/api/2023-10/graphql.json`, // Replace with your Shopify store URL
       headers: {
         'X-Shopify-Storefront-Access-Token': process.env
           .NEXT_PUBLIC_SHOPIFY_HEADER as string, // Replace with your Shopify access token
