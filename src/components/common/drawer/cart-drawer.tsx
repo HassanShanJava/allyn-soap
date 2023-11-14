@@ -42,9 +42,8 @@ export default function CartSheet() {
     ? removeEdgesAndNodes(cart?.cart?.lines)
     : [];
   const handleCheckout = async (text: string) => {
-    let cartAddData;
     if (note && cart?.cart?.note !== note) {
-      cartAddData = await cartNote({
+      await cartNote({
         variables: {
           cartId: cart?.cart_id,
           note: note,

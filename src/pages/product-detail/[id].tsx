@@ -24,7 +24,7 @@ export async function getServerSideProps(context: any) {
 const ProductDetailsPage = (props: any) => {
   console.log(
     'props?.productData?.productprops?.productData?.product',
-    props?.productData?.product,
+    props?.productData?.product?.featuredImage?.url,
   );
   return (
     <>

@@ -6,7 +6,6 @@ import AppLayout from './app';
 
 // import Icon from '~/public/assets/favicon.png';
 import { Toaster } from 'react-hot-toast';
-import SeoHead from '../common/seo-head';
 type DefaultLayoutProps = { children: ReactNode };
 
 export default function DefaultLayout({ children }: DefaultLayoutProps) {

@@ -9,7 +9,6 @@ import { useEffect, useState } from 'react';
 import { ReviewDialog } from '~/components/common/modals/review-modal';
 import ReveiewContent from './review';
 import RelatedProducts from './related-products';
-import SeoHead from '~/components/common/seo-head';
 const DetailPage = () => {
   const router = useRouter();
 

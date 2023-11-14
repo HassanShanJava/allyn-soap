@@ -58,12 +58,7 @@ const AccountOrders = (props: AccountOrdersType) => {
     after: null,
     before: null,
   });
-  const {
-    error,
-    data: customerData,
-    loading,
-    refetch,
-  } = useQuery(orderAccountQuery, {
+  const { data: customerData, loading } = useQuery(orderAccountQuery, {
     variables: { ...filters },
   });
   const orderData = useMemo(() => {
