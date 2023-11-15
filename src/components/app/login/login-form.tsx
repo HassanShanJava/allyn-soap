@@ -60,7 +60,7 @@ const LoginForm = () => {
       if (
         !customerLoginData?.data?.customerAccessTokenCreate?.customerAccessToken
       )
-        throw new Error(`Something Went Wrong.`);
+        throw new Error(`User not found.`);
       const storeToken = await loginToken(
         customerLoginData?.data?.customerAccessTokenCreate?.customerAccessToken,
       );
@@ -87,7 +87,7 @@ const LoginForm = () => {
         }
         toast({
           variant: 'success',
-          title: 'Customer Login Successfully!',
+          title: 'Login Successfully!',
         });
 
         setLoading(false);
