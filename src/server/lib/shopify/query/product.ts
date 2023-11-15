@@ -50,6 +50,28 @@ export const getProductRecommendationsQuery = gql`
 `;
 
 
+export const getComboProductsQuery = gql`
+  query getComboProducts(
+    $reverse: Boolean
+    $query: String
+    $first: Int!
+  ) {
+    products(
+      reverse: $reverse
+      query: $query
+      first: $first
+    ) {
+      edges {
+        node {
+          ...product
+        }
+      }
+    }
+  }
+  ${productFragment}
+`;
+
+
 // export const allDiscountProductsQuery = gql`
 //   query getDiscountProducts($compareAtPriceRange: Int!,$priceRange: Int!) {
 

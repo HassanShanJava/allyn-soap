@@ -5,6 +5,7 @@ import ArrivalSection from './arrival_section';
 import CustomerTestimonials from '~/components/common/customer-testimonials';
 import { useRouter } from 'next/router';
 import CompressImage from '~/components/common/compress_image';
+import DiscountSection from '~/components/common/discount-section';
 
 const demoList = [
   {
@@ -40,7 +41,7 @@ const demoList = [
 const Home = () => {
   return (
     <>
-      <div className="relative  font-poppins">
+      <div className="relative  font-poppins grid-cols-2">
         {/* for bg color */}
         <div className="absolute -z-10 bg-secondary min-w-[200px] w-full  max-w-[70%] md:max-w-[80%] h-20 md:h-48 rounded-br-[100px] transform-all ease-in-out duration-300"></div>
 
@@ -51,6 +52,7 @@ const Home = () => {
         {/* <CompressImage /> */}
         <ArrivalSection />
         <CustomerTestimonials />
+        {/* <DiscountSection/> */}
       </div>
     </>
   );

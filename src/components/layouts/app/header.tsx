@@ -53,7 +53,7 @@ export default function Header() {
 
   const [getCart] = useLazyQuery(getCartQuery);
   const [customerCartUpdate] = useMutation(CartUpdateMutation);
-  const { data,loading } = useQuery(getMenuQuery, {
+  const { data, loading } = useQuery(getMenuQuery, {
     variables: { handle: 'main-menu' },
   });
   // for changing color on scroll
@@ -154,7 +154,7 @@ export default function Header() {
           <Image src={LogoImage} alt="/" width={80} height={80} />
         </Link>
 
-        {loading && (
+        {loading && navList.length === 0 && (
           <>
             <NavSkeleton />
           </>

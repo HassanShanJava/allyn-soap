@@ -30,6 +30,9 @@ html {
   .clip-img {
     clip-path: url(#svgPath);
   }
+
+
+  
 }
 
 @layer base {
