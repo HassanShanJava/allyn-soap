@@ -36,10 +36,12 @@ export const addCustomerReview = z.object({
   email: z
     .string({ required_error: 'Please enter Email.' })
     .email()
+    .max(256, {
+      message: 'Email must not exceed 256 characters',
+    })
     .refine((val) => validateEmail(val), {
       message: 'Invalid email format.',
     }),
-
   review_title: z
     .string({ required_error: 'Please enter Title.' })
     .min(1, {

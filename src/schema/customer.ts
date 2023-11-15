@@ -29,6 +29,9 @@ export const signupCustomerSchema = z.object({
       required_error: 'Please enter your email',
       invalid_type_error: 'Please enter your email',
     })
+    .max(256, {
+      message: 'Email must not exceed 256 characters',
+    })
     .email({
       message: 'Please use a valid email ',
     })
@@ -64,9 +67,14 @@ export const loginCustomerSchema = z.object({
       required_error: 'Please enter your email',
       invalid_type_error: 'Please enter your email',
     })
+
+    .max(256, {
+      message: 'Email must not exceed 256 characters',
+    })
     .email({
       message: 'Please use a valid email ',
     })
+
     .refine((val) => (val.includes('*') ? false : true), {
       message: 'Please use a valid email ',
     })
@@ -101,6 +109,9 @@ export const resetEmailSchema = z.object({
     })
     .email({
       message: 'Please use a valid email ',
+    })
+    .max(256, {
+      message: 'Email must not exceed 256 characters',
     })
     .refine((val) => (val.includes('*') ? false : true), {
       message: 'Please use a valid email ',
