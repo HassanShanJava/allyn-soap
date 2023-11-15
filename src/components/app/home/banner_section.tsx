@@ -32,13 +32,13 @@ const BannerSection = () => {
   const settings = {
     dots: false,
     infinite: false,
+    lazyLoad: true,
     speed: 1000,
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
     centerMode: false,
     swipe: false,
-    // lazyLoad: true,
     beforeChange: (current: number, next: number) => setIndex(next),
   };
 

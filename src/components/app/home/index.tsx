@@ -5,6 +5,7 @@ import ArrivalSection from './arrival_section';
 import CustomerTestimonials from '~/components/common/customer-testimonials';
 import { useRouter } from 'next/router';
 import CompressImage from '~/components/common/compress_image';
+import DiscountSection from '~/components/common/discount-section';
 
 const demoList = [
   {
@@ -51,6 +52,7 @@ const Home = () => {
         {/* <CompressImage /> */}
         <ArrivalSection />
         <CustomerTestimonials />
+        {/* <DiscountSection/> */}
       </div>
     </>
   );

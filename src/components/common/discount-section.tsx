@@ -7,6 +7,9 @@ import Soap1 from '~/public/assets/soap1.png';
 import Soap2 from '~/public/assets/soap2.png';
 import Soap3 from '~/public/assets/soap3.png';
 import Soap4 from '~/public/assets/soap4.png';
+import { useQuery } from '@apollo/client';
+import { getComboProductsQuery } from '~/server/lib/shopify/query/product';
+
 const discountList = [
   {
     name: 'Soap Box',
@@ -39,8 +42,15 @@ const discountList = [
 ];
 
 const DiscountSection = () => {
+  const { data, loading } = useQuery(getComboProductsQuery, {
+    variables: {
+      reverse: true,
+      query: 'tag:combo  AND availableForSale:true',
+      first: 4,
+    },
+  });
 
-  
+  console.log({ data }, 'combo products');
 
   return (
     <div className="relative p-6 lg:px-12  flex flex-col md:flex-row gap-4 justify-between items-center">
@@ -59,17 +69,17 @@ const DiscountSection = () => {
       </div>
       <div className="grid grid-cols-2 gap-4 ">
         {discountList.map((item, i) => (
-          <div
-            className="bg-[#FAFAFA] rounded-xl w-fit p-2 sm:p-4  "
-            key={i}
-          >
+          <div className="bg-[#FAFAFA] rounded-xl w-fit p-2 sm:p-4  " key={i}>
             <NextImage src={item.img} alt="/" className="rounded-xl" />
             <p className="font-[600] text-xl md:text-3xl  pp-0.5 md:pt-1 ">
               <span className="text-red-700">$</span>
-              {item.price}{''}
+              {item.price}
+              {''}
               <span className="line-through text-base md:text-lg font-bold">{` $${item.compare}`}</span>
             </p>
-            <p className='text-[#272D4E] font-bold text-base md:text-lg py-0.5 md:py-1'>{item.name}</p>
+            <p className="text-[#272D4E] font-bold text-base md:text-lg py-0.5 md:py-1">
+              {item.name}
+            </p>
             <p className="line-clamp-1 text-[#5E5E5E]">{item.desc}</p>
           </div>
         ))}
