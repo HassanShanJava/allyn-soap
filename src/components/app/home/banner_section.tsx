@@ -29,7 +29,7 @@ const BannerSection = () => {
     }
   }, [loading, data]);
 
-  const settings = {
+  const settings:any = {
     dots: false,
     infinite: false,
     lazyLoad: true,

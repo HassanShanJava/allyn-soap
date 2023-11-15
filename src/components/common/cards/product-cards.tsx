@@ -22,14 +22,6 @@ const ProductCard = (props: { item: any; index: number }) => {
           </div>
         )}
         <div className="relative h-[12rem] w-full  px-4 ">
-          {/* <Image
-            height={1000}
-            width={1000}
-            className=" h-full w-full object-cover object-center rounded-xl "
-            src={LogoImage.src}
-            alt="girl-image"
-          /> */}
-
           {props?.item?.featuredImage ? (
             <NextImage
               height={1000}
