@@ -154,7 +154,7 @@ export default function Header() {
           <Image src={LogoImage} alt="/" width={80} height={80} />
         </Link>
 
-        {loading && (
+        {loading && navList.length === 0 && (
           <>
             <NavSkeleton />
           </>
