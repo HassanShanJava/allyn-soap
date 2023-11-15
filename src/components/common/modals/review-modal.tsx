@@ -36,6 +36,12 @@ export const addCustomerReview = z.object({
   email: z
     .string({ required_error: 'Please enter Email.' })
     .email()
+    .refine((val) => (val.includes('*') ? false : true), {
+      message: 'Please use a valid email ',
+    })
+    .refine((val) => (val.includes('-') ? false : true), {
+      message: 'Please use a valid email ',
+    })
     .refine((val) => validateEmail(val), {
       message: 'Invalid email format.',
     }),
