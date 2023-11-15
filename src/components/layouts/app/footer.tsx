@@ -62,10 +62,10 @@ function Footer() {
           </div>
         </div>
 
-        <div className="w-1/2 lg:w-4/6  grid grid-col-1  sm:grid-col-2 gap-y-6 gap-x-2 lg:gap-6 lg:grid-cols-3 justify-between text-text-dark ">
+        <div className="w-1/2 lg:w-4/6  grid grid-col-1 text-text  sm:grid-col-2 gap-y-6 gap-x-2 lg:gap-6 lg:grid-cols-3 justify-between text-text-dark pt-10">
           <div className="space-y-6 ">
-            <p className="font-[600] text-lg">Useful links</p>
-            <ul className="space-y-6 text-sm sm:text-base">
+            <p className="font-[600] text-xl">Useful links</p>
+            <ul className="space-y-6 text-sm sm:text-base font-medium text-text-dark-gray">
               {footerData &&
                 footerData.map((item: any, i: number) => (
                   <li key={i} className="">
@@ -80,8 +80,8 @@ function Footer() {
             </ul>
           </div>
           <div className="space-y-6">
-            <p className="font-[600] text-lg">Company</p>
-            <ul className="space-y-6 text-sm sm:text-base">
+            <p className="font-[600] text-xl">Company</p>
+            <ul className="space-y-6 text-sm sm:text-base font-medium text-text-dark-gray">
               <li className="">
                 <Link href={'/'}>Faqs</Link>
               </li>
@@ -97,8 +97,8 @@ function Footer() {
             </ul>
           </div>
           <div className="space-y-6 ">
-            <p className="font-[600] text-lg">Contact Us</p>
-            <ul className="space-y-6 text-sm sm:text-base">
+            <p className="font-[600] text-xl">Contact Us</p>
+            <ul className="space-y-6 text-sm sm:text-base font-medium text-text-dark-gray">
               <li className="">
                 <Link href={'/'}>info@AllynsSoapCo.com</Link>
               </li>
