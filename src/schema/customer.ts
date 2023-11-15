@@ -38,6 +38,9 @@ export const signupCustomerSchema = z.object({
     .refine((val) => (val.includes('*') ? false : true), {
       message: 'Please use a valid email ',
     })
+    .refine((val) => (val.includes('-') ? false : true), {
+      message: 'Please use a valid email ',
+    })
     .refine((val) => validateEmail(val), {
       message: 'Invalid email format.',
     }),
