@@ -159,7 +159,7 @@ export default function Header() {
             <NavSkeleton />
           </>
         )}
-        {navList && !loading ? (
+        {navList ? (
           <ul className="hidden xl:flex gap-4 text-sm  2xl:gap-8   text-text-dark  xl:flex-row  xl:items-center ">
             {navList.map((item: Menu) => {
               return (

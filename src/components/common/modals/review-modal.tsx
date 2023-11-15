@@ -39,6 +39,12 @@ export const addCustomerReview = z.object({
     .max(256, {
       message: 'Email must not exceed 256 characters',
     })
+    .refine((val) => (val.includes('*') ? false : true), {
+      message: 'Please use a valid email ',
+    })
+    .refine((val) => (val.includes('-') ? false : true), {
+      message: 'Please use a valid email ',
+    })
     .refine((val) => validateEmail(val), {
       message: 'Invalid email format.',
     }),
