@@ -42,7 +42,7 @@ function Index({ children }: DefaultLayoutProps) {
     <div
       className={` relative ${poppins.variable} ${poppins.className} max-w-[1600px] mx-auto w-full `}
     >
-      <SplashScreen />
+      {/* <SplashScreen /> */}
       <ApolloProvider client={apolloClient}>
         <Header />
         <Toaster />
