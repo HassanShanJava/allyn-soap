@@ -38,7 +38,7 @@ const Detail = (props: any) => {
   const { cart } = useSelector((state: RootState) => state.cart);
   const { user } = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
-
+console.log({cart,variant})
   const [cartCreate, { loading: cartCreatLoading }] =
     useMutation(createCartMutation);
   const [cartAdd, { loading: cartAddLoading }] = useMutation(addToCartMutation);
@@ -55,6 +55,7 @@ const Detail = (props: any) => {
     setVariants(variants);
     setVariant(variants[0]);
   }, [props?.data?.variants]);
+
   const addtoCart = async () => {
     try {
       let cartAddData: any;
@@ -132,7 +133,12 @@ const Detail = (props: any) => {
     setCartView(false);
     setRange(1);
   }
-
+  const cartCheck = cart?.cart?.lines?.edges
+  ? removeEdgesAndNodes(cart?.cart?.lines)
+  : [];
+  const isCartFull = cartCheck?.find((item)=> variant?.title === item?.merchandise?.title)?.quantity === variant?.quantityAvailable
+  // variant?.title === cartCheck?.merchandise?.title
+  console.log({variant,isCartFull})
   return (
     <div className="  flex flex-col gap-8 justify-between">
       <div className="flex flex-col gap-4">
@@ -280,6 +286,7 @@ const Detail = (props: any) => {
                 setCartView={setCartView}
                 addtoCart={addtoCart}
                 cartID={cart?.cart_id}
+                isCartFull={isCartFull}
                 loading={cartLoading || cartAddLoading || cartCreatLoading}
               />
             </div>
@@ -293,6 +300,7 @@ const Detail = (props: any) => {
 const RenderButton = (props: {
   forSale: boolean;
   cartView: boolean;
+  isCartFull: boolean;
   quantity: number;
   addtoCart: () => void;
   setCartView: (e: boolean) => unknown;
@@ -326,7 +334,23 @@ const RenderButton = (props: {
         View Cart
       </Button>
     );
-  } else {
+  }else if (props?.isCartFull) {
+    return (
+      <Button
+        className="w-full "
+        variant={'outline'}
+        onClick={() => {
+          if (props?.cartID) {
+            dispatch(toggleCartModal());
+            props?.setCartView(false);
+          }
+        }}
+      >
+        All items in cart
+      </Button>
+    );
+  }
+   else {
     return (
       <Button
         className="w-full flex items-center gap-2"

@@ -86,7 +86,6 @@ export function FilterContent(props: { isSheet: boolean; setModal?: any }) {
       seActiveIndex(index);
     }
     router.replace(`/${text}`);
-
   };
   const applyFilter = () => {
     let price = null;
