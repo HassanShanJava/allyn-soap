@@ -160,7 +160,7 @@ export default function Header() {
           </>
         )}
         {navList ? (
-          <ul className="hidden xl:flex gap-4 text-sm  2xl:gap-8   text-text-dark  xl:flex-row  xl:items-center ">
+          <ul className="hidden xl-lg:flex gap-4 text-sm  2xl:gap-8   text-text-dark  xl:flex-row  xl:items-center ">
             {navList.map((item: Menu) => {
               return (
                 <Link
@@ -186,7 +186,7 @@ export default function Header() {
       </div>
 
       <div>
-        <div className=" hidden  md:w-fit  px-6  lg:px-12 xl:flex text-text-dark  gap-4 justify-center text-lg items-center">
+        <div className=" hidden  md:w-fit  px-6  lg:px-12 xl-lg:flex text-text-dark  gap-4 justify-center text-lg items-center">
           <div onClick={() => setOpen(!open)} className="cursor-pointer">
             <Search className="text-lg" />
           </div>
@@ -217,7 +217,7 @@ export default function Header() {
           <SearchComponent open={open} setOpen={setOpen} />
         </div>
       </div>
-      <div className="flex justify-center items-center gap-4 py-6 xsm:p-6  xl:hidden w-[30%] md:w-[20%]">
+      <div className="flex justify-center items-center gap-4 py-6 xsm:p-6  xl-lg:hidden w-[30%] md:w-[20%]">
         <div
           className="relative cursor-pointer"
           onClick={() => {
