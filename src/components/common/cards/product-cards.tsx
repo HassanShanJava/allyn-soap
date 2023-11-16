@@ -51,7 +51,7 @@ const ProductCard = (props: { item: any; index: number }) => {
               {props.item.description}
             </p>
             <p
-              className={`hidden group-hover:block w-full text-2xl font-semibold text-right line-clamp-1`}
+              className={`w-full text-2xl font-semibold text-right line-clamp-1`}
             >
               <span className="text-xl font-semibold text-red-500">$</span>
               {(+props.item.priceRange.minVariantPrice.amount)?.toFixed(2)}
