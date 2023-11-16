@@ -23,7 +23,11 @@ const RelatedProducts = () => {
     <section id="category relative ">
       {/* sm:mx-auto grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4 xl:grid-cols-5
       w-full gap-6 mb-4 */}
-      <div className="relative px-4   sm:mx-auto  grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 w-full md:w-4/6 gap-6 mb-4   ">
+      <div
+        className={`relative px-4   sm:mx-auto  grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 w-full md:w-4/6 gap-6 mb-4   ${
+          !loading ? 'fade-in-card' : ''
+        }`}
+      >
         {!loading ? (
           <>
             {productData?.length > 0 ? (

@@ -71,7 +71,11 @@ const ProductSearch = (props: { search: string }) => {
     }
   };
   return (
-    <div className="relative flex flex-col gap-4">
+    <div
+      className={`relative flex flex-col gap-4 ${
+        !loading ? 'fade-in-card' : ''
+      }`}
+    >
       {!loading ? (
         <div className=" grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4   gap-4">
           {productData.length > 0 ? (
