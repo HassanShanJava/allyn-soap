@@ -85,6 +85,8 @@ export function FilterContent(props: { isSheet: boolean; setModal?: any }) {
       setCategory(text);
       seActiveIndex(index);
     }
+    router.replace(`/${text}`);
+
   };
   const applyFilter = () => {
     let price = null;
