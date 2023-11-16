@@ -19,7 +19,6 @@ const ArrivalCard = (props: { item: any; index: number }) => {
             className=" absolute   rounded-2xl border-t-[15rem] border-l-[15rem] 
 border-solid border-tranparent border-l-card-foreground overflow-hidden   "
           ></div>
-          {/* <div className=" absolute bottom-0 w-full h-1/2 bg-red-400"></div> */}
         </div>
         <div className="relative h-4/5 w-full p-4 py-6">
           {props?.item?.featuredImage ? (

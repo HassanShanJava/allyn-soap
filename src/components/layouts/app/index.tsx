@@ -12,6 +12,7 @@ import {
 } from '@apollo/client';
 import { Poppins } from 'next/font/google';
 import CartSheet from '~/components/common/drawer/cart-drawer';
+import SplashScreen from '~/components/common/loading/screenLoader';
 
 export const poppins = Poppins({
   subsets: ['latin'],
@@ -41,6 +42,7 @@ function Index({ children }: DefaultLayoutProps) {
     <div
       className={` relative ${poppins.variable} ${poppins.className} max-w-[1600px] mx-auto w-full `}
     >
+      <SplashScreen />
       <ApolloProvider client={apolloClient}>
         <Header />
         <Toaster />

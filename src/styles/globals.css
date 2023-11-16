@@ -30,9 +30,6 @@ html {
   .clip-img {
     clip-path: url(#svgPath);
   }
-
-
-  
 }
 
 @layer base {
@@ -252,4 +249,15 @@ svg .svg-image-static {
 
 .emptyIcons {
   display: inline-block;
+}
+
+/* LOADING */
+
+.example-class {
+  z-index: 1000;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  opacity: 0.4;
 }

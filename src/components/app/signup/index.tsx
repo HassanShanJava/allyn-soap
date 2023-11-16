@@ -1,4 +1,3 @@
-import BannerCard from '~/components/common/banner-card';
 import RegisterForm from './register-form';
 import StaticBanner from '~/components/common/static-banner-card';
 import SignUp from '~/public/assets/sign_up.jpg';
