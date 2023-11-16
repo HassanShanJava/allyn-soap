@@ -68,7 +68,7 @@ export default function CartSheet() {
               <>
                 Buy{' '}
                 <span className=" text-text  font-bold ">
-                  ${100 - cart?.cart?.cost?.totalAmount?.amount}
+                  ${(100 - cart?.cart?.cost?.totalAmount?.amount).toFixed(1)}
                 </span>{' '}
                 More and get{' '}
                 <span className=" text-text  font-bold ">free shipping</span>
