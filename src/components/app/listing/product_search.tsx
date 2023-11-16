@@ -35,12 +35,12 @@ const ProductSearch = (props: { search: string }) => {
         last: null,
         after: null,
         before: null,
-        price: null,
       }),
     );
   }, [router?.query?.id]);
 
   const productData = data?.search ? removeEdgesAndNodes(data?.search) : [];
+  console.log({ productData }, data?.search);
   const handleNextPage = () => {
     if (data?.search?.pageInfo?.hasNextPage) {
       dispatch(
@@ -52,9 +52,9 @@ const ProductSearch = (props: { search: string }) => {
           before: null,
         }),
       );
-      if (window) window?.scrollTo(0, 400);
-    }else{
-      console.log("search")
+      if (typeof window) window?.scrollTo(0, 0);
+    } else {
+      console.log('search');
     }
   };
 
@@ -69,9 +69,9 @@ const ProductSearch = (props: { search: string }) => {
           before: data?.search?.pageInfo?.startCursor,
         }),
       );
-      if (window) window?.scrollTo(0, 400);
-    }else{
-      console.log("search")
+      if (typeof window) window?.scrollTo(0, 0);
+    } else {
+      console.log('search');
     }
   };
   return (
@@ -107,7 +107,8 @@ const ProductSearch = (props: { search: string }) => {
           })}
         </div>
       )}
-      {
+      {(data?.search?.pageInfo?.hasPreviousPage ||
+        data?.search?.pageInfo?.hasNextPage) && (
         <>
           <hr className="mt-4" />
           <div className="  flex items-center justify-between xsm:justify-center gap-2 xsm:gap-8 mb-2">
@@ -137,7 +138,7 @@ const ProductSearch = (props: { search: string }) => {
             </div>
           </div>
         </>
-      }
+      )}
     </div>
   );
 };
