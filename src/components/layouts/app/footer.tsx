@@ -67,7 +67,7 @@ function Footer() {
   return (
     <section id="footer">
       {/* relative bottom-0 */}
-      <footer className=" p-6 lg:px-12  lg:pb-16 flex flex-col md:flex-row bg-secondary  justify-between item-start gap-4">
+      <footer className=" p-6 lg:px-12  lg:py-12 flex flex-col md:flex-row bg-secondary  justify-between item-start gap-4">
         <div className="w-full">
           <div>
             <Link
@@ -137,10 +137,8 @@ function Footer() {
             </ul>
           </div>
         </div>
-
       </footer>
       <div className="flex justify-between bg-primary items-center p-2 md:p-3 lg:px-12">
-       
         <div className="w-full text-white">
           <p className="w-full text-xs md:text-base text-center">
             {` Copyright © 2023, Allyn's Soap Co. Powered by Shopify`}
