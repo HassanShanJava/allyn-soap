@@ -84,7 +84,7 @@ function Footer() {
           </div>
         </div>
 
-        <div className="w-full  grid grid-cols-1 text-text  sm:grid-cols-3 gap-y-6 gap-x-2 lg:gap-6  justify-between text-text-dark pt-10">
+        <div className="w-full  grid grid-cols-1 text-text  sm:grid-cols-2 gap-y-6 gap-x-2 lg:gap-6  justify-between text-text-dark pt-10">
           <div className="space-y-6 ">
             <p className="font-[600] text-xl">Useful links</p>
             <ul className="space-y-6 text-sm sm:text-base font-medium text-text-dark-gray">
@@ -101,7 +101,7 @@ function Footer() {
                 ))}
             </ul>
           </div>
-          <div className="space-y-6">
+          {/* <div className="space-y-6">
             <p className="font-[600] text-xl">Company</p>
             <ul className="space-y-6 text-sm sm:text-base font-medium text-text-dark-gray">
               {Company.map((item, i) => (
@@ -110,7 +110,7 @@ function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </div> */}
           <div className="space-y-6 ">
             <p className="font-[600] text-xl">Contact Us</p>
             <ul className="space-y-6 text-sm md:text-base font-medium text-text-dark-gray">
