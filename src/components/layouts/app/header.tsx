@@ -187,7 +187,7 @@ export default function Header() {
 
       <div>
         <div className=" hidden  md:w-fit  px-6  lg:px-12 xl-lg:flex text-text-dark  gap-4 justify-center text-lg items-center">
-          <div onClick={() => setOpen(!open)} className="cursor-pointer">
+          <div id="search"  onClick={() => setOpen(!open)} className="cursor-pointer">
             <Search className="text-lg" />
           </div>
           <div
