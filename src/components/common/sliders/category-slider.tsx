@@ -114,7 +114,9 @@ const CategorySlider = () => {
         <i className="fa-solid fa-chevron-left text-base text-text-light group-hover:text-text-white"></i>
       </div>
 
-      <div className="w-4/5  mx-auto flex-1">
+      <div
+        className={`w-4/5  mx-auto flex-1 ${!loading ? 'fade-in-card' : ''}`}
+      >
         <Slider ref={slider} {...settings}>
           {collectionData.length > 0 &&
             collectionData?.map((item: any, index: number) => {

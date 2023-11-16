@@ -44,7 +44,11 @@ const DetailPage = () => {
   }, [productData?.product]);
   return (
     <>
-      <div className="relative  font-poppins">
+      <div
+        className={`relative  font-poppins min-h-screen ${
+          !loading ? 'fade-in-card' : ''
+        }`}
+      >
         <div className="absolute -z-10 bg-secondary min-w-[200px] w-full  max-w-[70%] md:max-w-[80%] h-8  rounded-br-[350px] transform-all ease-in-out duration-300"></div>
         {productData?.product && (
           <p className=" text-xs text-text-gray  md:text-sm px-6  md:px-12 pt-16">
