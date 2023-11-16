@@ -112,7 +112,11 @@ export function FilterContent(props: { isSheet: boolean; setModal?: any }) {
     }
   };
   return (
-    <div className="  p-4 text-text font-poppins">
+    <div
+      className={`  p-4 text-text font-poppins ${
+        !loading ? 'fade-in-card' : ''
+      }`}
+    >
       <div className="flex items-center justify-between text-dark border-b border-border-light pb-4 ">
         <div
           className={` font-bold ${poppins.variable} ${poppins.className} ${
