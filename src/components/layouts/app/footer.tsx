@@ -20,7 +20,6 @@ const Socials = [
   {
     name: 'email',
     icon: 'fa-brands fa-facebook-f',
-    link: 'https://www.facebook.com/AllynsSoapCo/',
     mail: 'info@AllynsSoapCo.com',
     lucide: <Mail />,
   },

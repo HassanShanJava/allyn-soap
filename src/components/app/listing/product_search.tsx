@@ -31,7 +31,7 @@ const ProductSearch = (props: { search: string }) => {
         ...filters,
         sortKey: defaultSort.sortKey,
         reverse: false,
-        first: 12,
+        first: 20,
         last: null,
         after: null,
         before: null,
@@ -46,13 +46,15 @@ const ProductSearch = (props: { search: string }) => {
       dispatch(
         toggleFilters({
           ...filters,
-          first: 12,
+          first: 20,
           last: null,
           after: data?.search?.pageInfo?.endCursor,
           before: null,
         }),
       );
-      if (window) window?.scrollTo(0, 100);
+      if (window) window?.scrollTo(0, 400);
+    }else{
+      console.log("search")
     }
   };
 
@@ -62,12 +64,14 @@ const ProductSearch = (props: { search: string }) => {
         toggleFilters({
           ...filters,
           first: null,
-          last: 12,
+          last: 20,
           after: null,
           before: data?.search?.pageInfo?.startCursor,
         }),
       );
-      if (window) window?.scrollTo(0, 100);
+      if (window) window?.scrollTo(0, 400);
+    }else{
+      console.log("search")
     }
   };
   return (
