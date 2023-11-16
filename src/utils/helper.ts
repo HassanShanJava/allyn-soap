@@ -39,9 +39,6 @@ export const loginToken = async (props: {
   // Calculate the maxAge in hours
   const maxAgeHours = hoursDifference;
   const maxAgeSecond = maxAgeHours * 60 * 60;
-  console.log('maxAge:', maxAgeHours * 60 * 60, 'seconds');
-  console.log('maxAge:', maxAgeMinutes, 'minutes');
-  console.log('maxAge:', maxAgeHours, 'hours');
   setCookie('allynssoapco_token', props?.accessToken, {
     maxAge: maxAgeSecond * maxAgeMinutes * maxAgeHours,
   });

@@ -117,13 +117,11 @@ type AccountDetailType = {
   addressData: any;
 };
 const CustomerAddressForm = (props: AccountDetailType) => {
-  console.log(props?.customerData?.defaultAddress?.id, 'customer address form');
   // states
   const { toast } = useToast();
   const [provinces, setProvinces] = useState<any>(null);
   const [defaultCheck, setDefaultCheck] = useState<boolean>(false);
   const { user } = useSelector((state: RootState) => state.auth);
-  console.log({ defaultCheck });
   const form = useForm<z.infer<typeof CustomerAddressSchema>>({
     resolver: zodResolver(CustomerAddressSchema),
     defaultValues: {
@@ -178,7 +176,6 @@ const CustomerAddressForm = (props: AccountDetailType) => {
   // submit function
   async function onSubmit(values: z.infer<typeof CustomerAddressSchema>) {
     try {
-      console.log({ values });
       let customerAddressData;
       if (props?.addAddress == 'add') {
         customerAddressData = await addAddress({
@@ -219,7 +216,6 @@ const CustomerAddressForm = (props: AccountDetailType) => {
       props?.setAddAdress(null);
       props?.setAddressData(null);
       props?.refetch();
-      console.log({ customerAddressData });
     } catch (error: any) {
       toast({
         variant: 'destructive',

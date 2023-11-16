@@ -38,7 +38,6 @@ const RegisterForm = () => {
           ...values,
         },
       });
-      console.log({ customerAddData });
       if (!customerAddData?.data?.customerCreate?.customer)
         throw new Error(`Customer Already Registered with following email.`);
 

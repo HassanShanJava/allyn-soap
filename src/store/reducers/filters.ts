@@ -40,7 +40,6 @@ export const filtersSlice = createSlice({
   initialState,
   reducers: {
     toggleFilters: (state, action: PayloadAction<Filters>) => {
-      console.log('action.payload', action.payload);
       state.filters = action.payload;
     },
   },

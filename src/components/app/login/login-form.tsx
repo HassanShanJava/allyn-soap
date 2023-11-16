@@ -45,7 +45,6 @@ const LoginForm = () => {
   const [customerCartUpdate, { loading: customerCustomerUpdateLoading }] =
     useMutation(CartUpdateMutation);
 
-  console.log(cart, 'cart data');
 
   async function onSubmit(values: z.infer<typeof loginCustomerSchema>) {
     try {
@@ -55,7 +54,6 @@ const LoginForm = () => {
           ...values,
         },
       });
-      console.log({ customerLoginData });
 
       if (
         !customerLoginData?.data?.customerAccessTokenCreate?.customerAccessToken
@@ -83,7 +81,6 @@ const LoginForm = () => {
                   ?.customerAccessToken?.accessToken,
             },
           });
-          console.log({ customerCartData });
         }
         toast({
           variant: 'success',

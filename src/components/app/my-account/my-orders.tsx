@@ -50,7 +50,6 @@ const AccountOrders = (props: AccountOrdersType) => {
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
   const { user } = useSelector((state: RootState) => state.auth);
-  console.log({ props }, 'props data orders');
   const [filters, setFilters] = useState<AccountOrdersFilterType>({
     customerAccessToken: user?.token_id,
     first: 10,
@@ -66,7 +65,6 @@ const AccountOrders = (props: AccountOrdersType) => {
       ? removeEdgesAndNodes(customerData?.customer?.orders)
       : [];
   }, [customerData?.customer?.orders]);
-  console.log(orderData, 'order table ');
   const columns: ColumnDef<any>[] = [
     {
       accessorKey: 'ID',

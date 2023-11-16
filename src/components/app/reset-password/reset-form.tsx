@@ -39,7 +39,6 @@ const ResetPasswordForm = () => {
       router.replace('/reset-password');
     }
   }, [router?.query?.url]);
-  console.log(cart, 'cart data');
   async function onSubmit(values: z.infer<typeof resetPasswordSchema>) {
     try {
       setLoading(true);
@@ -48,7 +47,6 @@ const ResetPasswordForm = () => {
         password: values?.password,
         resetUrl,
       };
-      console.log({ values });
       const recoverAcc = await customerResetAccount({
         variables: {
           ...payload,

@@ -8,23 +8,18 @@ const CompressImage = () => {
   async function imageChange(e: any) {
     const optimizedFile = await compressImage(e.target.files[0]);
     // setSelectedImage(e.target.files[0]);
-    console.log({ optimizedFile });
     setImage(optimizedFile);
     // if (e.target.files && e.target.files.length > 0) {
     // }
   }
 
   async function handleChange(e:React.ChangeEvent<HTMLInputElement>) {
-    console.log(e.target.files);
     const file =  e?.target?.files ? e?.target?.files[0]: null
     if(!file ) return
-    console.log({file})
     const optimizedFile = await compressImage(file);
     const imgUrl = URL.createObjectURL(optimizedFile)
-    console.log({optimizedFile,imgUrl})
     setImage(imgUrl);
   }
-  console.log({ image });
 
   return (
     <div>

@@ -112,7 +112,6 @@ export default function Header() {
   }, [data]);
   // for cart
   useEffect(() => {
-    console.log(router?.query, 'router?.query');
     if (router?.query?.status == 'true') {
       localStorage.removeItem('cartID');
 

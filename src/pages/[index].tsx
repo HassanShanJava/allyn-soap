@@ -22,7 +22,6 @@ const CmsContent = () => {
   } = useQuery(getTermsDetail, {
     skip: router?.query?.index === 'terms-of-service' ? false : true,
   });
-  console.log(termsData?.shop?.termsOfService?.body, 'termsData');
   return (
     <>
       <SeoHead

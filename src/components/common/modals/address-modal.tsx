@@ -33,7 +33,6 @@ export function AddressDialouge(props: addressDialogInterface) {
   };
   const handleDelete = async () => {
     try {
-      console.log('Delete Customer Address');
       const customerDeleteAddressData = await deleteAddress({
         variables: {
           customerAccessToken: user?.token_id,
@@ -49,7 +48,6 @@ export function AddressDialouge(props: addressDialogInterface) {
         handleClose();
       }
     } catch (e: any) {
-      console.log(e?.message);
       toast({
         variant: 'destructive',
         title: e?.message,

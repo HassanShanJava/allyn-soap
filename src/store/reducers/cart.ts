@@ -27,7 +27,6 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     toggleCart: (state, action: PayloadAction<Cart>) => {
-      console.log('action.payload', action.payload);
       state.cart = action.payload;
     },
     toggleCartModal: (state) => {

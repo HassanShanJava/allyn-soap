@@ -1,7 +1,6 @@
 import { Skeleton } from '~/components/ui/skeleton';
 
 const DescriptionSkeleton = () => {
-  //   console.log({category})
 
   return (
     <div className="w-full px-4 py-12 2xl:container sm:px-6 xl:px-20 2xl:mx-auto 2xl:px-0  ">

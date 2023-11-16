@@ -66,7 +66,6 @@ const CartCounter = (props: CounterType) => {
         }
       }
     } catch (e: any) {
-      console.log(e);
       toast({
         variant: 'destructive',
         title: e.message,

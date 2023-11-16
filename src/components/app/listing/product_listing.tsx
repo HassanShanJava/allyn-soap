@@ -56,8 +56,6 @@ const ProductListing = () => {
         }),
       );
       if (window) window?.scrollTo(0, 400);
-    }else{
-      console.log("search")
     }
   };
 
@@ -74,8 +72,6 @@ const ProductListing = () => {
         }),
       );
       if (window) window?.scrollTo(0, 400);
-    }else{
-      console.log("search")
     }
   };
   return (

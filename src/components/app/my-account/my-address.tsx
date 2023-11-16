@@ -24,7 +24,6 @@ const AccountAddress = (props: AccountDetailType) => {
   const [addAddress, setAddAdress] = useState(null);
   const [addressData, setAddressData] = useState<any>(null);
 
-  console.log(props?.customerData?.addresses?.pageInfo, 'props address data');
   // queries & mutations
   const addresses = props?.customerData?.addresses
     ? removeEdgesAndNodes(props?.customerData?.addresses)
@@ -89,7 +88,6 @@ const CustomerAddressView = (props: customerAddressViewType) => {
     setAddressId(id);
   };
   const EditAddress = (data: string) => {
-    console.log('edit address');
     props?.setAddressData(data);
     props?.setAddAdress('edit');
   };

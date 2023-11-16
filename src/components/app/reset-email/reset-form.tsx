@@ -37,7 +37,6 @@ const ResetEmailForm = () => {
     try {
       setIsFormSubmit(true);
       setLoading(true);
-      console.log({ values }, 'send email');
       const recoverAcc = await recoverAccount({
         variables: {
           ...values,
@@ -47,7 +46,6 @@ const ResetEmailForm = () => {
         variant: 'success',
         title: 'Email Sent!',
       });
-      console.log({ recoverAcc }, 'recoverAcc');
       setLoading(false);
     } catch (error: any) {
       setLoading(false);

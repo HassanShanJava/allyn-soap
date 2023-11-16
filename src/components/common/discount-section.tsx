@@ -50,7 +50,6 @@ const DiscountSection = () => {
     },
   });
 
-  console.log({ data }, 'combo products');
 
   return (
     <div className="relative p-6 lg:px-12  flex flex-col md:flex-row gap-4 justify-between items-center">

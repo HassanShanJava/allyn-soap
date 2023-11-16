@@ -40,7 +40,6 @@ const ProductSearch = (props: { search: string }) => {
   }, [router?.query?.id]);
 
   const productData = data?.search ? removeEdgesAndNodes(data?.search) : [];
-  console.log({ productData }, data?.search);
   const handleNextPage = () => {
     if (data?.search?.pageInfo?.hasNextPage) {
       dispatch(
@@ -53,9 +52,7 @@ const ProductSearch = (props: { search: string }) => {
         }),
       );
       if (typeof window) window?.scrollTo(0, 0);
-    } else {
-      console.log('search');
-    }
+    } 
   };
 
   const handlePrevPage = () => {
@@ -70,8 +67,6 @@ const ProductSearch = (props: { search: string }) => {
         }),
       );
       if (typeof window) window?.scrollTo(0, 0);
-    } else {
-      console.log('search');
     }
   };
   return (

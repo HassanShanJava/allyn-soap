@@ -59,7 +59,6 @@ const ProductSlider = () => {
     variables: { handle: 'special-sale' },
   });
 
-  console.log({ loading, data });
   const productData = data?.collectionByHandle?.products
     ? removeEdgesAndNodes(data?.collectionByHandle?.products)
     : [];
@@ -80,7 +79,6 @@ const ProductSlider = () => {
 
   const router = useRouter();
 
-  console.log(productList, productList[index]?.handle, 'somthing');
   return (
     <div className="bg-primary w-full py-6 sm:py-12 lg:py-24 ">
       <div className="w-full flex flex-col sm:flex-row justify-between items-center">
@@ -131,7 +129,6 @@ const ProductSlider = () => {
                 ((compare - price) / compare) * 100,
               );
 
-              console.log({ i, index }, 'index');
 
               return (
                 <div

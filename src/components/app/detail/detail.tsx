@@ -38,7 +38,6 @@ const Detail = (props: any) => {
   const { cart } = useSelector((state: RootState) => state.cart);
   const { user } = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
-console.log({cart,variant})
   const [cartCreate, { loading: cartCreatLoading }] =
     useMutation(createCartMutation);
   const [cartAdd, { loading: cartAddLoading }] = useMutation(addToCartMutation);
@@ -126,7 +125,6 @@ console.log({cart,variant})
       console.log('error :::', e?.message);
     }
   };
-  console.log({ variant });
   function toggleVariant(text: string) {
     const selectedVariant = variants?.find((item: any) => item?.title === text);
     setVariant(selectedVariant);
@@ -138,7 +136,6 @@ console.log({cart,variant})
   : [];
   const isCartFull = cartCheck?.find((item)=> variant?.title === item?.merchandise?.title)?.quantity === variant?.quantityAvailable
   // variant?.title === cartCheck?.merchandise?.title
-  console.log({variant,isCartFull})
   return (
     <div className="  flex flex-col gap-8 justify-between">
       <div className="flex flex-col gap-4">

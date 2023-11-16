@@ -110,7 +110,6 @@ const MyAccountGrid = () => {
       );
       if (window) window.location.href = '/';
     }
-    console.log({ customerLogoutData });
   };
   return (
     <>
