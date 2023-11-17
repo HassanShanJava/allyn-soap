@@ -3,7 +3,6 @@ import Header from './header';
 
 import Footer from './footer';
 import { Toaster } from '~/components/ui/toaster';
-import { useRouter } from 'next/router';
 import {
   ApolloClient,
   ApolloProvider,
@@ -12,7 +11,6 @@ import {
 } from '@apollo/client';
 import { Poppins } from 'next/font/google';
 import CartSheet from '~/components/common/drawer/cart-drawer';
-import SplashScreen from '~/components/common/loading/screenLoader';
 
 export const poppins = Poppins({
   subsets: ['latin'],

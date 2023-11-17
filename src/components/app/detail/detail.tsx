@@ -134,7 +134,7 @@ const Detail = (props: any) => {
   const cartCheck = cart?.cart?.lines?.edges
   ? removeEdgesAndNodes(cart?.cart?.lines)
   : [];
-  const isCartFull = cartCheck?.find((item)=> variant?.title === item?.merchandise?.title)?.quantity === variant?.quantityAvailable
+  const isCartFull = cartCheck?.find((item)=> variant?.id === item?.merchandise?.id)?.quantity === variant?.quantityAvailable
   // variant?.title === cartCheck?.merchandise?.title
   return (
     <div className="  flex flex-col gap-8 justify-between">

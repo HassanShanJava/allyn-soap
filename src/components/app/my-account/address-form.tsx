@@ -103,7 +103,7 @@ const formSchema = [
     name: 'phone',
     label: 'phone',
 
-    placeholder: 'Phone',
+    placeholder: 'Phone No.',
   },
 ];
 type AccountDetailType = {
@@ -274,7 +274,7 @@ const CustomerAddressForm = (props: AccountDetailType) => {
                           defaultValue="United States"
                         >
                           <FormControl>
-                            <SelectTrigger className=" h-10  bg-text-light-secondary">
+                            <SelectTrigger className=" h-10  bg-text-light-secondary text-text-dark-gray">
                               <SelectValue placeholder={'Select Country'} />
                             </SelectTrigger>
                           </FormControl>
@@ -286,6 +286,7 @@ const CustomerAddressForm = (props: AccountDetailType) => {
                                     return (
                                       <div key={index}>
                                         <SelectItem
+                                          className="text-text-dark-gray"
                                           value={(item?.name).toString()}
                                         >
                                           {item?.name}
@@ -323,7 +324,7 @@ const CustomerAddressForm = (props: AccountDetailType) => {
                           defaultValue={provinces[0]?.name}
                         >
                           <FormControl>
-                            <SelectTrigger className=" h-10  bg-text-light-secondary">
+                            <SelectTrigger className=" h-10 text-text-dark-gray  bg-text-light-secondary">
                               <SelectValue placeholder={'Select Province'} />
                             </SelectTrigger>
                           </FormControl>
@@ -334,6 +335,7 @@ const CustomerAddressForm = (props: AccountDetailType) => {
                                   return (
                                     <div key={index}>
                                       <SelectItem
+                                      className='text-text-dark-grayF'
                                         value={(item?.name).toString()}
                                       >
                                         {item?.name}

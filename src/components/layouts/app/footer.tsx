@@ -1,13 +1,12 @@
 import Link from 'next/link';
-import React, { useState } from 'react';
-import { Menu } from '~/server/lib/shopify/type';
+import React from 'react';
+
 import { getMenuQuery } from '~/server/lib/shopify/query/menu';
 import { useQuery } from '@apollo/client';
-import { getRoutData, removeEdgesAndNodes } from '~/utils/helper';
+import { getRoutData } from '~/utils/helper';
 import LogoImage from '~/public/assets/logo.png';
 import Image from 'next/image';
-import XLogo from '~/public/assets/x-logo.png';
-import { Facebook, Instagram, Mail, Twitter } from 'lucide-react';
+import { Facebook, Instagram, Mail } from 'lucide-react';
 
 const XSvg = () => {
   return (
@@ -16,9 +15,9 @@ const XSvg = () => {
       viewBox="0 0 30 30"
       width="30px"
       height="30px"
-      className='fill-text-dark-gray group-hover:fill-primary'
+      className="fill-text-dark-gray group-hover:fill-primary"
     >
-      <path  d="M26.37,26l-8.795-12.822l0.015,0.012L25.52,4h-2.65l-6.46,7.48L11.28,4H4.33l8.211,11.971L12.54,15.97L3.88,26h2.65 l7.182-8.322L19.42,26H26.37z M10.23,6l12.34,18h-2.1L8.12,6H10.23z" />
+      <path d="M26.37,26l-8.795-12.822l0.015,0.012L25.52,4h-2.65l-6.46,7.48L11.28,4H4.33l8.211,11.971L12.54,15.97L3.88,26h2.65 l7.182-8.322L19.42,26H26.37z M10.23,6l12.34,18h-2.1L8.12,6H10.23z" />
     </svg>
   );
 };

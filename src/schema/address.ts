@@ -102,12 +102,13 @@ export const CustomerAddressSchema = z.object({
       message: 'Please enter your zip',
     }),
   phone: z
-    .string({ required_error: 'Please enter your phone' })
+    .string({ required_error: 'Please enter your phone number' })
+    .regex(new RegExp(/^[0-9]+$/), 'Please enter a valid phone number')
     .min(2, {
-      message: 'phone must be at least 2 characters',
+      message: 'phone number must be at least 2 characters',
     })
     .max(30, {
-      message: 'phone must not exceed 30 characters',
+      message: 'phone number must not exceed 30 characters',
     })
     .refine((val) => (val.startsWith(' ') ? false : true), {
       message: 'Please enter your phone',

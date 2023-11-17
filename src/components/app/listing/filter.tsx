@@ -78,13 +78,9 @@ export function FilterContent(props: { isSheet: boolean; setModal?: any }) {
     seActiveIndex(null);
   }, [router?.query?.id]);
   const handleCategory = (text: string, index: number) => {
-    if (text === category) {
-      setCategory(null);
-      seActiveIndex(null);
-    } else {
-      setCategory(text);
-      seActiveIndex(index);
-    }
+  
+    setCategory(text);
+    seActiveIndex(index);
     router.replace(`/${text}`);
   };
   const applyFilter = () => {
