@@ -106,6 +106,7 @@ const formSchema = [
     placeholder: 'Phone No.',
   },
 ];
+
 type AccountDetailType = {
   selectedMenu: string;
   customerData: any;
@@ -116,12 +117,15 @@ type AccountDetailType = {
   setAddressData: (e: any) => unknown;
   addressData: any;
 };
+
 const CustomerAddressForm = (props: AccountDetailType) => {
   // states
   const { toast } = useToast();
   const [provinces, setProvinces] = useState<any>(null);
   const [defaultCheck, setDefaultCheck] = useState<boolean>(false);
+  
   const { user } = useSelector((state: RootState) => state.auth);
+
   const form = useForm<z.infer<typeof CustomerAddressSchema>>({
     resolver: zodResolver(CustomerAddressSchema),
     defaultValues: {
@@ -159,6 +163,7 @@ const CustomerAddressForm = (props: AccountDetailType) => {
       );
     }
   }, [props?.addressData, props?.addAddress === 'edit']);
+
   useEffect(() => {
     const countryname = form.watch('country') ?? 'United States';
     const selectCountry: any = CountriesData.countries?.find(
@@ -311,6 +316,7 @@ const CustomerAddressForm = (props: AccountDetailType) => {
                 provinces &&
                 provinces?.length > 0
               ) {
+                console.log(provinces[0],provinces,"check me")
                 return (
                   <FormField
                     key={i}
@@ -321,11 +327,11 @@ const CustomerAddressForm = (props: AccountDetailType) => {
                         <Select
                           onValueChange={(value) => field.onChange(value)}
                           {...field}
-                          defaultValue={provinces[0]?.name}
+                          value={provinces[0]?.name}
                         >
                           <FormControl>
                             <SelectTrigger className=" h-10 text-text-dark-gray  bg-text-light-secondary">
-                              <SelectValue placeholder={'Select Province'} />
+                              <SelectValue placeholder={'Select Province'} defaultValue={provinces[0]?.name}/>
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent className="bg-background max-h-80">
