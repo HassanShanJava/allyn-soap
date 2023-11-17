@@ -316,6 +316,7 @@ const CustomerAddressForm = (props: AccountDetailType) => {
                 provinces &&
                 provinces?.length > 0
               ) {
+                console.log(provinces[0],provinces,"check me")
                 return (
                   <FormField
                     key={i}
@@ -326,11 +327,11 @@ const CustomerAddressForm = (props: AccountDetailType) => {
                         <Select
                           onValueChange={(value) => field.onChange(value)}
                           {...field}
-                          defaultValue={provinces[0]?.name}
+                          value={provinces[0]?.name}
                         >
                           <FormControl>
                             <SelectTrigger className=" h-10 text-text-dark-gray  bg-text-light-secondary">
-                              <SelectValue placeholder={'Select Province'} />
+                              <SelectValue placeholder={'Select Province'} defaultValue={provinces[0]?.name}/>
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent className="bg-background max-h-80">
