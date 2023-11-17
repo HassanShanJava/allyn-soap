@@ -55,7 +55,7 @@ export const CustomerAddressSchema = z.object({
     })
     .refine((val) => (val.startsWith(' ') ? false : true), {
       message: 'Please enter your address2',
-    }),
+    }).optional(),
   city: z
     .string({ required_error: 'Please enter your city' })
     .min(2, {
