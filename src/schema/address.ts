@@ -24,12 +24,12 @@ export const CustomerAddressSchema = z.object({
       message: 'Please enter your lastname',
     }),
   company: z
-    .string({ required_error: 'Please enter your company' })
-    .min(2, {
-      message: 'company must be at least 2 characters',
+    .string({ required_error: 'Please enter your company name' })
+    .min(7, {
+      message: 'company name must be at least 2 characters',
     })
     .max(30, {
-      message: 'company must not exceed 30 characters',
+      message: 'company name must not exceed 30 characters',
     })
     .refine((val) => (val.startsWith(' ') ? false : true), {
       message: 'Please enter your company',
@@ -104,8 +104,8 @@ export const CustomerAddressSchema = z.object({
   phone: z
     .string({ required_error: 'Please enter your phone number' })
     .regex(new RegExp(/^[0-9]+$/), 'Please enter a valid phone number')
-    .min(2, {
-      message: 'phone number must be at least 2 characters',
+    .min(7, {
+      message: 'phone number must be at least 7 characters',
     })
     .max(30, {
       message: 'phone number must not exceed 30 characters',

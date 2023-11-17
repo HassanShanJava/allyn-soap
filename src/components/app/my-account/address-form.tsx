@@ -106,6 +106,7 @@ const formSchema = [
     placeholder: 'Phone No.',
   },
 ];
+
 type AccountDetailType = {
   selectedMenu: string;
   customerData: any;
@@ -116,12 +117,15 @@ type AccountDetailType = {
   setAddressData: (e: any) => unknown;
   addressData: any;
 };
+
 const CustomerAddressForm = (props: AccountDetailType) => {
   // states
   const { toast } = useToast();
   const [provinces, setProvinces] = useState<any>(null);
   const [defaultCheck, setDefaultCheck] = useState<boolean>(false);
+  
   const { user } = useSelector((state: RootState) => state.auth);
+
   const form = useForm<z.infer<typeof CustomerAddressSchema>>({
     resolver: zodResolver(CustomerAddressSchema),
     defaultValues: {
@@ -159,6 +163,7 @@ const CustomerAddressForm = (props: AccountDetailType) => {
       );
     }
   }, [props?.addressData, props?.addAddress === 'edit']);
+
   useEffect(() => {
     const countryname = form.watch('country') ?? 'United States';
     const selectCountry: any = CountriesData.countries?.find(
