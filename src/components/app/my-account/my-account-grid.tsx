@@ -62,7 +62,7 @@ const MyAccountGrid = () => {
     skip: user?.token_id ? false : true,
   });
   const [customerLogout] = useMutation(LogoutMutation);
-
+  console.log({ customerData });
   // useEffect
   useEffect(() => {
     setFilters({

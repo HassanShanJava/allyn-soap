@@ -28,6 +28,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from '~/components/ui/input';
 import { Button } from '~/components/ui/button';
 import NavSkeleton from '~/components/common/skeleton/nav-skeleton';
+import { getCustomerQuery } from '~/server/lib/shopify/query/customer';
 interface SideBarMenuProps {
   nav: boolean;
   closeFn: React.Dispatch<React.SetStateAction<boolean>>;
@@ -52,6 +53,8 @@ export default function Header() {
   const id = router?.query?.id ?? '';
 
   const [getCart] = useLazyQuery(getCartQuery);
+  const [getCustomer] = useLazyQuery(getCustomerQuery);
+
   const [customerCartUpdate] = useMutation(CartUpdateMutation);
   const { data, loading } = useQuery(getMenuQuery, {
     variables: { handle: 'main-menu' },
@@ -86,11 +89,21 @@ export default function Header() {
         }
         const tokenID = await getCookie('allynssoapco_token');
         if (tokenID) {
+          const customerData: any = await getCustomer({
+            variables: {
+              customerAccessToken: tokenID,
+              first: 2,
+              last: null,
+              after: null,
+              before: null,
+            },
+          });
+          console.log(customerData?.data?.customer, 'customerData?.customer');
           dispatch(
             toggleAuth({
               token_id: tokenID,
               is_login: true,
-              user: null,
+              user: { ...customerData?.data?.customer },
             }),
           );
           if (cart?.cart_id && cart?.cart?.buyerIdentity?.customer) {
@@ -98,6 +111,12 @@ export default function Header() {
               variables: {
                 cartId: cart?.cart_id,
                 customerAccessToken: tokenID,
+                email: customerData?.data?.customer?.email,
+                customerAddressId:
+                  customerData?.data?.customer?.defaultAddress?.id,
+                deliveryAddress: {
+                  ...customerData?.data?.customer?.defaultAddress,
+                },
               },
             });
           }
@@ -186,7 +205,11 @@ export default function Header() {
 
       <div>
         <div className=" hidden  md:w-fit  px-6  lg:px-12 xl-lg:flex text-text-dark  gap-4 justify-center text-lg items-center">
-          <div id="search"  onClick={() => setOpen(!open)} className="cursor-pointer">
+          <div
+            id="search"
+            onClick={() => setOpen(!open)}
+            className="cursor-pointer"
+          >
             <Search className="text-lg" />
           </div>
           <div

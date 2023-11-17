@@ -47,9 +47,18 @@ export const LogoutMutation = gql`
 `;
 
 export const CartUpdateMutation = gql`
-  mutation MyMutation($cartId: ID!, $customerAccessToken: String!) {
+  mutation MyMutation(
+    $cartId: ID!
+    $customerAccessToken: String!
+    $customerAddressId: ID = ""
+    $email: String = ""
+  ) {
     cartBuyerIdentityUpdate(
-      buyerIdentity: { customerAccessToken: $customerAccessToken }
+      buyerIdentity: {
+        customerAccessToken: $customerAccessToken
+        deliveryAddressPreferences: { customerAddressId: $customerAddressId }
+        email: $email
+      }
       cartId: $cartId
     ) {
       cart {

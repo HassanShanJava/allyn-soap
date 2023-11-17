@@ -25,10 +25,16 @@ export const createCartMutation = gql`
   mutation createCart(
     $lineItems: [CartLineInput!]
     $customerAccessToken: String = ""
+    $customerAddressId: ID = ""
+    $email: String = ""
   ) {
     cartCreate(
       input: {
-        buyerIdentity: { customerAccessToken: $customerAccessToken }
+        buyerIdentity: {
+          customerAccessToken: $customerAccessToken
+          deliveryAddressPreferences: { customerAddressId: $customerAddressId }
+          email: $email
+        }
         lines: $lineItems
       }
     ) {

@@ -74,6 +74,7 @@ export const getCustomerQuery = gql`
         phone
         province
         provinceCode
+        zip
       }
     }
   }

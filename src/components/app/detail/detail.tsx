@@ -54,7 +54,23 @@ const Detail = (props: any) => {
     setVariants(variants);
     setVariant(variants[0]);
   }, [props?.data?.variants]);
-
+  console.log(
+    {
+      deliveryAddress: {
+        address1: user?.user?.defaultAddress?.address1 ?? '',
+        address2: user?.user?.defaultAddress?.address2 ?? '',
+        city: user?.user?.defaultAddress?.city ?? '',
+        company: user?.user?.defaultAddress?.company ?? '',
+        country: user?.user?.defaultAddress?.country ?? '',
+        firstName: user?.user?.defaultAddress?.firstName ?? '',
+        lastName: user?.user?.defaultAddress?.lastName ?? '',
+        phone: user?.user?.defaultAddress?.phone ?? '',
+        province: user?.user?.defaultAddress?.province ?? '',
+        zip: user?.user?.defaultAddress?.zip ?? '',
+      },
+    },
+    'user?.user',
+  );
   const addtoCart = async () => {
     try {
       let cartAddData: any;
@@ -62,8 +78,22 @@ const Detail = (props: any) => {
         const data: any = await cartCreate({
           variables: {
             customerAccessToken: user?.token_id,
+            email: user?.user?.email,
+            customerAddressId: user?.user?.defaultAddress?.id,
           },
         });
+        //  deliveryAddress: {
+        //       address1: user?.user?.defaultAddress?.address1 ?? '',
+        //       address2: user?.user?.defaultAddress?.address2 ?? '',
+        //       city: user?.user?.defaultAddress?.city ?? '',
+        //       company: user?.user?.defaultAddress?.company ?? '',
+        //       country: user?.user?.defaultAddress?.country ?? '',
+        //       firstName: user?.user?.defaultAddress?.firstName ?? '',
+        //       lastName: user?.user?.defaultAddress?.lastName ?? '',
+        //       phone: user?.user?.defaultAddress?.phone ?? '',
+        //       province: user?.user?.defaultAddress?.province ?? '',
+        //       zip: user?.user?.defaultAddress?.zip ?? '',
+        //     },
         if (data?.data?.cartCreate?.cart) {
           localStorage.setItem(
             'cartID',
@@ -132,9 +162,11 @@ const Detail = (props: any) => {
     setRange(1);
   }
   const cartCheck = cart?.cart?.lines?.edges
-  ? removeEdgesAndNodes(cart?.cart?.lines)
-  : [];
-  const isCartFull = cartCheck?.find((item)=> variant?.id === item?.merchandise?.id)?.quantity === variant?.quantityAvailable
+    ? removeEdgesAndNodes(cart?.cart?.lines)
+    : [];
+  const isCartFull =
+    cartCheck?.find((item) => variant?.id === item?.merchandise?.id)
+      ?.quantity === variant?.quantityAvailable;
   // variant?.title === cartCheck?.merchandise?.title
   return (
     <div className="  flex flex-col gap-8 justify-between">
@@ -331,7 +363,7 @@ const RenderButton = (props: {
         View Cart
       </Button>
     );
-  }else if (props?.isCartFull) {
+  } else if (props?.isCartFull) {
     return (
       <Button
         className="w-full "
@@ -346,8 +378,7 @@ const RenderButton = (props: {
         All items in cart
       </Button>
     );
-  }
-   else {
+  } else {
     return (
       <Button
         className="w-full flex items-center gap-2"
