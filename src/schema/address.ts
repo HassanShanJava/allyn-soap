@@ -111,5 +111,5 @@ export const CustomerAddressSchema = z.object({
     })
     .refine((val) => (val.startsWith(' ') ? false : true), {
       message: 'Please enter your phone',
-    }),
+    }).optional(),
 });
