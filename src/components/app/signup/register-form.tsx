@@ -43,7 +43,7 @@ const RegisterForm = () => {
 
       toast({
         variant: 'success',
-        title: 'Customer Registered Successfull!',
+        title: 'Registered Successfull!',
       });
       router.push('/login');
       setLoading(false);
