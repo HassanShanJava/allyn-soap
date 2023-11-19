@@ -47,3 +47,9 @@ package-lock.json
 
 # testing
 playwright/test-results
+
+
+#seo generate
+sitemap.xml
+sitemap-0.xml
+robots.txt
