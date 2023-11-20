@@ -122,8 +122,9 @@ const CustomerAddressForm = (props: AccountDetailType) => {
   // states
   const { toast } = useToast();
   const [provinces, setProvinces] = useState<any>(null);
+  const [defaultProvince, setDefaultProvince] = useState<any>(null);
   const [defaultCheck, setDefaultCheck] = useState<boolean>(false);
-  
+
   const { user } = useSelector((state: RootState) => state.auth);
 
   const form = useForm<z.infer<typeof CustomerAddressSchema>>({
@@ -170,14 +171,24 @@ const CustomerAddressForm = (props: AccountDetailType) => {
       (item) => item?.name === countryname,
     );
     if (selectCountry && selectCountry?.provinces.length > 0) {
+      const selectProvince: any =
+        selectCountry.provinces &&
+        selectCountry.provinces?.find(
+          (item) => item?.name === props?.addressData?.province,
+        );
       setProvinces(selectCountry?.provinces as any);
-
-      // form.setValue('province', selectCountry?.provinces[0]?.name);
+      setDefaultProvince(
+        selectProvince
+          ? selectProvince?.name
+          : selectCountry?.provinces[0]?.name,
+      );
     } else {
       setProvinces(null);
     }
   }, [form.watch('country')]);
-
+  useEffect(() => {
+    form?.setValue('province', defaultProvince);
+  }, [defaultProvince]);
   // submit function
   async function onSubmit(values: z.infer<typeof CustomerAddressSchema>) {
     try {
@@ -316,7 +327,6 @@ const CustomerAddressForm = (props: AccountDetailType) => {
                 provinces &&
                 provinces?.length > 0
               ) {
-                console.log(provinces[0],provinces,"check me")
                 return (
                   <FormField
                     key={i}
@@ -327,11 +337,11 @@ const CustomerAddressForm = (props: AccountDetailType) => {
                         <Select
                           onValueChange={(value) => field.onChange(value)}
                           {...field}
-                          value={provinces[0]?.name}
+                          defaultValue={defaultProvince}
                         >
                           <FormControl>
                             <SelectTrigger className=" h-10 text-text-dark-gray  bg-text-light-secondary">
-                              <SelectValue placeholder={'Select Province'} defaultValue={provinces[0]?.name}/>
+                              <SelectValue placeholder={'Select Province'} />
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent className="bg-background max-h-80">
@@ -341,7 +351,7 @@ const CustomerAddressForm = (props: AccountDetailType) => {
                                   return (
                                     <div key={index}>
                                       <SelectItem
-                                      className='text-text-dark-grayF'
+                                        className="text-text-dark-grayF"
                                         value={(item?.name).toString()}
                                       >
                                         {item?.name}

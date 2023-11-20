@@ -3,7 +3,7 @@ import { gql } from '@apollo/client';
 export const getCustomerQuery = gql`
   query MyQuery(
     $customerAccessToken: String = ""
-    $reverse: Boolean
+    $reverse: Boolean = true
     $first: Int
     $last: Int
     $after: String

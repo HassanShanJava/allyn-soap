@@ -38,6 +38,7 @@ export type AccountAddressFilterType = {
   last: number | null;
   after: string | null;
   before: string | null;
+  reverse: boolean;
 };
 const MyAccountGrid = () => {
   // states
@@ -51,6 +52,7 @@ const MyAccountGrid = () => {
     last: null,
     after: null,
     before: null,
+    reverse: true,
   });
   // queries & mutations
   const {
@@ -71,6 +73,7 @@ const MyAccountGrid = () => {
       last: null,
       after: null,
       before: null,
+      reverse: true,
     });
     // refetch();
   }, [user?.token_id]);
@@ -84,6 +87,7 @@ const MyAccountGrid = () => {
       last: null,
       after: null,
       before: null,
+      reverse: true,
     });
     if (type == 'logout') {
       handleLogout();
