@@ -174,7 +174,7 @@ const CustomerAddressForm = (props: AccountDetailType) => {
       const selectProvince: any =
         selectCountry.provinces &&
         selectCountry.provinces?.find(
-          (item) => item?.name === props?.addressData?.province,
+          (item: any) => item?.name === props?.addressData?.province,
         );
       setProvinces(selectCountry?.provinces as any);
       setDefaultProvince(
