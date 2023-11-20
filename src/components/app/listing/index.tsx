@@ -7,17 +7,9 @@ import SeoHead from '~/components/common/seo-head';
 const ListingPage = () => {
   const router = useRouter();
   const { id } = router.query;
-  const seoHead=(id as string)?.split('-').join(' ')
-  const finalhead= seoHead?.charAt(0).toUpperCase() + seoHead?.slice(1)
   return (
     <>
-      <SeoHead
-        title={finalhead}
-        description="Allyn's Soap Co. is dedicated to producing quality handmade soaps and lotions and other bath products with ingredients you can pronounce and understand."
-        image_url={
-          'https://cdn.shopify.com/s/files/1/0372/6124/6603/files/fb_logo_with_kraft_paper.png?v=1613915363'
-        }
-      />
+      
       <div className="relative  font-poppins">
         {/* for bg color */}
         <div

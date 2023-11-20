@@ -6,8 +6,8 @@ type seoType = {
   title: string;
   description: string;
   image_url: string;
-  link?:string;
-  canonical_url?:string;
+  link?: string;
+  canonical_url?: string;
 };
 const SeoHead = (props: seoType) => {
   return (
@@ -19,37 +19,37 @@ const SeoHead = (props: seoType) => {
       ></meta>
       <meta httpEquiv="X-UA-Compatible" content="ie=edge"></meta>
       <meta name="description" content={props?.description}></meta>
-      <meta name="keywords" content={props?.title}></meta>
+      <meta name="keywords" content={props?.title }></meta>
 
       <meta
         property="og:site_name"
-        content={`${props?.title} - Allyn's Soap Co`}
+        content={`${props?.title } - Allyn's Soap Co`}
       />
       <meta property="og:url" content="https://allynssoapco.com/" />
       <meta property="og:type" content="website" />
       <meta
         property="og:title"
-        content={`${props?.title} - Allyn's Soap Co`}
+        content={`${props?.title } - Allyn's Soap Co`}
       ></meta>
       <meta property="og:description" content={props?.description}></meta>
 
       <meta name="twitter:card" content="summary_large_image"></meta>
       <meta
         name="twitter:title"
-        content={`${props?.title} - Allyn's Soap Co`}
+        content={`${props?.title } - Allyn's Soap Co`}
       ></meta>
       <meta name="twitter:description" content={props?.description}></meta>
       <meta property="og:image" content={props?.image_url} />
       <meta property="og:image:secure_url" content={props?.image_url} />
       <meta property="og:image:width" content="2050" />
       <meta property="og:image:height" content="780" />
-      <title>{`${props?.title} - Allyn's Soap Co`}</title>
+      <title>{`${props?.title } - Allyn's Soap Co`}</title>
 
       <link rel="icon" href={logo.src} sizes="any" />
       <link
-          rel="canonical"
-          href={`https://${props?.link}/${props?.canonical_url}`}
-        />
+        rel="canonical"
+        href={`https://${props?.link}/${props?.canonical_url}`}
+      />
       <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
