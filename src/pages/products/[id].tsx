@@ -13,7 +13,6 @@ const ListingPage = dynamic(() => import('~/components/app/listing'), {
 export async function getServerSideProps(context: any) {
   // Fetch data from external API
   const { id } = context.query;
-  console.log({id},"id change")
   const seoHead = (id as string)?.split('-').join(' ');
   const finalhead = seoHead?.charAt(0).toUpperCase() + seoHead?.slice(1);
 
