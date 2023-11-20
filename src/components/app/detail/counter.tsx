@@ -3,6 +3,8 @@ type CounterType = {
   setRange: (e: number) => void;
   min: number;
   max: number;
+  cartView: boolean;
+  setCartView: (e: boolean) => unknown;
 };
 
 const Counter = (props: CounterType) => {
@@ -13,6 +15,7 @@ const Counter = (props: CounterType) => {
       } else if (type == 'substraction' && props?.range !== props?.min) {
         props?.setRange(props?.range - 1);
       }
+      props?.setCartView(false);
     }
   };
   return (

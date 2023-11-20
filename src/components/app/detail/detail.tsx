@@ -289,6 +289,8 @@ const Detail = (props: any) => {
                 setRange={setRange}
                 min={1}
                 max={variant?.quantityAvailable}
+                cartView={cartView}
+                setCartView={setCartView}
               />
               <RenderButton
                 forSale={variant?.availableForSale}
