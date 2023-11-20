@@ -178,12 +178,16 @@ const CustomerAddressForm = (props: AccountDetailType) => {
         );
       setProvinces(selectCountry?.provinces as any);
       setDefaultProvince(
-        selectProvince
-          ? selectProvince?.name
-          : selectCountry?.provinces[0]?.name,
+        selectCountry?.provinces
+          ? selectProvince
+            ? selectProvince?.name
+            : selectCountry?.provinces[0]?.name
+          : '',
       );
     } else {
+      setDefaultProvince('');
       setProvinces(null);
+      form.resetField('province');
     }
   }, [form.watch('country')]);
   useEffect(() => {
@@ -239,6 +243,8 @@ const CustomerAddressForm = (props: AccountDetailType) => {
       });
     }
   }
+  console.log(form?.getValues(), 'form?.formState');
+
   return (
     <div>
       <div className="flex items-center justify-between">
