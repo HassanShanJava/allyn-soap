@@ -83,7 +83,9 @@ const BannerCard = ({ banner, key, type }: any) => {
                 <image
                   xlinkHref={`${collectionBanner?.featuredImage?.url}`}
                   className="object-cover"
-                  onLoad={() => setHide(false)}
+                  onLoad={() =>
+                    collectionBanner?.featuredImage?.url && setHide(false)
+                  }
                 />
 
                 <polyline

@@ -47,7 +47,7 @@ const StaticBanner = ({ data, key, type }: any) => {
                 <image
                   xlinkHref={`${data?.src}`}
                   className=" object-center !width-[100%] svg-image-static"
-                  // onLoad={() => setHide(false)}
+                  onLoad={() => data?.src}
                 />
 
                 <polyline
