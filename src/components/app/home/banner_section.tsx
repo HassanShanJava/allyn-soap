@@ -53,7 +53,7 @@ const BannerSection = () => {
 
   return (
     <>
-      <section id="banner">
+      <section id="banner" className={` ${!loading ? 'fade-in-card' : ''}`}>
         {loading && <BannerSkeleton />}
         {sliderData && !loading ? (
           <Slider ref={slider} {...settings}>

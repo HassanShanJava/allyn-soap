@@ -35,7 +35,7 @@ const BannerCard = ({ banner, key, type }: any) => {
   }, [data, id]);
 
   return (
-    <>
+    <div className={` ${!loading ? 'fade-in-card' : ''}`}>
       <div className="relative  bottom-6  ">
         <p className="absolute hidden md:block text-xs md:text-sm p-6 md:px-12">
           {`Home > `}
@@ -105,7 +105,7 @@ const BannerCard = ({ banner, key, type }: any) => {
             </div>
           </div>
         </div>
-      ) : loading && id !== 'search'? (
+      ) : loading && id !== 'search' ? (
         <div className="py-14">
           <BannerSkeleton />
         </div>
@@ -114,7 +114,7 @@ const BannerCard = ({ banner, key, type }: any) => {
       ) : (
         <div className="py-2 sm:py-6 md:py-12"></div>
       )}
-    </>
+    </div>
   );
 };
 

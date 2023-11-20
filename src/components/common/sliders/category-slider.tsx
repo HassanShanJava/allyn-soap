@@ -106,7 +106,11 @@ const CategorySlider = () => {
   };
   //   const collection = await getCollections()
   return (
-    <div className="w-full md:w-4/6  mx-auto flex items-center justify-center gao-2 md:gap-4">
+    <div
+      className={`w-full md:w-4/6  mx-auto flex items-center justify-center gao-2 md:gap-4  ${
+        !loading ? 'fade-in-card' : ''
+      }`}
+    >
       <div
         onClick={() => previous()}
         className="group flex  bg-text-light-secondary hover:bg-primary  h-10 w-10 text-center justify-center items-center rounded-full cursor-pointer  transition ease-in delay-150"
