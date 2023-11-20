@@ -111,12 +111,6 @@ export default function Header() {
               variables: {
                 cartId: cart?.cart_id,
                 customerAccessToken: tokenID,
-                email: customerData?.data?.customer?.email,
-                customerAddressId:
-                  customerData?.data?.customer?.defaultAddress?.id,
-                deliveryAddress: {
-                  ...customerData?.data?.customer?.defaultAddress,
-                },
               },
             });
           }

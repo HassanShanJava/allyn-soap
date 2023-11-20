@@ -45,18 +45,18 @@ export const LogoutMutation = gql`
     }
   }
 `;
-
+//
+// deliveryAddressPreferences: { customerAddressId: $customerAddressId }
+// $customerAddressId: ID = ""
 export const CartUpdateMutation = gql`
   mutation MyMutation(
     $cartId: ID!
     $customerAccessToken: String!
-    $customerAddressId: ID = ""
     $email: String = ""
   ) {
     cartBuyerIdentityUpdate(
       buyerIdentity: {
         customerAccessToken: $customerAccessToken
-        deliveryAddressPreferences: { customerAddressId: $customerAddressId }
         email: $email
       }
       cartId: $cartId

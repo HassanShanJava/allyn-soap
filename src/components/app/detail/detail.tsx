@@ -54,23 +54,7 @@ const Detail = (props: any) => {
     setVariants(variants);
     setVariant(variants[0]);
   }, [props?.data?.variants]);
-  console.log(
-    {
-      deliveryAddress: {
-        address1: user?.user?.defaultAddress?.address1 ?? '',
-        address2: user?.user?.defaultAddress?.address2 ?? '',
-        city: user?.user?.defaultAddress?.city ?? '',
-        company: user?.user?.defaultAddress?.company ?? '',
-        country: user?.user?.defaultAddress?.country ?? '',
-        firstName: user?.user?.defaultAddress?.firstName ?? '',
-        lastName: user?.user?.defaultAddress?.lastName ?? '',
-        phone: user?.user?.defaultAddress?.phone ?? '',
-        province: user?.user?.defaultAddress?.province ?? '',
-        zip: user?.user?.defaultAddress?.zip ?? '',
-      },
-    },
-    'user?.user',
-  );
+
   const addtoCart = async () => {
     try {
       let cartAddData: any;
@@ -78,8 +62,6 @@ const Detail = (props: any) => {
         const data: any = await cartCreate({
           variables: {
             customerAccessToken: user?.token_id,
-            email: user?.user?.email,
-            customerAddressId: user?.user?.defaultAddress?.id,
           },
         });
         //  deliveryAddress: {
