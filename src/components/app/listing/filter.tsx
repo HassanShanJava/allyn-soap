@@ -140,7 +140,7 @@ export function FilterContent(props: { isSheet: boolean; setModal?: any }) {
               {FilterData?.menu?.items?.map((item: any, index: number) => {
                 if (item?.items?.length > 0) {
                   return (
-                    <AccordionItem value={`item-${index}`} key={index}>
+                    <AccordionItem value={`item-${index}`} key={index} >
                       <AccordionTrigger
                       
                         className={`indent-1 ${poppins.variable} ${poppins.className}`}
@@ -175,8 +175,9 @@ export function FilterContent(props: { isSheet: boolean; setModal?: any }) {
                   );
                 } else {
                   return (
-                    <AccordionItem value={`item-${index}`} key={index}>
-                      <p
+                    <AccordionItem value={`item-${index}`} key={index} >
+                      <AccordionTrigger
+                        hide
                         onClick={() => {
                           handleCategory(
                             `/products/${getRoutData(item?.url)}`,
@@ -189,11 +190,12 @@ export function FilterContent(props: { isSheet: boolean; setModal?: any }) {
                             : ' font-medium '
                         } cursor-pointer ${poppins.variable} ${
                           poppins.className
-                        } py-2 indent-1  hover:bg-text-light-secondary mt-1 rounded-md captialize-first  captialize-first lowercase text-sm`}
+                        } py-2 indent-1  hover:bg-text-light-secondary mt-1 rounded-md captialize text-sm`}
                         key={index}
+                        
                       >
                         {item?.title}
-                      </p>
+                      </AccordionTrigger>
                     </AccordionItem>
                   );
                 }
