@@ -25,15 +25,7 @@ export const CustomerAddressSchema = z.object({
     }),
   company: z
     .string({ required_error: 'Please enter your company name' })
-    .min(2, {
-      message: 'company name must be at least 2 characters',
-    })
-    .max(30, {
-      message: 'company name must not exceed 30 characters',
-    })
-    .refine((val) => (val.startsWith(' ') ? false : true), {
-      message: 'Please enter your company',
-    }),
+    .optional(),
   address1: z
     .string({ required_error: 'Please enter your address1' })
     .min(2, {

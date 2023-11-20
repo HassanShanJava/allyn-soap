@@ -6,6 +6,8 @@ type seoType = {
   title: string;
   description: string;
   image_url: string;
+  link?:string;
+  canonical_url?:string;
 };
 const SeoHead = (props: seoType) => {
   return (
@@ -44,6 +46,10 @@ const SeoHead = (props: seoType) => {
       <title>{`${props?.title} - Allyn's Soap Co`}</title>
 
       <link rel="icon" href={logo.src} sizes="any" />
+      <link
+          rel="canonical"
+          href={`https://${props?.link}/${props?.canonical_url}`}
+        />
       <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"

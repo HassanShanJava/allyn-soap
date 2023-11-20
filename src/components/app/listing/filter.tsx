@@ -78,7 +78,6 @@ export function FilterContent(props: { isSheet: boolean; setModal?: any }) {
     seActiveIndex(null);
   }, [router?.query?.id]);
   const handleCategory = (text: string, index: number) => {
-  
     setCategory(text);
     seActiveIndex(index);
     router.replace(`/${text}`);
@@ -143,6 +142,7 @@ export function FilterContent(props: { isSheet: boolean; setModal?: any }) {
                   return (
                     <AccordionItem value={`item-${index}`} key={index}>
                       <AccordionTrigger
+                      
                         className={`indent-1 ${poppins.variable} ${poppins.className}`}
                       >
                         {item?.title}
@@ -175,24 +175,26 @@ export function FilterContent(props: { isSheet: boolean; setModal?: any }) {
                   );
                 } else {
                   return (
-                    <p
-                      onClick={() => {
-                        handleCategory(
-                          `/products/${getRoutData(item?.url)}`,
-                          index,
-                        );
-                      }}
-                      className={`${
-                        category === '/products/' + getRoutData(item?.url)
-                          ? ' font-bold bg-text-light-secondary  '
-                          : ' font-medium '
-                      } cursor-pointer ${poppins.variable} ${
-                        poppins.className
-                      } py-2 indent-1 hover:bg-text-light-secondary mt-1 rounded-md captialize-first  lowercase text-sm`}
-                      key={index}
-                    >
-                      {item?.title}
-                    </p>
+                    <AccordionItem value={`item-${index}`} key={index}>
+                      <p
+                        onClick={() => {
+                          handleCategory(
+                            `/products/${getRoutData(item?.url)}`,
+                            index,
+                          );
+                        }}
+                        className={`${
+                          category === '/products/' + getRoutData(item?.url)
+                            ? ' font-bold bg-text-light-secondary  '
+                            : ' font-medium '
+                        } cursor-pointer ${poppins.variable} ${
+                          poppins.className
+                        } py-2 indent-1  hover:bg-text-light-secondary mt-1 rounded-md captialize-first  captialize-first lowercase text-sm`}
+                        key={index}
+                      >
+                        {item?.title}
+                      </p>
+                    </AccordionItem>
                   );
                 }
               })}
@@ -210,6 +212,7 @@ export function FilterContent(props: { isSheet: boolean; setModal?: any }) {
           )}
         </Accordion>
         <hr className="mt-4" />
+
         {id !== 'search' && (
           <Accordion
             type="single"
