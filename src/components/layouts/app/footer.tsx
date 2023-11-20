@@ -7,6 +7,8 @@ import { getRoutData } from '~/utils/helper';
 import LogoImage from '~/public/assets/logo.png';
 import Image from 'next/image';
 import { Facebook, Instagram, Mail } from 'lucide-react';
+import { Skeleton } from '~/components/ui/skeleton';
+import { FooterSkeleton } from '~/components/common/skeleton/nav-skeleton';
 
 const XSvg = () => {
   return (
@@ -102,7 +104,7 @@ function Footer() {
           <div className="space-y-6 ">
             <p className="font-[600] text-xl">Useful links</p>
             <ul className="space-y-6 text-sm sm:text-base font-medium text-text-dark-gray">
-              {footerData &&
+              {footerData ? (
                 footerData.map((item: any, i: number) => (
                   <li key={i} className="">
                     <Link
@@ -112,7 +114,13 @@ function Footer() {
                       {item.title}
                     </Link>
                   </li>
-                ))}
+                ))
+              ) : (
+                <>
+                  {/* footer skeleton */}
+                  <FooterSkeleton />
+                </>
+              )}
             </ul>
           </div>
           {/* <div className="space-y-6">

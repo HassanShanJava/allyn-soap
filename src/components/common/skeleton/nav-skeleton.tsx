@@ -14,3 +14,15 @@ const NavSkeleton = () => {
 };
 
 export default NavSkeleton;
+
+export const FooterSkeleton = () => {
+  return (
+    <>
+      {Array.from(Array(4).keys()).map((item, i) => (
+        <li key={i}>
+          <Skeleton className="w-24 h-2 rounded-md " />
+        </li>
+      ))}
+    </>
+  );
+};
