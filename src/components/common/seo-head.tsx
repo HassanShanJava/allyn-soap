@@ -12,6 +12,11 @@ type seoType = {
 const SeoHead = (props: seoType) => {
   return (
     <Head>
+      <meta
+        name="google-site-verification"
+        content="vXiskNlT9lXkOJlCQOPCu_3-O95ntC2Y7NxOzUElWxs"
+      />
+
       <meta charSet="utf-8"></meta>
       <meta
         name="viewport"
@@ -19,31 +24,31 @@ const SeoHead = (props: seoType) => {
       ></meta>
       <meta httpEquiv="X-UA-Compatible" content="ie=edge"></meta>
       <meta name="description" content={props?.description}></meta>
-      <meta name="keywords" content={props?.title }></meta>
+      <meta name="keywords" content={props?.title}></meta>
 
       <meta
         property="og:site_name"
-        content={`${props?.title } - Allyn's Soap Co`}
+        content={`${props?.title} - Allyn's Soap Co`}
       />
       <meta property="og:url" content="https://allynssoapco.com/" />
       <meta property="og:type" content="website" />
       <meta
         property="og:title"
-        content={`${props?.title } - Allyn's Soap Co`}
+        content={`${props?.title} - Allyn's Soap Co`}
       ></meta>
       <meta property="og:description" content={props?.description}></meta>
 
       <meta name="twitter:card" content="summary_large_image"></meta>
       <meta
         name="twitter:title"
-        content={`${props?.title } - Allyn's Soap Co`}
+        content={`${props?.title} - Allyn's Soap Co`}
       ></meta>
       <meta name="twitter:description" content={props?.description}></meta>
       <meta property="og:image" content={props?.image_url} />
       <meta property="og:image:secure_url" content={props?.image_url} />
       <meta property="og:image:width" content="2050" />
       <meta property="og:image:height" content="780" />
-      <title>{`${props?.title } - Allyn's Soap Co`}</title>
+      <title>{`${props?.title} - Allyn's Soap Co`}</title>
 
       <link rel="icon" href={logo.src} sizes="any" />
       <link
