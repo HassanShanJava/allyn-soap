@@ -128,7 +128,6 @@ const BannerSection = () => {
                         xlinkHref={`${item?.featuredImage.url}`}
                         className="object-cover"
                         onLoad={() => item?.featuredImage.url}
-                        
                       />
 
                       <polyline
@@ -153,7 +152,7 @@ const BannerSection = () => {
             ))}
           </Slider>
         ) : (
-          ''
+          <BannerSkeleton />
         )}
       </section>
     </>
