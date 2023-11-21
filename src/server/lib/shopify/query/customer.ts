@@ -82,7 +82,7 @@ export const getCustomerQuery = gql`
 export const getCustomerAddressQuery = gql`
   query MyQuery(
     $customerAccessToken: String!
-    $reverse: Boolean
+    $reverse: Boolean = true
     $first: Int
     $last: Int
     $after: String
@@ -126,7 +126,7 @@ export const getCustomerAddressQuery = gql`
 export const orderAccountQuery = gql`
   query MyQuery(
     $customerAccessToken: String = ""
-    $reverse: Boolean
+    $reverse: Boolean = true
     $first: Int
     $last: Int
     $after: String
