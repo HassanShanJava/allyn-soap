@@ -243,7 +243,6 @@ const CustomerAddressForm = (props: AccountDetailType) => {
       });
     }
   }
-  console.log(form?.getValues(), 'form?.formState');
 
   return (
     <div>
