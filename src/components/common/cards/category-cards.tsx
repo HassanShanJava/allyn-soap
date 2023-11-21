@@ -69,7 +69,10 @@ const CategoryCard = (props: { item: any; index: number }) => {
                 : ' text-text-light '
             } `}
           >
-            {`(${props?.item?.products?.filters[0]?.values[0]?.count} ${props?.item?.title})`}{' '}
+            {`(${
+              +(props?.item?.products?.filters[0]?.values[0]?.count ?? 0) +
+              +(props?.item?.products?.filters[0]?.values[1]?.count ?? 0)
+            } ${props?.item?.title})`}{' '}
           </p>
         </div>
       </div>
