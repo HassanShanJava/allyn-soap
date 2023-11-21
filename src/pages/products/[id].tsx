@@ -21,7 +21,7 @@ export async function getServerSideProps(context: any) {
 }
 
 const ProductDetails: NextPageWithLayout = (props: any) => {
-  console.log({props},"title change")
+
   return (
     <>
       {props?.seotitle && (

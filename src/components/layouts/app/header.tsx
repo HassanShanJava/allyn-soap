@@ -98,7 +98,7 @@ export default function Header() {
               before: null,
             },
           });
-          console.log(customerData?.data?.customer, 'customerData?.customer');
+
           dispatch(
             toggleAuth({
               token_id: tokenID,
