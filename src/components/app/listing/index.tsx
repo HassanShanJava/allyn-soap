@@ -10,7 +10,7 @@ const ListingPage = () => {
   return (
     <>
       
-      <div className="relative  font-poppins">
+      <div className="relative min-h-screen  font-poppins">
         {/* for bg color */}
         <div
           className={`absolute -z-10 bg-secondary min-w-[200px] w-full  max-w-[70%] md:max-w-[80%]  ${
