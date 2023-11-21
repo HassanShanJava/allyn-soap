@@ -21,7 +21,6 @@ export async function getServerSideProps(context: any) {
 }
 
 const ProductDetails: NextPageWithLayout = (props: any) => {
-
   return (
     <>
       {props?.seotitle && (
@@ -33,7 +32,7 @@ const ProductDetails: NextPageWithLayout = (props: any) => {
           }
         />
       )}
-      <Suspense fallback={<p>Loading home</p>}>
+      <Suspense fallback={<p className=" min-h-screen">Loading home</p>}>
         <ListingPage />
       </Suspense>
     </>
