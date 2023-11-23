@@ -5,7 +5,11 @@ import Link from 'next/link';
 import SoldOut from '../../../public/assets/soldout.svg';
 const ProductCard = (props: { item: any; index: number }) => {
   return (
-    <Link href={`/product-detail/${props?.item?.handle}`} aria-hidden="true">
+    <Link
+      href={`/product-detail/${props?.item?.handle}`}
+      aria-hidden="true"
+      tabindex="-1"
+    >
       <div className="relative ">
         <div
           className={`relative group  border border-border py-4 mx-auto w-full max-h transition-all hover:absolute duration-100 rounded-3xl shadow-md ease-in cursor-pointer bg-transparent hover:border-transparent hover:z-20 hover:shadow-2xl hover:bg-text-white  backdrop-blur-3xl  hover:opacity-100 `}

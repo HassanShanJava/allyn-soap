@@ -8,7 +8,11 @@ const ArrivalCard = (props: { item: any; index: number }) => {
   const { category } = useSelector((state: RootState) => state.category);
 
   return (
-    <Link href={`/product-detail/${props?.item?.handle}`} aria-hidden="true">
+    <Link
+      href={`/product-detail/${props?.item?.handle}`}
+      aria-hidden="true"
+      tabindex="-1"
+    >
       <div
         className={`group relative   ${
           category?.category_id == props?.item?.id ? '' : 'bg-card'

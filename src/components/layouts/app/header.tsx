@@ -177,20 +177,21 @@ export default function Header() {
               <ul className="hidden xl-lg:flex gap-4 text-sm  2xl:gap-8   text-text-dark  xl:flex-row  xl:items-center ">
                 {menu.map((item: Menu) => {
                   return (
-                    <Link
+                    <li
                       key={item.title}
-                      href={`/products/${getRoutData(item?.url)}`}
+                      className={` captialize-first  lowercase font-semibold ${
+                        id == getRoutData(item?.url)
+                          ? 'text-primary'
+                          : 'text-text-dark'
+                      }  hover:text-primary  hover:cursor-pointer `}
                     >
-                      <li
-                        className={` captialize-first  lowercase font-semibold ${
-                          id == getRoutData(item?.url)
-                            ? 'text-primary'
-                            : 'text-text-dark'
-                        }  hover:text-primary  hover:cursor-pointer `}
+                      <Link
+                        className="w-full"
+                        href={`/products/${getRoutData(item?.url)}`}
                       >
                         {item.title}
-                      </li>
-                    </Link>
+                      </Link>
+                    </li>
                   );
                 })}
               </ul>
