@@ -4,7 +4,7 @@ import React from 'react';
 
 export default function Document() {
   return (
-    <Html lang='en'>
+    <Html lang="en">
       <Head>
         <link
           rel="stylesheet"
@@ -14,10 +14,10 @@ export default function Document() {
           referrerPolicy="no-referrer"
         />
 
-        <script
+        <Script
           src="https://cdn-widgetsrepository.yotpo.com/v1/loader/5m8xhAHtJf2ak4R6ihcYA08d9QdD7NNTDkVromWz"
           async
-        ></script>
+        ></Script>
 
         <Script
           src={`https://cdn-widgetsrepository.yotpo.com/v1/loader/${process.env.NEXT_PUBLIC_SHOPIFY_REVIEW}`}
