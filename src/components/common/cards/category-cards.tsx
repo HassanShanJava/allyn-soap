@@ -36,6 +36,7 @@ const CategoryCard = (props: { item: any; index: number }) => {
             : 'bg-primary-foreground'
         } w-48 h-48 rounded-2xl  transition ease-in  cursor-pointer mx-auto`}
         onClick={() => onDataSubmit(props?.item)}
+        aria-hidden="true"
       >
         <div className="relative h-4/6 w-full p-4">
           {props?.item?.image ? (

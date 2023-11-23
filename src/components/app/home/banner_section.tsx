@@ -82,6 +82,7 @@ const BannerSection = () => {
                         router.push(`/product-detail/${sliderData[i]?.handle}`)
                       }
                       aria-label="shop now"
+                      aria-hidden="true"
                     >
                       Shop Now
                     </Button>
@@ -92,6 +93,7 @@ const BannerSection = () => {
                         onClick={previous}
                         disabled={i === 0 ? true : false}
                         aria-label="previous"
+                        aria-hidden="true"
                       >
                         <i className="text-md md:text-xl fas fa-angle-left  "></i>
                       </Button>
@@ -99,6 +101,7 @@ const BannerSection = () => {
                         className={`cursor-pointer disabled:cursor-not-allowed hover:opacity-80 font-thin w-10 h-10 md:w-12 md:h-12 shadow-lg bg-text-light-secondary hover:bg-primary hover:text-white  text-text rounded-full flex items-center justify-center `}
                         onClick={next}
                         aria-label="next"
+                        aria-hidden="true"
                         disabled={i == sliderData.length - 1 ? true : false}
                       >
                         <i className=" text-md md:text-xl fas fa-angle-right "></i>

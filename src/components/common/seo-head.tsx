@@ -20,7 +20,7 @@ const SeoHead = (props: seoType) => {
       <meta charSet="utf-8"></meta>
       <meta
         name="viewport"
-        content="width=device-width, initial-scale=1, user-scalable=0"
+        content="width=device-width, initial-scale=1, user-scalable=6"
       ></meta>
       <meta httpEquiv="X-UA-Compatible" content="ie=edge"></meta>
       <meta name="description" content={props?.description}></meta>
