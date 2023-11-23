@@ -56,7 +56,7 @@ const BannerSection = () => {
       id="banner"
       className={`relative ${!loading ? 'fade-in-card' : ''}`}
     >
-      {true ? (
+      {loading || !sliderData ? (
         <BannerSkeleton />
       ) : (
         <div>
