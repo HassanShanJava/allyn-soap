@@ -28,8 +28,7 @@ const ProductListing = () => {
     dispatch(
       toggleFilters({
         ...filters,
-        sortKey: defaultSort.sortKey,
-        reverse: false,
+        reverse: defaultSort?.reverse,
         first: 20,
         last: null,
         after: null,

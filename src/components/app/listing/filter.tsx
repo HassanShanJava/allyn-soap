@@ -56,13 +56,11 @@ export function FilterSheet(props: FilterSheetType) {
 }
 
 export function FilterContent(props: { isSheet: boolean; setModal?: any }) {
-  const { loading, data: FilterData } = useQuery(getFilterQuery, {
-    variables: { handle: 'main-menu' },
-  });
   const dispatch = useDispatch();
   const router = useRouter();
   const { id } = router.query;
   const { filters } = useSelector((state: RootState) => state.filters);
+  const { menu } = useSelector((state: RootState) => state.menu);
 
   const [range, setRange] = useState([5, 200]);
   const [priceChange, setPriceChange] = useState(false);
@@ -109,9 +107,7 @@ export function FilterContent(props: { isSheet: boolean; setModal?: any }) {
   };
   return (
     <div
-      className={`  p-4 text-text font-poppins ${
-        !loading ? 'fade-in-card' : ''
-      }`}
+      className={`  p-4 text-text font-poppins ${!menu ? 'fade-in-card' : ''}`}
     >
       <div className="flex items-center justify-between text-dark border-b border-border-light pb-4 ">
         <div
@@ -131,18 +127,15 @@ export function FilterContent(props: { isSheet: boolean; setModal?: any }) {
         <Accordion
           type="single"
           collapsible
-          className={`w-full ${poppins.variable} ${poppins.className} ${
-            loading ? '' : ' '
-          }`}
+          className={`w-full ${poppins.variable} ${poppins.className} `}
         >
-          {!loading ? (
+          {menu ? (
             <>
-              {FilterData?.menu?.items?.map((item: any, index: number) => {
+              {menu?.map((item: any, index: number) => {
                 if (item?.items?.length > 0) {
                   return (
-                    <AccordionItem value={`item-${index}`} key={index} >
+                    <AccordionItem value={`item-${index}`} key={index}>
                       <AccordionTrigger
-                      
                         className={`indent-1 ${poppins.variable} ${poppins.className}`}
                       >
                         {item?.title}
@@ -175,7 +168,7 @@ export function FilterContent(props: { isSheet: boolean; setModal?: any }) {
                   );
                 } else {
                   return (
-                    <AccordionItem value={`item-${index}`} key={index} >
+                    <AccordionItem value={`item-${index}`} key={index}>
                       <AccordionTrigger
                         hide
                         onClick={() => {
@@ -192,7 +185,6 @@ export function FilterContent(props: { isSheet: boolean; setModal?: any }) {
                           poppins.className
                         } py-2 indent-1  hover:bg-text-light-secondary mt-1 rounded-md captialize text-sm`}
                         key={index}
-                        
                       >
                         {item?.title}
                       </AccordionTrigger>

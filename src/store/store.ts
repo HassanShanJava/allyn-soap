@@ -5,6 +5,7 @@ import filtersReducer from './reducers/filters';
 import layoutReducer from './reducers/layout';
 import cartReducer from './reducers/cart';
 import authReducer from './reducers/auth';
+import menuReducer from './reducers/menu';
 
 const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ const store = configureStore({
     category: categoryReducer,
     filters: filtersReducer,
     cart: cartReducer,
+    menu: menuReducer,
   },
   middleware: (getDefaultMiddleware: any) =>
     getDefaultMiddleware({ serializableCheck: false }),

@@ -49,7 +49,32 @@ const SeoHead = (props: seoType) => {
       <meta property="og:image:width" content="2050" />
       <meta property="og:image:height" content="780" />
       <title>{`${props?.title} - Allyn's Soap Co`}</title>
+      <meta
+        name="apple-mobile-web-app-status-bar-style"
+        content="black-translucent"
+      />
+      <meta property="og:url" content="https://allynssoapco.vercel.app/" />
+      <meta property="og:site_name" content="allynssoapco" />
+      <meta property="og:locale" content="en-US" />
+      <meta property="og:image" content={props?.image_url} />
+      <meta property="og:image:width" content="800" />
 
+      <meta property="og:image:height" content="600" />
+
+      <meta property="og:image" content={props?.image_url} />
+
+      <meta property="og:image:width" content="1800" />
+
+      <meta property="og:image:height" content="1600" />
+      <meta property="og:image:alt" content={props?.description} />
+      <meta property="og:type" content="e-commerce" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content="@Shehzad" />
+      <meta name="twitter:creator" content="@Shehzad" />
+      <meta name="twitter:title" content={props?.title} />
+      <meta name="twitter:description" content={props?.description} />
+      <meta name="twitter:image" content={props?.image_url} />
+      <meta name="next-size-adjust" />
       <link rel="icon" href={logo.src} sizes="any" />
       <link
         rel="canonical"
