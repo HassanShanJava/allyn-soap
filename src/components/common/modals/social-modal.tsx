@@ -95,6 +95,9 @@ export function SocialDialouge(props: socialDialogInterface) {
                     title: `Link copy to clipboard`,
                   });
                 }}
+                aria-label="Copy"
+                aria-hidden="true"
+                tabIndex={-1}
                 className=" cursor-pointer text-text"
               />
             </div>

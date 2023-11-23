@@ -282,10 +282,19 @@ export function ReviewDialog(props: reviewDialogInterface) {
                         type="button"
                         disabled={loading}
                         onClick={() => handleClose()}
+                        aria-label="Cancel"
+                        aria-hidden="true"
+                        tabIndex={-1}
                       >
                         Cancel
                       </Button>
-                      <Button type="submit" disabled={loading}>
+                      <Button
+                        type="submit"
+                        disabled={loading}
+                        aria-label="Submit"
+                        aria-hidden="true"
+                        tabIndex={-1}
+                      >
                         {loading ? (
                           <i className="fa-solid fa-spinner fa-spin"></i>
                         ) : (

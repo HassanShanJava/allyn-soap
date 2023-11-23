@@ -248,7 +248,12 @@ const Detail = (props: any) => {
             Only <span className="font-bold">{variant?.quantityAvailable}</span>{' '}
             item(s) left in stock!
           </div>
-          <Progress value={variant?.quantityAvailable} />
+          <Progress
+            value={variant?.quantityAvailable}
+            aria-label="total quantity"
+            aria-hidden="true"
+            tabIndex={-1}
+          />
         </div>
         <div className="flex items-center gap-2">
           {variants && variants?.length > 1 && (
@@ -328,6 +333,9 @@ const RenderButton = (props: {
         className="w-full cursor-not-allowed"
         variant={'outline'}
         disabled={true}
+        aria-label="Sold Out"
+        aria-hidden="true"
+        tabIndex={-1}
       >
         Sold Out
       </Button>
@@ -343,6 +351,9 @@ const RenderButton = (props: {
             props?.setCartView(false);
           }
         }}
+        aria-label="View Cart"
+        aria-hidden="true"
+        tabIndex={-1}
       >
         View Cart
       </Button>
@@ -358,6 +369,9 @@ const RenderButton = (props: {
             props?.setCartView(false);
           }
         }}
+        aria-label="All items in cart"
+        aria-hidden="true"
+        tabIndex={-1}
       >
         All items in cart
       </Button>
@@ -368,6 +382,9 @@ const RenderButton = (props: {
         className="w-full flex items-center gap-2"
         disabled={props?.loading}
         onClick={() => props?.addtoCart()}
+        aria-label="Add to Cart"
+        aria-hidden="true"
+        tabIndex={-1}
       >
         {props?.loading && <i className="fa-solid fa-spinner fa-spin"></i>}
         Add to Cart

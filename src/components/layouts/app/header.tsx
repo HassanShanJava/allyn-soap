@@ -227,15 +227,18 @@ export default function Header() {
             )}
 
             <ShoppingCart className="text-lg" />
+            <span className="sr-only">shopping cart</span>
           </div>
           <div>
             <Link href={user?.is_login ? '/my-account' : '/login'}>
               <User className="text-lg" />
+              <span className="sr-only">user</span>
             </Link>
           </div>
         </div>
         <div className={`${open ? 'block' : 'hidden'}`}>
           <SearchComponent open={open} setOpen={setOpen} />
+          <span className="sr-only">user</span>
         </div>
       </div>
       <div className="flex justify-center items-center gap-4 py-6 xsm:p-6  xl-lg:hidden w-[30%] md:w-[20%]">
@@ -258,7 +261,9 @@ export default function Header() {
         <i
           className={` fas fa-bars-staggered text-2xl hover:cursor-pointer `}
           onClick={() => setNav(!nav)}
-        ></i>
+        >
+          <span className="sr-only">nav bar</span>
+        </i>
       </div>
 
       <SideBarMenu nav={nav} closeFn={setNav} list={menu} />
