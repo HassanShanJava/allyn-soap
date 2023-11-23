@@ -5,8 +5,8 @@ const NavSkeleton = () => {
   return (
     <div className="hidden xl:flex  gap-4 items-center">
       {Array.from(Array(10).keys()).map((item, i) => (
-        <div>
-          <Skeleton className="w-14 h-2 rounded-md " />
+        <div key={i}>
+          <Skeleton className="w-14 h-4 rounded-md " />
         </div>
       ))}
     </div>

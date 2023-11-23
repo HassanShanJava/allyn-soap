@@ -169,7 +169,7 @@ export default function Header() {
           <Image src={LogoImage} alt="/" width={80} height={80} />
         </Link>
 
-        {!menu && menu.length === 0 ? (
+        {!menu ? (
           <>
             <NavSkeleton />
           </>
