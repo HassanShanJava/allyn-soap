@@ -2,7 +2,8 @@ import { gql } from '@apollo/client';
 
 const imageFragment = gql`
   fragment image on Image {
-    url
+    url(transform: { preferredContentType: WEBP })
+    transformedSrc(preferredContentType: WEBP)
     altText
     width
     height
