@@ -50,7 +50,6 @@ export default function Header() {
   const { cart } = useSelector((state: RootState) => state.cart);
   const { user } = useSelector((state: RootState) => state.auth);
   const { menu } = useSelector((state: RootState) => state.menu);
-  console.log({ menu }, 'header menu');
   const dispatch = useDispatch();
   const router = useRouter();
   const id = router?.query?.id ?? '';
@@ -120,7 +119,6 @@ export default function Header() {
         const menuData: any = await getMenuFilters({
           variables: { handle: 'main-menu' },
         });
-        console.log({ menuData });
         menuData?.data && dispatch(updateNavList(menuData?.data?.menu?.items));
       }
     })();
