@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { getCookie } from 'cookies-next';
 import LogoImage from '~/public/assets/logo.png';
-import { getMenuQuery } from '~/server/lib/shopify/query/menu';
+import { getFilterQuery, getMenuQuery } from '~/server/lib/shopify/query/menu';
 
 import { Search as SearchIcon } from 'lucide-react';
 
@@ -29,6 +29,7 @@ import { Input } from '~/components/ui/input';
 import { Button } from '~/components/ui/button';
 import NavSkeleton from '~/components/common/skeleton/nav-skeleton';
 import { getCustomerQuery } from '~/server/lib/shopify/query/customer';
+import { naveList as updateNavList } from '~/store/reducers/menu';
 interface SideBarMenuProps {
   nav: boolean;
   closeFn: React.Dispatch<React.SetStateAction<boolean>>;
@@ -48,17 +49,18 @@ export default function Header() {
   const [navList, setNavList] = useState([]);
   const { cart } = useSelector((state: RootState) => state.cart);
   const { user } = useSelector((state: RootState) => state.auth);
+  const { menu } = useSelector((state: RootState) => state.menu);
+  console.log({ menu }, 'header menu');
   const dispatch = useDispatch();
   const router = useRouter();
   const id = router?.query?.id ?? '';
 
   const [getCart] = useLazyQuery(getCartQuery);
   const [getCustomer] = useLazyQuery(getCustomerQuery);
+  const [getMenuFilters] = useLazyQuery(getFilterQuery);
 
   const [customerCartUpdate] = useMutation(CartUpdateMutation);
-  const { data, loading } = useQuery(getMenuQuery, {
-    variables: { handle: 'main-menu' },
-  });
+
   // for changing color on scroll
   useEffect(() => {
     const changeColor = () =>
@@ -115,14 +117,15 @@ export default function Header() {
             });
           }
         }
+        const menuData: any = await getMenuFilters({
+          variables: { handle: 'main-menu' },
+        });
+        console.log({ menuData });
+        menuData?.data && dispatch(updateNavList(menuData?.data?.menu?.items));
       }
     })();
   }, []);
 
-  // for nav
-  useEffect(() => {
-    if (data) setNavList(data?.menu.items);
-  }, [data]);
   // for cart
   useEffect(() => {
     if (router?.query?.status == 'true') {
@@ -166,34 +169,37 @@ export default function Header() {
           <Image src={LogoImage} alt="/" width={80} height={80} />
         </Link>
 
-        {loading && navList.length === 0 && (
+        {!menu && menu.length === 0 ? (
           <>
             <NavSkeleton />
           </>
-        )}
-        {navList ? (
-          <ul className="hidden xl-lg:flex gap-4 text-sm  2xl:gap-8   text-text-dark  xl:flex-row  xl:items-center ">
-            {navList.map((item: Menu) => {
-              return (
-                <Link
-                  key={item.title}
-                  href={`/products/${getRoutData(item?.url)}`}
-                >
-                  <li
-                    className={` captialize-first  lowercase font-semibold ${
-                      id == getRoutData(item?.url)
-                        ? 'text-primary'
-                        : 'text-text-dark'
-                    }  hover:text-primary  hover:cursor-pointer `}
-                  >
-                    {item.title}
-                  </li>
-                </Link>
-              );
-            })}
-          </ul>
         ) : (
-          ''
+          <>
+            {menu ? (
+              <ul className="hidden xl-lg:flex gap-4 text-sm  2xl:gap-8   text-text-dark  xl:flex-row  xl:items-center ">
+                {menu.map((item: Menu) => {
+                  return (
+                    <Link
+                      key={item.title}
+                      href={`/products/${getRoutData(item?.url)}`}
+                    >
+                      <li
+                        className={` captialize-first  lowercase font-semibold ${
+                          id == getRoutData(item?.url)
+                            ? 'text-primary'
+                            : 'text-text-dark'
+                        }  hover:text-primary  hover:cursor-pointer `}
+                      >
+                        {item.title}
+                      </li>
+                    </Link>
+                  );
+                })}
+              </ul>
+            ) : (
+              <NavSkeleton />
+            )}
+          </>
         )}
       </div>
 
@@ -256,7 +262,7 @@ export default function Header() {
         ></i>
       </div>
 
-      <SideBarMenu nav={nav} closeFn={setNav} list={navList} />
+      <SideBarMenu nav={nav} closeFn={setNav} list={menu} />
     </nav>
   );
 }
