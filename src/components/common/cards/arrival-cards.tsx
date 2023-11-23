@@ -27,8 +27,8 @@ border-solid border-tranparent border-l-card-foreground overflow-hidden   "
         <div className="relative h-4/5 w-full p-4 py-6">
           {props?.item?.featuredImage ? (
             <NextImage
-              height={1000}
-              width={1000}
+              height={500}
+              width={500}
               src={props?.item?.featuredImage?.url}
               alt=""
               className=" h-full w-full object-cover object-center rounded-2xl "
