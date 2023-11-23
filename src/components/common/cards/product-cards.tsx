@@ -18,8 +18,8 @@ const ProductCard = (props: { item: any; index: number }) => {
             !props.item.availableForSale) && (
             <div className="absolute top-1 -right-[22px] px-2 text-white text-sm z-10 ">
               <Image
-                height={500}
-                width={500}
+                height={1000}
+                width={1000}
                 src={SoldOut}
                 alt=""
                 className="h-8 w-full object-cover object-center rounded-3xl"

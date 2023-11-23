@@ -42,8 +42,8 @@ const CategoryCard = (props: { item: any; index: number }) => {
         <div className="relative h-4/6 w-full p-4">
           {props?.item?.image ? (
             <NextImage
-              height={500}
-              width={500}
+              height={1000}
+              width={1000}
               src={props?.item?.image?.src}
               alt=""
               className=" h-full w-full object-cover object-center rounded-2xl "
