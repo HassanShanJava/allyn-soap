@@ -136,9 +136,6 @@ dependencies:
   https:
     specifier: ^1.0.0
     version: 1.0.0
-  jquery:
-    specifier: ^3.7.1
-    version: 3.7.1
   jsonwebtoken:
     specifier: ^9.0.1
     version: 9.0.1
@@ -213,7 +210,7 @@ dependencies:
     version: 2.2.2
   slick-carousel:
     specifier: ^1.8.1
-    version: 1.8.1(jquery@3.7.1)
+    version: 1.8.1
   superjson:
     specifier: ^1.11.0
     version: 1.11.0
@@ -234,9 +231,6 @@ devDependencies:
   '@playwright/test':
     specifier: ^1.28.1
     version: 1.28.1
-  '@types/jquery':
-    specifier: ^3.5.25
-    version: 3.5.25
   '@types/node':
     specifier: ^18.7.20
     version: 18.7.20
@@ -2818,12 +2812,6 @@ packages:
       hoist-non-react-statics: 3.3.2
     dev: false
 
-  /@types/jquery@3.5.25:
-    resolution: {integrity: sha512-gykx2c+OZf5nx2tv/5fDQqmvGgTiXshELy5jf9IgXPtVfSBl57IUYByN4osbwMXwJijWGOEYQABzGaFZE79A0Q==}
-    dependencies:
-      '@types/sizzle': 2.3.5
-    dev: true
-
   /@types/json-schema@7.0.11:
     resolution: {integrity: sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==}
     dev: true
@@ -2892,10 +2880,6 @@ packages:
 
   /@types/semver@7.3.13:
     resolution: {integrity: sha512-21cFJr9z3g5dW8B0CVI9g2O9beqaThGQ6ZFBqHfwhzLDKUxaqTIy3vnfah/UPkfOiF2pLq+tGz+W8RyCskuslw==}
-    dev: true
-
-  /@types/sizzle@2.3.5:
-    resolution: {integrity: sha512-tAe4Q+OLFOA/AMD+0lq8ovp8t3ysxAOeaScnfNdZpUxaGl51ZMDEITxkvFl1STudQ58mz6gzVGl9VhMKhwRnZQ==}
     dev: true
 
   /@types/use-sync-external-store@0.0.3:
@@ -4987,7 +4971,7 @@ packages:
       path-is-absolute: 1.0.1
       readdirp: 2.2.1(supports-color@4.5.0)
     optionalDependencies:
-      fsevents: 1.1.2
+      fsevents: 1.2.13
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -9514,10 +9498,6 @@ packages:
       '@sideway/pinpoint': 2.0.0
     dev: true
 
-  /jquery@3.7.1:
-    resolution: {integrity: sha512-m4avr8yL8kmFN8psrbFFFmB/If14iN5o9nw/NgnnM+kybDJpRsAynV2BsfpTYrTRysYUdADVD7CkUUizgkpLfg==}
-    dev: false
-
   /js-base64@2.6.4:
     resolution: {integrity: sha512-pZe//GGmwJndub7ZghVHz7vjb2LgC1m8B07Au3eYqeqv9emhESByMXxaEgkUkEqJe87oBbSniGYoQNIBklc7IQ==}
     dev: false
@@ -10940,7 +10920,7 @@ packages:
   /optimism@0.17.5:
     resolution: {integrity: sha512-TEcp8ZwK1RczmvMnvktxHSF2tKgMWjJ71xEFGX5ApLh67VsMSTy1ZUlipJw8W+KaqgOmQ+4pqwkeivY89j+4Vw==}
     dependencies:
-      '@wry/context': 0.7.3
+      '@wry/context': 0.7.4
       '@wry/trie': 0.4.3
       tslib: 2.6.2
     dev: false
@@ -13353,12 +13333,10 @@ packages:
       is-fullwidth-code-point: 4.0.0
     dev: true
 
-  /slick-carousel@1.8.1(jquery@3.7.1):
+  /slick-carousel@1.8.1:
     resolution: {integrity: sha512-XB9Ftrf2EEKfzoQXt3Nitrt/IPbT+f1fgqBdoxO3W/+JYvtEOW6EgxnWfr9GH6nmULv7Y2tPmEX3koxThVmebA==}
     peerDependencies:
       jquery: '>=1.8.0'
-    dependencies:
-      jquery: 3.7.1
     dev: false
 
   /snapdragon-node@2.1.1:

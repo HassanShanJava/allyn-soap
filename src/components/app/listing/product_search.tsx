@@ -1,5 +1,4 @@
 import { useLazyQuery, useQuery } from '@apollo/client';
-import { get } from 'jquery';
 
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/router';
@@ -52,7 +51,7 @@ const ProductSearch = (props: { search: string }) => {
         }),
       );
       if (typeof window) window?.scrollTo(0, 0);
-    } 
+    }
   };
 
   const handlePrevPage = () => {
