@@ -166,17 +166,28 @@ div.borderStyle {
   stroke-width: 4;
 }
 
-svg image {
+svg foreignObject {
   mask: url(#top);
   object-fit: fill;
   width: 100%;
-  height: auto;
-  max-width: max-content;
+  /* scale: 0.5; */
+  /* height: auto; */
+  height: 100%;
+  /* max-width: max-content; */
+}
+svg foreignObject div {
+  object-fit: fill;
+  width: 120%;
+  /* scale: 0.5; */
+  /* height: auto; */
+  height: 110%;
+  /* max-width: max-content; */
 }
 svg .svg-image-static {
   mask: url(#top);
   object-fit: cover;
   width: 100%;
+
   max-width: max-content;
 }
 
