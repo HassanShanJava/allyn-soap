@@ -182,13 +182,14 @@ svg .svg-image-static {
 
 @media screen and (max-width: 480px) {
   .container {
-    height: 240px;
+    height: 100%;
     max-width: 400px;
     overflow: hidden;
   }
 
   div.borderStyle {
     display: block;
+
     /* width: 100%; */
     width: 400px;
   }
@@ -196,7 +197,7 @@ svg .svg-image-static {
 
 @media screen and (max-width: 640px) {
   .container {
-    height: 360px;
+    height: 100%;
     max-width: 480px;
     overflow: hidden;
   }

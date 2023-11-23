@@ -117,12 +117,14 @@ const CustomerTestimonials = () => {
           <Button
             className={` cursor-pointer disabled:cursor-not-allowed   font-thin w-8 h-8 md:w-12 md:h-12 shadow-lg bg-white  text-text hover:text-primary rounded-full flex items-center justify-center `}
             onClick={previous}
+            aria-label="previous"
           >
             <i className="text-sm md:text-xl fas fa-angle-left  "></i>
           </Button>
           <Button
             className={`cursor-pointer disabled:cursor-not-allowed  font-thin w-8 h-8 md:w-12 md:h-12 shadow-lg bg-white text-text hover:text-primary   rounded-full flex items-center justify-center `}
             onClick={next}
+            aria-label="next"
           >
             <i className=" text-sm md:text-xl fas fa-angle-right "></i>
           </Button>

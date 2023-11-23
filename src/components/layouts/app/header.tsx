@@ -342,6 +342,7 @@ export const SideBarMenu: React.FC<SideBarMenuProps> = ({
                   <Button
                     type="submit"
                     className="text-center rounded-none bg-primary h-10 "
+                    aria-label="search"
                     onClick={() => {
                       onSubmit(searchInput);
                       closeFn(false);
