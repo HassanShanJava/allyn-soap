@@ -114,7 +114,9 @@ const BannerCard = ({ banner, key, type }: any) => {
       ) : id === 'search' ? (
         <div className="py-2 sm:py-6 md:py-8"></div>
       ) : (
-        <div className="py-2 sm:py-6 md:py-12"></div>
+        <div className="py-14">
+          <BannerSkeleton />
+        </div>
       )}
     </div>
   );
