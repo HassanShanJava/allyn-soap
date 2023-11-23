@@ -119,7 +119,7 @@ const CustomerTestimonials = () => {
             onClick={previous}
             aria-label="previous"
             aria-hidden="true"
-            tabindex="-1"
+            tabIndex={-1}
           >
             <i className="text-sm md:text-xl fas fa-angle-left  "></i>
           </Button>
@@ -128,7 +128,7 @@ const CustomerTestimonials = () => {
             onClick={next}
             aria-label="next"
             aria-hidden="true"
-            tabindex="-1"
+            tabIndex={-1}
           >
             <i className=" text-sm md:text-xl fas fa-angle-right "></i>
           </Button>

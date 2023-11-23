@@ -37,7 +37,7 @@ const CategoryCard = (props: { item: any; index: number }) => {
         } w-48 h-48 rounded-2xl  transition ease-in  cursor-pointer mx-auto`}
         onClick={() => onDataSubmit(props?.item)}
         aria-hidden="true"
-        tabindex="-1"
+        tabIndex={-1}
       >
         <div className="relative h-4/6 w-full p-4">
           {props?.item?.image ? (

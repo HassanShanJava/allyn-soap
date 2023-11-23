@@ -11,7 +11,7 @@ const ArrivalCard = (props: { item: any; index: number }) => {
     <Link
       href={`/product-detail/${props?.item?.handle}`}
       aria-hidden="true"
-      tabindex="-1"
+      tabIndex={-1}
     >
       <div
         className={`group relative   ${

@@ -83,7 +83,7 @@ const BannerSection = () => {
                       }
                       aria-label="shop now"
                       aria-hidden="true"
-                      tabindex="-1"
+                      tabIndex={-1}
                     >
                       Shop Now
                     </Button>
@@ -95,7 +95,7 @@ const BannerSection = () => {
                         disabled={i === 0 ? true : false}
                         aria-label="previous"
                         aria-hidden="true"
-                        tabindex="-1"
+                        tabIndex={-1}
                       >
                         <i className="text-md md:text-xl fas fa-angle-left  "></i>
                       </Button>
@@ -104,7 +104,7 @@ const BannerSection = () => {
                         onClick={next}
                         aria-label="next"
                         aria-hidden="true"
-                        tabindex="-1"
+                        tabIndex={-1}
                         disabled={i == sliderData.length - 1 ? true : false}
                       >
                         <i className=" text-md md:text-xl fas fa-angle-right "></i>
