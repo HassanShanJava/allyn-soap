@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLazyQuery, useMutation, useQuery } from '@apollo/client';
+import { useLazyQuery, useMutation } from '@apollo/client';
 import { Search, ShoppingCart, User } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
 import Image from 'next/image';
@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { getCookie } from 'cookies-next';
 import LogoImage from '~/public/assets/logo.png';
-import { getFilterQuery, getMenuQuery } from '~/server/lib/shopify/query/menu';
+import { getFilterQuery } from '~/server/lib/shopify/query/menu';
 
 import { Search as SearchIcon } from 'lucide-react';
 

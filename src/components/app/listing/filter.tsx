@@ -19,7 +19,6 @@ import {
   SheetDescription,
   SheetHeader,
 } from '~/components/ui/sheet';
-import { getFilterQuery } from '~/server/lib/shopify/query/menu';
 import { toggleFilters } from '~/store/reducers/filters';
 import { RootState } from '~/store/store';
 import { getRoutData } from '~/utils/helper';
