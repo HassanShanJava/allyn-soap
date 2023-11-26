@@ -177,10 +177,10 @@ svg foreignObject {
 }
 svg foreignObject div {
   object-fit: fill;
-  width: 120%;
+  width: 100%;
   /* scale: 0.5; */
   /* height: auto; */
-  height: 110%;
+  height: 100%;
   /* max-width: max-content; */
 }
 svg .svg-image-static {
