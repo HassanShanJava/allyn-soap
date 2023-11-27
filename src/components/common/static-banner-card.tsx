@@ -8,10 +8,7 @@ const StaticBanner = ({ data, key, type }: any) => {
   return (
     <>
       {data ? (
-        <div
-          key={key}
-          className="!flex flex-col md:!flex-row w-full  gap-5 md:gap-10 justify-between items-start  "
-        >
+        <div className="!flex flex-col md:!flex-row w-full  gap-5 md:gap-10 justify-between items-start  ">
           <div className="p-6 md:px-12 my-auto md:-my-2  w-full md:max-w-[50%]  ">
             <div className=" mb-6">
               <p className=" md:block text-xs md:text-sm  py-2 ">

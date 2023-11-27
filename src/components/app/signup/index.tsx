@@ -10,7 +10,7 @@ const SignupSection = () => {
         <div className="absolute -z-10 bg-secondary min-w-[200px] w-full  max-w-[70%] md:max-w-[80%] h-20 md:h-28 rounded-br-[100px] transform-all ease-in-out duration-300"></div>
         <StaticBanner
           type="signup"
-          key={1}
+          key={2}
           data={{
             title: 'Sign up your Account',
             slug: 'Create Account',

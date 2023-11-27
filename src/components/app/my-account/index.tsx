@@ -11,7 +11,7 @@ const MyAccountSection = () => {
         {/* <BannerCard banner={undefined} key={1} type="product-listing" /> */}
         <StaticBanner
           type="reset"
-          key={1}
+          key={2}
           data={{
             title: 'My Account',
             slug: 'Account Details',
