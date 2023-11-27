@@ -34,7 +34,7 @@ const BannerCard = ({ banner, key, type }: any) => {
       setTitle(searchQuery);
     }
   }, [data, id]);
-
+  console.log(collectionBanner?.featuredImage?.url, 'collectionBanner');
   return (
     <div className={` ${!loading ? 'fade-in-card' : ''}`}>
       <div className="relative  bottom-6  ">
@@ -86,7 +86,7 @@ const BannerCard = ({ banner, key, type }: any) => {
                   <div>
                     <NextImage
                       src={`${collectionBanner?.featuredImage?.url}`}
-                      className=" object-center !width-[100%] svg-image-static"
+                      className="object-contain object-center  ml-0"
                       width={1000} // Set the appropriate width
                       height={1000} // Set the appropriate height
                       loading="lazy"

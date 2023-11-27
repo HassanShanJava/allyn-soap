@@ -49,7 +49,7 @@ const StaticBanner = ({ data, key, type }: any) => {
                   <div>
                     <NextImage
                       src={`${data?.src}`}
-                      className=" object-center !width-[100%] svg-image-static"
+                      className="object-contain  ml-0"
                       width={1000} // Set the appropriate width
                       height={1000} // Set the appropriate height
                       loading="lazy"
