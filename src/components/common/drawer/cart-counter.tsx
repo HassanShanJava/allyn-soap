@@ -34,6 +34,10 @@ const CartCounter = (props: CounterType) => {
               },
             });
             setRange(range + 1);
+            toast({
+              variant: 'success',
+              title: `Cart updated Succesfully`,
+            });
           } else if (type == 'substraction' && range !== props?.min) {
             cartUpdate = await props?.cartUpdate({
               variables: {
@@ -42,6 +46,10 @@ const CartCounter = (props: CounterType) => {
               },
             });
             setRange(range - 1);
+            toast({
+              variant: 'success',
+              title: `Cart updated Succesfully`,
+            });
           }
           if (cartUpdate?.data) {
             const cartData: any = await props?.getCart({
@@ -56,12 +64,6 @@ const CartCounter = (props: CounterType) => {
               );
             }
           }
-
-          (range !== props?.min || range !== props?.max) &&
-            toast({
-              variant: 'success',
-              title: `Cart updated Succesfully`,
-            });
         }
       }
     } catch (e: any) {
