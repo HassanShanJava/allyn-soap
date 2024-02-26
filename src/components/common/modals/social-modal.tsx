@@ -59,7 +59,7 @@ export function SocialDialouge(props: socialDialogInterface) {
     <>
       <Dialog open={props?.isModal} onOpenChange={(e) => props.setIsModal(e)}>
         <DialogContent
-          className={`${poppins.variable} ${poppins.className} lg:max-w-[620px] px-8`}
+          className={`${poppins.variable} ${poppins.className} lg:max-w-[620px] px-8 text-text`}
         >
           <DialogHeader>
             <DialogTitle className="capitalize text-4xl font-semibold">

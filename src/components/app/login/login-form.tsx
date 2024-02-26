@@ -45,7 +45,6 @@ const LoginForm = () => {
   const [customerCartUpdate, { loading: customerCustomerUpdateLoading }] =
     useMutation(CartUpdateMutation);
 
-
   async function onSubmit(values: z.infer<typeof loginCustomerSchema>) {
     try {
       setLoading(true);
@@ -100,10 +99,10 @@ const LoginForm = () => {
   }
   return (
     <div className="px-4">
-      <div className="relative flex flex-col gap-4  p-8  border border-border rounded-3xl shadow-xl w-fit max-w-[30rem] mx-auto font-poppins">
+      <div className="relative flex flex-col gap-4  p-8  border border-border rounded-3xl shadow-xl w-fit max-w-[30rem] mx-auto font-poppin text-text">
         {/* for bg color */}
-        <h1 className=" text-2xl md:text-3xl font-bold">Login</h1>
-        <p className=" text-sm md:text-base text-text-light">
+        <h1 className=" text-2xl md:text-3xl font-bold text-text">Login</h1>
+        <p className=" text-sm md:text-base text-text">
           Small Batch Bars of Soap. Made with the freshest ingredients for a
           rich.
         </p>

@@ -213,7 +213,7 @@ const Detail = (props: any) => {
             )}
           </div>
         </div>
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1 text-text">
           <div className=" text-2xl font-semibold text-text">
             ${(+variant?.price?.amount ?? 0)?.toFixed(2)}
           </div>

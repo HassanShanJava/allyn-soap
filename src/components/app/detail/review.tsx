@@ -68,7 +68,7 @@ const ReveiewContent = (props: any) => {
   };
   return (
     <>
-      <div className="flex flex-col gap-4 ">
+      <div className="flex flex-col gap-4  text-text">
         {/* heading */}
         <div className=" flex flex-col sm:flex-row   gap-2 justify-between items-center">
           <div>

@@ -107,9 +107,9 @@ const RegisterForm = () => {
   }
   return (
     <div className="px-4">
-      <div className="relative flex flex-col gap-4  p-8  border border-border rounded-3xl shadow-xl w-fit max-w-[30rem] mx-auto font-poppins">
+      <div className="relative flex flex-col gap-4  p-8  border border-border rounded-3xl shadow-xl w-fit max-w-[30rem] mx-auto font-poppins text-text">
         {/* for bg color */}
-        <h1 className=" text-2xl md:text-3xl font-bold">Sign up</h1>
+        <h1 className=" text-2xl md:text-3xl font-bold text-text">Sign up</h1>
         <p className=" text-sm md:text-base text-text-light">
           Small Batch Bars of Soap. Made with the freshest ingredients for a
           rich.

@@ -174,7 +174,7 @@ export default function Header() {
         ) : (
           <>
             {menu ? (
-              <ul className="hidden xl-lg:flex gap-4 text-sm  2xl:gap-8   text-text-dark  xl:flex-row  xl:items-center ">
+              <ul className="hidden xl-lg:flex gap-4 text-sm  2xl:gap-8   text-text  xl:flex-row  xl:items-center ">
                 {menu.map((item: Menu) => {
                   return (
                     <li
@@ -209,7 +209,7 @@ export default function Header() {
             onClick={() => setOpen(!open)}
             className="cursor-pointer"
           >
-            <Search className="text-lg" />
+            <Search className="text-lg text-text" />
           </div>
           <div
             className="relative cursor-pointer"
@@ -219,20 +219,20 @@ export default function Header() {
             }}
           >
             {cart?.cart && cart?.cart?.totalQuantity > 0 && (
-              <div className=" absolute text-sm -top-4 -right-2 p-1">
+              <div className=" absolute text-sm text-text -top-4 -right-2 p-1">
                 {cart?.cart?.totalQuantity > 99
                   ? '99+'
                   : cart?.cart?.totalQuantity}
               </div>
             )}
 
-            <ShoppingCart className="text-lg" />
-            <span className="sr-only">shopping cart</span>
+            <ShoppingCart className="text-lg text-text" />
+            <span className="sr-only text-text">shopping cart</span>
           </div>
           <div>
             <Link href={user?.is_login ? '/my-account' : '/login'}>
-              <User className="text-lg" />
-              <span className="sr-only">user</span>
+              <User className="text-lg text-text" />
+              <span className="sr-only text-text">user</span>
             </Link>
           </div>
         </div>
@@ -250,16 +250,16 @@ export default function Header() {
           }}
         >
           {cart?.cart && cart?.cart?.totalQuantity > 0 && (
-            <div className=" absolute text-sm -top-4 -right-2 p-1">
+            <div className=" absolute text-sm text-text -top-4 -right-2 p-1">
               {cart?.cart?.totalQuantity > 99
                 ? '99+'
                 : cart?.cart?.totalQuantity}
             </div>
           )}
-          <ShoppingCart className="text-lg" />
+          <ShoppingCart className="text-lg text-text" />
         </div>
         <i
-          className={` fas fa-bars-staggered text-2xl hover:cursor-pointer `}
+          className={` fas fa-bars-staggered text-2xl hover:cursor-pointer text-text `}
           onClick={() => setNav(!nav)}
         >
           <span className="sr-only">nav bar</span>
@@ -329,7 +329,7 @@ export const SideBarMenu: React.FC<SideBarMenuProps> = ({
 
               <i
                 onClick={() => closeFn(false)}
-                className="fas fa-xmark text-3xl  text-center hover:cursor-pointer  "
+                className="fas fa-xmark text-3xl  text-center hover:cursor-pointer text-text  "
               ></i>
             </div>
 
@@ -378,7 +378,7 @@ export const SideBarMenu: React.FC<SideBarMenuProps> = ({
                 className={`group py-3 text-lg w-full text-center ${
                   list.length - 1 === i ? 'border-y-[1px]' : 'border-t-[1px]'
                 }
-             border-gray-200 hover:bg-primary captialize-first  lowercase hover:text-primary-foreground hover:border-transparent transition-colors duration-300 ease-in-out cursor-pointer`}
+             border-gray-200 hover:bg-primary captialize-first text-text  lowercase hover:text-primary-foreground hover:border-transparent transition-colors duration-300 ease-in-out cursor-pointer`}
                 onClick={() => {
                   closeFn(false);
                 }}
@@ -389,7 +389,7 @@ export const SideBarMenu: React.FC<SideBarMenuProps> = ({
           })}
         <Link
           href={user?.is_login ? '/my-account' : '/login'}
-          className={`group py-3 text-lg w-full text-center border-y-[1px] 
+          className={`group py-3 text-lg w-full text-center text-text border-y-[1px] 
           border-gray-200 hover:bg-primary  hover:text-primary-foreground hover:border-transparent transition-colors duration-300 ease-in-out cursor-pointer`}
           onClick={() => {
             closeFn(false);

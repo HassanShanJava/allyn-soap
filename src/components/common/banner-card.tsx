@@ -41,7 +41,7 @@ const BannerCard = ({ banner, key, type }: any) => {
         <p className="absolute hidden md:block text-xs md:text-sm p-6 md:px-12">
           {`Home > `}
           {id !== 'search' ? (
-            <span className="capitalize font-[#272D4E]">
+            <span className="capitalize text-text  font-[#272D4E]">
               {(id as string)?.split('-').join(' ')}
             </span>
           ) : (
@@ -55,10 +55,10 @@ const BannerCard = ({ banner, key, type }: any) => {
           className="!flex flex-col md:!flex-row w-full  gap-5 md:gap-10 justify-between items-start  "
         >
           <div className="p-6 md:px-12 my-auto md:my-6  w-full md:max-w-[50%]">
-            <p className="text-text-dark uppercase leading-none text-3xl  lg:text-[3.5rem] font-black">
+            <p className="text-text uppercase leading-none text-3xl  lg:text-[3.5rem] font-black">
               {collectionBanner?.title}
             </p>
-            <div className="text-text-light py-5 w-full leading-none text-sm md:text-base md:max-w-[400px]">
+            <div className="text-text py-5 w-full leading-none text-sm md:text-base md:max-w-[400px]">
               <p className=" line-clamp-2 md:line-clamp-3 ">
                 {collectionBanner?.description}
               </p>

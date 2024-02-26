@@ -11,15 +11,15 @@ const StaticBanner = ({ data, key, type }: any) => {
         <div className="!flex flex-col md:!flex-row w-full  gap-5 md:gap-10 justify-between items-start  ">
           <div className="p-6 md:px-12 my-auto md:-my-2  w-full md:max-w-[50%]  ">
             <div className=" mb-6">
-              <p className=" md:block text-xs md:text-sm  py-2 ">
+              <p className=" md:block text-text text-xs md:text-sm  py-2 ">
                 {`Home > `}
                 <span className="capitalize font-[#272D4E]">{data.slug}</span>
               </p>
             </div>
-            <p className="text-text-dark uppercase leading-none text-3xl  lg:text-[3rem] font-black">
+            <p className="text-text uppercase leading-none text-3xl  lg:text-[3rem] font-black">
               {data?.title}
             </p>
-            <div className="text-text-light py-5 w-full leading-none text-sm md:text-base md:w-10/12">
+            <div className="text-text py-5 w-full leading-none text-sm md:text-base md:w-10/12">
               <p className=" line-clamp-2 md:line-clamp-3 ">
                 {data?.description}
               </p>
